@@ -20,6 +20,8 @@ if ! ENV['TRAVIS']
   gem 'guard-rspec'
   gem 'guard-bundler'
   gem 'guard-rails'
+  gem 'rb-fsevent'
+  gem 'terminal-notifier-guard'
 end
 
 file = File.expand_path("Gemfile", ENV['ENGINE_CART_DESTINATION'] || ENV['RAILS_ROOT'] || File.expand_path("../spec/internal", __FILE__))
