@@ -1,14 +1,14 @@
 require 'feature_helper'
 
 describe 'Transform in memory Work object to Show HTML Document' do
-  let(:property_set) do
-    Hydramata::Work::PropertySet.new do |set|
-      set.push predicate: :title, value: 'Hello'
-      set.push predicate: :title, value: 'World'
-      set.push predicate: :title, value: 'Bang!'
-      set.push predicate: :abstract, value: 'Long Text'
-      set.push predicate: :abstract, value: 'Longer Text'
-      set.push predicate: :keyword, value: 'Programming'
+  let(:entity) do
+    Hydramata::Work::Entity.new do |entity|
+      entity.properties << { predicate: :title, value: 'Hello' }
+      entity.properties << { predicate: :title, value: 'World' }
+      entity.properties << { predicate: :title, value: 'Bang!' }
+      entity.properties << { predicate: :abstract, value: 'Long Text' }
+      entity.properties << { predicate: :abstract, value: 'Longer Text' }
+      entity.properties << { predicate: :keyword, value: 'Programming' }
     end
   end
 
@@ -28,7 +28,7 @@ describe 'Transform in memory Work object to Show HTML Document' do
     rendered_output = Hydramata::Work.render(
       context: :show,
       content_type: :html,
-      property_set: property_set,
+      entity: entity,
       presentation_structure: presentation_structure
     )
 
