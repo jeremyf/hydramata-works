@@ -5,14 +5,21 @@ module Hydramata
   module Work
     describe Entity do
       subject { described_class.new }
-      it { expect(subject).to respond_to(:entity_type) }
-
+      let(:predicate) { :title }
+      let(:value) { 'Hello' }
+      let(:property) { { predicate: predicate, value: value } }
       context '#properties' do
-        let(:property) { { predicate: :title, value: 'Hello' } }
         it 'can be appended' do
           expect {
             subject.properties << property
           }.to change { subject.properties.count }.by(1)
+        end
+      end
+
+      context '#property' do
+        it 'returns matching predicates' do
+          subject.properties << property
+          expect(subject.property(predicate)).to eq([value])
         end
       end
     end

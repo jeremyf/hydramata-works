@@ -2,7 +2,7 @@ require 'feature_helper'
 
 describe 'An entity and presentation structure' do
   let(:entity) do
-    Hydramata::Work::Entity.new do |entity|
+    Hydramata::Work::Entity.new.tap do |entity|
       entity.properties << { predicate: :title, value: 'Hello' }
       entity.properties << { predicate: :title, value: 'World' }
       entity.properties << { predicate: :title, value: 'Bang!' }
@@ -13,19 +13,14 @@ describe 'An entity and presentation structure' do
   end
 
   let(:presentation_structure) do
-    Hydramata::Work::PresentationStructure.new do |struct|
-      struct.fieldset(:required) do |fieldset|
-        fieldset.push predicate: :title
-      end
-      struct.fieldset(:optional) do |fieldset|
-        fieldset.push predicate: :abstract
-        fieldset.push predicate: :keyword
-      end
+    Hydramata::Work::PresentationStructure.new.tap do |struct|
+      struct.fieldsets << [:required, [:title]]
+      struct.fieldsets << [:optional, [:abstract, :keyword]]
     end
   end
 
   let(:renderer) do
-    Hydramata::Work::Renderer.new(
+    Hydramata::Work::EntityRenderer.new(
       context: :show,
       content_type: :html,
       entity: entity,
@@ -33,8 +28,8 @@ describe 'An entity and presentation structure' do
     )
   end
 
-  xit 'renders as a well-structured HTML document' do
-    rendered_output = renderer.call
+  it 'renders as a well-structured HTML document' do
+    rendered_output = renderer.render
 
     expect(rendered_output).to have_tag('.work') do
       with_tag('.required .title .label', text: 'Title')
