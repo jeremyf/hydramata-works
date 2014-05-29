@@ -1,6 +1,6 @@
 require 'feature_helper'
 
-describe 'Transform in memory Work object to Show HTML Document' do
+describe 'An entity and presentation structure' do
   let(:entity) do
     Hydramata::Work::Entity.new do |entity|
       entity.properties << { predicate: :title, value: 'Hello' }
@@ -24,13 +24,17 @@ describe 'Transform in memory Work object to Show HTML Document' do
     end
   end
 
-  it 'renders respectable output' do
-    rendered_output = Hydramata::Work.render(
+  let(:renderer) do
+    Hydramata::Work::Renderer.new(
       context: :show,
       content_type: :html,
       entity: entity,
       presentation_structure: presentation_structure
     )
+  end
+
+  it 'renders as a well-structured HTML document' do
+    rendered_output = renderer.call
 
     expect(rendered_output).to have_tag('.work') do
       with_tag('.required .title .label', text: 'Title')
