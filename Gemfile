@@ -14,6 +14,8 @@ gemspec
 # gem 'debugger'
 
 gem "rake"
+gem 'coveralls', require: false
+gem 'simplecov', require: false
 
 file = File.expand_path("Gemfile", ENV['ENGINE_CART_DESTINATION'] || ENV['RAILS_ROOT'] || File.expand_path("../spec/internal", __FILE__))
 if File.exists?(file)
