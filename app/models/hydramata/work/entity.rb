@@ -9,6 +9,10 @@ module Hydramata
     #
     # Unlike a Lotus::Model, the Work is an arbitrary collection of Properties.
     class Entity
+      def initialize
+        yield(self) if block_given?
+      end
+
       def properties
         @properties ||= []
       end
