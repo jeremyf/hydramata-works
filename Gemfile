@@ -22,3 +22,5 @@ if File.exists?(file)
   puts "Loading #{file} ..." if $DEBUG # `ruby -d` or `bundle -v`
   instance_eval File.read(file)
 end
+
+gem 'sprockets', '2.11.0'
