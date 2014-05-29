@@ -14,8 +14,8 @@ Gem::Specification.new do |s|
     'jeremy.n.friesen@gmail.com'
   ]
   s.homepage    = 'https://github.com/jeremyf/hydramata-work'
-  s.summary     = 'TODO: Summary of Hydramata::Work.'
-  s.description = 'TODO: Description of Hydramata::Work.'
+  s.summary     = 'A Thought Experiement on Modeling Hydramata::Work'
+  s.description = 'A Thought Experiement on Modeling Hydramata::Work'
 
   s.license = 'APACHE2'
 
