@@ -16,6 +16,7 @@ gemspec
 gem "rake"
 gem 'coveralls', require: false
 gem 'simplecov', require: false
+gem 'sass-rails', github: 'rails/sass-rails'
 
 file = File.expand_path("Gemfile", ENV['ENGINE_CART_DESTINATION'] || ENV['RAILS_ROOT'] || File.expand_path("../spec/internal", __FILE__))
 if File.exists?(file)
