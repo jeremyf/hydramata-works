@@ -10,9 +10,9 @@ module Hydramata
       let(:property) { { predicate: predicate, value: value } }
       context '#properties' do
         it 'can be appended' do
-          expect {
-            subject.properties << property
-          }.to change { subject.properties.count }.by(1)
+          expect { subject.properties << property }.
+            to change { subject.properties.count }.
+            by(1)
         end
       end
 
