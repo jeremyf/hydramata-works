@@ -2,19 +2,19 @@
 
 ## Initial Intreface
 
-For a Work to assert its available predicates, the Permission subsystem should:
+For a Work to assert its available predicates, the Permissions subsystem should:
 
 * Provide a `Hydramata::Permissions.roles_for(agent)` service. Responsible for getting all of the roles of an agent.
 * Each of the returned objects from `Hydramata::Permissions.roles_for` should:
   * have a unique identifying symbol from which the Work subsystem can craft the appropriate Work Reification Strategy (which properties go on the work value object that is being passed through the system).
 
-For the Permission subsystem to interact with a Work, the Work object should provide the following:
+The Permissions subsystem is concerned with these three concepts:
 
-* a `#persisted?` method that returns `false` if the work's identifying symbol is not present and `true` otherwise
-* responds to a `#class#model_name` (see [ActiveModel::Naming](http://api.rubyonrails.org/classes/ActiveModel/Naming.html))
-* a unique identifying symbol (eg `#to_key`)
-* a `#work_type` that has a unique identifying symbol
-* a permissions property that is composed as per the Permissions component requirement; Present assumption is it would be analogous to Hydra Rights Metadata
+* Resource - exposes the following methods `#persisted?`, `#to_key`, `#class#model_name` (a subset of the [ActiveModel::Lint::Test](http://api.rubyonrails.org/classes/ActiveModel/Lint/Tests.html))
+* Action - what is the agent trying to do with the resource? This would likely be the Controller#action_name
+* Agent - who (or what) is attempting to take action on the resource
+
+For the Permissions subsystem to interact with a Work, the Work object should implement a Resource interface.
 
 ## Initial Scenarios
 
@@ -55,7 +55,7 @@ Feature: Work object interacting with Permissions
     Given an Agent with role <role>
     And a Work of work type <work_type>
     When the Agent requests the Work
-    Then the Permission subsystem asserts that the Agent is <access_state> access to the Work.
+    Then the Permissions subsystem asserts that the Agent is <access_state> access to the Work.
 
     Examples:
       | role      | work_type | access_state |
@@ -74,7 +74,7 @@ Feature: Work object interacting with Permissions
       | Professor | not allowed  |
       | Librarian | allowed      |
     When the Agent requests the Work
-    Then the Permission subsystem asserts that the Agent is allowed access to the Work.
+    Then the Permissions subsystem asserts that the Agent is allowed access to the Work.
 
   Scenario:
 
@@ -88,5 +88,5 @@ Feature: Work object interacting with Permissions
       | Professor | not allowed  |
       | Librarian | allowed      |
     When the Agent requests the Work
-    Then the Permission subsystem asserts that the Agent is allowed access to the Work.
+    Then the Permissions subsystem asserts that the Agent is allowed access to the Work.
 ```
