@@ -16,6 +16,19 @@ The Permissions subsystem is concerned with these three concepts:
 
 For the Permissions subsystem to interact with a Work, the Work object should implement a Resource interface.
 
+### Searching for Resources
+
+This is an interesting and complicated case. In the case of Searching for Works, the resource would be a Search object.
+Thus we would ask: "Can I show the Search?". This does not adjudicate what elements are returned in the search response.
+
+The Permission system is responsible for appending additional restrictions to Search object.
+The additional restrictions would modify the Search by adding "AND I can Show".
+
+We can search on the indexed properties even though we may not be able to access them.
+Since we reify the object from SOLR via a Work Reification Strategy, this means any properties that they can't access won't be available for view rendering.
+Thus Discover and Show are similar.
+
+
 ## Initial Scenarios
 
 ```gherkin
