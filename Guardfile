@@ -7,7 +7,7 @@ guard :bundler do
   watch(/^.+\.gemspec/)
 end
 
-guard 'rails', root: 'spec/internal' do
+guard 'rails', root: 'spec/internal', port: 3001 do
   watch('Gemfile.lock')
   watch(%r{^(config|lib)/.*})
 end
