@@ -1,11 +1,11 @@
 <div class="work">
-<% presentation_structure.fieldsets.each do |fieldset, predicates| %>
+<% show.each_fieldset_with_properties do |fieldset, properties| %>
   <fieldset class="<%= fieldset %>">
-    <% predicates.each do |predicate| %>
+    <% Array(properties).each do |predicate, values| %>
     <div class="<%= predicate %>">
       <p class="label"><%= predicate.to_s.titleize %></p>
       <ul>
-      <% entity.property(predicate).each do |value| %>
+      <% values.each do |value| %>
         <li class="value"><%= value %></li>
       <% end %>
       </ul>

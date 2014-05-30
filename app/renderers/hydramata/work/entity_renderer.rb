@@ -1,19 +1,18 @@
 module Hydramata
   module Work
     class EntityRenderer
-      attr_reader :context, :template, :format, :entity, :presentation_structure, :template_name_prefix
+      attr_reader :context, :template, :format, :presented_entity, :template_name_prefix
       def initialize(options = {})
         @format = options.fetch(:format) { default_format }
         @template = options.fetch(:template) { default_template }
         @template_name_prefix = options.fetch(:template_name_prefix) { default_template_name_prefix }
 
         @context = options.fetch(:context)
-        @entity = options.fetch(:entity)
-        @presentation_structure = options.fetch(:presentation_structure)
+        @presented_entity = PresentedEntity.new(options)
       end
 
       def render
-        template.render(file: template_name, locals: { entity: entity, presentation_structure: presentation_structure })
+        template.render(file: template_name, locals: { context.to_sym => presented_entity })
       end
 
       private
