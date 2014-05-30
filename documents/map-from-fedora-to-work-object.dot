@@ -1,0 +1,51 @@
+digraph "G" {
+    label="Map from Fedora to Work Object"
+    compound=true;
+    node[color="grey15" shape=record penwidth=2 margin="0.15, 0.125"];
+
+    subgraph 1 {
+        label="Records"
+        node[color="grey" style=filled fillcolor=olivedrab3];
+        fedora[label="Fedora"]
+        work[label="{ <f0> Work (in memory) | <f1> #pid | <f2> #work_type | <f3> #property_set }"]
+    }
+
+    subgraph cluster_0 {
+        label="Sequence for Transforming\nFedora object to a Work"
+        color="orange"
+        style="filled"
+        node[style=filled fillcolor=white]
+        fedora_request_pid[label="Request PID"]
+        fedora_retrieve_object[label="Retrieve Object"]
+        fedora_instantiate_work[label="Instantiate Work"]
+        fedora_assign_work_type[label="Assign Work Type"]
+        fedora_retrieve_datastreams[label="Retrieve Datastreams"]
+        fedora_for_each_datastream[label="For each Datastream"]
+        fedora_parse_datastream[label="Parse Datastream"]
+        fedora_for_each_property[label="For each Property"]
+        fedora_loop_for_each_property[label="More Properties" shape="diamond"]
+        fedora_loop_for_each_datastream[label="More Datastreams" shape="diamond"]
+        fedora_push_property_to_work_property_set[label="Push Property to Work Property Set"]
+        return_work[label="Return Work object"]
+
+        fedora_request_pid -> fedora_retrieve_object
+        fedora_retrieve_object -> fedora_instantiate_work ->
+        fedora_instantiate_work -> fedora_assign_work_type
+        fedora_assign_work_type -> fedora_retrieve_datastreams
+        fedora_retrieve_datastreams -> fedora_for_each_datastream
+        fedora_for_each_datastream-> fedora_parse_datastream
+        fedora_parse_datastream -> fedora_for_each_property
+        fedora_for_each_property -> fedora_push_property_to_work_property_set
+        fedora_push_property_to_work_property_set -> fedora_loop_for_each_property
+        fedora_loop_for_each_property -> fedora_for_each_property [label="NEXT"]
+        fedora_loop_for_each_property -> fedora_loop_for_each_datastream [label="NO"]
+        fedora_loop_for_each_datastream -> fedora_for_each_datastream [label="NEXT"]
+        fedora_loop_for_each_datastream -> return_work [label="NO"]
+    }
+
+    fedora_instantiate_work -> work[dir=both]
+    fedora_assign_work_type -> work:f2
+    fedora_retrieve_object -> fedora[dir=both]
+    fedora_push_property_to_work_property_set -> work:f3
+    work -> return_work
+}

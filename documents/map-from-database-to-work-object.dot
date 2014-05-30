@@ -1,0 +1,44 @@
+digraph "G" {
+    label="Map from Database to Work Object"
+    compound=true;
+    node[color="grey15" shape=record penwidth=2 margin="0.15, 0.125"];
+
+    subgraph 1 {
+        label="Records"
+        node[color="grey" style=filled fillcolor=olivedrab3];
+        database[label="Database"]
+        work[label="{ <f0> Work (in memory) | <f1> #pid | <f2> #work_type | <f3> #property_set }"]
+    }
+
+    subgraph cluster_0 {
+        label="Sequence for Transforming\nDatabase object to a Work"
+        color="orange"
+        style="filled"
+        node[style=filled fillcolor=white]
+        database_request_pid[label="Request PID"]
+        database_retrieve_object[label="Retrieve Object"]
+        database_instantiate_work[label="Instantiate Work"]
+        database_assign_work_type[label="Assign Work Type"]
+        database_parse_datastream[label="Parse Serialized data"]
+        database_for_each_property[label="For each Property"]
+        database_loop_for_each_property[label="More Properties" shape="diamond"]
+        database_push_property_to_work_property_set[label="Push Property to Work Property Set"]
+        return_work[label="Return Work object"]
+
+        database_request_pid -> database_retrieve_object
+        database_retrieve_object -> database_instantiate_work ->
+        database_instantiate_work -> database_assign_work_type
+        database_assign_work_type -> database_parse_datastream
+        database_parse_datastream -> database_for_each_property
+        database_for_each_property -> database_push_property_to_work_property_set
+        database_push_property_to_work_property_set -> database_loop_for_each_property
+        database_loop_for_each_property -> database_for_each_property [label="NEXT"]
+        database_loop_for_each_property -> return_work [label="NO"]
+    }
+
+    database_instantiate_work -> work[dir=both]
+    database_assign_work_type -> work:f2
+    database_retrieve_object -> database[dir=both]
+    database_push_property_to_work_property_set -> work:f3
+    work -> return_work
+}

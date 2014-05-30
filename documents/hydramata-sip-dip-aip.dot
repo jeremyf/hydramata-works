@@ -1,0 +1,88 @@
+digraph "G" {
+    label="Hydramata SIP / DIP / AIP"
+    compound=true;
+    node[color="grey15" shape=record penwidth=2 margin="0.15, 0.125"];
+
+    subgraph cluster_0 {
+        label="Operations via Interface";
+        color="olivedrab3";
+        node[color="grey" style=filled fillcolor=olivedrab3];
+
+        user_submission [label="{User Submission Interface | rendered HTML form }"];
+        batch_submission [label="{Batch Submission Interface | machine readable file }"];
+        sip_request [label="{GET SIP by PID}"]
+        aip_request [label="{GET AIP by PID}"]
+        dip_request [label="{GET DIP by PID}"]
+        search_interface [label="{GET SEARCH}"]
+        work_viewer [label="{Representation of Work | by content type (i.e. HTML, JSON)}"]
+        search_response [label="{Representation of Search | by content type (i.e. HTML, JSON)}"]
+    }
+
+    subgraph 1 {
+        label="Data Negotiation"
+        color="lightskyblue3";
+        node[color="grey" style=filled fillcolor=lightskyblue3]
+
+        submission_handler [label="{Submission Input Handler | validate input | mint PID | persist input | enqueue submission}"];
+        work_wrangler [label="{Work Wrangler | retrieve data from persistence | retrieval sequence (for :edit, :show, etc.)}"]
+
+        blacklight [label="{Blacklight}"]
+        work_wrangler_aip [label="{ActiveFedora}"]
+        work_wrangler_sip [label="{ActiveRecord}"]
+        rubydora [label="{Rubydora}"]
+        solrizer [label="{Solrizer}"]
+        work_renderer [label="{Work Renderer}"]
+    }
+
+    subgraph cluster_2 {
+        label="Queing System"
+        color="pink"
+        style="filled"
+        hydramata_queue_handler [fillcolor=pink label="{Hydramata Workflow}"]
+        hydramata_queue_handler ->
+        send_user_notifications ->
+        run_anti_virus ->
+        characterize_files ->
+        generate_derivatives ->
+        apply_rights_metadata ->
+        etc ->
+        ingest_sip
+        send_user_notifications
+    }
+
+    subgraph 3 {
+        label="Data Storage and Persistence"
+        node[color="grey"style=filled fillcolor=grey];
+        sip_data_storage [label="{ Database }"];
+        sip_file_storage [label="{ File System Workspace }"];
+        aip_data_storage [label="{ Fedora }"];
+        index_data_storage [label="{ SOLR }"];
+    }
+
+    submission_handler -> sip_data_storage [label="Persist SIP"]
+    sip_request -> work_wrangler
+    dip_request -> work_wrangler
+    aip_request -> work_wrangler
+
+    work_wrangler -> work_wrangler_sip [arrowhead="none" label="Exists in Database?"]
+    work_wrangler_sip -> sip_data_storage [arrowhead="both"]
+    work_wrangler -> work_wrangler_aip [arrowhead="none" label="Exists in Fedora or SOLR?"]
+    work_wrangler -> work_renderer [label="Well-formed Work object"]
+    work_renderer -> work_viewer [label="Negotiated content type (i.e. JSON, HTML, XML)"]
+
+    work_wrangler_aip -> rubydora [arrowhead="both"]
+    work_wrangler_aip -> solrizer [arrowhead="both"]
+    search_interface -> blacklight
+    blacklight -> index_data_storage
+    blacklight -> search_response
+    user_submission -> submission_handler [label="User submits a form"];
+    batch_submission -> submission_handler [label="Batch file ready to process"];
+    submission_handler -> sip_request [label="Response from Submission Input Handler"];
+    submission_handler -> hydramata_queue_handler [label="Enqueue PID and workflow ID"];
+    hydramata_queue_handler -> sip_data_storage [label="Update SIP data"]
+    sip_data_storage -> hydramata_queue_handler [label="Load SIP data"]
+    hydramata_queue_handler -> rubydora [label="Ingest (SIP -> AIP)"]
+    hydramata_queue_handler -> solrizer [label="Index (SIP -> AIP)"]
+    rubydora -> aip_data_storage
+    solrizer -> index_data_storage
+}

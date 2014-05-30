@@ -1,0 +1,37 @@
+digraph "G" {
+    label="Map from User Input to Work Object"
+    compound=true;
+    node[color="grey15" shape=record penwidth=2 margin="0.15, 0.125"];
+
+    subgraph 1 {
+        label="Records"
+        node[color="grey" style=filled fillcolor=olivedrab3];
+        input[label="Input"]
+        work[label="{ <f0> Work (in memory) | <f1> #pid | <f2> #work_type | <f3> #property_set }"]
+    }
+
+    subgraph cluster_0 {
+        label="Sequence for Transforming\nUser Input to a Work"
+        color="orange"
+        style="filled"
+        node[style=filled fillcolor=white]
+        post_user_input[label="Post User Input"]
+        for_each_input_key[label="For each Input Key/Value pair"]
+        determine_predicate_for_key[label="Determine Predicate by Key"]
+        coerce_value[label="Use Predicate to coerce Value into a Property"]
+        push_value_to_onto_work[label="Push Property onto Work"]
+        loop_input_key[label="More input keys?" shape="diamond"]
+        return_work[label="Return Work object"]
+
+        post_user_input -> for_each_input_key
+        for_each_input_key -> determine_predicate_for_key
+        determine_predicate_for_key -> coerce_value
+        coerce_value -> push_value_to_onto_work
+        push_value_to_onto_work -> loop_input_key
+        loop_input_key -> for_each_input_key[label="NEXT"]
+        loop_input_key -> return_work[label="NO"]
+    }
+    coerce_value -> work
+    work -> return_work
+    input -> for_each_input_key
+}

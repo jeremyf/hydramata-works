@@ -1,0 +1,53 @@
+digraph "G" {
+    label="Render a Work"
+    compound=true;
+    node[color="grey15" shape=record penwidth=2 margin="0.15, 0.125"];
+
+    subgraph 1 {
+        label="Records"
+        node[color="grey" style=filled fillcolor=olivedrab3];
+        work[label="{ <f0> Work (in memory) | <f1> #pid | <f2> #work_type | <f3> #property_set }"]
+        output_buffer[label=" { Rendered output }"]
+    }
+
+    subgraph cluster_0 {
+        label="Sequence for Transforming\nWork to Rendered Output"
+        color="orange"
+        style="filled"
+        node[style=filled fillcolor=white]
+        request_for_content_type[label="Request Work for Content Type (i.e. XML)"]
+        determine_presentation_structure[label="With Presentation Structure"]
+        for_each_fieldset[label="For each Fieldset"]
+        render_fieldset_container[label="Render Fieldset container"]
+        for_each_predicate[label="For each Predicate"]
+        render_predicate_container[label="Render Predicate container"]
+        fetch_work_property_by_predicate[label="Fetch Property from Work by Predicate"]
+        render_work_property[label="Render Work's Property#values"]
+        loop_for_each_predicate[shape="diamond" label="More Predicates?"]
+        loop_for_each_fieldset[shape="diamond" label="More Fieldsets?"]
+        render_remaining_work_properties_in_junk_drawer_fieldset[label="Render remaining Work Properties (if applicable)"]
+        return_output_buffer[label="Return rendered output to requester"]
+
+        request_for_content_type -> determine_presentation_structure
+        determine_presentation_structure -> for_each_fieldset
+        for_each_fieldset -> render_fieldset_container
+        render_fieldset_container -> for_each_predicate
+        for_each_predicate -> render_predicate_container
+        render_predicate_container -> fetch_work_property_by_predicate
+        fetch_work_property_by_predicate -> render_work_property
+        render_work_property -> loop_for_each_predicate
+        loop_for_each_predicate -> for_each_predicate [label="NEXT"]
+        loop_for_each_predicate -> loop_for_each_fieldset [label="NO"]
+        loop_for_each_fieldset -> for_each_fieldset [label="NEXT"]
+        loop_for_each_fieldset -> render_remaining_work_properties_in_junk_drawer_fieldset [label="NO"]
+        render_remaining_work_properties_in_junk_drawer_fieldset -> return_output_buffer
+    }
+
+    fetch_work_property_by_predicate -> work:f3[arrowhead=none]
+    determine_presentation_structure -> work:f2[arrowhead=none]
+    render_fieldset_container -> output_buffer
+    render_predicate_container -> output_buffer
+    render_work_property -> output_buffer
+    render_remaining_work_properties_in_junk_drawer_fieldset -> output_buffer
+    output_buffer -> return_output_buffer
+}

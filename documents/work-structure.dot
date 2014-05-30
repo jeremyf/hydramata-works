@@ -1,0 +1,32 @@
+digraph "G" {
+    label="Work Structure"
+    compound=true;
+    node[color="grey15" shape=record penwidth=2 margin="0.15, 0.125"];
+    edge[arrowhead="crowfeet"]
+
+    work[label="{ <f0> Work (in memory) | <f1> #pid | <f2> #work_type | <f3> #property_set }"]
+    work_type [label="{ WorkType | #name | #presentation_structure }"]
+    property [label="{ Property (in memory) | #predicate | #values }"]
+    workflow [label="{ Workflow | #first_task | #task_graph }"]
+    fieldset [label="{ Fieldset | #name | #predicates | #presentation_sequence_number }"]
+    fieldset_predicates [label="{ FieldsetPredicate | #fieldset | #predicate | #presentation_sequence_number }"]
+    predicate [label="{ <f0> Predicate | <f1> #name | <f2> #uri | <f3> #datastream_name | <f4> #predicate_coercer_class_name | <f5> #predicate_parser_class_name | <f6> #indexing_strategy | <f7> #key }"]
+    work_type_datastream_parser [label="{ WorkTypeDatastreamParser | #work_type | #datastream_name | #parser_class_name }"]
+    presentation_structure [label="{ Presentation Structure | #name }"]
+    presentation_context [label="{ PresentationContext | #work_type | #content_type (ie 'solr', 'xml', 'html') | #context (ie 'show', 'edit') | #renderer_class_name }"]
+    work_type_processing_context [label="{ ProcessingContext | #work_type | #context (ie 'create', 'update', 'destroy') }"]
+    property_set [label="{ PropertySet (in memory) | #work | #push(a_property) }"]
+
+    work_type -> work
+    work -> property_set [arrowhead=lcrow]
+    property_set -> property
+    predicate -> property
+    presentation_structure -> fieldset
+    fieldset -> fieldset_predicates
+    predicate -> fieldset_predicates
+    work_type -> presentation_structure
+    work_type -> presentation_context
+    work_type -> work_type_processing_context -> workflow
+
+    work_type -> work_type_datastream_parser
+}

@@ -1,0 +1,31 @@
+digraph "G" {
+    label="Map from Work Object to Database"
+    compound=true;
+    node[color="grey15" shape=record penwidth=2 margin="0.15, 0.125"];
+
+    subgraph 1 {
+        label="Records"
+        node[color="grey" style=filled fillcolor=olivedrab3];
+        database[label="database"]
+        work[label="{ <f0> Work (in memory) | <f1> #pid | <f2> #work_type | <f3> #property_set }"]
+    }
+
+    subgraph cluster_0 {
+        label="Sequence for Transforming\nan in Memory Work to the Database"
+        color="orange"
+        style="filled"
+        node[style=filled fillcolor=white]
+        save_work[label="Request to save Work"]
+        validate[label="Validate Work"]
+        request_pid[label="Request PID (if applicable)"]
+        serialize_property_set[label="Serialize PropertySet to JSON"]
+
+        save_work -> validate
+        validate -> work[dir=both]
+        work -> serialize_property_set
+        validate -> request_pid
+        request_pid -> serialize_property_set
+        serialize_property_set -> database
+    }
+
+}
