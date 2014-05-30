@@ -1,6 +1,6 @@
 # DRAFT - Interface between Work and Permissions component - DRAFT
 
-## Initial Intreface
+## Initial Interface
 
 For a Work to assert its available predicates, the Permissions subsystem should:
 
@@ -39,7 +39,7 @@ Feature: Role-based access to Predicates
   So that I am upholding any institutional policies and protocols regarding content.
 
   As the Work component is responsible for wrangling the Work from persistence to memory to output buffer,
-  it would be the responsiblity of the Work component to negotiate any predicate level access.
+  it would be the responsibility of the Work component to negotiate any predicate level access.
 
   Scenario Outline:
 

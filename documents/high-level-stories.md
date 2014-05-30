@@ -6,6 +6,8 @@ Below are stories that are supported in the `./documents` directory.
 
 ### Transform in memory Work object to Show HTML Document
 
+Story points: 3
+
 **Done looks like**
 
 ```gherkin
@@ -31,10 +33,20 @@ Then I should have the following css-selectors and text:
   | .optional .keyword .value  | Programming |
 ```
 
+### Transform in memory Work object to New HTML Document
+
+Story points: 4
+
+***Done looks like**
+
+## Parking Lot
+
+* Define a Work type's suggested predicates
+* Define a Work type's presentation structure
+* Define an abstract Predicate
 * Transform Database object to in memory Work object
 * Transform Solr object to in memory Work object
 * Transform in memory Work object to SOLR Document
-* Transform in memory Work object to New HTML Document
 * Transform in memory Work object to Edit HTML Document
 * Transform in memory Work object to Show JSON Document
 * Transform user input from Edit Form to in memory Work object

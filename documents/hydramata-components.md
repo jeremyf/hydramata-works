@@ -33,7 +33,13 @@ A common interface for application level permissions. That is to say "Can I view
 
 Responsible for defining what an agent interacting with the application can do.
 
-The scope of the permissions system is beyond just works. Can this person, because they are a member of these groups take this specific action. And the action could be "Show the Resque worker queue." "Masquerade as another user." "Edit a given work."
+The scope of the permissions system is beyond just works.
+Can this person, because they are a member of these groups take this specific action.
+And the action could be:
+
+* "Show the Resque worker queue."
+* "Masquerade as another user."
+* "Edit a given work."
 
 ### What pain points is Hydramata::Permissions addressing?
 
@@ -54,3 +60,23 @@ This could be ingesting SIPs, sending emails to depositors, running characteriza
 * Acknowledging the transactional challenges of coordinating updates to Fedora and SOLR so as to deliver on the promise of preservation.
 * Teasing apart numerous small tasks that can be run and tested in isolation.
 * Speeding up the responsiveness and scalability of user deposit.
+
+## Hydramata::AdministrativeSet
+
+A conceptual place where Works are put.
+
+As it relates to the Hydramata::Permissions component, the AdministrativeSet is a Resource.
+An AdministrativeSetMembership is also a Resource.
+
+If I want to create a Work, I need to declare which AdministrativeSet I want to put it in.
+"Can I create AdministrativeSetMembership (an Article in this AdministrativeSet)?"
+
+### @TODO
+
+Consider how we persist a Work's AdministrativeSet.
+Is this uneditable?
+Is the attribute shown on the page?
+How to enforce that?
+
+The reification strategy.
+If a property is present but not editable, discard any value associated with the property when we attempt to.
