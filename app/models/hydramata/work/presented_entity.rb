@@ -1,9 +1,11 @@
 module Hydramata
   module Work
     class PresentedEntity
+      extend Forwardable
+
       attr_reader :entity, :presentation_structure
       def initialize(collaborators = {})
-        @entity = collaborators.fetch(:entity)
+        self.entity = collaborators.fetch(:entity)
         @presentation_structure = collaborators.fetch(:presentation_structure)
       end
 
@@ -16,6 +18,14 @@ module Hydramata
           end
           yield(fieldset, properties)
         end
+      end
+
+      def_delegator :entity, :entity_type
+
+      protected
+
+      def entity=(entity)
+        @entity = entity
       end
     end
   end
