@@ -24,6 +24,8 @@ module Hydramata
 
       protected
 
+      # Adding a setter as I want to make sure that the collaborating entity
+      # is "well-formed".
       def entity=(entity)
         @entity = entity
       end
