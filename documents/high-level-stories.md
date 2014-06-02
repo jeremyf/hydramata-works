@@ -53,7 +53,7 @@ Then I should have the following css-selectors and text:
   | .required .title label.label                        | 'Title'    |
   | .required .title input.value[name=work[title]       | 'Hello'    |
   | .required .title input.value[name=work[title]       | ''         |
-  | fieldset.required.caption                           | 'Optional' |
+  | fieldset.optional.caption                           | 'Optional' |
   | .optional .abstract input.value[name=work[abstract] | ''         |
   | .optional .keyword input.value[name=work[keyword]   | ''         |
   | .optional .keyword input.value[name=work[keyword]   | ''         |

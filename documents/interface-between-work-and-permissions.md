@@ -18,16 +18,42 @@ For the Permissions subsystem to interact with a Work, the Work object should im
 
 ### Searching for Resources
 
-This is an interesting and complicated case. In the case of Searching for Works, the resource would be a Search object.
-Thus we would ask: "Can I show the Search?". This does not adjudicate what elements are returned in the search response.
+This is a more complicated case. When searching for Works there are two permission checks:
 
-The Permission system is responsible for appending additional restrictions to Search object.
-The additional restrictions would modify the Search by adding "AND I can Show".
+1. "Can I create a Search?" - In other words, can I perform a search?
+1. "Can I show a given Search result?" - In other words, what are the documents returned in the search?
 
-We can search on the indexed properties even though we may not be able to access them.
-Since we reify the object from SOLR via a Work Reification Strategy, this means any properties that they can't access won't be available for view rendering.
-Thus Discover and Show are similar.
+The Permission system is responsible for appending additional restrictions to Search object/query.
+The additional restrictions would modify the Search by in effect adding "AND I can Show" to the search query.
 
+For a search request, we will search across all indexed properties of the solr documents, regardless of permissions.
+When we render a search result document, only properties that the user can access will be available for rendering to the output buffer.
+
+Said another way:
+
+```gherkin
+Feature: I can search amongst properties that I may not be able to access
+  As patron of the library
+  I want to...
+  So that I...
+
+  Scenario:
+    Given an Agent
+    And there exists the following indexed Works:
+      | work_type | properties                        |
+      | Article   | { title: 'Hello', secret: 'Dog' } |
+      | Book      | { title: 'Dog' }                  |
+      | Article   | { title: 'World' }                |
+    And I can accessess the following predicates by Work Type:
+      | work_type | predicates |
+      | Article   | [:title]   |
+      | Book      | [:title]   |
+    When the Agent searches for "Dog"
+    Then they will find two Works with the following properties:
+      | work_type | properties         |
+      | Article   | { title: 'Hello' } |
+      | Book      | { title: 'Dog' }   |
+```
 
 ## Initial Scenarios
 
