@@ -26,7 +26,7 @@ module Hydramata
       context '#property' do
         it 'returns matching predicates' do
           subject.properties << property
-          expect(subject.property(predicate)).to eq([value])
+          expect(subject.properties[predicate]).to eq([value])
         end
       end
     end

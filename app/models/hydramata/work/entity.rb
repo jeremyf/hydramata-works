@@ -21,10 +21,6 @@ module Hydramata
         @properties
       end
 
-      def property(predicate)
-        @properties[predicate]
-      end
-
       private
 
       def default_properties_container

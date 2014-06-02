@@ -76,7 +76,7 @@ module Hydramata
       it 'should parse the fedora object to retrieve the depositor' do
         VCR.use_cassette('fedora-object', record: :none) do
           expect { work_wrangler.call(pid, with_datastreams: true) }.
-            to change { entity.property(:depositor) }.
+            to change { entity.properties[:depositor] }.
             from([]).
             to(['username-1'])
         end

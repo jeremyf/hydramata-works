@@ -5,13 +5,13 @@ module Hydramata
   module Work
     describe PresentedEntity do
       let(:presentation_structure) { double('PresentationStructure', fieldsets: [[:required, [:title]], [:optional, [:abstract]]]) }
-      let(:entity) { double('Entity', property: true, entity_type: true) }
+      let(:entity) { double('Entity', properties: true, entity_type: true) }
       let(:properties) { { title: double, abstract: double } }
       subject { described_class.new(entity: entity, presentation_structure: presentation_structure) }
 
       it 'should yield fieldsets with corresponding properties' do
-        entity.should_receive(:property).with(:title).and_return(properties[:title])
-        entity.should_receive(:property).with(:abstract).and_return(properties[:abstract])
+        entity.properties.should_receive(:[]).with(:title).and_return(properties[:title])
+        entity.properties.should_receive(:[]).with(:abstract).and_return(properties[:abstract])
         expect{|b| subject.each_fieldset_with_properties(&b) }.
         to yield_successive_args(
           [:required, {title: properties[:title]}],

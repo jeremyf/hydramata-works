@@ -13,7 +13,7 @@ module Hydramata
         @presentation_structure.fieldsets.each do |fieldset, predicates|
           properties = {}
           predicates.each_with_object(properties) do |predicate, mem|
-            mem[predicate] = entity.property(predicate)
+            mem[predicate] = entity.properties[predicate]
             mem
           end
           yield(fieldset, properties)
