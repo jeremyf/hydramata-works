@@ -1,0 +1,299 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://fedoraAdmin:fedoraAdmin@127.0.0.1:8983/fedora/objects/und:f4752f8687n?format=xml
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Expires:
+      - Thu, 01-Jan-1970 00:00:00 GMT
+      Set-Cookie:
+      - JSESSIONID=17248nboq3adn1ovrh9esgyzq3;Path=/fedora
+      Content-Type:
+      - text/xml
+      Date:
+      - Mon, 02 Jun 2014 17:52:45 GMT
+      Content-Length:
+      - '977'
+      Server:
+      - Jetty(6.1-SNAPSHOT)
+    body:
+      encoding: UTF-8
+      string: <?xml version="1.0" encoding="UTF-8"?><objectProfile  xmlns="http://www.fedora.info/definitions/1/0/access/"  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.fedora.info/definitions/1/0/access/
+        http://www.fedora.info/definitions/1/0/objectProfile.xsd" pid="und:f4752f8687n"
+        ><objLabel></objLabel><objOwnerId>fedoraAdmin</objOwnerId><objModels><model>info:fedora/afmodel:SeniorThesis</model><model>info:fedora/fedora-system:FedoraObject-3.0</model></objModels><objCreateDate>2014-06-02T17:52:44.573Z</objCreateDate><objLastModDate>2014-06-02T17:52:45.371Z</objLastModDate><objDissIndexViewURL>http://localhost:8983/fedora/objects/und%3Af4752f8687n/methods/fedora-system%3A3/viewMethodIndex</objDissIndexViewURL><objItemIndexViewURL>http://localhost:8983/fedora/objects/und%3Af4752f8687n/methods/fedora-system%3A3/viewItemIndex</objItemIndexViewURL><objState>A</objState></objectProfile>
+    http_version:
+  recorded_at: Mon, 02 Jun 2014 17:52:45 GMT
+- request:
+    method: get
+    uri: http://fedoraAdmin:fedoraAdmin@127.0.0.1:8983/fedora/objects/und:f4752f8687n/datastreams?format=xml&profiles=true
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Expires:
+      - Thu, 01-Jan-1970 00:00:00 GMT
+      Set-Cookie:
+      - JSESSIONID=b0hi4btwr340vontqipg8f8;Path=/fedora
+      Content-Type:
+      - text/xml
+      Date:
+      - Mon, 02 Jun 2014 17:52:45 GMT
+      Content-Length:
+      - '4066'
+      Server:
+      - Jetty(6.1-SNAPSHOT)
+    body:
+      encoding: UTF-8
+      string: <?xml version="1.0" encoding="UTF-8"?><objectDatastreams xmlns="http://www.fedora.info/definitions/1/0/access/"
+        xmlns:apim="http://www.fedora.info/definitions/1/0/management/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.fedora.info/definitions/1/0/access/
+        http://localhost:8983/fedora/schema/listDatastreams.xsd" pid="und:f4752f8687n"  baseURL="http://localhost:8983/fedora/"
+        ><datastreamProfile pid="und:f4752f8687n" dsID="DC" ><apim:dsLabel>Dublin
+        Core Record for this object</apim:dsLabel><apim:dsVersionID>DC1.0</apim:dsVersionID><apim:dsCreateDate>2014-06-02T17:52:44.573Z</apim:dsCreateDate><apim:dsState>A</apim:dsState><apim:dsMIME>text/xml</apim:dsMIME><apim:dsFormatURI>http://www.openarchives.org/OAI/2.0/oai_dc/</apim:dsFormatURI><apim:dsControlGroup>X</apim:dsControlGroup><apim:dsSize>344</apim:dsSize><apim:dsVersionable>true</apim:dsVersionable><apim:dsInfoType></apim:dsInfoType><apim:dsLocation>und:f4752f8687n+DC+DC1.0</apim:dsLocation><apim:dsLocationType></apim:dsLocationType><apim:dsChecksumType>DISABLED</apim:dsChecksumType><apim:dsChecksum>none</apim:dsChecksum></datastreamProfile><datastreamProfile
+        pid="und:f4752f8687n" dsID="RELS-EXT" ><apim:dsLabel>Fedora Object-to-Object
+        Relationship Metadata</apim:dsLabel><apim:dsVersionID>RELS-EXT.0</apim:dsVersionID><apim:dsCreateDate>2014-06-02T17:52:44.744Z</apim:dsCreateDate><apim:dsState>A</apim:dsState><apim:dsMIME>application/rdf+xml</apim:dsMIME><apim:dsFormatURI></apim:dsFormatURI><apim:dsControlGroup>X</apim:dsControlGroup><apim:dsSize>317</apim:dsSize><apim:dsVersionable>true</apim:dsVersionable><apim:dsInfoType></apim:dsInfoType><apim:dsLocation>und:f4752f8687n+RELS-EXT+RELS-EXT.0</apim:dsLocation><apim:dsLocationType></apim:dsLocationType><apim:dsChecksumType>DISABLED</apim:dsChecksumType><apim:dsChecksum>none</apim:dsChecksum></datastreamProfile><datastreamProfile
+        pid="und:f4752f8687n" dsID="properties" ><apim:dsLabel></apim:dsLabel><apim:dsVersionID>properties.0</apim:dsVersionID><apim:dsCreateDate>2014-06-02T17:52:44.775Z</apim:dsCreateDate><apim:dsState>A</apim:dsState><apim:dsMIME>text/xml</apim:dsMIME><apim:dsFormatURI></apim:dsFormatURI><apim:dsControlGroup>M</apim:dsControlGroup><apim:dsSize>54</apim:dsSize><apim:dsVersionable>true</apim:dsVersionable><apim:dsInfoType></apim:dsInfoType><apim:dsLocation>und:f4752f8687n+properties+properties.0</apim:dsLocation><apim:dsLocationType>INTERNAL_ID</apim:dsLocationType><apim:dsChecksumType>DISABLED</apim:dsChecksumType><apim:dsChecksum>none</apim:dsChecksum></datastreamProfile><datastreamProfile
+        pid="und:f4752f8687n" dsID="rightsMetadata" ><apim:dsLabel></apim:dsLabel><apim:dsVersionID>rightsMetadata.0</apim:dsVersionID><apim:dsCreateDate>2014-06-02T17:52:44.806Z</apim:dsCreateDate><apim:dsState>A</apim:dsState><apim:dsMIME>text/xml</apim:dsMIME><apim:dsFormatURI></apim:dsFormatURI><apim:dsControlGroup>M</apim:dsControlGroup><apim:dsSize>556</apim:dsSize><apim:dsVersionable>true</apim:dsVersionable><apim:dsInfoType></apim:dsInfoType><apim:dsLocation>und:f4752f8687n+rightsMetadata+rightsMetadata.0</apim:dsLocation><apim:dsLocationType>INTERNAL_ID</apim:dsLocationType><apim:dsChecksumType>DISABLED</apim:dsChecksumType><apim:dsChecksum>none</apim:dsChecksum></datastreamProfile><datastreamProfile
+        pid="und:f4752f8687n" dsID="descMetadata" ><apim:dsLabel></apim:dsLabel><apim:dsVersionID>descMetadata.0</apim:dsVersionID><apim:dsCreateDate>2014-06-02T17:52:45.371Z</apim:dsCreateDate><apim:dsState>A</apim:dsState><apim:dsMIME>text/plain</apim:dsMIME><apim:dsFormatURI></apim:dsFormatURI><apim:dsControlGroup>M</apim:dsControlGroup><apim:dsSize>847</apim:dsSize><apim:dsVersionable>true</apim:dsVersionable><apim:dsInfoType></apim:dsInfoType><apim:dsLocation>und:f4752f8687n+descMetadata+descMetadata.0</apim:dsLocation><apim:dsLocationType>INTERNAL_ID</apim:dsLocationType><apim:dsChecksumType>DISABLED</apim:dsChecksumType><apim:dsChecksum>none</apim:dsChecksum></datastreamProfile></objectDatastreams>
+    http_version:
+  recorded_at: Mon, 02 Jun 2014 17:52:45 GMT
+- request:
+    method: get
+    uri: http://fedoraAdmin:fedoraAdmin@127.0.0.1:8983/fedora/objects/und:f4752f8687n/datastreams/RELS-EXT/content
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Expires:
+      - Thu, 01-Jan-1970 00:00:00 GMT
+      Set-Cookie:
+      - JSESSIONID=133y0mnohe9fvhd3rd8rctx3;Path=/fedora
+      Content-Disposition:
+      - inline; filename="Fedora Object-to-Object Relationship Metadata.rdf"
+      Content-Length:
+      - '317'
+      Content-Type:
+      - application/rdf+xml
+      Date:
+      - Mon, 02 Jun 2014 17:52:45 GMT
+      Server:
+      - Jetty(6.1-SNAPSHOT)
+    body:
+      encoding: UTF-8
+      string: |2
+
+        <rdf:RDF xmlns:fedora-model="info:fedora/fedora-system:def/model#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+          <rdf:Description rdf:about="info:fedora/und:f4752f8687n">
+            <fedora-model:hasModel rdf:resource="info:fedora/afmodel:SeniorThesis"></fedora-model:hasModel>
+          </rdf:Description>
+        </rdf:RDF>
+    http_version:
+  recorded_at: Mon, 02 Jun 2014 17:52:45 GMT
+- request:
+    method: get
+    uri: http://fedoraAdmin:fedoraAdmin@127.0.0.1:8983/fedora/objects/und:f4752f8687n/datastreams/DC/content
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Expires:
+      - Thu, 01-Jan-1970 00:00:00 GMT
+      Set-Cookie:
+      - JSESSIONID=isia3sh1xtq7uc4p983h2s94;Path=/fedora
+      Content-Disposition:
+      - inline; filename="Dublin Core Record for this object.xml"
+      Content-Length:
+      - '344'
+      Content-Type:
+      - text/xml
+      Date:
+      - Mon, 02 Jun 2014 17:52:45 GMT
+      Server:
+      - Jetty(6.1-SNAPSHOT)
+    body:
+      encoding: UTF-8
+      string: |2
+
+        <oai_dc:dc xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai_dc/ http://www.openarchives.org/OAI/2.0/oai_dc.xsd">
+          <dc:identifier>und:f4752f8687n</dc:identifier>
+        </oai_dc:dc>
+    http_version:
+  recorded_at: Mon, 02 Jun 2014 17:52:45 GMT
+- request:
+    method: get
+    uri: http://fedoraAdmin:fedoraAdmin@127.0.0.1:8983/fedora/objects/und:f4752f8687n/datastreams/properties/content
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Expires:
+      - Thu, 01-Jan-1970 00:00:00 GMT
+      Set-Cookie:
+      - JSESSIONID=2wcw8zu10k2ct7i2knctgzfj;Path=/fedora
+      Content-Disposition:
+      - inline; filename="properties.xml"
+      Content-Length:
+      - '54'
+      Content-Type:
+      - text/xml
+      Date:
+      - Mon, 02 Jun 2014 17:52:45 GMT
+      Server:
+      - Jetty(6.1-SNAPSHOT)
+    body:
+      encoding: UTF-8
+      string: |-
+        <fields>
+          <depositor>username-1</depositor>
+        </fields>
+    http_version:
+  recorded_at: Mon, 02 Jun 2014 17:52:45 GMT
+- request:
+    method: get
+    uri: http://fedoraAdmin:fedoraAdmin@127.0.0.1:8983/fedora/objects/und:f4752f8687n/datastreams/rightsMetadata/content
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Expires:
+      - Thu, 01-Jan-1970 00:00:00 GMT
+      Set-Cookie:
+      - JSESSIONID=1kmc1i5n0pnhzoo0fk52zo3lb;Path=/fedora
+      Content-Disposition:
+      - inline; filename="rightsMetadata.xml"
+      Content-Length:
+      - '556'
+      Content-Type:
+      - text/xml
+      Date:
+      - Mon, 02 Jun 2014 17:52:45 GMT
+      Server:
+      - Jetty(6.1-SNAPSHOT)
+    body:
+      encoding: UTF-8
+      string: "<rightsMetadata xmlns=\"http://hydra-collab.stanford.edu/schemas/rightsMetadata/v1\"
+        version=\"0.1\">\n  <copyright>\n    <human type=\"title\"/>\n    <human type=\"description\"/>\n
+        \   <machine type=\"uri\"/>\n  </copyright>\n  <access type=\"discover\">\n
+        \   <human/>\n    <machine/>\n  </access>\n  <access type=\"read\">\n    <human/>\n
+        \   <machine>\n      \n    <group>registered</group></machine>\n  </access>\n
+        \ <access type=\"edit\">\n    <human/>\n    <machine><person>username-1</person></machine>\n
+        \ </access>\n  <embargo>\n    <human/>\n    <machine/>\n  </embargo>\n</rightsMetadata>"
+    http_version:
+  recorded_at: Mon, 02 Jun 2014 17:52:45 GMT
+- request:
+    method: get
+    uri: http://fedoraAdmin:fedoraAdmin@127.0.0.1:8983/fedora/objects/und:f4752f8687n/datastreams/descMetadata/content
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      Accept:
+      - '*/*; q=0.5, application/xml'
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Expires:
+      - Thu, 01-Jan-1970 00:00:00 GMT
+      Set-Cookie:
+      - JSESSIONID=1okrb7frmjfn51ceptriwjteti;Path=/fedora
+      Content-Disposition:
+      - inline; filename="descMetadata.txt"
+      Content-Length:
+      - '847'
+      Content-Type:
+      - text/plain
+      Date:
+      - Mon, 02 Jun 2014 17:52:45 GMT
+      Server:
+      - Jetty(6.1-SNAPSHOT)
+    body:
+      encoding: UTF-8
+      string: |
+        <info:fedora/und:f4752f8687n> <http://purl.org/dc/terms/created> "2014-06-02" .
+        <info:fedora/und:f4752f8687n> <http://purl.org/dc/terms/language> "English" .
+        <info:fedora/und:f4752f8687n> <http://purl.org/dc/terms/publisher> "University of Notre Dame" .
+        <info:fedora/und:f4752f8687n> <http://purl.org/dc/terms/title> "Title 1" .
+        <info:fedora/und:f4752f8687n> <http://purl.org/dc/terms/dateSubmitted> "2014-06-02Z"^^<http://www.w3.org/2001/XMLSchema#date> .
+        <info:fedora/und:f4752f8687n> <http://purl.org/dc/terms/modified> "2014-06-02Z"^^<http://www.w3.org/2001/XMLSchema#date> .
+        <info:fedora/und:f4752f8687n> <http://purl.org/dc/terms/rights> "Attribution 3.0 United States" .
+        <info:fedora/und:f4752f8687n> <http://purl.org/dc/terms/creator> "Creator Name1" .
+        <info:fedora/und:f4752f8687n> <http://purl.org/dc/terms/description> "Hello World!" .
+    http_version:
+  recorded_at: Mon, 02 Jun 2014 17:52:45 GMT
+recorded_with: VCR 2.7.0

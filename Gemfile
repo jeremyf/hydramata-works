@@ -18,6 +18,7 @@ gem 'coveralls', require: false
 if ! ENV['TRAVIS']
   gem 'simplecov', require: false
   gem 'guard-rspec'
+  gem 'byebug'
   gem 'guard-bundler'
   gem 'guard-rails'
   gem 'rb-fsevent'
