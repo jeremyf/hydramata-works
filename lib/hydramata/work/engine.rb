@@ -5,8 +5,9 @@ module Hydramata
 
       initializer 'hydramata_work.initializers' do |app|
         app.config.paths.add 'app/renderers', eager_load: true
+        app.config.paths.add 'app/parsers', eager_load: true
         app.config.autoload_paths += %W(
-          #{config.root}/app/renderers
+          #{config.root}/app/parsers
         )
       end
 
