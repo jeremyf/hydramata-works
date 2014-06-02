@@ -1,10 +1,13 @@
 require 'fast_helper'
 require 'hydramata/work/entity'
+require 'hydramata/work/linters'
 
 module Hydramata
   module Work
     describe Entity do
       subject { described_class.new }
+      it_behaves_like 'a work entity'
+
       let(:predicate) { :title }
       let(:value) { 'Hello' }
       let(:property) { { predicate: predicate, value: value } }

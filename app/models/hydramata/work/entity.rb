@@ -10,7 +10,7 @@ module Hydramata
     # Unlike a Lotus::Model, the Work is an arbitrary collection of Properties.
     class Entity
       extend Forwardable
-      def initialize(collaborators = {})
+      def initialize(collaborators = {}, &block)
         @properties = collaborators.fetch(:properties_container) { default_properties_container }
         yield(self) if block_given?
       end
