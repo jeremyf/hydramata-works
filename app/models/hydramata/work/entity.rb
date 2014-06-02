@@ -9,22 +9,25 @@ module Hydramata
     #
     # Unlike a Lotus::Model, the Work is an arbitrary collection of Properties.
     class Entity
-      def initialize
+      extend Forwardable
+      def initialize(collaborators = {})
+        @properties = collaborators.fetch(:properties_container) { default_properties_container }
         yield(self) if block_given?
       end
 
       attr_accessor :work_type
 
       def properties
-        @properties ||= []
+        @properties
       end
 
-      def property(key)
-        properties.each_with_object([]) do |entry, mem|
-          if entry.fetch(:predicate).to_s == key.to_s
-            mem << entry.fetch(:value)
-          end
-        end
+      def_delegator :properties, :property
+
+      private
+
+      def default_properties_container
+        require 'hydramata/work/property_set'
+        PropertySet.new(self)
       end
     end
   end
