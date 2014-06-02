@@ -13,13 +13,15 @@ module Hydramata
         yield(self) if block_given?
       end
 
+      attr_accessor :work_type
+
       def properties
         @properties ||= []
       end
 
       def property(key)
         properties.each_with_object([]) do |entry, mem|
-          if entry.fetch(:predicate) == key.to_sym
+          if entry.fetch(:predicate).to_s == key.to_s
             mem << entry.fetch(:value)
           end
         end

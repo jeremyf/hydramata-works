@@ -8,6 +8,10 @@ module Hydramata
       let(:predicate) { :title }
       let(:value) { 'Hello' }
       let(:property) { { predicate: predicate, value: value } }
+
+      it { should respond_to :work_type }
+      it { should respond_to :work_type= }
+
       context '#properties' do
         it 'can be appended' do
           expect { subject.properties << property }.
