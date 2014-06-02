@@ -1,18 +1,32 @@
 module Hydramata
   module Work
-    class PropertySet < Array
+    class PropertySet
+      include ::Enumerable
 
-      def initialize(entity)
-        @entity = entity
-        super()
+      def initialize(*args)
+        @properties = {}
       end
 
-      def property(key)
-        each_with_object([]) do |entry, mem|
-          if entry.fetch(:predicate).to_s == key.to_s
-            mem << entry.fetch(:value)
-          end
-          mem
+      def <<(property)
+        predicate  = property[:predicate]
+        value = property[:value]
+        @properties[predicate.to_s] ||= []
+        @properties[predicate.to_s] << value
+      end
+
+      def [](key)
+        fetch(key)
+      rescue KeyError
+        []
+      end
+
+      def fetch(key)
+        @properties.fetch(key.to_s)
+      end
+
+      def each
+        @properties.each do |key, value|
+          yield(key, value)
         end
       end
 

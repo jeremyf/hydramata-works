@@ -21,7 +21,9 @@ module Hydramata
         @properties
       end
 
-      def_delegator :properties, :property
+      def property(predicate)
+        @properties[predicate]
+      end
 
       private
 
