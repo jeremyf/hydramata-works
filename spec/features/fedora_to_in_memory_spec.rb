@@ -9,6 +9,7 @@ VCR.configure do |config|
   config.hook_into :webmock
 end
 
+# Because of Rubydora this is required
 def logger
   @logger ||= Logger.new(STDOUT)
 end
@@ -41,6 +42,7 @@ module Hydramata
         object.profile['objModels'].each do |model|
           if model =~ /\Ainfo:fedora\/afmodel\:(.*)\Z/
             entity.work_type = $1
+            break
           end
         end
       end
