@@ -4,9 +4,7 @@ Below are stories that are supported in the `./documents` directory.
 
 ## Must Have
 
-### Transform in memory Work object to Show HTML Document
-
-Story points: 3
+### (3) Transform in memory Work object to Show HTML Document
 
 **Done looks like**
 
@@ -33,9 +31,7 @@ Then I should have the following css-selectors and text:
   | .optional .keyword .value  | Programming |
 ```
 
-### Transform in memory Work object to New HTML Document
-
-Story points: 4
+### (4) Transform in memory Work object to New HTML Document
 
 **Done looks like**
 
@@ -58,31 +54,39 @@ Then I should have the following css-selectors and text:
   | .optional .keyword input.value[name=work[keyword]]   | ''         |
 ```
 
-## Parking Lot
 
-* Create an interface for rendering a fieldset
+### (0.5) Create an interface for rendering a fieldset
+
   * in Edit HTML
   * in New HTML
   * in Show HTML
-* Create an interface for rendering a property
+
+### (3) Create an interface for rendering a property
+
   * in Edit HTML
   * in New HTML
   * in Show HTML
   * in Solr Document
-* Transform Database object to in memory Work object
-  * Done Looks Like: All of the persisted properties in the database are reified in the Work object's #properties.
-* Transform Fedora object to in memory Work object
-  * Done Looks Like: All of the persisted datastreams are  in the database are reified in the Work object's #properties.
-* Transform Solr object to in memory Work object
-  * Done
-* Transform in memory Work object to SOLR Document
-* Transform in memory Work object to Edit HTML Document
-* Transform in memory Work object to Database
-* Transform in memory Work to Fedora object
-* Transform user input from Edit Form to in memory Work object
-* Transform user input from New Form to in memory Work object
 
-### Components
+### (1) Transform Database object to in memory Work object
+
+  * Done Looks Like: All of the persisted properties in the database are reified in the Work object's #properties.
+
+### (2) Transform Fedora object to in memory Work object
+
+  * Done Looks Like: All of the persisted datastreams are  in the database are reified in the Work object's #properties.
+
+### (2) Transform Solr object to in memory Work object
+
+### (2) Transform in memory Work object to SOLR Document
+### (3) Transform in memory Work object to Raw Datastreams
+### (1) Transform in memory Work object to Edit HTML Document
+### (1) Transform in memory Work object to Database
+### (3) Transform in memory Work to Fedora object
+### (1) Transform user input from Edit Form to in memory Work object
+### (1) Transform user input from New Form to in memory Work object
+
+#### Components
 
 * Define a Work type's suggested predicates
 * Define a Work type's presentation structure
