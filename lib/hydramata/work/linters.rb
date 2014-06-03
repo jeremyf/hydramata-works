@@ -1,3 +1,13 @@
+shared_examples 'a presented entity' do |default_presented_entity_class|
+  let(:presented_entity_class) { (default_presented_entity_class || described_class) }
+
+  context 'its #each_fieldset_with_properties' do
+    it 'takes a block' do
+      expect(presented_entity_class.instance_method(:each_fieldset_with_properties).parameters.last[1]).to eq(:block)
+    end
+  end
+end
+
 shared_examples 'a datastream parser' do |default_parser|
   let(:datastream_parser) { default_parser || described_class }
   it 'responds to #call' do

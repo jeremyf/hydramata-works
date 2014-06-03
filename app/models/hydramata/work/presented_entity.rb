@@ -9,7 +9,7 @@ module Hydramata
         @presentation_structure = collaborators.fetch(:presentation_structure)
       end
 
-      def each_fieldset_with_properties
+      def each_fieldset_with_properties(&block)
         @presentation_structure.fieldsets.each do |fieldset, predicates|
           properties = {}
           predicates.each_with_object(properties) do |predicate, mem|

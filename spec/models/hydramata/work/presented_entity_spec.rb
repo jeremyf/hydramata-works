@@ -4,6 +4,8 @@ require 'hydramata/work/presented_entity'
 module Hydramata
   module Work
     describe PresentedEntity do
+      it_behaves_like 'a presented entity'
+
       let(:presentation_structure) { double('PresentationStructure', fieldsets: [[:required, [:title]], [:optional, [:abstract]]]) }
       let(:entity) { double('Entity', properties: true, entity_type: true) }
       let(:properties) { { title: double, abstract: double } }
