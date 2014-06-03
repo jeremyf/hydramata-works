@@ -45,6 +45,9 @@ module Hydramata
         end
 
         context '#each' do
+          it 'should yield the predicate and normalized values' do
+            expect{|b| subject.each(&b) }.to yield_with_args('title', [property[:value]])
+          end
         end
       end
     end
