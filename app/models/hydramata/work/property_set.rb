@@ -1,3 +1,4 @@
+require 'active_support/core_ext/array/wrap'
 module Hydramata
   module Work
     class PropertySet
@@ -15,9 +16,7 @@ module Hydramata
       end
 
       def [](key)
-        fetch(key)
-      rescue KeyError
-        []
+        Array.wrap(@properties[key.to_s])
       end
 
       def fetch(key)
