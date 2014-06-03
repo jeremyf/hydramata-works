@@ -1,0 +1,13 @@
+<section class="<%= fieldset %>">
+  <h1><%= fieldset %><h1>
+  <% properties.each do |predicate, values| %>
+  <div class="<%= predicate %>">
+    <p class="label"><%= predicate.to_s.titleize %></p>
+    <ul>
+    <% values.each do |value| %>
+      <li class="value"><%= value %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+</section>

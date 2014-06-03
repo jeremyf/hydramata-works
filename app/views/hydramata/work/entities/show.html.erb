@@ -1,16 +1,5 @@
-<div class="work">
+<article class="work">
 <% show.each_fieldset_with_properties do |fieldset, properties| %>
-  <fieldset class="<%= fieldset %>">
-    <% Array(properties).each do |predicate, values| %>
-    <div class="<%= predicate %>">
-      <p class="label"><%= predicate.to_s.titleize %></p>
-      <ul>
-      <% values.each do |value| %>
-        <li class="value"><%= value %></li>
-      <% end %>
-      </ul>
-    </div>
-    <% end %>
-  </fieldset>
+  <%= render partial: 'hydramata/work/fieldsets/show', locals: { fieldset: fieldset, properties: properties } %>
 <% end %>
-</div>
+</article>
