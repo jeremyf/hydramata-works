@@ -1,3 +1,4 @@
+require 'active_support/core_ext/array/wrap'
 module Hydramata
   module Work
     # The responsibility of a Property is to be a collection of values for
@@ -9,12 +10,18 @@ module Hydramata
       attr_reader :predicate, :values
       def initialize(options = {})
         @predicate = options.fetch(:predicate)
-        self.values = options.fetch(:values) { default_values }
+        @values = []
+        push(options[:values])
+        push(options[:value])
       end
 
       def <<(value)
-        @values << value
+        Array.wrap(value).each do |v|
+          @values << v
+        end
+        self
       end
+      alias_method :push, :<<
 
       alias_method :value, :values
 
@@ -23,16 +30,6 @@ module Hydramata
           other.instance_of?(self.class) &&
           other.predicate == predicate &&
           other.values == values
-      end
-
-      private
-
-      def default_values
-        []
-      end
-
-      def values=(options)
-        @values = [options].flatten.compact
       end
     end
   end

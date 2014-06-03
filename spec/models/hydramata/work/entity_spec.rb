@@ -10,7 +10,7 @@ module Hydramata
 
       let(:predicate) { :title }
       let(:value) { 'Hello' }
-      let(:property) { { predicate: predicate, value: value } }
+      let(:property) { Property.new(predicate: predicate, value: value) }
 
       it { should respond_to :work_type }
       it { should respond_to :work_type= }
@@ -26,7 +26,7 @@ module Hydramata
       context '#property' do
         it 'returns matching predicates' do
           subject.properties << property
-          expect(subject.properties[predicate]).to eq([value])
+          expect(subject.properties[predicate]).to eq(property)
         end
       end
     end

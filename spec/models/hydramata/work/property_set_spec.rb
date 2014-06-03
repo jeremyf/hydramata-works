@@ -5,10 +5,10 @@ module Hydramata
   module Work
     describe PropertySet do
       subject { PropertySet.new }
-      let(:property) { { predicate: :title, value: 'value one' } }
+      let(:property) { Property.new(predicate: :title, value: 'value one') }
 
       it 'allows properties to be pushed onto it' do
-        expect { subject << { predicate: :title, value: 'value' } }
+        expect { subject << property }
         .to change { subject.count }
         .by(1)
       end
@@ -29,26 +29,34 @@ module Hydramata
           end
 
           it 'should return the values if the predicate exists' do
-            expect(subject.fetch(property[:predicate]))
-            .to eq([property[:value]])
+            expect(subject.fetch(property.predicate))
+            .to eq(property)
           end
         end
 
         context '#[]' do
           it 'should return nil if the predicate is not found' do
-            expect(subject[:missing]).to eq([])
+            expect(subject[:missing]).to eq(Property.new(predicate: :missing))
           end
           it 'should return the values if the predicate exists' do
-            expect(subject[property[:predicate]])
-            .to eq([property[:value]])
+            expect(subject[property.predicate])
+            .to eq(property)
           end
         end
 
         context '#each' do
           it 'should yield the predicate and normalized values' do
-            expect{|b| subject.each(&b) }.to yield_with_args('title', [property[:value]])
+            expect{|b| subject.each(&b) }.to yield_with_args(property)
           end
         end
+
+        # context '#subset' do
+        #   let(:a_second_property) { { predicate: :another_predicate, value: 'another value' } }
+        #   it 'should return a property set that only has the specified keys' do
+        #     subject << a_second_property
+        #     expect(subject.subset(property.predicate)).to eq described_class.new(property)
+        #   end
+        # end
       end
     end
   end
