@@ -61,6 +61,7 @@ Then I should have the following css-selectors and text:
 ## Parking Lot
 
 * Transform Database object to in memory Work object
+* Transform Fedora object to in memory Work object
 * Transform Solr object to in memory Work object
 * Transform in memory Work object to SOLR Document
 * Transform in memory Work object to Edit HTML Document
