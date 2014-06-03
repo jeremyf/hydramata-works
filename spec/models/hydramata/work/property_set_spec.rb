@@ -7,6 +7,7 @@ module Hydramata
       subject { PropertySet.new }
       let(:property) { Property.new(predicate: :title, value: 'value one') }
 
+
       it 'allows properties to be pushed onto it' do
         expect { subject << property }
         .to change { subject.count }
@@ -21,6 +22,8 @@ module Hydramata
 
       context 'data retrieval methods' do
         before { subject << property }
+
+        its(:predicates) { should eq [property.predicate.to_s] }
 
         context '#fetch' do
           it 'should raise an error if the predicate is not found' do
@@ -50,13 +53,24 @@ module Hydramata
           end
         end
 
-        # context '#subset' do
-        #   let(:a_second_property) { { predicate: :another_predicate, value: 'another value' } }
-        #   it 'should return a property set that only has the specified keys' do
-        #     subject << a_second_property
-        #     expect(subject.subset(property.predicate)).to eq described_class.new(property)
-        #   end
-        # end
+        context '#==' do
+          it 'should return true if underlying properties are identical' do
+            property_set = described_class.new
+            other = described_class.new
+
+            expect(property_set == other).to be_true
+          end
+        end
+
+        context '#subset' do
+          let(:a_second_property) { { predicate: :another_predicate, value: 'another value' } }
+          it 'should return a property set that only has the specified keys' do
+            subject << a_second_property
+            subset = described_class.new
+            subset << property
+            expect(subject.subset(property.predicate)).to eq(subset)
+          end
+        end
       end
     end
   end
