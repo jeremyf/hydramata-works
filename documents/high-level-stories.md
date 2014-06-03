@@ -4,7 +4,7 @@ Below are stories that are supported in the `./documents` directory.
 
 ## Must Have
 
-### (3) Transform in memory Work object to Show HTML Document
+### (1) Transform in memory Work object to Show HTML Document
 
 **Done looks like**
 
@@ -55,7 +55,7 @@ Then I should have the following css-selectors and text:
 ```
 
 
-### (0.5) Create an interface for rendering a fieldset
+### (1) Create an interface for rendering a fieldset
 
   * in Edit HTML
   * in New HTML
