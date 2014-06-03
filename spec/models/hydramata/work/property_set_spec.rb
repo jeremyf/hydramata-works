@@ -60,6 +60,28 @@ module Hydramata
 
             expect(property_set == other).to be_true
           end
+
+          it 'should return false if different classes' do
+            property_set = described_class.new
+            other = 'abc'
+
+            expect(property_set == other).to be_false
+          end
+
+          it 'should return false if underlyng properties are different' do
+            property_set = described_class.new
+            other = described_class.new
+            property_set << property
+
+            expect(property_set == other).to be_false
+          end
+
+          it 'should return true if empty property set and hash are compared' do
+            property_set = described_class.new
+            other = {}
+
+            expect(property_set == other).to be_true
+          end
         end
 
         context '#subset' do
