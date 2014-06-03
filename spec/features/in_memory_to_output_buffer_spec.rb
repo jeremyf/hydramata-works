@@ -45,6 +45,35 @@ module Hydramata
           with_tag('.optional .keyword .value', text: 'Programming')
         end
       end
+
+      context 'view_path override' do
+        around do |example|
+          begin
+            path = File.expand_path('../../../app/views/articles/hydramata/work/entities/show.html.erb', __FILE__)
+            FileUtils.mkdir_p(File.dirname(path))
+            File.open(path, 'w+') {|f| f.puts template_contents }
+            example.run
+          ensure
+            File.unlink(path) if File.exist?(path)
+          end
+        end
+
+        let(:template_contents) { 'HELLO' }
+        let(:renderer) do
+          EntityRenderer.new(
+            context: :show,
+            content_type: :html,
+            entity: entity,
+            view_path: 'app/views/articles',
+            presentation_structure: presentation_structure
+          )
+        end
+
+        it 'renders something found earlier in the view paths' do
+          rendered_output = renderer.render
+          expect(rendered_output.strip).to eq(template_contents.strip)
+        end
+      end
     end
   end
 end
