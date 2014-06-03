@@ -1,5 +1,10 @@
 module Hydramata
   module Work
+    # The responsibility of a Property is to be a collection of values for
+    # a given predicate. In other words, this represents the Predicate/Object
+    # components of an RDF Triple.
+    #
+    # Why not use RDF? Because not everything we are working with is in RDF.
     class Property
       attr_reader :predicate, :values
       def initialize(options = {})
