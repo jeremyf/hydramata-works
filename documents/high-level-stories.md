@@ -65,19 +65,20 @@ Then I should have the following css-selectors and text:
 * Transform Solr object to in memory Work object
 * Transform in memory Work object to SOLR Document
 * Transform in memory Work object to Edit HTML Document
-* Transform in memory Work object to Show JSON Document
 * Transform in memory Work object to Database
 * Transform in memory Work to Fedora object
 * Transform user input from Edit Form to in memory Work object
 * Transform user input from New Form to in memory Work object
 
 ### Components
+
 * Define a Work type's suggested predicates
 * Define a Work type's presentation structure
 * Define an abstract Predicate
 
 ## Nice to Have
 
+* Transform in memory Work object to Show JSON Document
 * Transform in memory Work object to New JSON Document
 
 ## There are Small Work Items
