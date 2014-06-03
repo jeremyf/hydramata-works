@@ -11,24 +11,33 @@ module Hydramata
       def <<(property)
         predicate  = property[:predicate]
         value = property[:value]
-        @properties[predicate.to_s] ||= []
-        @properties[predicate.to_s] << value
+        properties[predicate.to_s] ||= []
+        properties[predicate.to_s] << value
       end
 
       def [](key)
-        Array.wrap(@properties[key.to_s])
+        normalize_values(properties[key.to_s])
       end
 
       def fetch(key)
-        @properties.fetch(key.to_s)
+        normalize_values(properties.fetch(key.to_s))
       end
 
       def each
-        @properties.each do |key, value|
-          yield(key, value)
+        properties.each do |key, value|
+          yield(key.to_s, normalize_values(value))
         end
       end
 
+      private
+
+      def properties
+        @properties
+      end
+
+      def normalize_values(value)
+        Array.wrap(value)
+      end
     end
   end
 end
