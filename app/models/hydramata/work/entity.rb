@@ -25,7 +25,7 @@ module Hydramata
 
       def default_properties_container
         require 'hydramata/work/property_set'
-        PropertySet.new(self)
+        PropertySet.new(entity: self)
       end
     end
   end

@@ -7,7 +7,7 @@ module Hydramata
       include Conversions
       include ::Enumerable
 
-      def initialize(*args)
+      def initialize(options = {})
         @properties = {}
       end
 
