@@ -32,5 +32,6 @@ shared_examples 'a work entity' do |entity_builder|
     its(:properties) { should respond_to(:<<) }
     its(:properties) { should respond_to(:[]) }
     its(:properties) { should respond_to(:each) }
+    its(:properties) { should respond_to(:fetch) }
   end
 end
