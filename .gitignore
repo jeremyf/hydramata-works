@@ -6,3 +6,4 @@ Gemfile.lock
 spec/internal
 ./spec/internal
 coverage
+*.sqlite3
