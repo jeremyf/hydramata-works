@@ -7,6 +7,8 @@ module Hydramata
     #
     # Why not use RDF? Because not everything we are working with is in RDF.
     class Property
+      include ::Enumerable
+
       attr_reader :predicate, :values
       def initialize(options = {})
         @predicate = options.fetch(:predicate)
@@ -14,6 +16,12 @@ module Hydramata
         push(options[:values])
         push(options[:value])
       end
+
+      # Because who wants to remember which way to access this?
+      alias_method :value, :values
+
+      extend Forwardable
+      def_delegator :values, :each
 
       def <<(value)
         Array.wrap(value).each do |v|
@@ -23,14 +31,13 @@ module Hydramata
       end
       alias_method :push, :<<
 
-      alias_method :value, :values
-
       def ==(other)
         super ||
           other.instance_of?(self.class) &&
           other.predicate == predicate &&
           other.values == values
       end
+
     end
   end
 end

@@ -10,6 +10,11 @@ module Hydramata
 
       it { should respond_to :values }
 
+      it 'should delegate #each to #values' do
+        subject << value
+        expect{|b| subject.each(&b) }.to yield_with_args(value)
+      end
+
       it 'can append to values' do
         expect { subject << value }
         .to change { subject.values }
