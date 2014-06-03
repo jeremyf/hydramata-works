@@ -37,7 +37,7 @@ Then I should have the following css-selectors and text:
 
 Story points: 4
 
-***Done looks like**
+**Done looks like**
 
 ```gherkin
 Given a work object with the following propety_set:
@@ -48,16 +48,14 @@ Given a work object with the following propety_set:
   | :optional | :keyword  | ''            |
 When I request an HTML version of the work
 Then I should have the following css-selectors and text:
-  | css_selector                                        | text       |
-  | fieldset.required.caption                           | 'Required' |
-  | .required .title label.label                        | 'Title'    |
-  | .required .title input.value[name=work[title]       | 'Hello'    |
-  | .required .title input.value[name=work[title]       | ''         |
-  | fieldset.optional.caption                           | 'Optional' |
-  | .optional .abstract input.value[name=work[abstract] | ''         |
-  | .optional .keyword input.value[name=work[keyword]   | ''         |
-  | .optional .keyword input.value[name=work[keyword]   | ''         |
-  | .optional .keyword input.value[name=work[keyword]   | ''         |
+  | css_selector                                         | text       |
+  | fieldset.required.caption                            | 'Required' |
+  | .required .title label.label                         | 'Title'    |
+  | .required .title input.value[name=work[title]]       | 'Hello'    |
+  | .required .title input.value[name=work[title]]       | ''         |
+  | fieldset.optional.caption                            | 'Optional' |
+  | .optional .abstract input.value[name=work[abstract]] | ''         |
+  | .optional .keyword input.value[name=work[keyword]]   | ''         |
 ```
 
 ## Parking Lot
