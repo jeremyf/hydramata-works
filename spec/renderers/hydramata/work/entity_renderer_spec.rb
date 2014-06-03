@@ -1,4 +1,5 @@
-require 'spec_helper'
+require 'fast_helper'
+require 'hydramata/work/entity_renderer'
 
 module Hydramata
   module Work
