@@ -60,9 +60,21 @@ Then I should have the following css-selectors and text:
 
 ## Parking Lot
 
+* Create an interface for rendering a fieldset
+  * in Edit HTML
+  * in New HTML
+  * in Show HTML
+* Create an interface for rendering a property
+  * in Edit HTML
+  * in New HTML
+  * in Show HTML
+  * in Solr Document
 * Transform Database object to in memory Work object
+  * Done Looks Like: All of the persisted properties in the database are reified in the Work object's #properties.
 * Transform Fedora object to in memory Work object
+  * Done Looks Like: All of the persisted datastreams are  in the database are reified in the Work object's #properties.
 * Transform Solr object to in memory Work object
+  * Done
 * Transform in memory Work object to SOLR Document
 * Transform in memory Work object to Edit HTML Document
 * Transform in memory Work object to Database
@@ -75,6 +87,10 @@ Then I should have the following css-selectors and text:
 * Define a Work type's suggested predicates
 * Define a Work type's presentation structure
 * Define an abstract Predicate
+* Create a presented fieldset
+  * Should render itself for its context
+* Create a presented property
+  * Should render itself for its context
 
 ## Nice to Have
 
