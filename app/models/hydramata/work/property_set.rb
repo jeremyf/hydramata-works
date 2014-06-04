@@ -46,11 +46,12 @@ module Hydramata
         end
       end
 
-      def subset(keys, receiver = self.class.new)
+      def subset(keys, receiver = self.class.new, property_builder = nil)
+        property_builder ||= lambda {|o| o }
         Array.wrap(keys).each_with_object(receiver).each do |key, collector|
           # A concession regarding null property; If you ask for the keys, I'll
           # give them to you; it just may be an empty value.
-          collector << self[key]
+          collector << property_builder.call(self[key])
           collector
         end
       end

@@ -14,7 +14,7 @@ module Hydramata
         subject.render(template: template, renderer: renderer)
         expect(template).
         to have_received(:render).
-        with(partial: 'hydramata/work/fieldsets/show', object: subject)
+        with(partial: 'hydramata/work/fieldsets/show', object: subject, locals: { renderer: renderer} )
       end
 
       it 'should have a #name' do

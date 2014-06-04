@@ -1,0 +1,8 @@
+<div class="<%= show.predicate %>">
+  <p class="label"><%= show.predicate.to_s.titleize %></p>
+  <ul>
+  <% show.each do |value| %>
+    <li class="value"><%= value %></li>
+  <% end %>
+  </ul>
+</div>

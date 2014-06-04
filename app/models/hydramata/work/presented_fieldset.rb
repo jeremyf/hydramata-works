@@ -15,7 +15,7 @@ module Hydramata
       def render(options = {})
         template = options.fetch(:template)
         renderer = options.fetch(:renderer)
-        template.render(partial: template_name(renderer.context), object: self)
+        template.render(partial: template_name(renderer.context), object: self, locals: { renderer: renderer } )
       end
 
       def template_name(context)
@@ -26,8 +26,8 @@ module Hydramata
         'hydramata/work/fieldsets'
       end
 
-      def format
-        :html
+      def instance_of?(klass)
+        super || __getobj__.instance_of?(klass)
       end
 
     end

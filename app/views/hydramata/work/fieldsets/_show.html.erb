@@ -1,13 +1,4 @@
 <section class="<%= show.name %>">
   <h1><%= show.name %><h1>
-  <% show.each do |property| %>
-  <div class="<%= property.predicate %>">
-    <p class="label"><%= property.predicate.to_s.titleize %></p>
-    <ul>
-    <% property.each do |value| %>
-      <li class="value"><%= value %></li>
-    <% end %>
-    </ul>
-  </div>
-  <% end %>
+  <% show.each do |property| %><%= property.render(template: self, renderer: renderer) %><% end %>
 </section>
