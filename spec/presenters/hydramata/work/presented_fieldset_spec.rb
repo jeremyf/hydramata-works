@@ -6,7 +6,7 @@ module Hydramata
   module Work
     describe PresentedFieldset do
       let(:fieldset_class) { Struct.new(:name) }
-      let(:fieldset) { fieldset_class.new('my fieldset') }
+      let(:fieldset) { fieldset_class.new('my_fieldset') }
       let(:entity) { double('Entity', work_type: 'an entity type') }
       let(:template) { double('Template', render: true) }
       subject { described_class.new(entity: entity, fieldset: fieldset, presentation_context: 'show') }
@@ -16,10 +16,6 @@ module Hydramata
         expect(template).
           to have_received(:render).
           with(partial: 'hydramata/work/fieldsets/show', object: subject )
-      end
-
-      it 'should have a #name' do
-        expect(subject.name).to eq(fieldset.name)
       end
 
       it 'should have an #work_type' do
@@ -32,6 +28,10 @@ module Hydramata
 
       it 'should also be an instance of the presenter class' do
         expect(subject.instance_of?(described_class)).to be_truthy
+      end
+
+      it 'should have a #dom_class' do
+        expect(subject.dom_class).to eq('my-fieldset')
       end
 
     end

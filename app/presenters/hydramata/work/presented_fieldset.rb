@@ -22,6 +22,10 @@ module Hydramata
         super || __getobj__.instance_of?(klass)
       end
 
+      def dom_class
+        __getobj__.name.to_s.downcase.gsub(/[\W_]+/, '-')
+      end
+
       private
 
       def default_presentation_context
