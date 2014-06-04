@@ -1,4 +1,4 @@
-require 'rspec/given'
+require 'rspec'
 Dir[File.expand_path("../../app/*", __FILE__)].each do |dir|
   $LOAD_PATH << dir
 end

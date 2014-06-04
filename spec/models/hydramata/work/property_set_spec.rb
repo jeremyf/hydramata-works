@@ -23,7 +23,11 @@ module Hydramata
       context 'data retrieval methods' do
         before { subject << property }
 
-        its(:predicates) { should eq [property.predicate.to_s] }
+        context '#predicates' do
+          it 'should be the predicate names' do
+            expect(subject.predicates).to eq [property.predicate.to_s]
+          end
+        end
 
         context '#fetch' do
           it 'should raise an error if the predicate is not found' do
@@ -58,14 +62,14 @@ module Hydramata
             property_set = described_class.new
             other = described_class.new
 
-            expect(property_set == other).to be_true
+            expect(property_set == other).to be_truthy
           end
 
           it 'should return false if different classes' do
             property_set = described_class.new
             other = 'abc'
 
-            expect(property_set == other).to be_false
+            expect(property_set == other).to be_falsey
           end
 
           it 'should return false if underlyng properties are different' do
@@ -73,14 +77,14 @@ module Hydramata
             other = described_class.new
             property_set << property
 
-            expect(property_set == other).to be_false
+            expect(property_set == other).to be_falsey
           end
 
           it 'should return true if empty property set and hash are compared' do
             property_set = described_class.new
             other = {}
 
-            expect(property_set == other).to be_true
+            expect(property_set == other).to be_truthy
           end
         end
 

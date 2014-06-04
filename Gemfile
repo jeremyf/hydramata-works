@@ -13,6 +13,7 @@ gemspec
 # To use debugger
 # gem 'debugger'
 
+gem 'equivalent-xml', github: 'jeremyf/equivalent-xml', branch: 'updating-rspec-for-rspec-3'
 gem "rake"
 gem 'coveralls', require: false
 if ! ENV['TRAVIS']

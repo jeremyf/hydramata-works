@@ -37,11 +37,11 @@ shared_examples 'a work entity' do |entity_builder|
   end
 
   context 'its #properties method' do
-    let(:entity) { entity_class.new }
-    its(:properties) { should be_a_kind_of(Enumerable) }
-    its(:properties) { should respond_to(:<<) }
-    its(:properties) { should respond_to(:[]) }
-    its(:properties) { should respond_to(:each) }
-    its(:properties) { should respond_to(:fetch) }
+    subject { entity_class.new.properties }
+    it { should be_a_kind_of(Enumerable) }
+    it { should respond_to(:<<) }
+    it { should respond_to(:[]) }
+    it { should respond_to(:each) }
+    it { should respond_to(:fetch) }
   end
 end
