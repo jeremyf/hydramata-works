@@ -7,6 +7,19 @@ module Hydramata
       subject { PropertySet.new }
       let(:property) { Property.new(predicate: :title, value: 'value one') }
 
+      context 'predicate order' do
+        it 'the first predicate pushed will return as the first' do
+          subject << (first = Property.new(predicate: :one, value: 1))
+          subject << (second = Property.new(predicate: :two, value: 2))
+          subject << (third = Property.new(predicate: :three, value: 3))
+
+          # Note: I am pushing a Property with the same predicate as the first
+          # object pushed. This will modify
+          subject << (fourth = Property.new(predicate: :one, value: 4))
+
+          expect {|b| subject.each(&b) }.to yield_successive_args(first, second, third)
+        end
+      end
 
       it 'allows properties to be pushed onto it' do
         expect { subject << property }
@@ -15,9 +28,15 @@ module Hydramata
       end
 
       it 'amends an existing property if a common predicate is found' do
-        subject << { predicate: :title, value: 'value one' }
-        expect { subject << { predicate: :title, value: 'value one' } }
-        .to_not change { subject.count }
+        property = Property.new(predicate: :title, value: 'value one')
+        property_with_same_predicate = Property.new(predicate: :title, value: 'another')
+        subject << property
+        expect {
+          expect { subject << property_with_same_predicate }
+          .to_not change { subject.count }
+        }.to change { property.values }
+        .from(['value one'])
+        .to(['value one', 'another'])
       end
 
       context 'data retrieval methods' do

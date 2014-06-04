@@ -6,19 +6,14 @@ module Hydramata
     describe PresentedEntity do
       it_behaves_like 'a presented entity'
 
-      let(:presentation_structure) { double('PresentationStructure', fieldsets: [[:required, [:title]], [:optional, [:abstract]]]) }
-      let(:entity) { double('Entity', properties: true, entity_type: true) }
-      let(:properties) { { title: double, abstract: double } }
-      subject { described_class.new(entity: entity, presentation_structure: presentation_structure) }
+      let(:presentation_structure) { double('PresentationStructure') }
+      let(:entity) { double('Entity', entity_type: true) }
+      let(:presented_fieldset_builder) { double('Builder', call: true) }
+      subject { described_class.new(entity: entity, presentation_structure: presentation_structure, presented_fieldset_builder: presented_fieldset_builder) }
 
-      it 'should yield fieldsets with corresponding properties' do
-        entity.properties.should_receive(:[]).with(:title).and_return(properties[:title])
-        entity.properties.should_receive(:[]).with(:abstract).and_return(properties[:abstract])
-        expect{|b| subject.each_fieldset_with_properties(&b) }.
-        to yield_successive_args(
-          [:required, {title: properties[:title]}],
-          [:optional, {abstract: properties[:abstract]}]
-        )
+      it 'should have #fieldsets that are extracted from the #entity and #presentation_structure' do
+        subject.fieldsets
+        expect(presented_fieldset_builder).to have_received(:call).with(entity: entity, presentation_structure: presentation_structure)
       end
 
       it 'delegates :entity_type to :entity' do

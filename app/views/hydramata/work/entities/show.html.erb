@@ -1,5 +1,5 @@
 <article class="work">
-<% show.each_fieldset_with_properties do |fieldset, properties| %>
-  <%= render partial: 'hydramata/work/fieldsets/show', locals: { fieldset: fieldset, properties: properties } %>
+<% show.fieldsets.each do |fieldset| %>
+  <%= fieldset.inspect %>
 <% end %>
 </article>

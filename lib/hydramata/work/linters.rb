@@ -1,10 +1,8 @@
 shared_examples 'a presented entity' do |default_presented_entity_class|
   let(:presented_entity_class) { (default_presented_entity_class || described_class) }
-
-  context 'its #each_fieldset_with_properties' do
-    it 'takes a block' do
-      expect(presented_entity_class.instance_method(:each_fieldset_with_properties).parameters.last[1]).to eq(:block)
-    end
+  it 'responds to #fieldsets' do
+    expect { presented_entity_class.instance_method(:fieldsets) }.
+    to_not raise_error
   end
 end
 

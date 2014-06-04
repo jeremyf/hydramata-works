@@ -1,5 +1,4 @@
 require 'active_support/core_ext/array/wrap'
-require 'hydramata/work/property'
 require 'hydramata/work/conversions'
 module Hydramata
   module Work
@@ -7,8 +6,10 @@ module Hydramata
       include Conversions
       include ::Enumerable
 
+      attr_reader :name
       def initialize(options = {})
         @properties = {}
+        @name = options.fetch(:name) { default_name }
       end
 
       def <<(input)
@@ -45,23 +46,23 @@ module Hydramata
         end
       end
 
-      def subset(keys)
-        Array.wrap(keys).each_with_object(self.class.new).each do |key, property_set|
+      def subset(keys, receiver = self.class.new)
+        Array.wrap(keys).each_with_object(receiver).each do |key, collector|
           # A concession regarding null property; If you ask for the keys, I'll
           # give them to you; it just may be an empty value.
-          property_set << self[key]
-          property_set
+          collector << self[key]
+          collector
         end
-      end
-
-      def _equal_properties?(other_properties)
-        properties == other_properties
       end
 
       private
 
       def properties
         @properties
+      end
+
+      def default_name
+        'unamed property set'
       end
 
     end
