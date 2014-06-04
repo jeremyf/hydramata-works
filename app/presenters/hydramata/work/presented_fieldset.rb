@@ -1,29 +1,18 @@
-require 'delegate'
+require 'hydramata/work/base_presenter'
+
 module Hydramata
   module Work
-    class PresentedFieldset < SimpleDelegator
+    class PresentedFieldset < BasePresenter
       extend Forwardable
-      attr_reader :entity, :presentation_context
+      attr_reader :entity
       def initialize(collaborators = {})
-        @entity = collaborators.fetch(:entity)
         fieldset = collaborators.fetch(:fieldset)
-        @presentation_context = collaborators.fetch(:presentation_context) { default_presentation_context }
-        __setobj__(fieldset)
+        @entity = collaborators.fetch(:entity)
+        super(fieldset, collaborators)
       end
 
-      def_delegator :entity, :work_type
-
-      def render(options = {})
-        template = options.fetch(:template)
-        template.render(partial: template_name, object: self)
-      end
-
-      def instance_of?(klass)
-        super || __getobj__.instance_of?(klass)
-      end
-
-      def dom_class
-        __getobj__.name.to_s.downcase.gsub(/[\W_]+/, '-')
+      def work_type
+        entity.work_type
       end
 
       private
@@ -32,14 +21,9 @@ module Hydramata
         entity.respond_to?(:presentation_context) ? entity.presentation_context : 'show'
       end
 
-      def template_name
-        File.join(template_name_prefix, presentation_context.to_s)
+      def view_path_slug_for_object
+        'fieldsets'
       end
-
-      def template_name_prefix
-        'hydramata/work/fieldsets'
-      end
-
 
     end
   end

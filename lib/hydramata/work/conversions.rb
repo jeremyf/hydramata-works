@@ -17,7 +17,8 @@ module Hydramata
         presentation_structure = collaborators.fetch(:presentation_structure)
         presentation_structure.fieldsets.each_with_object([]) do |(fieldset_name, predicates), collector|
           fieldset = PropertySet.new(name: fieldset_name)
-          entity.properties.subset(predicates, fieldset, PresentedProperty.method(:new))
+          property_builder = lambda {|pr| PresentedProperty.new(property: pr, fieldset: fieldset, entity: entity) }
+          entity.properties.subset(predicates, fieldset, property_builder)
           presented_fieldset = PresentedFieldset.new(entity: entity, fieldset: fieldset)
           collector << presented_fieldset
         end

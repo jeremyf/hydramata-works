@@ -48,7 +48,7 @@ module Hydramata
       context 'view_path override' do
         around do |example|
           begin
-            path = File.expand_path('../../../app/views/articles/hydramata/work/entities/_show.html.erb', __FILE__)
+            path = File.expand_path('../../../app/views/articles/hydramata/work/works/_show.html.erb', __FILE__)
             FileUtils.mkdir_p(File.dirname(path))
             File.open(path, 'w+') {|f| f.puts template_contents }
             example.run

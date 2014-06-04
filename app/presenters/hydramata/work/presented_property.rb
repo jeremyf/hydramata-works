@@ -1,33 +1,19 @@
-require 'delegate'
+require 'hydramata/work/base_presenter'
 module Hydramata
   module Work
-    class PresentedProperty < SimpleDelegator
+    class PresentedProperty < BasePresenter
 
-      def initialize(property)
-        __setobj__(property)
-      end
-
-      def render(options = {})
-        template = options.fetch(:template)
-        template.render(partial: template_name, object: self)
-      end
-
-      def instance_of?(klass)
-        super || __getobj__.instance_of?(klass)
+      attr_reader :fieldset
+      def initialize(collaborators = {})
+        property = collaborators.fetch(:property)
+        @fieldset = collaborators.fetch(:fieldset)
+        super(property, collaborators)
       end
 
       private
 
-      def template_name
-        File.join(template_name_prefix, presentation_context)
-      end
-
-      def template_name_prefix
-        'hydramata/work/properties'
-      end
-
-      def presentation_context
-        'show'
+      def view_path_slug_for_object
+        'properties'
       end
 
     end
