@@ -1,10 +1,10 @@
 require 'fast_helper'
-require 'hydramata/work/presented_entity'
+require 'hydramata/work/entity_presenter'
 require 'hydramata/work/linters'
 
 module Hydramata
   module Work
-    describe PresentedEntity do
+    describe EntityPresenter do
       it_behaves_like 'a presented entity'
 
       let(:presentation_structure) { double('PresentationStructure') }

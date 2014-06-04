@@ -1,10 +1,9 @@
 require 'fast_helper'
-require 'hydramata/work/presented_fieldset'
-require 'hydramata/work/linters'
+require 'hydramata/work/fieldset_presenter'
 
 module Hydramata
   module Work
-    describe PresentedFieldset do
+    describe FieldsetPresenter do
       let(:fieldset_class) { Struct.new(:name) }
       let(:fieldset) { fieldset_class.new('my_fieldset') }
       let(:entity) { double('Entity', work_type: 'an entity type') }

@@ -2,7 +2,7 @@ require 'hydramata/work/base_presenter'
 
 module Hydramata
   module Work
-    class PresentedFieldset < BasePresenter
+    class FieldsetPresenter < BasePresenter
       extend Forwardable
       attr_reader :entity
       def initialize(collaborators = {})

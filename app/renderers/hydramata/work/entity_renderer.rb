@@ -1,4 +1,3 @@
-require 'hydramata/work/presented_entity'
 module Hydramata
   module Work
     class EntityRenderer
