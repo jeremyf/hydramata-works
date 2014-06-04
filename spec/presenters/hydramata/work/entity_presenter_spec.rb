@@ -22,14 +22,6 @@ module Hydramata
         expect(entity).to have_received(:work_type)
       end
 
-      it 'should be an instance of the presented object\'s class' do
-        expect(subject.instance_of?(entity.class)).to be_truthy
-      end
-
-      it 'should also be an instance of the presenter class' do
-        expect(subject.instance_of?(described_class)).to be_truthy
-      end
-
     end
   end
 end

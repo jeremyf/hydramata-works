@@ -1,11 +1,13 @@
+require 'delegate'
 module Hydramata
   module Work
     class BasePresenter < SimpleDelegator
 
-      attr_reader :presentation_context
+      attr_reader :presentation_context, :translator
       def initialize(object, collaborators = {})
         __setobj__(object)
         @presentation_context = collaborators.fetch(:presentation_context) { default_presentation_context }
+        @translator = collaborators.fetch(:translator) { default_translator }
       end
 
       def render(options = {})
@@ -18,8 +20,13 @@ module Hydramata
       end
 
       def dom_class
-        __getobj__.name.to_s.downcase.gsub(/[\W_]+/, '-')
+         __getobj__.name.to_s.downcase.gsub(/[\W_]+/, '-')
       end
+
+      def translate(key)
+        translator.t(translation_scope_for(key), default: default_translation_for(key))
+      end
+      alias_method :t, :translate
 
       private
 
@@ -32,7 +39,20 @@ module Hydramata
       end
 
       def view_path_slug_for_object
-        fail NotImplementedError, ("Define #{self.class}#view_path_slug_for_object.")
+        'base'
+      end
+
+      def default_translation_for(key)
+        lambda { |scope, options| send(key).to_s }
+      end
+
+      def translation_scope_for(key)
+        "hydramata.work.#{view_path_slug_for_object}.#{key}"
+      end
+
+      def default_translator
+        require 'i18n'
+        I18n
       end
 
     end

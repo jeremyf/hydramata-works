@@ -9,6 +9,7 @@ module Hydramata
       subject { described_class.new(predicate: predicate) }
 
       it { should respond_to :values }
+      it { should respond_to :name }
 
       it 'should delegate #each to #values' do
         subject << value

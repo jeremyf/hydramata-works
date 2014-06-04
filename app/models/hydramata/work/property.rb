@@ -17,6 +17,10 @@ module Hydramata
         push(options[:value])
       end
 
+      def name
+        predicate
+      end
+
       # Because who wants to remember which way to access this?
       alias_method :value, :values
 

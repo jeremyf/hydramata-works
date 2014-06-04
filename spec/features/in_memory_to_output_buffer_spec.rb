@@ -21,26 +21,26 @@ module Hydramata
         end
       end
 
-      let(:presented_entity) do
-        PresentedEntity.new(entity: entity, presentation_structure: presentation_structure, presentation_context: :show)
+      let(:entity_presenter) do
+        EntityPresenter.new(entity: entity, presentation_structure: presentation_structure, presentation_context: :show)
       end
 
       let(:renderer) do
-        EntityRenderer.new(entity: presented_entity, content_type: :html)
+        EntityRenderer.new(entity: entity_presenter, content_type: :html)
       end
 
       it 'renders as a well-structured HTML document' do
         rendered_output = renderer.render
 
         expect(rendered_output).to have_tag('.work') do
-          with_tag('.required .title .label', text: 'Title')
+          with_tag('.required .title .label', text: 'title')
           with_tag('.required .title .value', text: 'Hello')
           with_tag('.required .title .value', text: 'World')
           with_tag('.required .title .value', text: 'Bang!')
-          with_tag('.optional .abstract .label', text: 'Abstract')
+          with_tag('.optional .abstract .label', text: 'abstract')
           with_tag('.optional .abstract .value', text: 'Long Text')
           with_tag('.optional .abstract .value', text: 'Longer Text')
-          with_tag('.optional .keyword .label', text: 'Keyword')
+          with_tag('.optional .keyword .label', text: 'keyword')
           with_tag('.optional .keyword .value', text: 'Programming')
         end
       end
@@ -59,7 +59,7 @@ module Hydramata
 
         let(:template_contents) { 'HELLO' }
         let(:renderer) do
-          EntityRenderer.new(entity: presented_entity, content_type: :html, view_path: 'app/views/articles')
+          EntityRenderer.new(entity: entity_presenter, content_type: :html, view_path: 'app/views/articles')
         end
 
         it 'renders something found earlier in the view paths' do

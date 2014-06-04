@@ -1,8 +1,6 @@
-<div class="<%= show.predicate %>">
-  <p class="label"><%= show.predicate.to_s.titleize %></p>
+<div class="<%= show.dom_class %>">
+  <p class="label"><%= show.t(:name) %></p>
   <ul>
-  <% show.each do |value| %>
-    <li class="value"><%= value %></li>
-  <% end %>
+  <% show.each do |value| %><li class="value"><%= value %></li><% end %>
   </ul>
 </div>
