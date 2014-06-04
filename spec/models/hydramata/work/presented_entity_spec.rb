@@ -1,5 +1,6 @@
 require 'fast_helper'
 require 'hydramata/work/presented_entity'
+require 'hydramata/work/linters'
 
 module Hydramata
   module Work
@@ -13,7 +14,7 @@ module Hydramata
 
       it 'should have #fieldsets that are extracted from the #entity and #presentation_structure' do
         subject.fieldsets
-        expect(presented_fieldset_builder).to have_received(:call).with(entity: entity, presentation_structure: presentation_structure)
+        expect(presented_fieldset_builder).to have_received(:call).with(entity: subject, presentation_structure: presentation_structure)
       end
 
       it 'delegates :entity_type to :entity' do

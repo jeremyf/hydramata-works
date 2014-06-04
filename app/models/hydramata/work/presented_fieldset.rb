@@ -1,22 +1,19 @@
+require 'delegate'
 module Hydramata
   module Work
-    class PresentedFieldset
+    class PresentedFieldset < SimpleDelegator
       extend Forwardable
-      attr_reader :entity, :fieldset
+      attr_reader :entity
       def initialize(collaborators = {})
         @entity = collaborators.fetch(:entity)
-        @fieldset = collaborators.fetch(:fieldset)
+        fieldset = collaborators.fetch(:fieldset)
+        __setobj__(fieldset)
       end
 
       def_delegator :entity, :entity_type
-      def_delegator :fieldset, :name
 
       def render(template)
-        template.render(file: template_name, locals: { presented_entity.to_sym => presented_entity })
-      end
-
-      def default_template_name_prefix
-        'hydramata/work/fieldsets'
+        template.render
       end
 
     end
