@@ -14,7 +14,7 @@ module Hydramata
       end
 
       def render
-        template.render(file: template_name, locals: { context.to_sym => presented_entity })
+        template.render(file: template_name, locals: { context.to_sym => presented_entity, renderer: self })
       end
 
       private

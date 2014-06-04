@@ -1,5 +1,5 @@
 <article class="work">
 <% show.fieldsets.each do |fieldset| %>
-  <%= fieldset.inspect %>
+  <%= fieldset.render(self, show) %>
 <% end %>
 </article>

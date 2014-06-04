@@ -41,11 +41,13 @@ module Hydramata
           expect(presented_fieldsets.count).to eq(2)
 
           required_fieldset = presented_fieldsets[0]
+          expect(required_fieldset.entity).to eq(entity)
           expect(required_fieldset.count).to eq(1)
           expect(required_fieldset.name).to eq(:required)
           expect(required_fieldset[:title].values).to eq(['Hello', 'World', 'Bang!'])
 
           optional_fieldset = presented_fieldsets[1]
+          expect(optional_fieldset.entity).to eq(entity)
           expect(optional_fieldset.count).to eq(2)
           expect(optional_fieldset.name).to eq(:optional)
           expect(optional_fieldset[:abstract].values).to eq(['Long Text', 'Longer Text'])

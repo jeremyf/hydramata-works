@@ -26,7 +26,7 @@ module Hydramata
         expect(template).to have_received(:render).
         with(
           file: template_name,
-          locals: { context.to_sym => instance_of(PresentedEntity) }
+          locals: { context.to_sym => instance_of(PresentedEntity), renderer: subject }
         )
       end
     end
