@@ -1,5 +1,7 @@
 module Hydramata
   module Work
+    # For some reason if you want to render the object outside of the context
+    # of a controller, this provides the wrapper.
     class EntityRenderer
       attr_reader :template, :format, :entity, :view_path
       def initialize(options = {})

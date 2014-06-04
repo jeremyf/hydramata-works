@@ -74,7 +74,7 @@ Then I should have the following css-selectors and text:
 
 ### (2) Transform Fedora object to in memory Work object
 
-  * Done Looks Like: All of the persisted datastreams are  in the database are reified in the Work object's #properties.
+  * Done Looks Like: All of the persisted datastreams are in the database are reified in the Work object's #properties.
 
 ### (2) Transform Solr object to in memory Work object
 
