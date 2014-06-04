@@ -2,30 +2,19 @@ require 'hydramata/work/presented_entity'
 module Hydramata
   module Work
     class EntityRenderer
-      attr_reader :context, :template, :format, :presented_entity, :template_name_prefix, :view_path
+      attr_reader :template, :format, :entity, :view_path
       def initialize(options = {})
+        @entity = options.fetch(:entity)
         @format = options.fetch(:format) { default_format }
         @view_path = options.fetch(:view_path) { default_view_path }
-        @template_name_prefix = options.fetch(:template_name_prefix) { default_template_name_prefix }
-
         @template = options.fetch(:template) { default_template }
-        @context = options.fetch(:context)
-        @presented_entity = PresentedEntity.new(options)
       end
 
       def render
-        template.render(file: template_name, locals: { context.to_sym => presented_entity, renderer: self })
+        entity.render(template: template)
       end
 
       private
-
-      def template_name
-        File.join(template_name_prefix, context.to_s)
-      end
-
-      def default_template_name_prefix
-        'hydramata/work/entities'
-      end
 
       def default_format
         :html

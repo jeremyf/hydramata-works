@@ -21,13 +21,12 @@ module Hydramata
         end
       end
 
+      let(:presented_entity) do
+        PresentedEntity.new(entity: entity, presentation_structure: presentation_structure, presentation_context: :show)
+      end
+
       let(:renderer) do
-        EntityRenderer.new(
-          context: :show,
-          content_type: :html,
-          entity: entity,
-          presentation_structure: presentation_structure
-        )
+        EntityRenderer.new(entity: presented_entity, content_type: :html)
       end
 
       it 'renders as a well-structured HTML document' do
@@ -49,7 +48,7 @@ module Hydramata
       context 'view_path override' do
         around do |example|
           begin
-            path = File.expand_path('../../../app/views/articles/hydramata/work/entities/show.html.erb', __FILE__)
+            path = File.expand_path('../../../app/views/articles/hydramata/work/entities/_show.html.erb', __FILE__)
             FileUtils.mkdir_p(File.dirname(path))
             File.open(path, 'w+') {|f| f.puts template_contents }
             example.run
@@ -60,13 +59,7 @@ module Hydramata
 
         let(:template_contents) { 'HELLO' }
         let(:renderer) do
-          EntityRenderer.new(
-            context: :show,
-            content_type: :html,
-            entity: entity,
-            view_path: 'app/views/articles',
-            presentation_structure: presentation_structure
-          )
+          EntityRenderer.new(entity: presented_entity, content_type: :html, view_path: 'app/views/articles')
         end
 
         it 'renders something found earlier in the view paths' do

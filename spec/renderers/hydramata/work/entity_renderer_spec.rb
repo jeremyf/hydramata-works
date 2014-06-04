@@ -5,29 +5,16 @@ module Hydramata
   module Work
     describe EntityRenderer do
       let(:context) { :show }
-      let(:entity) { double('Entity') }
+      let(:entity) { double('Entity', render: true) }
       let(:presentation_structure) { double('Presentation Structure') }
-      let(:template) { double('Template', render: true)}
+      let(:template) { double('Template')}
       subject do
-        Hydramata::Work::EntityRenderer.new(
-          format: :html,
-          template_name_prefix: 'hello/world',
-          context: context,
-          entity: entity,
-          template: template,
-          presentation_structure: presentation_structure
-        )
+        Hydramata::Work::EntityRenderer.new(entity: entity, format: :html, context: context, template: template)
       end
 
       it 'should render the template based on all the inputs' do
         subject.render
-        template_name = "hello/world/#{context}"
-
-        expect(template).to have_received(:render).
-        with(
-          file: template_name,
-          locals: { context.to_sym => instance_of(PresentedEntity), renderer: subject }
-        )
+        expect(entity).to have_received(:render).with(template: template)
       end
     end
   end

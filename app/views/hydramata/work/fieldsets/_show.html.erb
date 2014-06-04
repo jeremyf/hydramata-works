@@ -1,4 +1,4 @@
 <section class="<%= show.name %>">
   <h1><%= show.name %><h1>
-  <% show.each do |property| %><%= property.render(template: self, renderer: renderer) %><% end %>
+  <% show.each do |property| %><%= property.render(template: self) %><% end %>
 </section>
