@@ -40,10 +40,6 @@ module Hydramata
         ActionView::Base.new(view_container.view_paths, {}, view_container, [format])
       end
 
-      def view_container=(object)
-        @view_container = object
-      end
-
       def default_view_path
         nil
       end
