@@ -7,11 +7,14 @@ module Hydramata
       let(:fieldset) { double('Fieldset', name: 'my fieldset') }
       let(:entity) { double('Entity', entity_type: 'an entity type') }
       let(:template) { double('Template', render: true) }
+      let(:renderer) { double('Renderer', context: :show) }
       subject { described_class.new(entity: entity, fieldset: fieldset) }
 
       it 'should render as per the template' do
-        subject.render(template)
-        expect(template).to have_received(:render)
+        subject.render(template: template, renderer: renderer)
+        expect(template).
+        to have_received(:render).
+        with(partial: 'hydramata/work/fieldsets/show', object: subject)
       end
 
       it 'should have a #name' do

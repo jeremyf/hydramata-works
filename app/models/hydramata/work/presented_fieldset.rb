@@ -12,8 +12,22 @@ module Hydramata
 
       def_delegator :entity, :entity_type
 
-      def render(template)
-        template.render
+      def render(options = {})
+        template = options.fetch(:template)
+        renderer = options.fetch(:renderer)
+        template.render(partial: template_name(renderer.context), object: self)
+      end
+
+      def template_name(context)
+        File.join(template_name_prefix, context.to_s)
+      end
+
+      def template_name_prefix
+        'hydramata/work/fieldsets'
+      end
+
+      def format
+        :html
       end
 
     end

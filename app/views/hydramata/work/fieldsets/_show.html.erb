@@ -1,6 +1,6 @@
-<section class="<%= fieldset %>">
-  <h1><%= fieldset %><h1>
-  <% properties.each do |predicate, property| %>
+<section class="<%= show.name %>">
+  <h1><%= show.name %><h1>
+  <% show.each do |property| %>
   <div class="<%= property.predicate %>">
     <p class="label"><%= property.predicate.to_s.titleize %></p>
     <ul>
