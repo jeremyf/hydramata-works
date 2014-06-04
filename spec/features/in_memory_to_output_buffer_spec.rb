@@ -21,50 +21,33 @@ module Hydramata
         end
       end
 
+      let(:presentation_context) { :show }
+
       let(:entity_presenter) do
-        EntityPresenter.new(entity: entity, presentation_structure: presentation_structure, presentation_context: :show)
+        EntityPresenter.new(entity: entity, presentation_structure: presentation_structure, presentation_context: presentation_context)
       end
 
       let(:renderer) do
         EntityRenderer.new(entity: entity_presenter, content_type: :html)
       end
 
-      it 'renders as a well-structured HTML document' do
-        rendered_output = renderer.render
+      context 'renders :show action' do
+        let(:presentation_context) { :show }
 
-        expect(rendered_output).to have_tag('.work') do
-          with_tag('.required .title .label', text: 'title')
-          with_tag('.required .title .value', text: 'Hello')
-          with_tag('.required .title .value', text: 'World')
-          with_tag('.required .title .value', text: 'Bang!')
-          with_tag('.optional .abstract .label', text: 'abstract')
-          with_tag('.optional .abstract .value', text: 'Long Text')
-          with_tag('.optional .abstract .value', text: 'Longer Text')
-          with_tag('.optional .keyword .label', text: 'keyword')
-          with_tag('.optional .keyword .value', text: 'Programming')
-        end
-      end
-
-      context 'view_path override' do
-        around do |example|
-          begin
-            path = File.expand_path('../../../app/views/articles/hydramata/work/works/_show.html.erb', __FILE__)
-            FileUtils.mkdir_p(File.dirname(path))
-            File.open(path, 'w+') {|f| f.puts template_contents }
-            example.run
-          ensure
-            File.unlink(path) if File.exist?(path)
-          end
-        end
-
-        let(:template_contents) { 'HELLO' }
-        let(:renderer) do
-          EntityRenderer.new(entity: entity_presenter, content_type: :html, view_path: 'app/views/articles')
-        end
-
-        it 'renders something found earlier in the view paths' do
+        it 'as a well-structured HTML document' do
           rendered_output = renderer.render
-          expect(rendered_output.strip).to eq(template_contents.strip)
+
+          expect(rendered_output).to have_tag('.work') do
+            with_tag('.required .title .label', text: 'title')
+            with_tag('.required .title .value', text: 'Hello')
+            with_tag('.required .title .value', text: 'World')
+            with_tag('.required .title .value', text: 'Bang!')
+            with_tag('.optional .abstract .label', text: 'abstract')
+            with_tag('.optional .abstract .value', text: 'Long Text')
+            with_tag('.optional .abstract .value', text: 'Longer Text')
+            with_tag('.optional .keyword .label', text: 'keyword')
+            with_tag('.optional .keyword .value', text: 'Programming')
+          end
         end
       end
     end
