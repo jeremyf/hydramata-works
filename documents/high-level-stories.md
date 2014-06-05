@@ -81,6 +81,7 @@ Then I should have the following css-selectors and text:
 ### (2) Transform in memory Work object to SOLR Document
 ### (3) Transform in memory Work object to Raw Datastreams
 ### (1) Transform in memory Work object to Edit HTML Document
+### (1) Transform in memory Work object to Show JSON Document
 ### (1) Transform in memory Work object to Database
 ### (3) Transform in memory Work to Fedora object
 ### (1) Transform user input from Edit Form to in memory Work object
@@ -98,7 +99,6 @@ Then I should have the following css-selectors and text:
 
 ## Nice to Have
 
-* Transform in memory Work object to Show JSON Document
 * Transform in memory Work object to New JSON Document
 
 ## There are Small Work Items
