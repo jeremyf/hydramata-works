@@ -12,7 +12,12 @@ module Hydramata
 
       def render(options = {})
         template = options.fetch(:template)
-        template.render(partial: partial_name, object: self)
+        rendering_options = {
+          partial: partial_name,
+          object: self
+        }
+        rendering_options[:locals] = options[:locals] if options.key?(:locals)
+        template.render(rendering_options)
       end
 
       def instance_of?(klass)
@@ -20,7 +25,7 @@ module Hydramata
       end
 
       def dom_class
-         __getobj__.name.to_s.downcase.gsub(/[\W_]+/, '-')
+        __getobj__.name.to_s.downcase.gsub(/[\W_]+/, '-')
       end
 
       def translate(key)
