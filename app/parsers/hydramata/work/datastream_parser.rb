@@ -9,9 +9,9 @@ module Hydramata
       module_function
 
       def call(options = {}, &block)
-        content = options.fetch(:content)
+        datastream = options.fetch(:datastream)
         parser = parser_for(options)
-        parser.call(content, &block)
+        parser.call(datastream.content, &block)
       end
 
       def parser_for(options = {})
@@ -23,13 +23,13 @@ module Hydramata
         # @TODO - This logic is rather gnarly and also dense. Consider a parser
         # registery. The first parser that says it matches, does the work.
         lambda do |options|
-          content_type = options.fetch(:content_type)
+          datastream = options.fetch(:datastream)
           null_parser = proc { }
-          case content_type
+          case datastream.mimeType
           when 'text/xml' then RudimentaryXmlParser
           when 'application/rdf+xml' then null_parser
           when 'text/plain'
-            content = options.fetch(:content)
+            content = datastream.content
             if content =~ /\A\<info:fedora/
               require 'hydramata/work/datastream_parsers/rdf_ntriples_parser'
               DatastreamParsers::RdfNtriplesParser

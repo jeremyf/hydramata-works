@@ -47,14 +47,13 @@ module Hydramata
       end
 
       def parse_datastreams(object)
-        object.datastreams.each do |name, datastream|
-          parse_datastream_content(name, datastream)
+        object.datastreams.each do |_name, datastream|
+          parse_datastream_content(datastream)
         end
       end
 
-      def parse_datastream_content(name, datastream)
-        content_type = datastream.profile['dsMIME']
-        DatastreamParser.call(content_type: content_type, content: datastream.content, datastream_name: name, entity: entity) do |property|
+      def parse_datastream_content(datastream)
+        DatastreamParser.call(datastream: datastream, entity: entity) do |property|
           entity.properties << property
         end
       end
