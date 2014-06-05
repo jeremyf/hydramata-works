@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib']
 
   s.add_dependency 'rails', '~> 4.0.3'
+  s.add_dependency 'rdf', '~> 1.1'
 
   s.add_development_dependency 'engine_cart'
   s.add_development_dependency 'rspec', '~> 2.99'
