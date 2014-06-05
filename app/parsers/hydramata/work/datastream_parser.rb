@@ -26,7 +26,9 @@ module Hydramata
           datastream = options.fetch(:datastream)
           null_parser = proc { }
           case datastream.mimeType
-          when 'text/xml' then RudimentaryXmlParser
+          when 'text/xml'
+            require 'hydramata/work/datastream_parsers/simple_xml_parser'
+            DatastreamParsers::SimpleXmlParser
           when 'application/rdf+xml' then null_parser
           when 'text/plain'
             content = datastream.content
@@ -42,17 +44,6 @@ module Hydramata
         end
       end
       private_class_method :default_parser_finder
-
-      module RudimentaryXmlParser
-        module_function
-        def call(content, &block)
-          require 'nokogiri'
-          doc = Nokogiri::XML.parse(content)
-          doc.xpath('/fields/*').each do |node|
-            yield(predicate: node.name, value: node.text)
-          end
-        end
-      end
     end
   end
 end

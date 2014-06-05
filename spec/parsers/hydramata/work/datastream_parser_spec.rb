@@ -24,10 +24,6 @@ module Hydramata
           expect { |b| described_class.call(options, &b) }.to yield_with_args(predicate: 'depositor', value: 'Username-1')
         end
       end
-
-      describe DatastreamParser::RudimentaryXmlParser do
-        it_behaves_like 'a datastream parser', DatastreamParser::RudimentaryXmlParser
-      end
     end
   end
 end
