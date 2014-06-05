@@ -22,7 +22,7 @@ module Hydramata
       end
 
       def default_parser_finder
-        ->(options) do
+        proc do
           require 'hydramata/work/predicate_parsers/simple_parser'
           PredicateParsers::SimpleParser
         end

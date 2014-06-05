@@ -24,7 +24,7 @@ module Hydramata
         # registery. The first parser that says it matches, does the work.
         lambda do |options|
           content_type = options.fetch(:content_type)
-          null_parser = lambda { |*args| }
+          null_parser = proc { }
           case content_type
           when 'text/xml' then RudimentaryXmlParser
           when 'application/rdf+xml' then null_parser

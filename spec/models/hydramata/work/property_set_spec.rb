@@ -31,10 +31,10 @@ module Hydramata
         property = Property.new(predicate: :title, value: 'value one')
         property_with_same_predicate = Property.new(predicate: :title, value: 'another')
         subject << property
-        expect {
+        expect do
           expect { subject << property_with_same_predicate }.
-          to_not change { subject.count }
-        }.to change { property.values }.
+            to_not change { subject.count }
+        end.to change { property.values }.
           from(['value one']).
           to(['value one', 'another'])
       end

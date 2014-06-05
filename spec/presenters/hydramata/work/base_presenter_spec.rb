@@ -16,7 +16,7 @@ module Hydramata
       subject { described_class.new(object, translator: translator) }
 
       it 'should have a friendly inspect message, because tracking it down could be a pain' do
-        expect(subject.inspect).to include("#{described_class}:#{subject.object_id}")
+        expect(subject.inspect).to include("#{described_class}")
         expect(subject.inspect).to include(object.inspect)
       end
 

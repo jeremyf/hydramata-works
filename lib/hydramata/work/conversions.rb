@@ -4,6 +4,7 @@ module Hydramata
   module Work
     module Conversions
       private
+
       def Property(input)
         if input.instance_of?(Property)
           input

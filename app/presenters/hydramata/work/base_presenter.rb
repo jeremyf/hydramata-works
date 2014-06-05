@@ -17,7 +17,7 @@ module Hydramata
       end
 
       def inspect
-        sprintf('#<%s:%d presenting=%s>', self.class, object_id, __getobj__.inspect)
+        format('#<%s:%#0x presenting=%s>', self.class, __id__, __getobj__.inspect)
       end
 
       def instance_of?(klass)
@@ -48,7 +48,7 @@ module Hydramata
       end
 
       def default_translation_for(key)
-        lambda { |scope, options| send(key).to_s }
+        proc { send(key).to_s }
       end
 
       def translation_scope_for(key)
