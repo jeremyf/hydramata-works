@@ -1,5 +1,5 @@
 ENV["RAILS_ENV"] ||= 'test'
-if ENV['COVERAGE']
+if ENV['COV'] || ENV['COVERAGE']
   require 'simplecov'
   SimpleCov.start 'rails'
   SimpleCov.command_name "spec"
