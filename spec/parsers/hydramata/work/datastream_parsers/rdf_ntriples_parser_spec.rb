@@ -18,7 +18,7 @@ module Hydramata
           let(:rdf_object_value) { '2014-06-02Z' }
           let(:data) { "<#{rdf_subject}> <#{rdf_predicate}> #{rdf_object} ." }
           it 'should yield each encountered property' do
-            expect { |b| subject.call(data, &b) }.to yield_with_args(predicate: rdf_predicate, value: rdf_object_value)
+            expect { |b| subject.call(data, &b) }.to yield_with_args(predicate: rdf_predicate, value: instance_of(RDF::Literal::Date))
           end
         end
 
@@ -37,8 +37,8 @@ module Hydramata
           it 'should yield each encountered property' do
             expect { |b| subject.call(data, &b) }.
             to yield_successive_args(
-              { predicate: rdf_predicate, value: rdf_object_value_1 },
-              { predicate: rdf_predicate, value: rdf_object_value_2 }
+              { predicate: rdf_predicate, value: instance_of(RDF::Literal::Date) },
+              { predicate: rdf_predicate, value: instance_of(RDF::Literal::Date) }
             )
           end
         end
