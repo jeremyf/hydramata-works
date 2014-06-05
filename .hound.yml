@@ -24,6 +24,7 @@ AllCops:
     - config/**/*
     - lib/**/version.rb
     - spec/internal/**/*
+
 MethodLength:
   Max: 10
   Description: 'Avoid methods longer than 10 lines of code.'
@@ -195,6 +196,7 @@ Documentation:
   Enabled: true
   Exclude:
   - spec/**/*
+  - lib/**/version.rb
 
 DotPosition:
   Description: 'Checks the position of the dot in multi-line method calls.'

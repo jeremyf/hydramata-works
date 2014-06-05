@@ -31,8 +31,16 @@ module Hydramata
       context 'with view_path override and format' do
         around do |example|
           begin
-            generate_template('works', "ENTITY <%= #{presentation_context}.t(:work_type)%>\n<% #{presentation_context}.fieldsets.each do |f|%><%= f.render(template: self) %><% end %>")
-            generate_template('fieldsets', "FIELDSET <%= #{presentation_context}.t(:name)%>\n<% #{presentation_context}.each do |f|%><%= f.render(template: self) %><% end %>")
+            generate_template(
+              'works',
+              "ENTITY <%= #{presentation_context}.t(:work_type)%>",
+              "<% #{presentation_context}.fieldsets.each do |f|%><%= f.render(template: self) %><% end %>"
+            )
+            generate_template(
+              'fieldsets',
+              "FIELDSET <%= #{presentation_context}.t(:name)%>",
+              "<% #{presentation_context}.each do |f|%><%= f.render(template: self) %><% end %>"
+            )
             generate_template('properties', "PROPERTY <%= #{presentation_context}.t(:name) %>")
             example.run
           ensure
@@ -48,10 +56,10 @@ module Hydramata
         end
       end
 
-      def generate_template(name, template_contents)
+      def generate_template(name, *lines)
         path = File.expand_path("../../../#{view_path}/hydramata/work/#{name}/_#{presentation_context}.#{format}.erb", __FILE__)
         FileUtils.mkdir_p(File.dirname(path))
-        File.open(path, 'w+') { |f| f.puts template_contents }
+        File.open(path, 'w+') { |f| f.puts lines.join("\n") }
       end
 
       def cleanup_template(name)
