@@ -12,7 +12,7 @@ module Hydramata
       extend Forwardable
       def initialize(collaborators = {}, &block)
         @properties = collaborators.fetch(:properties_container) { default_properties_container }
-        yield(self) if block_given?
+        block.call(self) if block_given?
       end
 
       attr_accessor :work_type

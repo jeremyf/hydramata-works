@@ -10,7 +10,13 @@ module Hydramata
       let(:presentation_structure) { double('PresentationStructure') }
       let(:entity) { double('Entity', work_type: true) }
       let(:presented_fieldset_builder) { double('Builder', call: true) }
-      subject { described_class.new(entity: entity, presentation_structure: presentation_structure, presented_fieldset_builder: presented_fieldset_builder) }
+      subject do
+        described_class.new(
+          entity: entity,
+          presentation_structure: presentation_structure,
+          presented_fieldset_builder: presented_fieldset_builder
+        )
+      end
 
       it 'should have #fieldsets that are extracted from the #entity and #presentation_structure' do
         subject.fieldsets

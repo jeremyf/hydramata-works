@@ -41,7 +41,7 @@ module Hydramata
       end
 
       def each
-        properties.each do |key, property|
+        properties.each do |_key, property|
           yield(property)
         end
       end

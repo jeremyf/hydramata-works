@@ -11,10 +11,7 @@ module Hydramata
 
       def render(options = {})
         template = options.fetch(:template)
-        rendering_options = {
-          partial: partial_name,
-          object: self
-        }
+        rendering_options = { partial: partial_name, object: self }
         rendering_options[:locals] = options[:locals] if options.key?(:locals)
         template.render(rendering_options)
       end

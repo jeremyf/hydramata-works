@@ -17,10 +17,10 @@ module Hydramata
       end
 
       it 'can append to values' do
-        expect { subject << value }
-        .to change { subject.values }
-        .from([])
-        .to([value])
+        expect { subject << value }.
+          to change { subject.values }.
+          from([]).
+          to([value])
       end
 
       context 'equality' do

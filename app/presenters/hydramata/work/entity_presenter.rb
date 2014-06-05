@@ -25,7 +25,7 @@ module Hydramata
       end
 
       def default_presented_fieldset_builder
-        lambda { |*args| PresentedFieldsets(*args) }
+        ->(*args) { PresentedFieldsets(*args) }
       end
     end
   end

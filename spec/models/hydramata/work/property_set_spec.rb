@@ -15,16 +15,16 @@ module Hydramata
 
           # Note: I am pushing a Property with the same predicate as the first
           # object pushed. This will modify
-          subject << (fourth = Property.new(predicate: :one, value: 4))
+          subject << Property.new(predicate: :one, value: 4)
 
           expect { |b| subject.each(&b) }.to yield_successive_args(first, second, third)
         end
       end
 
       it 'allows properties to be pushed onto it' do
-        expect { subject << property }
-        .to change { subject.count }
-        .by(1)
+        expect { subject << property }.
+          to change { subject.count }.
+          by(1)
       end
 
       it 'amends an existing property if a common predicate is found' do
@@ -32,11 +32,11 @@ module Hydramata
         property_with_same_predicate = Property.new(predicate: :title, value: 'another')
         subject << property
         expect {
-          expect { subject << property_with_same_predicate }
-          .to_not change { subject.count }
-        }.to change { property.values }
-        .from(['value one'])
-        .to(['value one', 'another'])
+          expect { subject << property_with_same_predicate }.
+          to_not change { subject.count }
+        }.to change { property.values }.
+          from(['value one']).
+          to(['value one', 'another'])
       end
 
       context 'data retrieval methods' do
@@ -50,13 +50,11 @@ module Hydramata
 
         context '#fetch' do
           it 'should raise an error if the predicate is not found' do
-            expect { subject.fetch(:missing) }
-            .to raise_error(KeyError)
+            expect { subject.fetch(:missing) }.to raise_error(KeyError)
           end
 
           it 'should return the values if the predicate exists' do
-            expect(subject.fetch(property.predicate))
-            .to eq(property)
+            expect(subject.fetch(property.predicate)).to eq(property)
           end
         end
 
@@ -64,9 +62,9 @@ module Hydramata
           it 'should return nil if the predicate is not found' do
             expect(subject[:missing]).to eq(Property.new(predicate: :missing))
           end
+
           it 'should return the values if the predicate exists' do
-            expect(subject[property.predicate])
-            .to eq(property)
+            expect(subject[property.predicate]).to eq(property)
           end
         end
 

@@ -30,7 +30,7 @@ module Hydramata
           let(:data) do
             [
               "<#{rdf_subject}> <#{rdf_predicate}> #{rdf_object_1} .",
-              "<#{rdf_subject}> <#{rdf_predicate}> #{rdf_object_2} .",
+              "<#{rdf_subject}> <#{rdf_predicate}> #{rdf_object_2} ."
             ].join("\n")
           end
 
