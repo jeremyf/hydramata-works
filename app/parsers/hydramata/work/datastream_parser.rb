@@ -23,7 +23,26 @@ module Hydramata
       end
 
       def default_parser_finder
-        lambda { |*args| RudimentaryXmlParser }
+        # @TODO - This logic is rather gnarly and also dense. Consider a parser
+        # registery. The first parser that says it matches, does the work.
+        lambda { |options|
+          content_type = options.fetch(:content_type)
+          null_parser = lambda { |*args| }
+          case content_type
+          when 'text/xml' then RudimentaryXmlParser
+          when 'application/rdf+xml' then null_parser
+          when 'text/plain'
+            content = options.fetch(:content)
+            if content =~ /\A\<info:fedora/
+              require 'hydramata/work/datastream_parsers/rdf_ntriples_parser'
+              DatastreamParsers::RdfNtriplesParser
+            else
+              null_parser
+            end
+          else
+            null_parser
+          end
+        }
       end
       private_class_method :default_parser_finder
 

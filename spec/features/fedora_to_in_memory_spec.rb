@@ -49,12 +49,13 @@ module Hydramata
 
       def parse_datastreams(object)
         object.datastreams.each do |name, datastream|
-          parse_datastream_content(name, datastream.content)
+          parse_datastream_content(name, datastream)
         end
       end
 
-      def parse_datastream_content(name, content)
-        DatastreamParser.call(content: content, datastream_name: name, entity: entity) do |property|
+      def parse_datastream_content(name, datastream)
+        content_type = datastream.profile['dsMIME']
+        DatastreamParser.call(content_type: content_type, content: datastream.content, datastream_name: name, entity: entity) do |property|
           entity.properties << property
         end
       end
@@ -76,9 +77,22 @@ module Hydramata
       it 'should parse the fedora object to retrieve the depositor' do
         VCR.use_cassette('fedora-object', record: :none) do
           expect { work_wrangler.call(pid, with_datastreams: true) }.
-            to change { entity.properties[:depositor].values }.
+            to change { entity.properties.predicates }.
             from([]).
-            to(['username-1'])
+          to(
+            [
+              "depositor",
+              "http://purl.org/dc/terms/created",
+              "http://purl.org/dc/terms/language",
+              "http://purl.org/dc/terms/publisher",
+              "http://purl.org/dc/terms/title",
+              "http://purl.org/dc/terms/dateSubmitted",
+              "http://purl.org/dc/terms/modified",
+              "http://purl.org/dc/terms/rights",
+              "http://purl.org/dc/terms/creator",
+              "http://purl.org/dc/terms/description"
+            ]
+          )
         end
       end
     end

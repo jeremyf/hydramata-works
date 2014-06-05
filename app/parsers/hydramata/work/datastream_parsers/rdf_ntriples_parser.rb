@@ -23,7 +23,7 @@ module Hydramata
         def query_graph_with(data, &block)
           graph << reader.new(data)
           graph.query(pattern).each_statement do |statement|
-            yield(statement.predicate.to_s, statement.object.to_s)
+            yield(predicate: statement.predicate.to_s, value: statement.object.to_s)
           end
         end
 

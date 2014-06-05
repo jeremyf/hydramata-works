@@ -8,7 +8,7 @@ module Hydramata
       context '.parser_for' do
         let(:a_parser) { double('A Parser') }
         let(:parser_finder) { double('Parser Finder', call: a_parser) }
-        let(:options) { { datastream_name: 'Hello', parser_finder: parser_finder } }
+        let(:options) { { datastream_name: 'Hello', parser_finder: parser_finder, content_type: 'text/xml' } }
         it 'should find the appropriate parser based on input options' do
           expect(described_class.parser_for(options)).to eq(a_parser)
           expect(parser_finder).to have_received(:call).with(options)
@@ -16,7 +16,7 @@ module Hydramata
       end
 
       context '.call' do
-        let(:options) { { content: '<fields>\n  <depositor>Username-1</depositor>\n</fields>' } }
+        let(:options) { { content: '<fields>\n  <depositor>Username-1</depositor>\n</fields>', content_type: 'text/xml' } }
         it 'should find the appropriate parser based on input options' do
           expect {|b| described_class.call(options, &b) }.to yield_with_args({predicate: 'depositor', value: 'Username-1'})
         end
