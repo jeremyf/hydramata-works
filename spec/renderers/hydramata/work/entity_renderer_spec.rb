@@ -18,7 +18,7 @@ module Hydramata
 
       it 'should default to :html format' do
         renderer = Hydramata::Work::EntityRenderer.new(entity: entity, template: template)
-        expect(subject.format).to eq(:html)
+        expect(renderer.format).to eq(:html)
       end
     end
   end
