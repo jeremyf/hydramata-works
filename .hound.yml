@@ -22,6 +22,7 @@ AllCops:
   Exclude:
     - db/**/*
     - config/**/*
+    - lib/**/version.rb
     - spec/internal/**/*
 MethodLength:
   Max: 10
