@@ -1,13 +1,14 @@
 module Hydramata
   module Work
     module DatastreamParsers
+      # Responsible for parsing a very simplistic XML document.
       module SimpleXmlParser
         module_function
         def call(content, &block)
           require 'nokogiri'
           doc = Nokogiri::XML.parse(content)
           doc.xpath('/fields/*').each do |node|
-            yield(predicate: node.name, value: node.text)
+            block.call(predicate: node.name, value: node.text)
           end
         end
       end

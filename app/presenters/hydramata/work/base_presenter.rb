@@ -1,6 +1,8 @@
 require 'delegate'
 module Hydramata
   module Work
+    # Responsible for coordinating the rendering of an in-memory data structure
+    # object to an output buffer.
     class BasePresenter < SimpleDelegator
       attr_reader :presentation_context, :translator
       def initialize(object, collaborators = {})

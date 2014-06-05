@@ -3,6 +3,8 @@ require 'hydramata/work/base_presenter'
 
 module Hydramata
   module Work
+    # Responsible for coordinating the rendering of an in-memory Entity-like
+    # object to an output buffer.
     class EntityPresenter < BasePresenter
       include Conversions
 

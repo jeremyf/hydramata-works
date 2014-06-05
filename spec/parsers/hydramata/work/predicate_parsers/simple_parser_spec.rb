@@ -14,14 +14,6 @@ module Hydramata
             expect { |b| described_class.call(object, &b) }.to yield_with_args(value: object)
           end
         end
-
-        context '#call' do
-          let(:object) { double('Object') }
-          it 'makes no effort to to convert the object' do
-            expect { |b| described_class.new.call(object, &b) }.to yield_with_args(value: object)
-          end
-        end
-
       end
     end
   end

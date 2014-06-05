@@ -2,6 +2,10 @@ require 'hydramata/work/base_presenter'
 
 module Hydramata
   module Work
+    # Responsible for coordinating the rendering of an in-memory
+    # PropertySet-like object to an output buffer.
+    #
+    # @TODO - Rename fieldset in presentation to property_set
     class FieldsetPresenter < BasePresenter
       extend Forwardable
       attr_reader :entity

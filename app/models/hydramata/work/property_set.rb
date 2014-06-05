@@ -2,6 +2,8 @@ require 'active_support/core_ext/array/wrap'
 require 'hydramata/work/conversions'
 module Hydramata
   module Work
+    # A container for Property objects. It provides ordered access to
+    # properties. The corresponding specs go into further details on ordering.
     class PropertySet
       include Conversions
       include ::Enumerable
@@ -50,7 +52,7 @@ module Hydramata
       # Consider extracting the shared behavior into that function. Perhaps
       # making a proper class.
       def subset(keys, receiver = self.class.new, property_builder = nil)
-        property_builder ||= lambda { |o| o }
+        property_builder ||= ->(builder) { builder }
         Array.wrap(keys).each_with_object(receiver).each do |key, collector|
           # A concession regarding null property; If you ask for the keys, I'll
           # give them to you; it just may be an empty value.

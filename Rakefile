@@ -35,7 +35,7 @@ end
 begin
   Rake::Task['default'].clear
 rescue RuntimeError
-  # This isn't a big deal if we don't have a default
+  puts 'Unable to find :default rake task; No worries.'
 end
 
 Rake::Task['spec'].clear

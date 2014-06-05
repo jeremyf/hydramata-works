@@ -2,6 +2,11 @@ require 'hydramata/work/property'
 
 module Hydramata
   module Work
+    # Taking a que from Avdi Grimm's "Confident Ruby", the Conversion module
+    # is responsible for coercing the inputs to another format.
+    #
+    # This is somewhat experimental, though analogous to the Array() method in
+    # base ruby.
     module Conversions
       private
 

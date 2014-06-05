@@ -24,7 +24,7 @@ module Hydramata
         # registery. The first parser that says it matches, does the work.
         lambda do |options|
           datastream = options.fetch(:datastream)
-          null_parser = proc { }
+          null_parser = proc {}
           case datastream.mimeType
           when 'text/xml'
             require 'hydramata/work/datastream_parsers/simple_xml_parser'

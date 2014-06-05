@@ -24,6 +24,7 @@ AllCops:
     - config/**/*
     - lib/**/version.rb
     - spec/internal/**/*
+    - spec/*_helper.rb
 
 MethodLength:
   Max: 10

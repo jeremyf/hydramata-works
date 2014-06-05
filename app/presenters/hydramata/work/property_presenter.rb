@@ -1,6 +1,10 @@
 require 'hydramata/work/base_presenter'
 module Hydramata
   module Work
+    # Responsible for coordinating the rendering of an in-memory Property-like
+    # object to an output buffer.
+    #
+    # @TODO - create a corresponding spec.
     class PropertyPresenter < BasePresenter
       attr_reader :fieldset, :entity
       def initialize(collaborators = {})

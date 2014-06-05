@@ -1,6 +1,7 @@
 module Hydramata
   module Work
     module DatastreamParsers
+      # Responsible for parsing an ntriples encoded datastructure.
       class RdfNtriplesParser
         def self.call(data, collaborators = {}, &block)
           new(collaborators).call(data, &block)
@@ -18,7 +19,7 @@ module Hydramata
 
         private
 
-        def query_graph_with(data, &block)
+        def query_graph_with(data)
           graph << reader.new(data)
           graph.query(pattern).each_statement do |statement|
             yield(predicate: statement.predicate.to_s, value: statement.object)

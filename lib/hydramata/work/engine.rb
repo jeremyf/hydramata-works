@@ -1,5 +1,9 @@
 module Hydramata
   module Work
+    # Hydramata::Work is a [Rails::Engine](http://guides.rubyonrails.org/engines.html)
+    #
+    # These are the pieces necessary for coordinating the Hydramata::Work with
+    # your instance of a Rails application.
     class Engine < ::Rails::Engine
       engine_name 'hydramata_work'
 

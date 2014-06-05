@@ -8,3 +8,11 @@
 [![APACHE 2 License](http://img.shields.io/badge/APACHE2-license-blue.svg)](./LICENSE)
 
 See the [High Level Stories regarding the Hydramata::Work component](./documents/high-level-stories.md).
+
+
+Responsible for providing a well defined data-structure to ease the
+interaction between differing layers of an application.
+
+* Persistence Layer
+* In Memory
+* Rendering/Output Buffer
