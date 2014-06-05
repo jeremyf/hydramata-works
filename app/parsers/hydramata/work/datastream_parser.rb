@@ -1,4 +1,3 @@
-require 'nokogiri'
 module Hydramata
   module Work
 
@@ -49,6 +48,7 @@ module Hydramata
       module RudimentaryXmlParser
         module_function
         def call(content, &block)
+          require 'nokogiri'
           doc = Nokogiri::XML.parse(content)
           doc.xpath('/fields/*').each do |node|
             yield(predicate: node.name, value: node.text)
