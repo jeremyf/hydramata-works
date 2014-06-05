@@ -20,6 +20,10 @@ module Hydramata
         template.render(rendering_options)
       end
 
+      def inspect
+        sprintf("#<%s:%d presenting=%s>", self.class, object_id, __getobj__.inspect)
+      end
+
       def instance_of?(klass)
         super || __getobj__.instance_of?(klass)
       end

@@ -15,6 +15,11 @@ module Hydramata
       let(:translator) { double('Translator', t: true)}
       subject { described_class.new(object, translator: translator) }
 
+      it 'should have a friendly inspect message, because tracking it down could be a pain' do
+        expect(subject.inspect).to include("#{described_class}:#{subject.object_id}")
+        expect(subject.inspect).to include(object.inspect)
+      end
+
       it 'should be an instance of the presented object\'s class' do
         expect(subject.instance_of?(object.class)).to be_truthy
       end
