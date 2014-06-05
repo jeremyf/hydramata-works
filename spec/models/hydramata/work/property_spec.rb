@@ -13,7 +13,7 @@ module Hydramata
 
       it 'should delegate #each to #values' do
         subject << value
-        expect{|b| subject.each(&b) }.to yield_with_args(value)
+        expect { |b| subject.each(&b) }.to yield_with_args(value)
       end
 
       it 'can append to values' do

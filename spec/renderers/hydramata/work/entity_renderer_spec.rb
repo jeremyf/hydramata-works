@@ -6,7 +6,7 @@ module Hydramata
     describe EntityRenderer do
       let(:entity) { double('Entity', render: true) }
       let(:presentation_structure) { double('Presentation Structure') }
-      let(:template) { double('Template')}
+      let(:template) { double('Template') }
       subject do
         Hydramata::Work::EntityRenderer.new(entity: entity, format: :html, template: template)
       end

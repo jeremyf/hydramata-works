@@ -2,7 +2,6 @@ require 'hydramata/work/base_presenter'
 module Hydramata
   module Work
     class PropertyPresenter < BasePresenter
-
       attr_reader :fieldset, :entity
       def initialize(collaborators = {})
         property = collaborators.fetch(:property)
@@ -20,7 +19,6 @@ module Hydramata
       def view_path_slug_for_object
         'properties'
       end
-
     end
   end
 end

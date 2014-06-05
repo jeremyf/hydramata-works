@@ -41,7 +41,6 @@ module Hydramata
           other.predicate == predicate &&
           other.values == values
       end
-
     end
   end
 end

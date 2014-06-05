@@ -2,7 +2,6 @@ require 'delegate'
 module Hydramata
   module Work
     class BasePresenter < SimpleDelegator
-
       attr_reader :presentation_context, :translator
       def initialize(object, collaborators = {})
         __setobj__(object)
@@ -21,7 +20,7 @@ module Hydramata
       end
 
       def inspect
-        sprintf("#<%s:%d presenting=%s>", self.class, object_id, __getobj__.inspect)
+        sprintf('#<%s:%d presenting=%s>', self.class, object_id, __getobj__.inspect)
       end
 
       def instance_of?(klass)
@@ -63,7 +62,6 @@ module Hydramata
         require 'i18n'
         I18n
       end
-
     end
   end
 end

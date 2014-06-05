@@ -17,9 +17,7 @@ module Hydramata
 
       attr_accessor :work_type
 
-      def properties
-        @properties
-      end
+      attr_reader :properties
 
       private
 

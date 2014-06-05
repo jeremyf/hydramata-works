@@ -51,7 +51,7 @@ module Hydramata
       def generate_template(name, template_contents)
         path = File.expand_path("../../../#{view_path}/hydramata/work/#{name}/_#{presentation_context}.#{format}.erb", __FILE__)
         FileUtils.mkdir_p(File.dirname(path))
-        File.open(path, 'w+') {|f| f.puts template_contents }
+        File.open(path, 'w+') { |f| f.puts template_contents }
       end
 
       def cleanup_template(name)

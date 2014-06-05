@@ -16,7 +16,6 @@ end
 
 module Hydramata
   module Work
-
     class FedoraWrangler
       attr_reader :repo, :entity
       def initialize(collaborators = {})
@@ -41,7 +40,7 @@ module Hydramata
       def assign_work_type_from(object)
         object.profile['objModels'].each do |model|
           if model =~ /\Ainfo:fedora\/afmodel\:(.*)\Z/
-            entity.work_type = $1
+            entity.work_type = Regexp.last_match[1]
             break
           end
         end
@@ -81,16 +80,16 @@ module Hydramata
             from([]).
           to(
             [
-              "depositor",
-              "http://purl.org/dc/terms/created",
-              "http://purl.org/dc/terms/language",
-              "http://purl.org/dc/terms/publisher",
-              "http://purl.org/dc/terms/title",
-              "http://purl.org/dc/terms/dateSubmitted",
-              "http://purl.org/dc/terms/modified",
-              "http://purl.org/dc/terms/rights",
-              "http://purl.org/dc/terms/creator",
-              "http://purl.org/dc/terms/description"
+              'depositor',
+              'http://purl.org/dc/terms/created',
+              'http://purl.org/dc/terms/language',
+              'http://purl.org/dc/terms/publisher',
+              'http://purl.org/dc/terms/title',
+              'http://purl.org/dc/terms/dateSubmitted',
+              'http://purl.org/dc/terms/modified',
+              'http://purl.org/dc/terms/rights',
+              'http://purl.org/dc/terms/creator',
+              'http://purl.org/dc/terms/description'
             ]
           )
         end

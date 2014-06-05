@@ -11,8 +11,8 @@ module Hydramata
     end
     describe BasePresenter do
       let(:name) { 'hello world' }
-      let(:object) { MockPresentable.new {|b| b.name = name } }
-      let(:translator) { double('Translator', t: true)}
+      let(:object) { MockPresentable.new { |b| b.name = name } }
+      let(:translator) { double('Translator', t: true) }
       subject { described_class.new(object, translator: translator) }
 
       it 'should have a friendly inspect message, because tracking it down could be a pain' do

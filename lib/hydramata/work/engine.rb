@@ -13,7 +13,6 @@ module Hydramata
           #{config.root}/app/parsers
         )
       end
-
     end
   end
 end

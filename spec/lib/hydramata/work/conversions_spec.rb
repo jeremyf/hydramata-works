@@ -7,7 +7,7 @@ module Hydramata
       include Conversions
       context '#Property' do
         it 'should convert a Hash to a property' do
-          expect(Property(predicate: 'a predicate' )).to be_an_instance_of(Property)
+          expect(Property(predicate: 'a predicate')).to be_an_instance_of(Property)
         end
 
         it 'should preserve a Property' do

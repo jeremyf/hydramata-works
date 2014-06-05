@@ -1,13 +1,11 @@
 module Hydramata
   module Work
-
     # Responsible for finding the appropriate datastream parser based on the
     # input context, then calling the found parser.
     #
     # See lib/hydramata/work/linters.rb for the interface definition of a
     # datastream parser.
     module DatastreamParser
-
       module_function
 
       def call(options = {}, &block)
@@ -24,7 +22,7 @@ module Hydramata
       def default_parser_finder
         # @TODO - This logic is rather gnarly and also dense. Consider a parser
         # registery. The first parser that says it matches, does the work.
-        lambda { |options|
+        lambda do |options|
           content_type = options.fetch(:content_type)
           null_parser = lambda { |*args| }
           case content_type
@@ -41,7 +39,7 @@ module Hydramata
           else
             null_parser
           end
-        }
+        end
       end
       private_class_method :default_parser_finder
 
@@ -55,7 +53,6 @@ module Hydramata
           end
         end
       end
-
     end
   end
 end

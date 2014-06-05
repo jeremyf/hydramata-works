@@ -18,7 +18,7 @@ module Hydramata
       context '.call' do
         let(:options) { { content: '<fields>\n  <depositor>Username-1</depositor>\n</fields>', content_type: 'text/xml' } }
         it 'should find the appropriate parser based on input options' do
-          expect {|b| described_class.call(options, &b) }.to yield_with_args({predicate: 'depositor', value: 'Username-1'})
+          expect { |b| described_class.call(options, &b) }.to yield_with_args(predicate: 'depositor', value: 'Username-1')
         end
       end
 

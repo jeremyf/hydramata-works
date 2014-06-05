@@ -24,7 +24,6 @@ module Hydramata
       def view_path_slug_for_object
         'fieldsets'
       end
-
     end
   end
 end

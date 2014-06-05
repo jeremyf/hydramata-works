@@ -3,7 +3,6 @@ module Hydramata
   module Work
     module DatastreamParsers
       class RdfNtriplesParser
-
         def self.call(data, &block)
           new.call(data, &block)
         end

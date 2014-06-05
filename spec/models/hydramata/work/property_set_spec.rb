@@ -17,7 +17,7 @@ module Hydramata
           # object pushed. This will modify
           subject << (fourth = Property.new(predicate: :one, value: 4))
 
-          expect {|b| subject.each(&b) }.to yield_successive_args(first, second, third)
+          expect { |b| subject.each(&b) }.to yield_successive_args(first, second, third)
         end
       end
 
@@ -72,7 +72,7 @@ module Hydramata
 
         context '#each' do
           it 'should yield the predicate and normalized values' do
-            expect{|b| subject.each(&b) }.to yield_with_args(property)
+            expect { |b| subject.each(&b) }.to yield_with_args(property)
           end
         end
 
