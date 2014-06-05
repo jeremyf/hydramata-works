@@ -46,6 +46,9 @@ module Hydramata
         end
       end
 
+      # Conversion::PresentedFieldsets interacts with this.
+      # Consider extracting the shared behavior into that function. Perhaps
+      # making a proper class.
       def subset(keys, receiver = self.class.new, property_builder = nil)
         property_builder ||= lambda { |o| o }
         Array.wrap(keys).each_with_object(receiver).each do |key, collector|

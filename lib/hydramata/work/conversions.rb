@@ -14,6 +14,9 @@ module Hydramata
       end
 
       def PresentedFieldsets(collaborators)
+        # @TODO - This could be packaged up into a tidier location.
+        # The collaboration with an entity's PropertySet#subset is convoluted.
+        # I also don't know if I need.
         entity = collaborators.fetch(:entity)
         presentation_structure = collaborators.fetch(:presentation_structure)
         presentation_structure.fieldsets.each_with_object([]) do |(fieldset_name, predicates), collector|
