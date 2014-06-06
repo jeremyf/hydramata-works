@@ -10,13 +10,15 @@
 require 'active_record'
 require 'fast_helper'
 
-# Sometimes this will be invoked when Rails is defined. In that case the relative
-# path is ../internal. When Rails is not defined the relative path is different.
-# By providing an absolute path, I avoid either of those silly things.
-database = File.expand_path('../internal/db/development.sqlite3', __FILE__)
+if !defined?(Rails)
+  # Sometimes this will be invoked when Rails is defined. In that case the relative
+  # path is ../internal. When Rails is not defined the relative path is different.
+  # By providing an absolute path, I avoid either of those silly things.
+  database = File.expand_path('../internal/db/development.sqlite3', __FILE__)
 
-connection_info = { adapter: 'sqlite3', database: database, pool: 5, timeout: 5000 }
-ActiveRecord::Base.establish_connection(connection_info)
+  connection_info = { adapter: 'sqlite3', database: database, pool: 5, timeout: 5000 }
+  ActiveRecord::Base.establish_connection(connection_info)
+end
 
 RSpec.configure do |config|
   config.around do |example|
