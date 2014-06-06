@@ -1,4 +1,6 @@
 require 'active_support/core_ext/array/wrap'
+require 'hydramata/work/conversions'
+
 module Hydramata
   module Work
     # The responsibility of a Property is to be a collection of values for
@@ -8,10 +10,11 @@ module Hydramata
     # Why not use RDF? Because not everything we are working with is in RDF.
     class Property
       include ::Enumerable
+      include Conversions
 
       attr_reader :predicate, :values
       def initialize(options = {})
-        @predicate = options.fetch(:predicate)
+        self.predicate = options.fetch(:predicate)
         @values = []
         push(options[:values])
         push(options[:value])
@@ -40,6 +43,12 @@ module Hydramata
           other.instance_of?(self.class) &&
           other.predicate == predicate &&
           other.values == values
+      end
+
+      private
+
+      def predicate=(value)
+        @predicate = Predicate(value)
       end
     end
   end

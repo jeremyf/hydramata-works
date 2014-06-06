@@ -9,7 +9,7 @@ RSpec::Matchers.define :implement_predicate_interface do
     :default_coercer_class_name,
     :default_parser_class_name,
     :default_indexing_strategy
-  ]
+  ].freeze unless defined?(PREDICATE_INTERFACE_METHODS)
 
   match do |subject|
     PREDICATE_INTERFACE_METHODS.all? {|method_name|
