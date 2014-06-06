@@ -1,4 +1,6 @@
 require 'hydramata/work/value_parsers/simple_parser'
+require 'hydramata/work/value_parsers/date_parser'
+require 'hydramata/work/value_parsers/interrogation_parser'
 
 module Hydramata
   module Work
