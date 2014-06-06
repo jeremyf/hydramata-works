@@ -79,14 +79,3 @@ shared_examples 'a work entity' do |entity_builder|
     it { should respond_to(:fetch) }
   end
 end
-
-shared_examples 'a predicate' do |predicate_builder|
-  let(:predicate) { (predicate_builder || described_class).new }
-
-  it { should respond_to :identity }
-  it { should respond_to :name_for_application_usage }
-  it { should respond_to :datastream_name }
-  it { should respond_to :value_coercer_name }
-  it { should respond_to :value_parser_name }
-  it { should respond_to :indexing_strategy }
-end

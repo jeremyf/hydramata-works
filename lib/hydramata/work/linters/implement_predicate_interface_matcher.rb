@@ -20,8 +20,4 @@ RSpec::Matchers.define :implement_predicate_interface do
   description do
     "implmenents the Predicate interface"
   end
-
-  failure_message_for_should do |subject|
-    "#{subject.inspect} should respond to #{PREDICATE_INTERFACE_METHODS.inspect}"
-  end
 end

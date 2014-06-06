@@ -46,6 +46,11 @@ module Hydramata
           it 'should return the identity if a matching predicate was not found' do
             expect(described_class.existing_attributes_for(identity)).to eq({ identity: identity })
           end
+
+          it 'should handle connection failed' do
+            expect(described_class).to receive(:find_by_identity!).and_raise(ActiveRecord::ConnectionNotEstablished)
+            expect(described_class.existing_attributes_for(identity)).to eq({ identity: identity })
+          end
         end
 
       end

@@ -24,6 +24,13 @@ module Hydramata
           expect(described_class.find(predicate: predicate)).to eq ValueParsers::SimpleParser
         end
       end
+
+      context 'a constant not in the namespace' do
+        let(:parser_class_name) { 'MissingParser' }
+        it 'will fallback to the simple parser' do
+          expect(described_class.find(predicate: predicate)).to eq ValueParsers::SimpleParser
+        end
+      end
     end
   end
 end
