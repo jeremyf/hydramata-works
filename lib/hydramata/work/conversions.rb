@@ -12,12 +12,12 @@ module Hydramata
       private
 
       def Predicate(input)
-        require 'hydramata/work/predicate'
+        require 'hydramata/work/predicates'
 
         case input
         when Predicate then self
-        when String, Symbol then Predicate.find_by_identity(input)
-        when Hash then Predicate.find_by_identity(input.fetch(:identity))
+        when String, Symbol then Predicates.find(input)
+        when Hash then Predicates.find(input.fetch(:identity), input)
         else
           raise ConversionError
         end
