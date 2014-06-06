@@ -1,3 +1,6 @@
+require 'hydramata/work/datastream_parsers/simple_xml_parser'
+require 'hydramata/work/datastream_parsers/rdf_ntriples_parser'
+
 module Hydramata
   module Work
     # Responsible for finding the appropriate datastream parser based on the
@@ -9,8 +12,8 @@ module Hydramata
       module_function
 
       def call(options = {}, &block)
-        datastream = options.fetch(:datastream)
         parser = parser_for(options)
+        datastream = options.fetch(:datastream)
         parser.call(datastream.content, &block)
       end
 
@@ -20,27 +23,11 @@ module Hydramata
       end
 
       def default_parser_finder
-        # @TODO - This logic is rather gnarly and also dense. Consider a parser
-        # registery. The first parser that says it matches, does the work.
         lambda do |options|
-          datastream = options.fetch(:datastream)
           null_parser = proc {}
-          case datastream.mimeType
-          when 'text/xml'
-            require 'hydramata/work/datastream_parsers/simple_xml_parser'
-            DatastreamParsers::SimpleXmlParser
-          when 'application/rdf+xml' then null_parser
-          when 'text/plain'
-            content = datastream.content
-            if content =~ /\A\<info:fedora/
-              require 'hydramata/work/datastream_parsers/rdf_ntriples_parser'
-              DatastreamParsers::RdfNtriplesParser
-            else
-              null_parser
-            end
-          else
+          DatastreamParsers::RdfNtriplesParser.match?(options) ||
+            DatastreamParsers::SimpleXmlParser.match?(options) ||
             null_parser
-          end
         end
       end
       private_class_method :default_parser_finder

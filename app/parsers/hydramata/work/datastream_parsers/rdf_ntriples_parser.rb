@@ -3,6 +3,17 @@ module Hydramata
     module DatastreamParsers
       # Responsible for parsing an ntriples encoded datastructure.
       class RdfNtriplesParser
+        def self.match?(options = {})
+          datastream = options[:datastream]
+          return false unless datastream
+          if datastream.mimeType == 'text/plain' &&
+            datastream.content =~ /\A\<info:fedora/
+            self
+          else
+            false
+          end
+        end
+
         def self.call(data, collaborators = {}, &block)
           new(collaborators).call(data, &block)
         end

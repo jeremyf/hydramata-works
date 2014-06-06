@@ -8,11 +8,15 @@ end
 
 shared_examples 'a datastream parser' do |default_parser|
   let(:parser) { default_parser || described_class }
-  it 'responds to #call' do
+  it 'responds to .call' do
     expect(parser).to respond_to(:call)
   end
 
-  context 'its #call method' do
+  it 'responds to .match?' do
+    expect(parser).to respond_to(:match?)
+  end
+
+  context 'its .call method' do
     it 'has a required first parameter' do
       expect(parser.method(:call).parameters.first[0]).to eq(:req)
     end

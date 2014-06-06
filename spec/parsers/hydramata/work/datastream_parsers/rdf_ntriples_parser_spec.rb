@@ -11,13 +11,29 @@ module Hydramata
 
         let(:rdf_subject) { 'info:fedora/und:f4752f8687n' }
         let(:rdf_predicate) { 'http://purl.org/dc/terms/dateSubmitted' }
+        let(:rdf_object) { "\"#{rdf_object_value}\"^^<http://www.w3.org/2001/XMLSchema#date>" }
+        let(:rdf_object_value) { '2014-06-02Z' }
+        let(:data) { "<#{rdf_subject}> <#{rdf_predicate}> #{rdf_object} ." }
 
         subject { described_class }
 
+        context '.match?' do
+          let(:ntriples_datastream) { double(content: data, mimeType: 'text/plain') }
+          let(:not_ntriples_datastream) { double(content: '', mimeType: 'application/xml') }
+          it 'should not match when no datastream is provided' do
+            expect(described_class.match?).to be_falsey
+          end
+
+          it 'should match when an RDF ntriples datastream is provided' do
+            expect(described_class.match?(datastream: ntriples_datastream)).to eq(described_class)
+          end
+
+          it 'should not match when the data stream does not appear to be RDF ntriples' do
+            expect(described_class.match?(datastream: not_ntriples_datastream)).to be_falsey
+          end
+        end
+
         context 'with single value encountered' do
-          let(:rdf_object) { "\"#{rdf_object_value}\"^^<http://www.w3.org/2001/XMLSchema#date>" }
-          let(:rdf_object_value) { '2014-06-02Z' }
-          let(:data) { "<#{rdf_subject}> <#{rdf_predicate}> #{rdf_object} ." }
           it 'should yield each encountered property' do
             expect { |b| subject.call(data, &b) }.to yield_with_args(predicate: rdf_predicate, value: instance_of(RDF::Literal::Date))
           end
