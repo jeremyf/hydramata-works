@@ -4,13 +4,12 @@ module Hydramata
     # one form to another (i.e. persistence to memory, memory to input)
     #
     # @TODO - Create an ActiveRecord::Base model of this.
-    class Predicate
-      attr_accessor :name
-      attr_accessor :uri
-      attr_accessor :default_datastream_name
-      attr_accessor :default_coercer_class_name
-      attr_accessor :default_parser_class_name
-      attr_accessor :default_indexing_strategy
+    class Predicate < ActiveRecord::Base
+      self.table_name = :hydramata_work_predicates
+
+      def self.find_by_identity(identity)
+        where(identity: identity).first
+      end
     end
   end
 end

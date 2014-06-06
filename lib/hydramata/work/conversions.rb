@@ -1,4 +1,5 @@
 require 'hydramata/work/property'
+require 'hydramata/work/predicate'
 
 module Hydramata
   module Work
@@ -9,6 +10,10 @@ module Hydramata
     # base ruby.
     module Conversions
       private
+
+      def Predicate(input)
+        Predicate.find_by_identity(input)
+      end
 
       def Property(input)
         if input.instance_of?(Property)

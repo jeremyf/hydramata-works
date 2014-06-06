@@ -1,10 +1,26 @@
 require 'feature_helper'
 require 'hydramata/work/conversions'
+require 'hydramata/work/linters/implement_predicate_interface_matcher'
 
 module Hydramata
   module Work
     describe Conversions do
       include Conversions
+
+      context '#Predicate' do
+        it 'should convert the input to a Predicate object' do
+          predicate = Predicate.create(
+            identity: 'hello',
+            name_for_application_usage: 'hello-world',
+            default_datastream_name: 'descMetadata',
+            default_coercer_class_name: 'SimpleParser',
+            default_parser_class_name: 'SimpleParser',
+            default_indexing_strategy: 'dsti'
+          )
+          expect(Predicate('hello')).to implement_predicate_interface
+        end
+      end
+
       context '#Property' do
         it 'should convert a Hash to a property' do
           expect(Property(predicate: 'a predicate')).to be_an_instance_of(Property)
