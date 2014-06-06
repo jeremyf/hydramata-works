@@ -5,10 +5,10 @@ RSpec::Matchers.define :implement_predicate_interface do
   PREDICATE_INTERFACE_METHODS = [
     :identity,
     :name_for_application_usage,
-    :default_datastream_name,
-    :default_coercer_class_name,
-    :default_parser_class_name,
-    :default_indexing_strategy
+    :datastream_name,
+    :value_coercer_name,
+    :value_parser_name,
+    :indexing_strategy
   ].freeze unless defined?(PREDICATE_INTERFACE_METHODS)
 
   match do |subject|

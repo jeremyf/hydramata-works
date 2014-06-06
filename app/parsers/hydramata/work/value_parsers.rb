@@ -6,7 +6,7 @@ module Hydramata
       module_function
       def find(options = {})
         predicate = options.fetch(:predicate)
-        parser_class_name = predicate.default_parser_class_name
+        parser_class_name = predicate.value_parser_name
         if const_defined?(parser_class_name)
           const_get(parser_class_name)
         else

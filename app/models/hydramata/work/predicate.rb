@@ -4,10 +4,10 @@ module Hydramata
 
       attr_accessor :identity
       attr_accessor :name_for_application_usage
-      attr_accessor :default_datastream_name
-      attr_accessor :default_coercer_class_name
-      attr_accessor :default_parser_class_name
-      attr_accessor :default_indexing_strategy
+      attr_accessor :datastream_name
+      attr_accessor :value_coercer_name
+      attr_accessor :value_parser_name
+      attr_accessor :indexing_strategy
 
       def initialize(attributes = {})
         attributes.each do |key, value|

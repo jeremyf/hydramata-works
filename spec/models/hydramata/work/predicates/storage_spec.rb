@@ -17,10 +17,10 @@ module Hydramata
           described_class.create(
             identity: identity,
             name_for_application_usage: 'hello-world',
-            default_datastream_name: 'descMetadata',
-            default_coercer_class_name: 'SimpleParser',
-            default_parser_class_name: 'SimpleParser',
-            default_indexing_strategy: 'dsti'
+            datastream_name: 'descMetadata',
+            value_coercer_name: 'SimpleParser',
+            value_parser_name: 'SimpleParser',
+            indexing_strategy: 'dsti'
           )
         end
 

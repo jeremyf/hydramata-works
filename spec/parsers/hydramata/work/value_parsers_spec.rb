@@ -9,7 +9,7 @@ module Hydramata
       end
     end
     describe ValueParsers do
-      let(:predicate) { Predicate.new(default_parser_class_name: parser_class_name) }
+      let(:predicate) { Predicate.new(value_parser_name: parser_class_name) }
 
       context 'existing parser in ValueParsers namespace' do
         let(:parser_class_name) { 'MockParser' }
