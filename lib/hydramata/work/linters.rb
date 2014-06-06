@@ -42,6 +42,22 @@ shared_examples 'a predicate parser' do |default_parser|
   end
 end
 
+shared_examples 'a value parser' do |default_parser|
+  let(:parser) { default_parser || described_class }
+  it 'responds to #call' do
+    expect(parser).to respond_to(:call)
+  end
+
+  context 'its #call method' do
+    it 'has a required first parameter' do
+      expect(parser.method(:call).parameters.first[0]).to eq(:req)
+    end
+    it 'takes a block' do
+      expect(parser.method(:call).parameters.last[1]).to eq(:block)
+    end
+  end
+end
+
 shared_examples 'a work entity' do |entity_builder|
   let(:entity_class) { (entity_builder || described_class) }
 
