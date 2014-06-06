@@ -15,8 +15,8 @@ module Hydramata
 
       def default_parser_finder
         ->(options) do
-          require 'hydramata/work/predicate_parsers/simple_parser'
-          ValueParsers::SimpleParser
+          require 'hydramata/work/value_parsers'
+          ValueParsers.find(options)
         end
       end
       private_class_method :default_parser_finder

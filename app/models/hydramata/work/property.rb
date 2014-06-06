@@ -12,9 +12,10 @@ module Hydramata
       include ::Enumerable
       include Conversions
 
-      attr_reader :predicate, :values
+      attr_reader :predicate, :values, :value_parser
       def initialize(options = {})
         self.predicate = options.fetch(:predicate)
+        @value_parser = options.fetch(:value_parser) { default_value_parser }
         @values = []
         push(options[:values])
         push(options[:value])
@@ -30,9 +31,11 @@ module Hydramata
       extend Forwardable
       def_delegator :values, :each
 
-      def <<(value)
-        Array.wrap(value).each do |v|
-          @values << v
+      def <<(values)
+        Array.wrap(values).each do |value|
+          value_parser.call(predicate: predicate, value: value) do |response|
+            @values << response.fetch(:value)
+          end
         end
         self
       end
@@ -49,6 +52,11 @@ module Hydramata
 
       def predicate=(value)
         @predicate = Predicate(value)
+      end
+
+      def default_value_parser
+        require 'hydramata/work/value_parser'
+        ValueParser
       end
     end
   end

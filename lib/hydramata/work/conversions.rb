@@ -12,10 +12,10 @@ module Hydramata
       private
 
       def Predicate(input)
-        require 'hydramata/work/predicates'
+        return input  if input.instance_of?(Predicate)
 
+        require 'hydramata/work/predicates'
         case input
-        when Predicate then self
         when String, Symbol then Predicates.find(input)
         when Hash then Predicates.find(input.fetch(:identity), input)
         else

@@ -1,5 +1,6 @@
 require 'hydramata/work/predicate'
 require 'hydramata/work/predicates/storage'
+
 module Hydramata
   module Work
     module Predicates
