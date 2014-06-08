@@ -40,7 +40,18 @@ module Hydramata
         context '.existing_attributes_for' do
           it 'should return the existing predicate attributes' do
             predicate
-            expect(described_class.existing_attributes_for(identity)).to eq(predicate.attributes)
+            keys = [
+              :id,
+              :identity,
+              :name_for_application_usage,
+              :datastream_name,
+              :value_coercer_name,
+              :value_parser_name,
+              :indexing_strategy
+            ]
+            actual_values = described_class.existing_attributes_for(identity).values_at(keys)
+            # Because date comparisons are a bit wonky
+            expect(actual_values).to eq(predicate.attributes.values_at(keys))
           end
 
           it 'should return the identity if a matching predicate was not found' do
