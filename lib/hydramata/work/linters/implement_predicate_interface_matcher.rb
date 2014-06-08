@@ -12,7 +12,7 @@ RSpec::Matchers.define :implement_predicate_interface do
   ].freeze unless defined?(PREDICATE_INTERFACE_METHODS)
 
   match do |subject|
-    PREDICATE_INTERFACE_METHODS.all? {|method_name|
+    PREDICATE_INTERFACE_METHODS.all? { |method_name|
       subject.respond_to?(method_name)
     }
   end

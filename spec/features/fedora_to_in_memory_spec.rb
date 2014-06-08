@@ -76,7 +76,7 @@ module Hydramata
         seed_predicates!
         VCR.use_cassette('fedora-object', record: :none) do
           work_wrangler.call(pid, with_datastreams: true)
-          expect {|b| entity.properties.each(&b) }.
+          expect { |b| entity.properties.each(&b) }.
           to yield_successive_args(
             Property.new(predicate: 'depositor', value: 'username-1'),
             Property.new(predicate: 'http://purl.org/dc/terms/created', value: Date.new(2014, 6, 2)),
