@@ -1,3 +1,8 @@
+# Why is this a slow_spec_helper instead of spec_helper
+# Because it is extremely slow to load all of the following dependencies:
+#
+# * SimpleCov
+# * EngineCart (and therefore the underlying internal Rails application)
 ENV['RAILS_ENV'] ||= 'test'
 if ENV['COV'] || ENV['COVERAGE']
   require 'simplecov'

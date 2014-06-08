@@ -1,16 +1,35 @@
 module Hydramata
   module Work
-    # A data-structure object that helps in transitioning a predicate from
-    # one form to another (i.e. persistence to memory, memory to input)
-    #
-    # @TODO - Create an ActiveRecord::Base model of this.
     class Predicate
-      attr_accessor :name
-      attr_accessor :uri
-      attr_accessor :default_datastream_name
-      attr_accessor :default_coercer_class_name
-      attr_accessor :default_parser_class_name
-      attr_accessor :default_indexing_strategy
+
+      attr_accessor :identity
+      attr_accessor :name_for_application_usage
+      attr_accessor :datastream_name
+      attr_accessor :value_coercer_name
+      attr_accessor :value_parser_name
+      attr_accessor :indexing_strategy
+
+      def initialize(attributes = {})
+        attributes.each do |key, value|
+          self.send("#{key}=", value.freeze) if respond_to?("#{key}=")
+        end
+        yield self if block_given?
+        self.freeze
+      end
+
+      def identity=(value)
+        @identity = value.to_s
+      end
+
+      def to_s
+        identity
+      end
+
+      def ==(other)
+        instance_of?(self.class) &&
+          identity == other.identity
+      end
+
     end
   end
 end

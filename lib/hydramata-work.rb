@@ -7,5 +7,9 @@ module Hydramata
   # * In Memory
   # * Rendering/Output Buffer
   module Work
+    module_function
+    def table_name_prefix
+      'hydramata_work_'
+    end
   end
 end

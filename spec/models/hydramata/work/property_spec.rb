@@ -4,7 +4,7 @@ require 'hydramata/work/property'
 module Hydramata
   module Work
     describe Property do
-      let(:predicate) { double('Predicate') }
+      let(:predicate) { 'Predicate' }
       let(:value) { double('Value') }
       subject { described_class.new(predicate: predicate) }
 

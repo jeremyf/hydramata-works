@@ -1,7 +1,8 @@
 module Hydramata
   module Work
-    module PredicateParsers
-      # A comically simple parser. You get what you give.
+    module ValueParsers
+      # A comically simple parser.
+      # You get what you give.
       module SimpleParser
         module_function
         def call(object, &block)

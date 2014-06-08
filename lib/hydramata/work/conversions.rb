@@ -1,5 +1,3 @@
-require 'hydramata/work/property'
-
 module Hydramata
   module Work
     # Taking a que from Avdi Grimm's "Confident Ruby", the Conversion module
@@ -8,9 +6,26 @@ module Hydramata
     # This is somewhat experimental, though analogous to the Array() method in
     # base ruby.
     module Conversions
+      class ConversionError < RuntimeError
+      end
+
       private
 
+      def Predicate(input)
+        return input  if input.instance_of?(Predicate)
+
+        require 'hydramata/work/predicates'
+        case input
+        when String, Symbol then Predicates.find(input)
+        when Hash then Predicates.find(input.fetch(:identity), input)
+        else
+          raise ConversionError
+        end
+      end
+
       def Property(input)
+        require 'hydramata/work/property'
+
         if input.instance_of?(Property)
           input
         else

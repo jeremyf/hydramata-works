@@ -7,3 +7,4 @@ spec/internal
 ./spec/internal
 coverage
 *.sqlite3
+tmp/
