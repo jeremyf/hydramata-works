@@ -28,9 +28,6 @@ namespace :spec do
     ENV['SPEC_OPTS'] = "--profile 20 --require #{spec_helper}"
     Rake::Task['engine_cart:clean'].invoke
     Rake::Task['engine_cart:generate'].invoke
-    Rake::Task['app:db:create'].invoke
-    Rake::Task['app:db:migrate'].invoke
-    Rake::Task['app:db:test:prepare'].invoke
     Rake::Task['spec:all'].invoke
   end
 end
