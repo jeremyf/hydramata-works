@@ -1,22 +1,30 @@
-require 'hydramata/work/datastream_parser'
-
 module Hydramata
   module Work
     class FedoraWrangler
-      attr_reader :repo, :entity
+      attr_reader :repository_connection, :entity, :datastream_parser
       def initialize(collaborators = {})
-        @repo = collaborators.fetch(:repository_connection) { default_repository_connection }
+        @repository_connection = collaborators.fetch(:repository_connection) { default_repository_connection }
+        @datastream_parser = collaborators.fetch(:datastream_parser) { default_datastream_parser }
         @entity = collaborators.fetch(:entity)
       end
 
       def call(pid, options = {})
-        with_datastreams = options.fetch(:with_datastreams, false)
-        object = @repo.find(pid)
+        with_datastreams = options.fetch(:with_datastreams) { default_with_datastreams }
+        object = repository_connection.find(pid)
         assign_work_type_from(object)
         parse_datastreams(object) if with_datastreams
       end
 
       private
+
+      def default_datastream_parser
+        require 'hydramata/work/datastream_parser'
+        DatastreamParser
+      end
+
+      def default_with_datastreams
+        false
+      end
 
       def default_repository_connection
         require 'rubydora'
@@ -25,7 +33,7 @@ module Hydramata
       end
 
       def assign_work_type_from(object)
-        object.profile['objModels'].each do |model|
+        object.models.each do |model|
           if model =~ /\Ainfo:fedora\/afmodel\:(.*)\Z/
             entity.work_type = Regexp.last_match[1]
             break
@@ -40,7 +48,7 @@ module Hydramata
       end
 
       def parse_datastream_content(datastream)
-        DatastreamParser.call(datastream: datastream, entity: entity) do |property|
+        datastream_parser.call(datastream: datastream, entity: entity) do |property|
           entity.properties << property
         end
       end

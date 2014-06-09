@@ -21,14 +21,6 @@ module Hydramata
       let(:pid) { 'und:f4752f8687n' }
       let(:work_wrangler) { FedoraWrangler.new(entity: entity) }
       let(:entity) { Entity.new }
-      it 'should parse the fedora object to assign the work_type' do
-        VCR.use_cassette('fedora-object', record: :none) do
-          expect { work_wrangler.call(pid) }.
-            to change { entity.work_type }.
-            from(nil).
-            to('SeniorThesis')
-        end
-      end
 
       it 'should parse the Fedora object and assign the predicates' do
         seed_predicates!
