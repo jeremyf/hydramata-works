@@ -4,7 +4,7 @@ module Hydramata
   module Work
     describe 'An entity and presentation structure' do
       let(:entity) do
-        Entity.new.tap do |entity|
+        Entity.new do |entity|
           entity.work_type = 'Special Work Type'
           entity.properties << { predicate: :title, value: 'Hello' }
           entity.properties << { predicate: :title, value: 'World' }
@@ -16,16 +16,20 @@ module Hydramata
       end
 
       let(:presentation_structure) do
-        PresentationStructure.new.tap do |struct|
-          struct.fieldsets << [:required, [:title]]
-          struct.fieldsets << [:optional, [:abstract, :keyword]]
+        PresentationStructure.new do |structure|
+          structure.fieldsets << [:required, [:title]]
+          structure.fieldsets << [:optional, [:abstract, :keyword]]
         end
       end
 
       let(:presentation_context) { :show }
 
       let(:entity_presenter) do
-        EntityPresenter.new(entity: entity, presentation_structure: presentation_structure, presentation_context: presentation_context)
+        EntityPresenter.new(
+          entity: entity,
+          presentation_structure: presentation_structure,
+          presentation_context: presentation_context
+        )
       end
 
       context 'renders :show action' do
