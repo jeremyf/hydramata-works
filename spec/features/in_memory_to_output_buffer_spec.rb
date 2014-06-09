@@ -57,6 +57,8 @@ module Hydramata
           output = renderer.render
           json = JSON.parse(output)
           expect(json['work']['fieldsets']['required']['properties']['title']['values']).to eq(['Hello', 'World', 'Bang!'])
+          expect(json['work']['fieldsets']['optional']['properties']['abstract']['values']).to eq(['Long Text', 'Longer Text'])
+          expect(json['work']['fieldsets']['optional']['properties']['keyword']['values']).to eq(['Programming'])
         end
       end
 
