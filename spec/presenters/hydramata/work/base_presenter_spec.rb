@@ -1,12 +1,4 @@
 require 'fast_helper'
-
-unless defined?(ActionView)
-  module ActionView
-    class MissingTemplate < RuntimeError
-    end
-  end
-end
-
 require 'hydramata/work/base_presenter'
 
 module Hydramata
@@ -41,8 +33,14 @@ module Hydramata
         expect(translator).to have_received(:t).with('hydramata.work.base.name', default: instance_of(Proc))
       end
 
-      it 'has a #dom_class' do
-        expect(subject.dom_class).to eq('hello-world')
+      context '#dom_class' do
+        it 'extrapolates based on the named object' do
+          expect(subject.dom_class).to eq('hello-world')
+        end
+
+        it 'allows a prefix' do
+          expect(subject.dom_class('edit')).to eq('edit-hello-world')
+        end
       end
 
       context '#render' do

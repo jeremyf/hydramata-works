@@ -22,6 +22,10 @@ module Hydramata
 
       private
 
+      def base_dom_class
+        entity.work_type.to_s.downcase.gsub(/[\W_]+/, '-')
+      end
+
       def view_path_slug_for_object
         'works'
       end

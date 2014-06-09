@@ -27,8 +27,12 @@ module Hydramata
         super || __getobj__.instance_of?(klass)
       end
 
-      def dom_class
-        __getobj__.name.to_s.downcase.gsub(/[\W_]+/, '-')
+      def dom_class(prefix = nil)
+        if prefix.to_s.strip.size == 0
+          base_dom_class
+        else
+          "#{prefix}-#{base_dom_class}"
+        end
       end
 
       def translate(key)
@@ -37,6 +41,10 @@ module Hydramata
       alias_method :t, :translate
 
       private
+
+      def base_dom_class
+        __getobj__.name.to_s.downcase.gsub(/[\W_]+/, '-')
+      end
 
       def render_with_diminishing_specificity(template, rendering_options)
         view_depth = view_chain.size
