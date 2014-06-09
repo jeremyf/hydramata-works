@@ -5,7 +5,7 @@ module Hydramata
         module_function
         def call(object, &block)
           date = Date.parse(object.to_s)
-          block.call(value: date)
+          block.call(value: date, raw: object)
         end
       end
     end
