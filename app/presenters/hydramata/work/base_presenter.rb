@@ -13,8 +13,7 @@ module Hydramata
 
       def render(options = {})
         template = options.fetch(:template)
-        rendering_options = { partial: partial_name, object: self }
-        rendering_options[:locals] = options[:locals] if options.key?(:locals)
+        rendering_options = rendering_options_for(partial_name, options)
         template.render(rendering_options)
       end
 
@@ -36,6 +35,12 @@ module Hydramata
       alias_method :t, :translate
 
       private
+
+      def rendering_options_for(partial_name, options = {})
+        returning_options = { partial: partial_name, object: self }
+        returning_options[:locals] = options[:locals] if options.key?(:locals)
+        returning_options
+      end
 
       def partial_name
         File.join('hydramata/work', view_path_slug_for_object, presentation_context.to_s)
