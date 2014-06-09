@@ -1,5 +1,8 @@
+<%# @TODO
+Tidy this up. Not yet certain how to do this.
+%>
 <div class="<%= edit.dom_class %>">
-  <%= label_tag("work_#{edit.predicate}", edit.predicate) %>
+  <%= label_tag("work_#{edit.predicate}", edit.translate(:predicate)) %>
   <div class="values">
   <% edit.each_with_index do |value, index| %>
     <%= text_field_tag("work_#{edit.predicate}_#{index+1}", value, name: "work[#{edit.predicate}][]") %>
