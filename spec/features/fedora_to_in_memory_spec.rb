@@ -11,7 +11,7 @@ end
 
 # Because of Rubydora this is required
 def logger
-  @logger ||= Logger.new(STDOUT)
+  @logger ||= Logger.new("/dev/null")
 end
 
 module Hydramata
