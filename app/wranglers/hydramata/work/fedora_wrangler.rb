@@ -1,5 +1,7 @@
 module Hydramata
   module Work
+    # Responsible for wrangling up data from Fedora and passing that data to
+    # visiting :entity.
     class FedoraWrangler
       attr_reader :repository_connection, :entity, :datastream_parser
       def initialize(collaborators = {})
