@@ -11,6 +11,16 @@ module Hydramata
 
       private
 
+      # @TODO - Test more than the Hash option
+      def Value(input)
+        return input  if input.instance_of?(Value)
+        case input
+        when Hash then Value.new(input)
+        else
+          raise ConversionError
+        end
+      end
+
       def Predicate(input)
         return input  if input.instance_of?(Predicate)
 

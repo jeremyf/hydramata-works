@@ -6,7 +6,7 @@ module Hydramata
       module SimpleParser
         module_function
         def call(object, &block)
-          block.call(value: object, raw: object)
+          block.call(value: object, raw_object: object)
         end
       end
     end

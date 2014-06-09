@@ -10,7 +10,7 @@ module Hydramata
           else
             object
           end
-          block.call(value: value, raw: object)
+          block.call(value: value, raw_object: object)
         end
       end
     end
