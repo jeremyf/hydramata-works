@@ -27,7 +27,14 @@ module Hydramata
         # Engine's paths['app/views']. I don't know if this will continue to
         # work that way.
         view_container.prepend_view_path(view_path) if view_path.present?
-        ActionView::Base.new(view_container.view_paths, {}, view_container, [format])
+        view = ActionView::Base.new(view_container.view_paths, {}, view_container, [format])
+
+        # Required if rendering a form. Defaults to false as this is a
+        # convenience object.
+        def view.protect_against_forgery?
+          false
+        end
+        view
       end
 
       def default_view_path
