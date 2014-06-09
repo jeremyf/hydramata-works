@@ -1,0 +1,88 @@
+digraph "G" {
+    label="Hydramata Refactor"
+    compound=true;
+    node[color="grey15" fillcolor=white style=filled shape=record penwidth=2 margin="0.15, 0.125"];
+
+    subgraph cluster_1 {
+      label="Hydramata Base Definitions"
+      fillcolor=olivedrab3
+      style=filled
+      define_works_public_interface[label="{ Work's Public Interface | 1 week }"]
+      define_plugin_architecture_spec[label="{ Plugin Architecture Spec | 1 week }"]
+    }
+
+    subgraph cluster_2 {
+      label="Hydramata::Work"
+      fillcolor=orange
+      style=filled
+      articulate_work_responsibility[label="{Articulate Work Responsibility | 1 week }"]
+      define_presentation_structure[label="{ Define Presentation Structure | 1 week }"]
+      splice_presentation_structure[label="{ Splice in Presentation Structure | 3 weeks | SWARM! }"]
+      define_predicate_interfaces[label="{ Define Predicates Interfaces | 3 weeks }"]
+      define_existing_predicates[label="{ Define Existing Predicates | 3 weeks | SWARM! }"]
+      splice_work_wrangler[label="{ Splice Work Wrangler for Fedora | 3 weeks }"]
+      splice_actor_shim[label="{ Splice Actor Shim for Hydramata::Work | 2 weeks | SWARM? }"]
+    }
+
+    subgraph cluster_3 {
+      label="Hydramata::Workflow"
+      fillcolor=lightblue
+      style=filled
+      articulate_workflow_responsibility[label="{Articulate WorkFlow Responsibility | 1 week }"]
+      define_workflow_interface[label="{Define Workflow Interface | 2 week }"]
+      create_asynchronous_workflow[label="{ Create Asynchronous Workflow System | 6 weeks }"]
+      create_exsting_tasks[label="{ Create Single Focus Tasks | 3 weeks | SWARM! }"]
+      stand_up_workflow_app[label="{ Stand-up Workflow App | 1 week }"]
+      replace_existing_actors[label="{ Replace Actors with Workflow | 2 week }"]
+    }
+
+    subgraph cluster_4 {
+      label="Hydramata::Permissions"
+      fillcolor=firebrick2
+      style=filled
+      articulate_permission_responsibility[label="{ Articulate Permission Responsibility | 1 week }"]
+      define_permission_interface[label="{ Define Permission Interface | 2 weeks }"]
+      define_permission_management_system[label="{ Create Permission Management System | 8 weeks }"]
+      splice_in_hacl[label="{ Splice in Permission for Hydra::AccessControls | 3 weeks }"]
+      replace_repository_admin[label="{ Replace Repository Admin | 1 week }"]
+      replace_application_manager[label="{ Replace Application Manager | 1 week }"]
+    }
+
+    subgraph cluster_5 {
+      label="Hydramata::AdministrativeContext"
+      fillcolor=orchid3
+      style=filled
+      articulate_administrative_context_responsibility[label="{ Articulate AdministrativeContext Responsibility | 3 weeks }"]
+      define_impact_on_work[label="{ Define Impact on Work Datastructure | 1 weeks }"]
+      define_impact_on_permissions[label="{ Define Impact on Permissions | 1 weeks }"]
+      define_impact_on_workflow[label="{ Define Impact on Workflow | 1 weeks }"]
+      make_it_so[label="{ Make it So | ??? weeks }"]
+    }
+
+    define_works_public_interface -> define_plugin_architecture_spec
+    define_plugin_architecture_spec -> articulate_work_responsibility -> define_presentation_structure
+    define_plugin_architecture_spec -> articulate_permission_responsibility -> define_permission_interface
+    define_plugin_architecture_spec -> articulate_workflow_responsibility -> define_workflow_interface -> create_asynchronous_workflow
+
+    define_presentation_structure -> articulate_administrative_context_responsibility
+    define_permission_interface -> articulate_administrative_context_responsibility
+    define_workflow_interface -> articulate_administrative_context_responsibility
+    articulate_administrative_context_responsibility -> define_impact_on_work -> make_it_so
+    articulate_administrative_context_responsibility -> define_impact_on_workflow -> make_it_so
+    articulate_administrative_context_responsibility -> define_impact_on_permissions -> make_it_so
+
+    define_permission_interface -> define_permission_management_system
+    define_permission_management_system -> replace_repository_admin
+    replace_repository_admin -> replace_application_manager
+    define_permission_management_system -> splice_in_hacl
+    define_presentation_structure -> splice_presentation_structure
+    define_presentation_structure -> define_predicate_interfaces
+    define_predicate_interfaces -> define_existing_predicates
+    splice_presentation_structure -> splice_work_wrangler
+    define_existing_predicates -> splice_work_wrangler
+    splice_work_wrangler -> splice_actor_shim
+    create_asynchronous_workflow -> create_exsting_tasks
+    create_asynchronous_workflow -> stand_up_workflow_app
+    stand_up_workflow_app -> replace_existing_actors
+    create_exsting_tasks -> replace_existing_actors
+}

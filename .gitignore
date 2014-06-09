@@ -8,3 +8,5 @@ spec/internal
 coverage
 *.sqlite3
 tmp/
+documents/**/*.png
+documents/**/*.pdf
