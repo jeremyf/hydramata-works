@@ -1,0 +1,9 @@
+<div class="<%= edit.dom_class %>">
+  <%= label_tag("work_#{edit.predicate}", edit.predicate) %>
+  <div class="values">
+  <% edit.each_with_index do |value, index| %>
+    <%= text_field_tag("work_#{edit.predicate}_#{index+1}", value, name: "work[#{edit.predicate}][]") %>
+  <% end %>
+    <%= text_field_tag("work_#{edit.predicate}_0", nil, name: "work[#{edit.predicate}][]") %>
+  </div>
+</div>

@@ -59,6 +59,34 @@ module Hydramata
           expect(json['work']['fieldsets']['required']['properties']['title']['values']).to eq(['Hello', 'World', 'Bang!'])
         end
       end
+
+      context 'renders :edit action' do
+        let(:presentation_context) { :edit }
+
+        it 'as a well-structured HTML document' do
+          renderer = EntityRenderer.new(entity: entity_presenter, format: :html)
+          rendered_output = renderer.render
+
+          expect(rendered_output).to have_tag('form.edit-special-work-type', with: { method: 'post', action: '/' }) do
+            with_tag('input', with: { name: '_method', value: 'patch' } )
+            with_tag('fieldset.required caption', text: 'required')
+            with_tag('fieldset.required .title label', text: 'title')
+            with_tag('fieldset.required .title .values input', value: 'Hello', with: { name: 'work[title][]' })
+            with_tag('fieldset.required .title .values input', value: 'World', with: { name: 'work[title][]' })
+            with_tag('fieldset.required .title .values input', value: 'Bang!', with: { name: 'work[title][]' })
+            with_tag('fieldset.required .title .values input', value: '', with: { name: 'work[title][]' })
+            with_tag('fieldset.optional caption', text: 'optional')
+            with_tag('fieldset.optional .abstract label', text: 'abstract')
+            with_tag('fieldset.optional .abstract .values input', value: 'Long Text', with: { name: 'work[abstract][]' })
+            with_tag('fieldset.optional .abstract .values input', value: 'Longer Text', with: { name: 'work[abstract][]' })
+            with_tag('fieldset.optional .abstract .values input', value: '', with: { name: 'work[abstract][]' })
+            with_tag('fieldset.optional .keyword label', text: 'keyword')
+            with_tag('fieldset.optional .keyword .values input', value: 'Programming', with: { name: 'work[keyword][]' })
+            with_tag('fieldset.optional .keyword .values input', value: '', with: { name: 'work[keyword][]' })
+          end
+        end
+
+      end
     end
   end
 end

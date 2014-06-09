@@ -1,0 +1,3 @@
+<%= form_for edit, as: :work, url: '/', method: :patch, html: { class: edit.dom_class('edit') } do |form| %>
+  <% edit.fieldsets.each do |fieldset| %><%= fieldset.render(template: self, locals: { form: form } ) %><% end %>
+<% end %>
