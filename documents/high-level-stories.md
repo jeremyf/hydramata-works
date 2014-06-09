@@ -2,7 +2,15 @@
 
 Below are stories that are supported in the `./documents` directory.
 
-## Must Have
+## Done
+
+### (1) Transform in memory Work object to Show JSON Document
+
+### (2) Transform Fedora object to in memory Work object
+
+  * Done Looks Like: All of the persisted datastreams are in the database are reified in the Work object's #properties.
+
+### (1) Create an interface for rendering a fieldset
 
 ### (1) Transform in memory Work object to Show HTML Document
 
@@ -31,6 +39,8 @@ Then I should have the following css-selectors and text:
   | .optional .keyword .value  | Programming |
 ```
 
+## Must Have
+
 ### (4) Transform in memory Work object to New HTML Document
 
 **Done looks like**
@@ -54,13 +64,6 @@ Then I should have the following css-selectors and text:
   | .optional .keyword input.value[name=work[keyword]]   | ''         |
 ```
 
-
-### (1) Create an interface for rendering a fieldset
-
-  * in Edit HTML
-  * in New HTML
-  * in Show HTML
-
 ### (3) Create an interface for rendering a property
 
   * in Edit HTML
@@ -72,16 +75,11 @@ Then I should have the following css-selectors and text:
 
   * Done Looks Like: All of the persisted properties in the database are reified in the Work object's #properties.
 
-### (2) Transform Fedora object to in memory Work object
-
-  * Done Looks Like: All of the persisted datastreams are in the database are reified in the Work object's #properties.
-
 ### (2) Transform Solr object to in memory Work object
 
 ### (2) Transform in memory Work object to SOLR Document
 ### (3) Transform in memory Work object to Raw Datastreams
 ### (1) Transform in memory Work object to Edit HTML Document
-### (1) Transform in memory Work object to Show JSON Document
 ### (1) Transform in memory Work object to Database
 ### (3) Transform in memory Work to Fedora object
 ### (1) Transform user input from Edit Form to in memory Work object
