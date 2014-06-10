@@ -9,10 +9,24 @@
 
 See the [High Level Stories regarding the Hydramata::Work component](./documents/high-level-stories.md).
 
-
 Responsible for providing a well defined data-structure to ease the
 interaction between differing layers of an application.
 
 * Persistence Layer
 * In Memory
 * Rendering/Output Buffer
+
+## Top Level Features
+
+- [x] Fedora -> Memory
+- [x] Memory -> Show HTML
+- [x] Memory -> Show JSON
+- [x] Memory -> Edit HTML
+- [ ] Database -> Memory
+- [ ] Solr -> Memory
+- [ ] Memory -> Fedora
+- [ ] Memory -> Database
+- [ ] Memory -> Solr
+- [ ] Memory -> New HTML
+- [ ] Memory -> Solr Document
+- [ ] UI Input -> Memory
