@@ -47,6 +47,7 @@ But are instead a parking lot that may be cleared or added to.
       predicate name as the partial prefixes.
 - [ ] Create Work Type persistence
 - [ ] Create Work Type presentation structure persistence
+- [ ] Remove some duplication of Work Type and Predicate (moving towards a Definition concept?)
 - [ ] Create some rudimentary seeds for Work Types
 - [ ] Create some rudimentary seeds for Work Types presentation structure
 - [ ] Create some rudimentary seeds for Predicates
