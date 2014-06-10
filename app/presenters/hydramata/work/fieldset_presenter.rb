@@ -7,7 +7,6 @@ module Hydramata
     #
     # @TODO - Rename fieldset in presentation to property_set
     class FieldsetPresenter < BasePresenter
-      extend Forwardable
       attr_reader :entity
       def initialize(collaborators = {})
         fieldset = collaborators.fetch(:fieldset)

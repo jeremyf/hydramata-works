@@ -28,8 +28,9 @@ module Hydramata
       # Because who wants to remember which way to access this?
       alias_method :value, :values
 
-      extend Forwardable
-      def_delegator :values, :each
+      def each(&block)
+        values.each(&block)
+      end
 
       def <<(values)
         Array.wrap(values).each do |value|
