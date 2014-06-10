@@ -19,19 +19,8 @@ module Hydramata
 
       private
 
-      def default_datastream_parser
-        require 'hydramata/work/datastream_parser'
-        DatastreamParser
-      end
-
       def default_with_datastreams
         false
-      end
-
-      def default_repository_connection
-        require 'rubydora'
-        # Please note: these parameters were used in building the VCR cassettes, so please don't change them.
-        Rubydora.connect(url: 'http://127.0.0.1:8983/fedora', user: 'fedoraAdmin', password: 'fedoraAdmin')
       end
 
       def assign_work_type_from(object)
@@ -54,6 +43,18 @@ module Hydramata
           entity.properties << property
         end
       end
+
+      def default_datastream_parser
+        require 'hydramata/work/datastream_parser'
+        DatastreamParser
+      end
+
+      def default_repository_connection
+        require 'rubydora'
+        # Please note: these parameters were used in building the VCR cassettes, so please don't change them.
+        Rubydora.connect(url: 'http://127.0.0.1:8983/fedora', user: 'fedoraAdmin', password: 'fedoraAdmin')
+      end
+
     end
   end
 end
