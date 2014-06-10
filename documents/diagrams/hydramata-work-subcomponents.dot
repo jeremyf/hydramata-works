@@ -1,0 +1,36 @@
+digraph "G" {
+    label="Hydramata Refactor"
+    compound=true;
+    node[color="grey15" fillcolor=white style=filled shape=record penwidth=2 margin="0.15, 0.125"];
+
+    subgraph cluster_1 {
+      label="Hydramata Base Definitions"
+      fillcolor=olivedrab3
+      style=filled
+    }
+
+    subgraph cluster_2 {
+      label="Hydramata::Work"
+      fillcolor=orange
+      style=filled
+    }
+
+    subgraph cluster_3 {
+      label="Hydramata::Workflow"
+      fillcolor=lightblue
+      style=filled
+    }
+
+    subgraph cluster_4 {
+      label="Hydramata::Permissions"
+      fillcolor=firebrick2
+      style=filled
+    }
+
+    subgraph cluster_5 {
+      label="Hydramata::AdministrativeContext"
+      fillcolor=orchid3
+      style=filled
+    }
+
+}
