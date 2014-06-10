@@ -1,3 +1,7 @@
+require 'hydramata/work/conversions/value'
+require 'hydramata/work/conversions/predicate'
+require 'hydramata/work/conversions/work_type'
+require 'hydramata/work/conversions/property'
 module Hydramata
   module Work
     # Taking a que from Avdi Grimm's "Confident Ruby", the Conversion module
@@ -6,56 +10,7 @@ module Hydramata
     # This is somewhat experimental, though analogous to the Array() method in
     # base ruby.
     module Conversions
-      class ConversionError < RuntimeError
-        def initialize(class_name, input)
-          super("Could not convert #{input.inspect} to #{class_name}")
-        end
-      end
 
-      private
-
-      def Value(input)
-        require 'hydramata/work/value'
-        case input
-        when Value then input
-        when Hash then Value.new(input)
-        when String, Symbol then Value.new(value: input)
-        else
-          raise ConversionError.new(:Value, input)
-        end
-      end
-
-      def Predicate(input)
-        require 'hydramata/work/predicates'
-        case input
-        when Predicate then input
-        when String, Symbol then Predicates.find(input)
-        when Hash then Predicates.find(input.fetch(:identity), input)
-        else
-          raise ConversionError.new(:Predicate, input)
-        end
-      end
-
-      def WorkType(input)
-        require 'hydramata/work/work_types'
-        case input
-        when Predicate then input
-        when String, Symbol then WorkTypes.find(input)
-        when Hash then WorkTypes.find(input.fetch(:identity), input)
-        else
-          raise ConversionError.new(:WorkType, input)
-        end
-      end
-
-      def Property(input)
-        require 'hydramata/work/property'
-
-        if input.instance_of?(Property)
-          input
-        else
-          Property.new(input)
-        end
-      end
 
       def PresentedFieldsets(collaborators)
         # @TODO - This could be packaged up into a tidier location.
