@@ -36,6 +36,17 @@ module Hydramata
         end
       end
 
+      def WorkType(input)
+        require 'hydramata/work/work_types'
+        case input
+        when Predicate then input
+        when String, Symbol then WorkTypes.find(input)
+        when Hash then WorkTypes.find(input.fetch(:identity), input)
+        else
+          raise ConversionError.new(:WorkType, input)
+        end
+      end
+
       def Property(input)
         require 'hydramata/work/property'
 

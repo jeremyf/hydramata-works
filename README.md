@@ -45,7 +45,8 @@ But are instead a parking lot that may be cleared or added to.
       partial prefixes.
 - [X] Default fieldset rendering to include work_type, fieldset name, and
       predicate name as the partial prefixes.
-- [ ] Create Work Type persistence
+- [X] Create Work Type persistence
+- [X] Create Work Type conversion
 - [ ] Create Work Type presentation structure persistence
 - [ ] Remove some duplication of Work Type and Predicate (moving towards a Definition concept?)
 - [ ] Create some rudimentary seeds for Work Types
