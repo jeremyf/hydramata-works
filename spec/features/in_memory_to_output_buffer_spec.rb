@@ -56,9 +56,15 @@ module Hydramata
           renderer = EntityRenderer.new(entity: entity_presenter, format: :json)
           output = renderer.render
           json = JSON.parse(output)
-          expect(json['work']['fieldsets']['required']['properties']['title']['values']).to eq(['Hello', 'World', 'Bang!'])
-          expect(json['work']['fieldsets']['optional']['properties']['abstract']['values']).to eq(['Long Text', 'Longer Text'])
-          expect(json['work']['fieldsets']['optional']['properties']['keyword']['values']).to eq(['Programming'])
+          expect(json['work'].keys.sort).to eq(['properties', 'work_type'])
+
+          # Preserving presentation order, and there is a bug in jbuilder that
+          # adds the extra '' key; Patch is being submitted. When the patch is
+          # merged, then the '' key will go away.
+          expect(json['work']['properties'].keys).to eq(['title', '', 'abstract', 'keyword'])
+          expect(json['work']['properties']['title']).to eq(['Hello', 'World', 'Bang!'])
+          expect(json['work']['properties']['abstract']).to eq(['Long Text', 'Longer Text'])
+          expect(json['work']['properties']['keyword']).to eq(['Programming'])
         end
       end
 

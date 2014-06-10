@@ -1,6 +1,7 @@
+json.ignore_nil!
 json.set! :work do
   json.set! :work_type, show.work_type
-  json.set! :fieldsets do
+  json.properties do
     show.fieldsets.each do |fieldset|
       # Why the locals?
       # Without the local json declared the jbuilder rendering engine
