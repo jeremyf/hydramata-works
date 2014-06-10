@@ -27,6 +27,12 @@ module Hydramata
       def view_path_slug_for_object
         'fieldsets'
       end
+
+      def default_partial_prefixes
+        entity_prefix = String(entity.work_type).downcase.gsub(/\W+/, '_')
+        fieldset_prefix = String(name).gsub(/\W+/, '_')
+        [File.join(entity_prefix, fieldset_prefix), fieldset_prefix]
+      end
     end
   end
 end
