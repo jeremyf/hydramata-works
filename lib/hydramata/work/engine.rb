@@ -7,6 +7,9 @@ module Hydramata
     class Engine < ::Rails::Engine
       engine_name 'hydramata_work'
 
+      # SimpleForm did this, so I'm thinking that I will do it.
+      config.eager_load_namespaces << Hydramata::Work
+
       initializer 'hydramata_work.initializers' do |app|
         app.config.paths.add 'app/renderers', eager_load: true
         app.config.paths.add 'app/presenters', eager_load: true
