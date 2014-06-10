@@ -51,8 +51,8 @@ module Hydramata
           expect(template).to have_received(:render).with(partial: 'hydramata/work/base/show', object: subject)
         end
 
-        it 'should handle a view_chain rendering in less and less specificity' do
-          subject = described_class.new(object, translator: translator, view_chain: ['article', 'required'], presentation_context: 'show', template_missing_exception: [RuntimeError, NoMethodError])
+        it 'should handle a partial_prefixes rendering in less and less specificity' do
+          subject = described_class.new(object, translator: translator, partial_prefixes: ['article/required', 'article'], presentation_context: 'show', template_missing_exception: [RuntimeError, NoMethodError])
           expect(template).to receive(:render).
             with(partial: 'hydramata/work/base/article/required/show', object: subject).
             ordered.
