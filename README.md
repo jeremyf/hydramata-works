@@ -50,3 +50,4 @@ But are instead a parking lot that may be cleared or added to.
 - [ ] Create some rudimentary seeds for Work Types
 - [ ] Create some rudimentary seeds for Work Types presentation structure
 - [ ] Create some rudimentary seeds for Predicates
+- [ ] Disambigutate identity vs. name for application usage
