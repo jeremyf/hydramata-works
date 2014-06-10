@@ -37,5 +37,5 @@ interaction between differing layers of an application.
       prefixes.
 - [X] Default fieldset rendering to include work_type and fieldset name as the
       partial prefixes.
-- [ ] Default fieldset rendering to include work_type, fieldset name, and
+- [X] Default fieldset rendering to include work_type, fieldset name, and
       predicate name as the partial prefixes.

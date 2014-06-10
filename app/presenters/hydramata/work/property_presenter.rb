@@ -3,8 +3,6 @@ module Hydramata
   module Work
     # Responsible for coordinating the rendering of an in-memory Property-like
     # object to an output buffer.
-    #
-    # @TODO - create a corresponding spec.
     class PropertyPresenter < BasePresenter
       attr_reader :fieldset, :entity
       def initialize(collaborators = {})
@@ -23,6 +21,13 @@ module Hydramata
       def view_path_slug_for_object
         'properties'
       end
+
+      def default_partial_prefixes
+        entity_prefix = String(entity.work_type).downcase.gsub(/\W+/, '_')
+        predicate_prefix = String(predicate).downcase.gsub(/\W+/, '_')
+        [File.join(entity_prefix, predicate_prefix), predicate_prefix]
+      end
+
     end
   end
 end
