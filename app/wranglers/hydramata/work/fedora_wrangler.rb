@@ -3,12 +3,29 @@ module Hydramata
     # Responsible for wrangling up data from Fedora and passing that data to
     # visiting :entity.
     class FedoraWrangler
+
       attr_reader :repository_connection, :entity, :datastream_parser
       def initialize(collaborators = {})
         @repository_connection = collaborators.fetch(:repository_connection) { default_repository_connection }
         @datastream_parser = collaborators.fetch(:datastream_parser) { default_datastream_parser }
         @entity = collaborators.fetch(:entity)
       end
+
+      private
+
+      def default_datastream_parser
+        require 'hydramata/work/datastream_parser'
+        DatastreamParser
+      end
+
+      def default_repository_connection
+        require 'rubydora'
+        # Please note: these parameters were used in building the VCR cassettes, so change at your own risk.
+        # TODO: This should be a configuration option analogous to ActiveFedora.
+        Rubydora.connect(url: 'http://127.0.0.1:8983/fedora', user: 'fedoraAdmin', password: 'fedoraAdmin')
+      end
+
+      public
 
       def call(pid, options = {})
         with_datastreams = options.fetch(:with_datastreams) { default_with_datastreams }
@@ -42,17 +59,6 @@ module Hydramata
         datastream_parser.call(datastream: datastream, entity: entity) do |property|
           entity.properties << property
         end
-      end
-
-      def default_datastream_parser
-        require 'hydramata/work/datastream_parser'
-        DatastreamParser
-      end
-
-      def default_repository_connection
-        require 'rubydora'
-        # Please note: these parameters were used in building the VCR cassettes, so please don't change them.
-        Rubydora.connect(url: 'http://127.0.0.1:8983/fedora', user: 'fedoraAdmin', password: 'fedoraAdmin')
       end
 
     end
