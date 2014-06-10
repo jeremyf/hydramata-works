@@ -1,0 +1,113 @@
+digraph "G" {
+    label="Hydramata::Work Architecture"
+    compound=true;
+    node[color="grey15" style=filled fillcolor=white shape=oval penwidth=2 margin="0.15, 0.15"];
+
+    subgraph cluster_0 {
+        label="Datastores"
+        color="olivedrab3"
+        style="filled"
+        node[shape=record]
+        fedora3
+        database
+        fedora4[fillcolor=orchid2]
+        solr
+    }
+
+    subgraph cluster_5 {
+        label="Data Structure Definition"
+        color="olivedrab3"
+        style="filled"
+        node[shape=record]
+
+ #       work_type -> predicate_set -> predicate
+    }
+
+    subgraph cluster_1 {
+        label="Datastore Wrangling"
+        color="orange"
+        style="filled"
+        fedora3_wrangler
+        fedora4_wrangler[fillcolor=orchid2]
+        database_wrangler[label="database_wrangler*"]
+        solr_wrangler
+        work_resolver
+        datastream_parsers
+        database_serialization_parsers[label="database_serialization_parsers*"]
+        solr_document_parsers
+        predicate_parsers
+        value_parsers
+    }
+
+    subgraph cluster_6 {
+        label="Datastore Persister"
+        color="orange"
+        style="filled"
+        fedora3_persister
+        fedora4_persister[fillcolor=orchid2]
+        database_persister[label="database_persister*"]
+        solr_persister
+        work_persister
+    }
+    work_persister -> fedora3_persister
+    work_persister -> fedora4_persister
+    work_persister -> database_persister
+    work_persister -> solr_persister
+    fedora4_persister -> fedora4
+    fedora3_persister -> fedora3
+    database_persister -> database
+    solr_persister -> solr
+
+    subgraph cluster_2 {
+        label="In Memory"
+        color="lightblue"
+        style="filled"
+        node[shape=record]
+        work
+        property_set
+        property
+        value
+
+        work -> property_set
+        property_set -> property
+        property -> value
+    }
+
+
+    subgraph cluster_3 {
+        label="Buffer Map"
+        color="orange"
+        style="filled"
+    }
+
+    subgraph cluster_4 {
+        label="Output Buffer"
+        color="firebrick2"
+        style="filled"
+    }
+
+    work -> work_persister
+
+    fedora3 -> fedora3_wrangler
+    fedora4 -> fedora4_wrangler
+    database -> database_wrangler
+    solr -> solr_wrangler
+    fedora3_wrangler -> datastream_parsers
+    fedora4_wrangler -> datastream_parsers
+    solr_wrangler -> solr_document_parsers
+    database_wrangler -> database_serialization_parsers
+    database_serialization_parsers -> predicate_parsers
+    solr_document_parsers -> predicate_parsers
+    datastream_parsers -> predicate_parsers
+    predicate_parsers -> value_parsers
+
+    work_resolver -> work
+    predicate_parsers -> property
+    value_parsers -> value
+
+    work_resolver -> fedora3_wrangler
+    work_resolver -> fedora4_wrangler
+    work_resolver -> database_wrangler
+    work_resolver -> solr_wrangler
+
+}
