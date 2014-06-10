@@ -21,6 +21,11 @@ module Hydramata
           value = Value('hello')
           expect(Value(value).object_id).to eq(value.object_id)
         end
+
+        it 'should raise an error object is unexpected' do
+          expect { Value([]) }.to raise_error
+        end
+
       end
 
       context '#Predicate' do
