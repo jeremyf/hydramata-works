@@ -7,7 +7,8 @@ module Hydramata
     # to the Entity of the [DataMapper pattern](http://www.martinfowler.com/eaaCatalog/dataMapper.html)
     # as implemented in [Lotus::Models](https://github.com/lotus/model#entities).
     #
-    # Unlike a Lotus::Model, the Work is an arbitrary collection of Properties.
+    # Unlike a Lotus::Model, the Work is an arbitrary collection of Property
+    # objects, as defined in the PropertySet.
     class Entity
 
       def initialize(collaborators = {}, &block)
