@@ -8,38 +8,51 @@ digraph "G" {
         color="olivedrab3"
         style="filled"
         node[shape=record]
-        fedora3
+        fedora3[fillcolor=orchid4]
         database
         fedora4[fillcolor=orchid2]
         solr
     }
 
-    subgraph cluster_5 {
-        label="Data Structure Definition"
-        color="olivedrab3"
-        style="filled"
-        node[shape=record]
-
- #       work_type -> predicate_set -> predicate
-    }
-
     subgraph cluster_1 {
-        label="Datastore Wrangling"
+        label="Wranglers"
         color="orange"
         style="filled"
-        fedora3_wrangler
+        work_resolver
+        fedora3_wrangler[fillcolor=orchid4]
         fedora4_wrangler[fillcolor=orchid2]
         database_wrangler[label="database_wrangler*"]
         solr_wrangler
-        work_resolver
+        fedora_work_type_finder
+        fedora_work_type_finder
+        solr_work_type_finder
+        database_work_type_finder
+    }
+
+    subgraph cluster_8 {
+        label="Parsers"
+        color="orange"
+        style="filled"
+
         datastream_parsers
         database_serialization_parsers[label="database_serialization_parsers*"]
         solr_document_parsers
         predicate_parsers
         value_parsers
+        presentation_structure_builder
     }
 
-    subgraph cluster_6 {
+    subgraph cluster_2 {
+        label="Data Structure Definition"
+        color="olivedrab3"
+        style="filled"
+        node[shape=record]
+
+        work_type -> predicate_set -> predicate
+    }
+
+
+    subgraph cluster_3 {
         label="Datastore Persister"
         color="orange"
         style="filled"
@@ -49,16 +62,8 @@ digraph "G" {
         solr_persister
         work_persister
     }
-    work_persister -> fedora3_persister
-    work_persister -> fedora4_persister
-    work_persister -> database_persister
-    work_persister -> solr_persister
-    fedora4_persister -> fedora4
-    fedora3_persister -> fedora3
-    database_persister -> database
-    solr_persister -> solr
 
-    subgraph cluster_2 {
+    subgraph cluster_4 {
         label="In Memory"
         color="lightblue"
         style="filled"
@@ -67,47 +72,58 @@ digraph "G" {
         property_set
         property
         value
-
-        work -> property_set
-        property_set -> property
-        property -> value
     }
 
-
-    subgraph cluster_3 {
+    subgraph cluster_5 {
         label="Buffer Map"
         color="orange"
         style="filled"
     }
 
-    subgraph cluster_4 {
+    subgraph cluster_6 {
         label="Output Buffer"
         color="firebrick2"
         style="filled"
     }
 
-    work -> work_persister
-
-    fedora3 -> fedora3_wrangler
-    fedora4 -> fedora4_wrangler
+    presentation_structure_builder -> property_set
     database -> database_wrangler
-    solr -> solr_wrangler
-    fedora3_wrangler -> datastream_parsers
-    fedora4_wrangler -> datastream_parsers
-    solr_wrangler -> solr_document_parsers
-    database_wrangler -> database_serialization_parsers
+    database_persister -> database
     database_serialization_parsers -> predicate_parsers
-    solr_document_parsers -> predicate_parsers
+    database_wrangler -> database_serialization_parsers
+    database_wrangler -> database_work_type_finder
     datastream_parsers -> predicate_parsers
-    predicate_parsers -> value_parsers
-
-    work_resolver -> work
+    fedora3 -> fedora3_wrangler
+    fedora3_persister -> fedora3
+    fedora3_wrangler -> datastream_parsers
+    fedora3_wrangler -> fedora_work_type_finder
+    fedora_work_type_finder
+    fedora4 -> fedora4_wrangler
+    fedora4_persister -> fedora4
+    fedora4_wrangler -> datastream_parsers
+    fedora4_wrangler -> fedora_work_type_finder
+    predicate -> presentation_structure_builder
     predicate_parsers -> property
+    predicate_parsers -> value_parsers
+    predicate_set -> presentation_structure_builder
+    property -> value
+    property_set -> property
+    solr -> solr_wrangler
+    solr_document_parsers -> predicate_parsers
+    solr_persister -> solr
+    solr_wrangler -> solr_document_parsers
+    solr_wrangler -> solr_work_type_finder
     value_parsers -> value
-
+    work -> property_set
+    work -> work_persister
+    work_persister -> database_persister
+    work_persister -> fedora3_persister
+    work_persister -> fedora4_persister
+    work_persister -> solr_persister
+    work_resolver -> presentation_structure_builder
+    work_resolver -> database_wrangler
     work_resolver -> fedora3_wrangler
     work_resolver -> fedora4_wrangler
-    work_resolver -> database_wrangler
     work_resolver -> solr_wrangler
-
+    work_resolver -> work
 }
