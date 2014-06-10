@@ -10,11 +10,13 @@ module Hydramata
       let(:presentation_structure) { double('PresentationStructure') }
       let(:entity) { double('Entity', work_type: 'My Work Type') }
       let(:presented_fieldset_builder) { double('Builder', call: true) }
+      let(:template) { double('Template', render: true) }
       subject do
         described_class.new(
           entity: entity,
           presentation_structure: presentation_structure,
-          presented_fieldset_builder: presented_fieldset_builder
+          presented_fieldset_builder: presented_fieldset_builder,
+          template_missing_exception: [RuntimeError]
         )
       end
 
@@ -31,6 +33,19 @@ module Hydramata
       it 'should have a default partial prefixes' do
         expect(subject.partial_prefixes).to eq(['my_work_type'])
       end
+
+      it 'should render as per the template' do
+        expect(template).to receive(:render).
+          with(partial: 'hydramata/work/works/my_work_type/show', object: subject).
+          ordered.
+          and_raise(RuntimeError)
+        expect(template).to receive(:render).
+          with(partial: 'hydramata/work/works/show', object: subject).
+          ordered.
+          and_return('YES')
+        expect(subject.render(template: template)).to eq('YES')
+      end
+
     end
   end
 end
