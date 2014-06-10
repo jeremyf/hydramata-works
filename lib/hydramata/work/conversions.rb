@@ -13,15 +13,18 @@ module Hydramata
 
       # @TODO - Test more than the Hash option
       def Value(input)
+        require 'hydramata/work/value'
         return input  if input.instance_of?(Value)
         case input
         when Hash then Value.new(input)
+        when String, Symbol then Value.new(value: input)
         else
           raise ConversionError
         end
       end
 
       def Predicate(input)
+        require 'hydramata/work/predicate'
         return input  if input.instance_of?(Predicate)
 
         require 'hydramata/work/predicates'
