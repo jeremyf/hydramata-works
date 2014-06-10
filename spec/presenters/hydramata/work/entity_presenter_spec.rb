@@ -8,7 +8,7 @@ module Hydramata
       it_behaves_like 'a presented entity'
 
       let(:presentation_structure) { double('PresentationStructure') }
-      let(:entity) { double('Entity', work_type: true) }
+      let(:entity) { double('Entity', work_type: 'My Work Type') }
       let(:presented_fieldset_builder) { double('Builder', call: true) }
       subject do
         described_class.new(
@@ -25,9 +25,12 @@ module Hydramata
 
       it 'delegates :work_type to :entity' do
         subject.work_type
-        expect(entity).to have_received(:work_type)
+        expect(entity).to have_received(:work_type).at_least(1).times
       end
 
+      it 'should have a default partial prefixes' do
+        expect(subject.partial_prefixes).to eq(['my_work_type'])
+      end
     end
   end
 end
