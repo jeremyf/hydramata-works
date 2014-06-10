@@ -7,11 +7,13 @@ module Hydramata
     # base ruby.
     module Conversions
       class ConversionError < RuntimeError
+        def initialize(class_name, input)
+          super("Could not convert #{input.inspect} to #{class_name}")
+        end
       end
 
       private
 
-      # @TODO - Test more than the Hash option
       def Value(input)
         require 'hydramata/work/value'
         return input  if input.instance_of?(Value)
@@ -19,7 +21,7 @@ module Hydramata
         when Hash then Value.new(input)
         when String, Symbol then Value.new(value: input)
         else
-          raise ConversionError
+          raise ConversionError.new(:Value, input)
         end
       end
 
@@ -32,7 +34,7 @@ module Hydramata
         when String, Symbol then Predicates.find(input)
         when Hash then Predicates.find(input.fetch(:identity), input)
         else
-          raise ConversionError
+          raise ConversionError.new(:Predicate, input)
         end
       end
 

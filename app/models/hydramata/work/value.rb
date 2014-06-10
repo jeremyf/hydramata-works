@@ -7,8 +7,8 @@ module Hydramata
       attr_reader :raw_object
       def initialize(options = {})
         value = options.fetch(:value)
-        @raw_object = options.fetch(:raw_object) { value }
         __setobj__(value)
+        @raw_object = options.fetch(:raw_object) { default_raw_object }
         yield(self) if block_given?
       end
 
@@ -24,6 +24,11 @@ module Hydramata
         super || other == __getobj__
       end
 
+      private
+
+      def default_raw_object
+        __getobj__
+      end
     end
   end
 end
