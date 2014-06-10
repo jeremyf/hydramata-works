@@ -8,6 +8,8 @@ module Hydramata
       let(:value) { 123456789 }
       subject { described_class.new(value: value, raw_object: raw_object) }
 
+      it { should implement_value_interface }
+
       it 'should have a #raw_object' do
         expect(subject.raw_object).to eq(raw_object)
       end
