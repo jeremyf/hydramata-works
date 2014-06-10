@@ -16,8 +16,8 @@ module Hydramata
 
       def Value(input)
         require 'hydramata/work/value'
-        return input  if input.instance_of?(Value)
         case input
+        when Value then input
         when Hash then Value.new(input)
         when String, Symbol then Value.new(value: input)
         else
@@ -26,11 +26,9 @@ module Hydramata
       end
 
       def Predicate(input)
-        require 'hydramata/work/predicate'
-        return input  if input.instance_of?(Predicate)
-
         require 'hydramata/work/predicates'
         case input
+        when Predicate then input
         when String, Symbol then Predicates.find(input)
         when Hash then Predicates.find(input.fetch(:identity), input)
         else
