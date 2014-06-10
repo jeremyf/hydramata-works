@@ -11,5 +11,13 @@ module Hydramata
     def table_name_prefix
       'hydramata_work_'
     end
+
+    # Because I am not using isolate_namespace for Hydramata::Work::Engine
+    # I need this for the application router to find the appropriate routes.
+    # @api private
+    def use_relative_model_naming?
+      true
+    end
+
   end
 end
