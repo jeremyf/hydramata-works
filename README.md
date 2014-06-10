@@ -18,6 +18,9 @@ interaction between differing layers of an application.
 
 ## Top Level Features
 
+These features reflect the movement of data from one layer to another.
+In each layer, there is a concept of a Work and its data structure.
+
 - [x] Fedora -> Memory
 - [x] Memory -> Show HTML
 - [x] Memory -> Show JSON
@@ -42,3 +45,8 @@ But are instead a parking lot that may be cleared or added to.
       partial prefixes.
 - [X] Default fieldset rendering to include work_type, fieldset name, and
       predicate name as the partial prefixes.
+- [ ] Create Work Type persistence
+- [ ] Create Work Type presentation structure persistence
+- [ ] Create some rudimentary seeds for Work Types
+- [ ] Create some rudimentary seeds for Work Types presentation structure
+- [ ] Create some rudimentary seeds for Predicates
