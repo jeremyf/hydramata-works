@@ -13,17 +13,12 @@ module Hydramata
         it { should implement_work_type_interface }
 
         let(:identity) { 'http://hello.com/world' }
-        let(:work_type) do
-          described_class.create(
-            identity: identity,
-            name_for_application_usage: 'hello_world'
-          )
-        end
+        subject { described_class.create(identity: identity, name_for_application_usage: 'hello_world') }
 
         context '.find_by_identity' do
 
           it 'returns a WorkType object when identity exists' do
-            work_type # creating the object
+            subject # creating the object
             expect(described_class.find_by_identity!(identity)).to implement_work_type_interface
           end
 
@@ -35,7 +30,7 @@ module Hydramata
 
         context '.existing_attributes_for' do
           it 'should return the existing work_type attributes' do
-            work_type
+            subject
             keys = [
               :id,
               :identity,
@@ -43,7 +38,7 @@ module Hydramata
             ]
             actual_values = described_class.existing_attributes_for(identity).values_at(keys)
             # Because date comparisons are a bit wonky
-            expect(actual_values).to eq(work_type.attributes.values_at(keys))
+            expect(actual_values).to eq(subject.attributes.values_at(keys))
           end
 
           it 'should return the identity if a matching work_type was not found' do
@@ -54,6 +49,12 @@ module Hydramata
             expect(described_class).to receive(:find_by_identity!).and_raise(ActiveRecord::ConnectionNotEstablished)
             expect(described_class.existing_attributes_for(identity)).to eq(identity: identity)
           end
+        end
+
+        it 'should have many :predicate_sets' do
+          expect { subject.predicate_sets.create(identity: 'required', presentation_sequence: 1) }.
+            to change { subject.predicate_sets.count }.
+            by(1)
         end
 
       end

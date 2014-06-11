@@ -1,4 +1,5 @@
 require 'active_record'
+require 'hydramata/work/predicate_sets/storage'
 module Hydramata
   module Work
     module WorkTypes
@@ -6,6 +7,8 @@ module Hydramata
       # strategy for predicates.
       class Storage < ActiveRecord::Base
         self.table_name = :hydramata_work_types
+        has_many :predicate_sets, class_name: '::Hydramata::Work::PredicateSets::Storage', foreign_key: 'work_type_id'
+
         def self.find_by_identity!(identity)
           where(identity: identity).first!
         end

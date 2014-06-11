@@ -24,6 +24,10 @@ module Hydramata
           )
         end
 
+        it 'belongs to a work_type' do
+          expect(subject.work_type).to eq(work_type)
+        end
+
       end
     end
   end
