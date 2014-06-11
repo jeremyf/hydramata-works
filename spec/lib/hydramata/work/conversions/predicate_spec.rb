@@ -18,7 +18,7 @@ module Hydramata
 
         it 'should return the same predicate if a Predicate is given' do
           predicate = Predicate(:hello)
-          expect(predicate.object_id).to eq(predicate.object_id)
+          expect(Predicate(predicate).object_id).to eq(predicate.object_id)
         end
 
         it 'should convert a "well-formed" Hash to a Predicate object' do

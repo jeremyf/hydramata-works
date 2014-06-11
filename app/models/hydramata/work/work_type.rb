@@ -22,7 +22,7 @@ module Hydramata
       end
 
       def ==(other)
-        instance_of?(self.class) &&
+        other.instance_of?(self.class) &&
           identity == other.identity
       end
 

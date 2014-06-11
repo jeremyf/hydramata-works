@@ -18,7 +18,7 @@ module Hydramata
 
         it 'should return the same work_type if a WorkType is given' do
           work_type = WorkType(:hello)
-          expect(work_type.object_id).to eq(work_type.object_id)
+          expect(WorkType(work_type).object_id).to eq(work_type.object_id)
         end
 
         it 'should convert a "well-formed" Hash to a WorkType object' do
