@@ -30,8 +30,8 @@ Gem::Specification.new do |s|
   s.add_dependency 'rdf', '~> 1.1'
 
   s.add_development_dependency 'engine_cart'
-  s.add_development_dependency 'rspec', '~> 2.99'
-  s.add_development_dependency 'rspec-html-matchers'
+  s.add_development_dependency 'rspec', '~> 3.0'
+  s.add_development_dependency 'rspec-html-matchers', '~>0.6'
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'rubydora'
   s.add_development_dependency 'vcr'

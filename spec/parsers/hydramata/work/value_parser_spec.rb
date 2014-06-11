@@ -13,7 +13,7 @@ module Hydramata
         let(:options) { { predicate: predicate, work_type: 'article', parser_finder: parser_finder, value: value } }
         it 'coordinate with the parser_finder and calls the found parser' do
           parsed_value = '1234'
-          a_parser.should_receive(:call).with(value).and_yield(value: parsed_value)
+          expect(a_parser).to receive(:call).with(value).and_yield(value: parsed_value)
           expect { |b| described_class.call(options, &b) }.to yield_with_args(value: parsed_value)
         end
       end
