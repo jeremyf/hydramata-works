@@ -25,6 +25,11 @@ module Hydramata
           expect(WorkType(identity: 'hello')).to implement_work_type_interface
         end
 
+        it 'should convert a "store work type" to a WorkType object' do
+          stored_object = WorkTypes::Storage.new(identity: 'hello')
+          expect(WorkType(stored_object)).to implement_work_type_interface
+        end
+
         it 'should raise an error if the Hash is not "well-formed"' do
           expect { WorkType(other: 'hello') }.to raise_error
         end
