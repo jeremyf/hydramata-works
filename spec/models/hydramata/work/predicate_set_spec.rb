@@ -21,6 +21,11 @@ module Hydramata
         let(:identity) { 'Identity' }
         subject { described_class.new(identity: 'Identity', work_type: work_type) }
 
+        it 'is false if they are different base classes' do
+          other = double(work_type: work_type, identity: identity)
+          expect(subject == other).to be_falsey
+        end
+
         it 'is true if they are the same object' do
           expect(subject == subject).to be_truthy
         end

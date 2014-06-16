@@ -1,6 +1,8 @@
 module Hydramata
   module Work
     class PredicateSet
+      include Comparable
+
       attr_accessor :work_type
       attr_accessor :identity
       attr_accessor :presentation_sequence
@@ -14,11 +16,13 @@ module Hydramata
         self.freeze
       end
 
-      def ==(other)
-        super ||
-          other.instance_of?(self.class) &&
-          other.identity == identity &&
-          other.work_type == work_type
+      def <=>(other)
+        if other.instance_of?(self.class)
+          [other.identity, other.work_type, other.presentation_sequence] <=>
+            [identity, work_type, presentation_sequence]
+        else
+          nil
+        end
       end
 
     end
