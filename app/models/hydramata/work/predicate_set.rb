@@ -18,8 +18,8 @@ module Hydramata
 
       def <=>(other)
         if other.instance_of?(self.class)
-          [other.identity, other.work_type, other.presentation_sequence] <=>
-            [identity, work_type, presentation_sequence]
+          [work_type, identity, presentation_sequence] <=>
+            [other.work_type, other.identity, other.presentation_sequence]
         else
           nil
         end
