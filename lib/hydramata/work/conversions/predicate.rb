@@ -8,6 +8,7 @@ module Hydramata
         require 'hydramata/work/predicates'
         case input
         when Predicate then input
+        when Predicates::Storage then Predicate.new(input.attributes)
         when String, Symbol then Predicates.find(input)
         when Hash then Predicates.find(input.fetch(:identity), input)
         else

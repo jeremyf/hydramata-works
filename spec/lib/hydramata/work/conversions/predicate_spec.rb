@@ -32,6 +32,10 @@ module Hydramata
         it 'should raise an error object is unexpected' do
           expect { Predicate([]) }.to raise_error
         end
+
+        it 'should converate a "stored predicate" to a predicate' do
+          expect(Predicate(Predicates::Storage.new(identity: 'hello'))).to implement_predicate_interface
+        end
       end
     end
   end
