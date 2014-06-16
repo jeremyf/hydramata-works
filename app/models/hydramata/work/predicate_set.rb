@@ -14,6 +14,13 @@ module Hydramata
         self.freeze
       end
 
+      def ==(other)
+        super ||
+          other.instance_of?(self.class) &&
+          other.identity == identity &&
+          other.work_type == work_type
+      end
+
     end
   end
 end
