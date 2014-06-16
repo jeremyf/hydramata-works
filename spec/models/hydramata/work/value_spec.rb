@@ -1,5 +1,6 @@
 require 'fast_helper'
 require 'hydramata/work/value'
+require 'hydramata/work/linters/implement_value_interface_matcher'
 
 module Hydramata
   module Work
