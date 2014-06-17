@@ -8,6 +8,7 @@ module Hydramata
       class Storage < ActiveRecord::Base
         self.table_name = :hydramata_work_types
         has_many :predicate_sets, class_name: '::Hydramata::Work::PredicateSets::Storage', foreign_key: 'work_type_id'
+        validates :identity, uniqueness: true, presence: true
 
         def self.find_by_identity!(identity)
           where(identity: identity).first!
