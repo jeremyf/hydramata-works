@@ -1,16 +1,21 @@
 require 'hydramata/work/conversions/exceptions'
+require 'hydramata/work/property'
+require 'hydramata/work/conversions/predicate'
+require 'hydramata/work/predicate'
 
 module Hydramata
   module Work
     module Conversions
       private
       def Property(input)
-        require 'hydramata/work/property'
 
-        if input.instance_of?(Property)
-          input
+        case input
+        when Property then input
+        when Predicate then Property.new(predicate: input)
+        when Hash then Property.new(input)
         else
-          Property.new(input)
+          predicate = Predicate(input)
+          Property.new(predicate: predicate)
         end
       end
     end
