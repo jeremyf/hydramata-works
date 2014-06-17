@@ -31,12 +31,13 @@ module Hydramata
       end
 
       def default_presented_fieldset_builder
-        ->(*args) { PresentedFieldsets(*args) }
+        ->(collaborators) { PresentedFieldsets(collaborators) }
       end
 
       def default_partial_prefixes
         [String(entity.work_type).downcase.gsub(/[\W_]+/, '_')]
       end
+
     end
   end
 end
