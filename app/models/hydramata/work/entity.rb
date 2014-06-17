@@ -1,3 +1,4 @@
+require 'hydramata/work/conversions'
 module Hydramata
   module Work
     # Responsible for being the in ruby representation of a set of Properties.
@@ -10,15 +11,18 @@ module Hydramata
     # Unlike a Lotus::Model, the Work is an arbitrary collection of Property
     # objects, as defined in the PropertySet.
     class Entity
+      include Conversions
 
       def initialize(collaborators = {}, &block)
         @properties = collaborators.fetch(:properties_container) { default_properties_container }
         block.call(self) if block_given?
       end
 
-      attr_accessor :work_type
+      def work_type=(value)
+        @work_type = WorkType(value)
+      end
 
-      attr_reader :properties
+      attr_reader :properties, :work_type
 
       private
 
