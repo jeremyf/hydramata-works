@@ -82,6 +82,7 @@ In each layer, there is a concept of a Work and its data structure.
 - [ ] Memory -> New HTML
 - [ ] Memory -> Solr Document
 - [ ] UI Input -> Memory
+- [ ] Validation in Memory Object
 
 ## Low Level Tasks
 
@@ -98,8 +99,21 @@ But are instead a parking lot that may be cleared or added to.
 - [X] Create Work Type conversion
 - [X] Create Work Type presentation structure persistence
 - [X] Integrate presentation structure persistence with construction of in memory objects for presentation
-- [ ] Remove some duplication of Work Type and Predicate (moving towards a Definition concept?)
-- [ ] Create some rudimentary seeds for Work Types
-- [ ] Create some rudimentary seeds for Work Types presentation structure
-- [ ] Create some rudimentary seeds for Predicates
+- [X] Remove some duplication of Work Type and Predicate (moving towards a Definition concept?)
+- [X] Create some rudimentary seeds for Work Types
+- [X] Create some rudimentary seeds for Work Types presentation structure
+- [X] Create some rudimentary seeds for Predicates
 - [ ] Disambigutate identity vs. name for application usage
+- [ ] Allow for the declaration of validations for a given Predicate
+- [ ] Add internationalization for Work Type contexts:
+  - [ ] Work type name
+  - [ ] Work type description
+  - [ ] Work type verbose description (fallback to description)
+- [ ] Add internationalization for Predicate Set
+  - [ ] Predicate set name
+  - [ ] Predicate set description
+  - [ ] Predicate set verbose description (fallback to description)
+- [ ] Add internationalization for Predicate
+  - [ ] Predicate label
+  - [ ] Predicate description (hint)
+  - [ ] Predicate verbose description (fallback to description)
