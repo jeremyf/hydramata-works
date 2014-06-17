@@ -289,8 +289,8 @@ http_interactions:
         <info:fedora/und:f4752f8687n> <http://purl.org/dc/terms/language> "English" .
         <info:fedora/und:f4752f8687n> <http://purl.org/dc/terms/publisher> "University of Notre Dame" .
         <info:fedora/und:f4752f8687n> <http://purl.org/dc/terms/title> "Title 1" .
-        <info:fedora/und:f4752f8687n> <http://purl.org/dc/terms/dateSubmitted> "2014-06-02Z"^^<http://www.w3.org/2001/XMLSchema#date> .
-        <info:fedora/und:f4752f8687n> <http://purl.org/dc/terms/modified> "2014-06-02Z"^^<http://www.w3.org/2001/XMLSchema#date> .
+        <info:fedora/und:f4752f8687n> <http://purl.org/dc/terms/dateSubmitted> "2014-06-04Z"^^<http://www.w3.org/2001/XMLSchema#date> .
+        <info:fedora/und:f4752f8687n> <http://purl.org/dc/terms/modified> "2014-06-03Z"^^<http://www.w3.org/2001/XMLSchema#date> .
         <info:fedora/und:f4752f8687n> <http://purl.org/dc/terms/rights> "Attribution 3.0 United States" .
         <info:fedora/und:f4752f8687n> <http://purl.org/dc/terms/creator> "Creator Name1" .
         <info:fedora/und:f4752f8687n> <http://purl.org/dc/terms/description> "Hello World!" .
