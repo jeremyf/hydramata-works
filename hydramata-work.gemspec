@@ -33,7 +33,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec', '~> 3.0'
   s.add_development_dependency 'rspec-html-matchers', '~>0.6'
   s.add_development_dependency 'sqlite3'
-  s.add_development_dependency 'rubydora'
+  s.add_development_dependency 'rubydora', '~> 1.7'
   s.add_development_dependency 'vcr'
   s.add_development_dependency 'webmock'
+  s.add_development_dependency 'database_cleaner', '~> 1.3'
 end
