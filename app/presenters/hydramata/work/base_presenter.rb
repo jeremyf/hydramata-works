@@ -40,10 +40,14 @@ module Hydramata
       end
       alias_method :t, :translate
 
+      def name
+        __getobj__.respond_to?(:name) ? __getobj__.name : __getobj__.name_for_application_usage
+      end
+
       private
 
       def base_dom_class
-        __getobj__.name.to_s.downcase.gsub(/[\W_]+/, '-')
+        name.to_s.downcase.gsub(/[\W_]+/, '-')
       end
 
       def render_with_diminishing_specificity(template, rendering_options)
