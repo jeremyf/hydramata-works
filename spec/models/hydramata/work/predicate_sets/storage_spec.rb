@@ -28,6 +28,12 @@ module Hydramata
           expect(subject.work_type).to eq(work_type)
         end
 
+        it 'has #predicate_set_attributes' do
+          expect(subject.predicate_set_attributes.fetch(:work_type)).to eq(work_type)
+          expect(subject.predicate_set_attributes.fetch(:predicates)).to respond_to(:each)
+          expect(subject.predicate_set_attributes.fetch(:identity)).to eq(identity)
+        end
+
       end
     end
   end

@@ -1,5 +1,7 @@
 require 'active_record'
 require 'hydramata/work/work_types/storage'
+require 'hydramata/work/predicates/storage'
+require 'hydramata/work/predicate_presentation_sequences/storage'
 
 module Hydramata
   module Work
@@ -13,6 +15,22 @@ module Hydramata
         )
         validates :identity, uniqueness: { scope: :work_type_id }
         validates :presentation_sequence, uniqueness: { scope: :work_type_id }
+
+        has_many(
+          :predicate_presentation_sequences,
+          class_name: '::Hydramata::Work::PredicatePresentationSequences::Storage',
+          foreign_key: 'predicate_set_id'
+        )
+
+        has_many(
+          :predicates,
+          class_name: '::Hydramata::Work::Predicates::Storage',
+          through: :predicate_presentation_sequences
+        )
+
+        def predicate_set_attributes
+          attributes.with_indifferent_access.merge(predicates: predicates, work_type: work_type)
+        end
       end
     end
   end
