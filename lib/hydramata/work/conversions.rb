@@ -3,6 +3,8 @@ require 'hydramata/work/conversions/predicate'
 require 'hydramata/work/conversions/work_type'
 require 'hydramata/work/conversions/property'
 require 'hydramata/work/conversions/predicate_set'
+require 'hydramata/work/conversions/property_set'
+
 module Hydramata
   module Work
     # Taking a que from Avdi Grimm's "Confident Ruby", the Conversion module
@@ -19,11 +21,13 @@ module Hydramata
         # I also don't know if I need.
         entity = collaborators.fetch(:entity)
         presentation_structure = collaborators.fetch(:presentation_structure)
-        presentation_structure.fieldsets.each_with_object([]) do |(fieldset_name, predicates), collector|
-          fieldset = PropertySet.new(name: fieldset_name)
-          property_builder = ->(pr) { PropertyPresenter.new(property: pr, fieldset: fieldset, entity: entity) }
-          entity.properties.subset(predicates, fieldset, property_builder)
-          presented_fieldset = FieldsetPresenter.new(entity: entity, fieldset: fieldset)
+        presentation_structure.fieldsets.each_with_object([]) do |predicate_set, collector|
+          predicate_set = PredicateSet(predicate_set)
+          predicates = predicate_set.predicates
+          property_set = PropertySet(predicate_set)
+          property_builder = ->(property) { PropertyPresenter.new(property: property, fieldset: property_set, entity: entity) }
+          entity.properties.subset(predicates, property_set, property_builder)
+          presented_fieldset = FieldsetPresenter.new(entity: entity, fieldset: property_set)
           collector << presented_fieldset
         end
       end

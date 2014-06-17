@@ -12,7 +12,7 @@ module Hydramata
 
         case input
         when PropertySet then input
-        when PredicateSet then PropertySet.new(name: input.identity)
+        when PredicateSet then PropertySet.new(predicate_set: input)
         else
           predicate_set = PredicateSet(input)
           PropertySet(predicate_set)

@@ -8,10 +8,14 @@ module Hydramata
       include Conversions
       include ::Enumerable
 
-      attr_reader :name
       def initialize(options = {})
         @properties = {}
-        @name = options.fetch(:name) { default_name }
+        self.predicate_set = options.fetch(:predicate_set) { default_predicate_set }
+      end
+      attr_reader :predicate_set
+
+      def name
+        predicate_set.identity
       end
 
       def <<(input)
@@ -65,8 +69,12 @@ module Hydramata
 
       attr_reader :properties
 
-      def default_name
-        'unamed property set'
+      def default_predicate_set
+        { identity: 'identity' }
+      end
+
+      def predicate_set=(value)
+        @predicate_set = PredicateSet(value)
       end
     end
   end
