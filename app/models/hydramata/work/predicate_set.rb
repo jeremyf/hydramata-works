@@ -1,29 +1,19 @@
 require 'active_support/core_ext/array/wrap'
 require 'hydramata/work/conversions/predicate'
+require 'hydramata/work/data_definition'
 
 module Hydramata
   module Work
 
     # A PredicateSet is analogous to a PropertySet, except it does not include
     # values.
-    class PredicateSet
-      include Comparable
+    class PredicateSet < DataDefinition
       include Conversions
 
       attr_accessor :work_type
-      attr_accessor :identity
       attr_accessor :presentation_sequence
       attr_accessor :name_for_application_usage
-      attr_accessor :predicates
-
-      def initialize(attributes = {})
-        attributes.each do |key, value|
-          self.send("#{key}=", value) if respond_to?("#{key}=")
-        end
-        yield self if block_given?
-        validate!
-        self.freeze
-      end
+      attr_reader :predicates
 
       def <=>(other)
         if other.instance_of?(self.class)

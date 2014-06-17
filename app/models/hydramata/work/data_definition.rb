@@ -1,6 +1,8 @@
 module Hydramata
   module Work
     class DataDefinition
+      include Comparable
+
       attr_reader :identity
 
       def initialize(attributes = {})
@@ -8,6 +10,7 @@ module Hydramata
           self.send("#{key}=", value.freeze) if respond_to?("#{key}=")
         end
         yield self if block_given?
+        validate!
         self.freeze
       end
 
@@ -19,11 +22,19 @@ module Hydramata
         identity
       end
 
-      def ==(other)
-        other.instance_of?(self.class) &&
-          identity == other.identity
+      def <=>(other)
+        if other.instance_of?(self.class)
+          identity <=> other.identity
+        else
+          nil
+        end
       end
 
+      private
+
+      def validate!
+        true
+      end
     end
   end
 end
