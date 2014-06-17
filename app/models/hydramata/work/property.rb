@@ -9,6 +9,10 @@ module Hydramata
     #
     # Why not use RDF? Because not everything we are working with is in RDF.
     class Property
+      def self.===(other)
+        super || other.instance_of?(self)
+      end
+
       include ::Enumerable
       include Conversions
 

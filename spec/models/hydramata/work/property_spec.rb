@@ -23,6 +23,17 @@ module Hydramata
           to([value])
       end
 
+      context 'case equality' do
+        it 'should delegate to the compared object' do
+          object = double('Double')
+          expect(object).
+            to receive(:instance_of?).
+            with(Property).
+            and_return(true)
+          expect(Property === object).to eq(true)
+        end
+      end
+
       context 'equality' do
         it 'is not equal if the predicates are different' do
           property = described_class.new(predicate: :hello)
