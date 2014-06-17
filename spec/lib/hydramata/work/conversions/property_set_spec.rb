@@ -18,6 +18,11 @@ module Hydramata
           expect(PropertySet(object)).to implement_property_set_interface
         end
 
+        it 'should preserive a PropertySet as that PropertySet' do
+          object = PropertySet.new(identity: 'hello')
+          expect(PropertySet(object).object_id).to eq(object.object_id)
+        end
+
         it 'should attempt to convert the input to a PredicateSet then a PropertySet' do
           object_to_convert = { identity: 'hello' }
           expect(self).
