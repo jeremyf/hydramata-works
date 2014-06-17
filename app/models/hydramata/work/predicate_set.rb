@@ -3,6 +3,9 @@ require 'hydramata/work/conversions/predicate'
 
 module Hydramata
   module Work
+
+    # A PredicateSet is analogous to a PropertySet, except it does not include
+    # values.
     class PredicateSet
       include Comparable
       include Conversions
@@ -31,14 +34,14 @@ module Hydramata
         end
       end
 
-      protected
-
       def predicates=(items)
         @predicates = []
-        Array.wrap(item).each do |item|
+        Array.wrap(items).each do |item|
           @predicates << Predicate(item)
         end
       end
+
+      protected
 
       def validate!
         if identity.nil?
