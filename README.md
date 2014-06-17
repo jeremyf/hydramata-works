@@ -97,7 +97,7 @@ But are instead a parking lot that may be cleared or added to.
 - [X] Create Work Type persistence
 - [X] Create Work Type conversion
 - [X] Create Work Type presentation structure persistence
-- [ ] Integrate presentation structure persistence with construction of in memory objects for presentation
+- [X] Integrate presentation structure persistence with construction of in memory objects for presentation
 - [ ] Remove some duplication of Work Type and Predicate (moving towards a Definition concept?)
 - [ ] Create some rudimentary seeds for Work Types
 - [ ] Create some rudimentary seeds for Work Types presentation structure
