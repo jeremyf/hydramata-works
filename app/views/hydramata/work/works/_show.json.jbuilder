@@ -1,5 +1,5 @@
 json.set! :work do
-  json.set! :work_type, show.work_type
+  json.set! :work_type, show.work_type.to_s
   json.properties do
     show.fieldsets.each do |fieldset|
       # Why the locals?

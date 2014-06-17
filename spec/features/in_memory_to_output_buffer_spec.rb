@@ -29,6 +29,7 @@ module Hydramata
           json = JSON.parse(output)
           expect(json['work'].keys.sort).to eq(['properties', 'work_type'])
 
+          expect(json['work']['work_type']).to eq(entity_presenter.work_type.to_s)
           expect(json['work']['properties'].keys).to eq(['title', 'abstract', 'keyword'])
           expect(json['work']['properties']['title']).to eq(['Hello', 'World', 'Bang!'])
           expect(json['work']['properties']['abstract']).to eq(['Long Text', 'Longer Text'])
