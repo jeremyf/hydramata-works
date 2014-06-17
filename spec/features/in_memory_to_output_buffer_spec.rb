@@ -3,54 +3,6 @@ require 'feature_helper'
 module Hydramata
   module Work
     describe 'An entity and presentation structure' do
-      let(:predicate_title) { Predicates::Storage.new(identity: 'title') }
-      let(:predicate_abstract) { Predicates::Storage.new(identity: 'abstract') }
-      let(:predicate_keyword) { Predicates::Storage.new(identity: 'keyword') }
-      let(:work_type) { WorkTypes::Storage.new(identity: 'Special Work Type') }
-      let(:predicate_set_required) { PredicateSets::Storage.new(identity: 'required', work_type: work_type, presentation_sequence: 1) }
-      let(:predicate_set_optional) { PredicateSets::Storage.new(identity: 'optional', work_type: work_type, presentation_sequence: 2) }
-
-      before do
-        predicate_title.save!
-        predicate_abstract.save!
-        predicate_keyword.save!
-        work_type.save!
-        predicate_set_optional.save!
-        predicate_set_required.save!
-        PredicatePresentationSequences::Storage.create!(predicate: predicate_title, predicate_set: predicate_set_required, presentation_sequence: 1)
-        PredicatePresentationSequences::Storage.create!(predicate: predicate_abstract, predicate_set: predicate_set_optional, presentation_sequence: 1)
-        PredicatePresentationSequences::Storage.create!(predicate: predicate_keyword, predicate_set: predicate_set_optional, presentation_sequence: 2)
-      end
-
-      let(:entity) do
-        Entity.new do |entity|
-          entity.work_type = work_type
-          entity.properties << { predicate: predicate_title, value: 'Hello' }
-          entity.properties << { predicate: predicate_title, value: 'World' }
-          entity.properties << { predicate: predicate_title, value: 'Bang!' }
-          entity.properties << { predicate: predicate_abstract, value: 'Long Text' }
-          entity.properties << { predicate: predicate_abstract, value: 'Longer Text' }
-          entity.properties << { predicate: predicate_keyword, value: 'Programming' }
-        end
-      end
-
-      let(:presentation_structure) do
-        PresentationStructure.new do |structure|
-          structure.fieldsets << predicate_set_required
-          structure.fieldsets << predicate_set_optional
-        end
-      end
-
-      let(:presentation_context) { :show }
-
-      let(:entity_presenter) do
-        EntityPresenter.new(
-          entity: entity,
-          presentation_structure: presentation_structure,
-          presentation_context: presentation_context
-        )
-      end
-
       context 'renders :show action' do
         let(:presentation_context) { :show }
 
@@ -109,8 +61,56 @@ module Hydramata
             with_tag('fieldset.optional .keyword .values input', value: '', with: { name: 'work[keyword][]' })
           end
         end
-
       end
+
+      let(:predicate_title) { Predicates::Storage.new(identity: 'title') }
+      let(:predicate_abstract) { Predicates::Storage.new(identity: 'abstract') }
+      let(:predicate_keyword) { Predicates::Storage.new(identity: 'keyword') }
+      let(:work_type) { WorkTypes::Storage.new(identity: 'Special Work Type') }
+      let(:predicate_set_required) { PredicateSets::Storage.new(identity: 'required', work_type: work_type, presentation_sequence: 1) }
+      let(:predicate_set_optional) { PredicateSets::Storage.new(identity: 'optional', work_type: work_type, presentation_sequence: 2) }
+
+      before do
+        predicate_title.save!
+        predicate_abstract.save!
+        predicate_keyword.save!
+        work_type.save!
+        predicate_set_optional.save!
+        predicate_set_required.save!
+        PredicatePresentationSequences::Storage.create!(predicate: predicate_title, predicate_set: predicate_set_required, presentation_sequence: 1)
+        PredicatePresentationSequences::Storage.create!(predicate: predicate_abstract, predicate_set: predicate_set_optional, presentation_sequence: 1)
+        PredicatePresentationSequences::Storage.create!(predicate: predicate_keyword, predicate_set: predicate_set_optional, presentation_sequence: 2)
+      end
+
+      let(:entity) do
+        Entity.new do |entity|
+          entity.work_type = work_type
+          entity.properties << { predicate: predicate_title, value: 'Hello' }
+          entity.properties << { predicate: predicate_title, value: 'World' }
+          entity.properties << { predicate: predicate_title, value: 'Bang!' }
+          entity.properties << { predicate: predicate_abstract, value: 'Long Text' }
+          entity.properties << { predicate: predicate_abstract, value: 'Longer Text' }
+          entity.properties << { predicate: predicate_keyword, value: 'Programming' }
+        end
+      end
+
+      let(:presentation_structure) do
+        PresentationStructure.new do |structure|
+          structure.fieldsets << predicate_set_required
+          structure.fieldsets << predicate_set_optional
+        end
+      end
+
+      let(:presentation_context) { :show }
+
+      let(:entity_presenter) do
+        EntityPresenter.new(
+          entity: entity,
+          presentation_structure: presentation_structure,
+          presentation_context: presentation_context
+        )
+      end
+
     end
   end
 end
