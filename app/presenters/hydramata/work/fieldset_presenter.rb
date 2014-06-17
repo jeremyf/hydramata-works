@@ -15,7 +15,7 @@ module Hydramata
       end
 
       def work_type
-        entity.work_type
+        __getobj__.work_type || entity.work_type
       end
 
       private

@@ -4,8 +4,8 @@ require 'hydramata/work/fieldset_presenter'
 module Hydramata
   module Work
     describe FieldsetPresenter do
-      let(:fieldset_class) { Struct.new(:name) }
-      let(:fieldset) { fieldset_class.new('my_fieldset') }
+      let(:fieldset_class) { Struct.new(:name, :work_type) }
+      let(:fieldset) { fieldset_class.new('my_fieldset', 'an entity type') }
       let(:entity) { double('Entity', work_type: 'an entity type') }
       let(:template) { double('Template', render: true) }
       subject { described_class.new(entity: entity, fieldset: fieldset, presentation_context: 'show', template_missing_exception: [RuntimeError]) }
