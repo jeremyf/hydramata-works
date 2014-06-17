@@ -1,9 +1,11 @@
 require 'active_support/core_ext/array/wrap'
+require 'hydramata/work/conversions/predicate'
 
 module Hydramata
   module Work
     class PredicateSet
       include Comparable
+      include Conversions
 
       attr_accessor :work_type
       attr_accessor :identity
@@ -31,8 +33,11 @@ module Hydramata
 
       protected
 
-      def predicates=(values)
-        @predicates = Array.wrap(values)
+      def predicates=(items)
+        @predicates = []
+        Array.wrap(item).each do |item|
+          @predicates << Predicate(item)
+        end
       end
 
       def validate!
