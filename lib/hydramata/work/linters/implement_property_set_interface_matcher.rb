@@ -8,7 +8,5 @@ RSpec::Matchers.define :implement_property_set_interface do
     end
   end
 
-  description do
-    "implmenents the PropertySet interface"
-  end
+  description { 'implemenents the PropertySet interface' }
 end

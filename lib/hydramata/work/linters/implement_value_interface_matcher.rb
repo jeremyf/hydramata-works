@@ -7,7 +7,5 @@ RSpec::Matchers.define :implement_value_interface do
     subject.respond_to?(:raw_object)
   end
 
-  description do
-    "implmenents the Value interface"
-  end
+  description { 'implemenents the Value interface' }
 end

@@ -9,7 +9,5 @@ RSpec::Matchers.define :implement_data_definition_interface do
     }
   end
 
-  description do
-    "implmenents the DataDefinition interface"
-  end
+  description { 'implements the DataDefinition interface' }
 end

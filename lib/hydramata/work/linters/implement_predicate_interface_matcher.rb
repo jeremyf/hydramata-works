@@ -17,7 +17,5 @@ RSpec::Matchers.define :implement_predicate_interface do
     }
   end
 
-  description do
-    "implmenents the Predicate interface"
-  end
+  description { 'implemenents the Predicate interface' }
 end

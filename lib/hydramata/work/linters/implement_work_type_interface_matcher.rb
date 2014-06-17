@@ -13,7 +13,5 @@ RSpec::Matchers.define :implement_work_type_interface do
     }
   end
 
-  description do
-    "implmenents the WorkType interface"
-  end
+  description { 'implemenents the WorkType interface' }
 end
