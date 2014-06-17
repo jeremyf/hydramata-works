@@ -2,6 +2,7 @@ require 'hydramata/work/conversions/value'
 require 'hydramata/work/conversions/predicate'
 require 'hydramata/work/conversions/work_type'
 require 'hydramata/work/conversions/property'
+require 'hydramata/work/conversions/predicate_set'
 module Hydramata
   module Work
     # Taking a que from Avdi Grimm's "Confident Ruby", the Conversion module

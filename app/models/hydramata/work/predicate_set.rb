@@ -1,3 +1,5 @@
+require 'active_support/core_ext/array/wrap'
+
 module Hydramata
   module Work
     class PredicateSet
@@ -7,12 +9,14 @@ module Hydramata
       attr_accessor :identity
       attr_accessor :presentation_sequence
       attr_accessor :name_for_application_usage
+      attr_accessor :predicates
 
       def initialize(attributes = {})
         attributes.each do |key, value|
           self.send("#{key}=", value) if respond_to?("#{key}=")
         end
         yield self if block_given?
+        validate!
         self.freeze
       end
 
@@ -25,6 +29,19 @@ module Hydramata
         end
       end
 
+      protected
+
+      def predicates=(values)
+        @predicates = Array.wrap(values)
+      end
+
+      def validate!
+        if identity.nil?
+          raise RuntimeError, "#{self.class}(#{attributes.inspect}) is invalid"
+        else
+          true
+        end
+      end
     end
   end
 end
