@@ -62,15 +62,29 @@ module Hydramata
             ordered.
             and_raise(RuntimeError)
           expect(template).to receive(:render).
-            with(partial: 'hydramata/work/base/show', object: subject).and_return('YES').
+            with(partial: 'hydramata/work/base/show', object: subject).
             ordered
-          expect(subject.render(template: template)).to eq('YES')
+          subject.render(template: template)
+        end
+
+        it 'should stop rendering chain once we sucessfully render a template' do
+          subject = described_class.new(object, translator: translator, partial_prefixes: ['article/required', 'article'], presentation_context: 'show', template_missing_exception: [RuntimeError, NoMethodError])
+          expect(template).to receive(:render).
+            with(partial: 'hydramata/work/base/article/required/show', object: subject).
+            ordered.
+            and_raise(NoMethodError)
+          expect(template).to receive(:render).
+            with(partial: 'hydramata/work/base/article/show', object: subject).
+            ordered
+          expect(template).to_not receive(:render).
+            with(partial: 'hydramata/work/base/show', object: subject)
+          subject.render(template: template)
         end
 
         it 'should raise exception if we are rendering as general as possible' do
           subject = described_class.new(object, translator: translator, presentation_context: 'show')
           expect(template).to receive(:render).
-            with(partial: 'hydramata/work/base/show', object: subject).and_return('YES').
+            with(partial: 'hydramata/work/base/show', object: subject).
             and_raise(RuntimeError)
           expect { subject.render(template: template) }.
             to raise_error(RuntimeError)

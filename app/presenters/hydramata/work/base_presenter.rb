@@ -51,19 +51,26 @@ module Hydramata
       end
 
       def render_with_diminishing_specificity(template, rendering_options)
+        render_with_prefixes(template, rendering_options) || render_without_prefixes(template, rendering_options)
+      end
+
+      def render_with_prefixes(template, rendering_options)
+        rendered = nil
         partial_prefixes.each do |partial_prefix|
           begin
-            rendering_options[:partial] = partial_name(partial_prefix)
-            template.render(rendering_options)
+            rendered = template.render(rendering_options.merge(partial: partial_name(partial_prefix)))
+            break
           # By using the splat operator I am allowing multiple exceptions to
           # be caught and pass to the next rendering context.
           rescue *template_missing_error
             next
           end
         end
-        # Our last resort! If this fails, we want it to bubble up.
-        rendering_options[:partial] = partial_name
-        template.render(rendering_options)
+        rendered
+      end
+
+      def render_without_prefixes(template, rendering_options)
+        template.render(rendering_options.merge(partial: partial_name))
       end
 
       def default_partial_prefixes
