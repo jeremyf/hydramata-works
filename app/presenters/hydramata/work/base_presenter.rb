@@ -36,7 +36,7 @@ module Hydramata
       end
 
       def translate(key)
-        translator.t(translation_scope_for(key), partial_prefixes, default: default_translation_for(key))
+        translator.t(translation_scope_for(key), scopes: partial_prefixes, default: default_translation_for(key))
       end
       alias_method :t, :translate
 

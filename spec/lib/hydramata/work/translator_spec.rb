@@ -12,6 +12,7 @@ module Hydramata
         )
       end
       let(:base_scope) { ['hydramata', 'work'] }
+      let(:scopes) { [['grandparent', 'parent'], ['grandparent']] }
       let(:translation_service) { double('TranslationService', translate: true) }
       let(:translation_service_error) { ArgumentError }
 
@@ -22,56 +23,56 @@ module Hydramata
             ordered.
             and_return('With Default')
 
-          expect(subject.translate('child', [], default: 'default')).to eq('With Default')
+          expect(subject.translate('child', default: 'default')).to eq('With Default')
         end
 
         it 'attempts to translate through each scope then finally via the base scope' do
           expect(translation_service).to receive(:translate).
-            with('child', scope: (base_scope + ['grandparent', 'parent']), raise: true).
+            with('child', scope: (base_scope + scopes[0]), raise: true).
             ordered.
             and_raise(translation_service_error)
           expect(translation_service).to receive(:translate).
-            with('child', scope: (base_scope + ['grandparent']), raise: true).
+            with('child', scope: (base_scope + scopes[1]), raise: true).
             ordered.
             and_raise(translation_service_error)
           expect(translation_service).to receive(:translate).
-            with('child', scope: base_scope).
+            with('child', scope: base_scope, scopes: scopes).
             ordered.
             and_return('My Work Type')
 
-          expect(subject.translate('child', [['grandparent', 'parent'], ['grandparent']])).to eq('My Work Type')
+          expect(subject.translate('child', scopes: scopes)).to eq('My Work Type')
         end
 
         it 'translates through each scope until it finds a match then returns without processing more generic case' do
           expect(translation_service).to receive(:translate).
-            with('child', scope: (base_scope + ['grandparent', 'parent']), raise: true).
+            with('child', scope: (base_scope + scopes[0]), raise: true).
             ordered.
             and_raise(translation_service_error)
           expect(translation_service).to receive(:translate).
-            with('child', scope: (base_scope + ['grandparent']), raise: true).
+            with('child', scope: (base_scope + scopes[1]), raise: true).
             ordered.
             and_return('Found Grandparent')
           expect(translation_service).to_not receive(:translate).
             with('child', scope: base_scope)
 
-          expect(subject.translate('child', [['grandparent', 'parent'], ['grandparent']])).to eq('Found Grandparent')
+          expect(subject.translate('child', scopes: scopes)).to eq('Found Grandparent')
         end
 
         it 'translates through each scope until it finds a match then returns without processing more generic case' do
           expect(translation_service).to receive(:translate).
-            with('child', scope: (base_scope + ['grandparent', 'parent']), raise: true).
+            with('child', scope: (base_scope + scopes[0]), raise: true).
             ordered.
             and_raise(translation_service_error)
           expect(translation_service).to receive(:translate).
-            with('child', scope: (base_scope + ['grandparent']), raise: true).
+            with('child', scope: (base_scope + scopes[1]), raise: true).
             ordered.
             and_raise(translation_service_error)
           expect(translation_service).to_not receive(:translate).
-            with('child', scope: base_scope).
+            with('child', scope: base_scope, scopes: scopes).
             ordered.
             and_raise(translation_service_error)
 
-          expect { subject.translate('child', [['grandparent', 'parent'], ['grandparent']]) }.to raise_error
+          expect { subject.translate('child', scopes: scopes) }.to raise_error
         end
       end
 
