@@ -1,0 +1,21 @@
+en:
+  hydramata:
+    work:
+      works:
+        specific_work_type:
+          name: A Specific Work Type
+      property_sets:
+        specific_work_type:
+          property_set_scoped_to_work_type:
+            name: This Property Set is scoped to a specific Work Type
+        property_set_unscoped:
+          name: This PropertySet is unscoped
+      properties:
+        specific_work_type:
+          property_scoped_to_work_type:
+            name: This Property is scoped to a specific Work Type
+        property_unscoped:
+          name: This Property is unscoped
+      translated_work_type:
+        works:
+          name: I Am a Translated Work Type!
