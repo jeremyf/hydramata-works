@@ -4,9 +4,15 @@ en:
       translated_work_type:
         translated_property_set:
           fieldsets:
-            name: I Am a Translated Property Set for a Translated Work Type! 
+            name: I Am a Translated Property Set for a Translated Work Type!
+        translated_property:
+          properties:
+            name: I Am a Translated Property for a Translated Work Type!
         works:
           name: I Am a Translated Work Type!
       translated_property_set:
         fieldsets:
-          name: I Am a Translated Property Set without a Translated Work Type!
+          name: I Am a Translated Property Set with a non-Translated Work Type!
+      translated_property:
+        properties:
+          name: I Am a Translated Property with a non-Translated Work Type!
