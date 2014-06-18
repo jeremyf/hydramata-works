@@ -105,8 +105,8 @@ But are instead a parking lot that may be cleared or added to.
 - [X] Create some rudimentary seeds for Predicates
 - [ ] Disambigutate identity vs. name for application usage
 - [ ] Allow for the declaration of validations for a given Predicate
-- [ ] Improve internationalization support by providing a better key path.
-- [ ] Add view tests for show templates
+- [X] Improve internationalization support by providing a better key path.
+- [X] Add view tests for show templates
 - [ ] Add view tests for edit templates
 - [X] Add internationalization for Work Type contexts:
   - [X] Work type name
