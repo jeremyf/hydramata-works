@@ -12,11 +12,14 @@ module Hydramata
         when PredicateSet then input
         when PredicateSets::Storage then PredicateSet.new(input.predicate_set_attributes)
         when Hash then PredicateSet.new(input)
+        when String then PredicateSet.new(identity: input)
         when Array then
-          if input.size == 2
-            PredicateSet.new(identity: input[0], predicates: input[1])
+          case input.size
+          when 0 then raise ConversionError.new(:PredicateSet, input)
+          when 1 then PredicateSet.new(identity: input[0])
+          when 2 then PredicateSet.new(identity: input[0], predicates: input[1])
           else
-            raise ConversionError.new(:PredicateSet, input)
+            PredicateSet.new(identity: input[0], predicates: input[1..-1])
           end
         else
           raise ConversionError.new(:PredicateSet, input)

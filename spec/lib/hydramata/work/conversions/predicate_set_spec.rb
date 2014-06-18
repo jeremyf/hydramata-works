@@ -16,16 +16,28 @@ module Hydramata
           expect { PredicateSet(other: 'hello') }.to raise_error
         end
 
-        it 'should raise an error when Array is of wrong size' do
-          expect { PredicateSet([]) }.to raise_error
-        end
-
         it 'should raise an error when input is unexpected' do
           expect { PredicateSet(double) }.to raise_error
         end
 
-        it 'should handle a "well formed" Array' do
+        it 'should raise an error when Array is empty' do
+          expect { PredicateSet([]) }.to raise_error
+        end
+
+        it 'should handle an Array of 2 elements' do
           expect(PredicateSet([:fieldset, [:predicate1, :predicate2]])).to implement_predicate_set_interface
+        end
+
+        it 'should handle an Array of 3 elements' do
+          expect(PredicateSet([:fieldset, :predicate1, :predicate2])).to implement_predicate_set_interface
+        end
+
+        it 'should handle an Array of 1 element' do
+          expect(PredicateSet([:fieldset])).to implement_predicate_set_interface
+        end
+
+        it 'should handle a String' do
+          expect(PredicateSet('An Identity')).to implement_predicate_set_interface
         end
 
         it 'should converate a "stored predicate" to a predicate' do
