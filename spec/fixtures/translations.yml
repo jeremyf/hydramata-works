@@ -19,3 +19,6 @@ en:
       translated_work_type:
         works:
           name: I Am a Translated Work Type!
+      translated_property_set:
+        fieldsets:
+          name: I Am a Translated Property Set!
