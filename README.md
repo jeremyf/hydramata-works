@@ -105,15 +105,18 @@ But are instead a parking lot that may be cleared or added to.
 - [X] Create some rudimentary seeds for Predicates
 - [ ] Disambigutate identity vs. name for application usage
 - [ ] Allow for the declaration of validations for a given Predicate
-- [ ] Add internationalization for Work Type contexts:
-  - [ ] Work type name
-  - [ ] Work type description
-  - [ ] Work type verbose description (fallback to description)
-- [ ] Add internationalization for Predicate Set
-  - [ ] Predicate set name
-  - [ ] Predicate set description
-  - [ ] Predicate set verbose description (fallback to description)
-- [ ] Add internationalization for Predicate
-  - [ ] Predicate label
-  - [ ] Predicate description (hint)
-  - [ ] Predicate verbose description (fallback to description)
+- [ ] Improve internationalization support by providing a better key path.
+- [ ] Add view tests for show templates
+- [ ] Add view tests for edit templates
+- [X] Add internationalization for Work Type contexts:
+  - [X] Work type name
+  - [X] Work type description
+  - [X] Work type verbose description (fallback to description)
+- [X] Add internationalization for Predicate Set
+  - [X] Predicate set name
+  - [X] Predicate set description
+  - [X] Predicate set verbose description (fallback to description)
+- [X] Add internationalization for Predicate
+  - [X] Predicate label
+  - [X] Predicate description (hint)
+  - [X] Predicate verbose description (fallback to description)
