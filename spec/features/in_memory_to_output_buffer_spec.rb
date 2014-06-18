@@ -11,11 +11,11 @@ module Hydramata
           rendered_output = renderer.render
 
           expect(rendered_output).to have_tag('.work') do
-            with_tag('.required .title .label', text: 'title')
+            with_tag('.required .title .label', text: 'My Special Title')
             with_tag('.required .title .value', text: 'Hello')
             with_tag('.required .title .value', text: 'World')
             with_tag('.required .title .value', text: 'Bang!')
-            with_tag('.optional .abstract .label', text: 'abstract')
+            with_tag('.optional .abstract .label', text: 'Very Specific Abstract Label')
             with_tag('.optional .abstract .value', text: 'Long Text')
             with_tag('.optional .abstract .value', text: 'Longer Text')
             with_tag('.optional .keyword .label', text: 'keyword')
@@ -70,6 +70,24 @@ module Hydramata
       let(:work_type) { WorkTypes::Storage.new(identity: 'Special Work Type') }
       let(:predicate_set_required) { PredicateSets::Storage.new(identity: 'required', work_type: work_type, presentation_sequence: 1) }
       let(:predicate_set_optional) { PredicateSets::Storage.new(identity: 'optional', work_type: work_type, presentation_sequence: 2) }
+
+      around do |example|
+        begin
+          # @TODO - The structure of the hash is not ideal. The order of keys is
+          # somewhat counter-intuitive.
+          old_backend = I18n.backend
+          I18n.backend.store_translations(
+            :en, { hydramata: { work: {
+                                  'title' => { properties: { name: 'My Special Title' } },
+                                  'special_work_type/abstract' => { properties: { name: 'Very Specific Abstract Label' } },
+                                  'abstract' => { properties: { name: 'Less Specific Abstract Label' } },
+            } } }
+          )
+          example.run
+        ensure
+          I18n.backend = old_backend
+        end
+      end
 
       before do
         predicate_title.save!
