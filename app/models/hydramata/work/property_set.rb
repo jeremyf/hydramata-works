@@ -3,13 +3,13 @@ require 'hydramata/work/conversions'
 module Hydramata
   module Work
     # A container for Property objects. It provides ordered access to
-    # properties. The corresponding specs go into further details on ordering.
+    # property_store. The corresponding specs go into further details on ordering.
     class PropertySet
       include Conversions
       include ::Enumerable
 
       def initialize(options = {})
-        @properties = {}
+        @property_store = {}
         self.predicate_set = options.fetch(:predicate_set) { default_predicate_set }
       end
       attr_reader :predicate_set
@@ -20,36 +20,40 @@ module Hydramata
 
       def <<(input)
         property = Property(input)
-        if properties[property.predicate.to_s]
-          properties[property.predicate.to_s] << property.values
+        if property_store[property.predicate.to_s]
+          property_store[property.predicate.to_s] << property.values
         else
-          properties[property.predicate.to_s] = property
+          property_store[property.predicate.to_s] = property
         end
       end
 
       # If the key is missing, return a quasi-null object.
       def [](key)
-        properties[key.to_s] || Property(predicate: key)
+        property_store[key.to_s] || Property(predicate: key)
       end
 
       def predicates
-        properties.keys
+        property_store.keys
       end
 
       def fetch(key)
-        properties.fetch(key.to_s)
+        property_store.fetch(key.to_s)
       end
 
       def ==(other)
-        # Because properties is a private method.
-        (other.instance_of?(properties.class) && properties == other) ||
-        (other.instance_of?(self.class) && other == properties)
+        # Because property_store is a private method.
+        (other.instance_of?(property_store.class) && property_store == other) ||
+        (other.instance_of?(self.class) && other == property_store)
       end
 
       def each
-        properties.each do |_key, property|
+        property_store.each do |_key, property|
           yield(property)
         end
+      end
+
+      def properties
+        property_store.collect {|_, property| property }
       end
 
       # Conversion::PresentedFieldsets interacts with this.
@@ -67,7 +71,7 @@ module Hydramata
 
       private
 
-      attr_reader :properties
+      attr_reader :property_store
 
       def default_predicate_set
         { identity: 'identity' }

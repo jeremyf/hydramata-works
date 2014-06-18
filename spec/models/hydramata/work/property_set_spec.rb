@@ -21,6 +21,11 @@ module Hydramata
         end
       end
 
+      it 'exposes #properties' do
+        subject << property
+        expect(subject.properties).to eq([property])
+      end
+
       it 'allows properties to be pushed onto it' do
         expect { subject << property }.
           to change { subject.count }.
