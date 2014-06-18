@@ -29,8 +29,8 @@ module Hydramata
       end
 
       def default_partial_prefixes
-        entity_prefix = String(entity.work_type).downcase.gsub(/\W+/, '_')
-        fieldset_prefix = String(name).gsub(/\W+/, '_')
+        entity_prefix = normalize_for_application_usage(entity.work_type)
+        fieldset_prefix = normalize_for_application_usage(name)
         [File.join(entity_prefix, fieldset_prefix), fieldset_prefix]
       end
     end

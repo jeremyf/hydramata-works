@@ -36,7 +36,7 @@ module Hydramata
       end
 
       def default_partial_prefixes
-        [String(entity.work_type).downcase.gsub(/[\W_]+/, '_')]
+        [normalize_for_application_usage(entity.work_type)]
       end
 
     end

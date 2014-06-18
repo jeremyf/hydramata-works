@@ -23,8 +23,8 @@ module Hydramata
       end
 
       def default_partial_prefixes
-        entity_prefix = String(entity.work_type).downcase.gsub(/\W+/, '_')
-        predicate_prefix = String(predicate).downcase.gsub(/\W+/, '_')
+        entity_prefix = normalize_for_application_usage(entity.work_type)
+        predicate_prefix = normalize_for_application_usage(predicate)
         [File.join(entity_prefix, predicate_prefix), predicate_prefix]
       end
 
