@@ -1,4 +1,4 @@
 <section class="<%= show.dom_class %>">
-  <h1><%= show.translate(:name)  %></h1>
-  <% show.each do |property| %><%= property.render(template: self) %><% end %>
+  <h1 class="heading"><%= show.t(:name)  %></h1>
+  <% show.properties.each do |property| %><%= property.render(template: self) %><% end %>
 </section>
