@@ -31,6 +31,7 @@ Gem::Specification.new do |s|
 
   s.add_development_dependency 'engine_cart'
   s.add_development_dependency 'rspec', '~> 3.0'
+  s.add_development_dependency 'rspec-rails', '~> 3.0'
   s.add_development_dependency 'rspec-html-matchers', '~>0.6'
   s.add_development_dependency 'sqlite3'
   s.add_development_dependency 'rubydora', '~> 1.7'

@@ -20,6 +20,7 @@ require File.expand_path('../internal/config/environment.rb',  __FILE__)
 
 EngineCart.load_application!
 
+require 'rspec/rails'
 require 'rspec-html-matchers'
 require 'database_cleaner'
 
