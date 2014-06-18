@@ -9,15 +9,15 @@ module Hydramata
 
       context 'for entities' do
         let(:presenter) { EntityPresenter.new(entity: entity, presentation_structure: nil) }
-        context 'with translated work type' do
+        context 'with existing work type translations' do
           let(:work_type) { 'Translated Work Type' }
-          it 'translates its :name' do
+          it 'translates its :name from the lookup table' do
             expect(presenter.t(:name)).to eq('I Am a Translated Work Type!')
           end
         end
-        context 'without translated work type' do
+        context 'without existing work type translations' do
           let(:work_type) { 'Non-Translated Work Type' }
-          it 'translates its :name' do
+          it 'translates its :name by using the work type directly' do
             expect(presenter.t(:name)).to eq('Non-Translated Work Type')
           end
         end
@@ -25,17 +25,25 @@ module Hydramata
 
       context 'for property_sets' do
         let(:presenter) { FieldsetPresenter.new(entity: entity, fieldset: fieldset) }
-        context 'with translated work type' do
+        context 'with existing property set and work type translations' do
           let(:fieldset) { PropertySet(identity: 'Translated Property Set') }
           let(:work_type) { 'Translated Work Type' }
-          it 'translates its :name' do
-            expect(presenter.t(:name)).to eq('I Am a Translated Property Set!')
+          it 'translates its :name from the lookup table' do
+            expect(presenter.t(:name)).to eq('I Am a Translated Property Set for a Translated Work Type!')
           end
         end
-        context 'without translated work type' do
-          let(:fieldset) { PropertySet(identity: 'Non-Translated Property Set') }
+        context 'with existing property set but not work type translations' do
+          let(:fieldset) { PropertySet(identity: 'Translated Property Set') }
           let(:work_type) { 'Non-Translated Work Type' }
           it 'translates its :name' do
+            expect(presenter.t(:name)).to eq('I Am a Translated Property Set without a Translated Work Type!')
+          end
+        end
+
+        context 'without property set translations' do
+          let(:fieldset) { PropertySet(identity: 'Non-Translated Property Set') }
+          let(:work_type) { 'Non-Translated Work Type' }
+          it 'translates its :name by using the work type directly' do
             expect(presenter.t(:name)).to eq('Non-Translated Property Set')
           end
         end
