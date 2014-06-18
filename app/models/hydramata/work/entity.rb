@@ -24,6 +24,10 @@ module Hydramata
 
       attr_reader :properties, :work_type
 
+      def name_for_application_usage
+        work_type.name_for_application_usage
+      end
+
       private
 
       def default_properties_container
