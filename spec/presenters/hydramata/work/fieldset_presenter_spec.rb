@@ -43,7 +43,7 @@ module Hydramata
       end
 
       it 'should have a default partial prefixes' do
-        expect(subject.partial_prefixes).to eq(['an_entity_type/my_fieldset', 'my_fieldset'])
+        expect(subject.partial_prefixes).to eq([['an_entity_type', 'my_fieldset'], ['my_fieldset']])
       end
 
     end

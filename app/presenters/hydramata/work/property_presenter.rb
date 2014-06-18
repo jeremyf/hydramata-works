@@ -25,7 +25,10 @@ module Hydramata
       def default_partial_prefixes
         entity_prefix = normalize_for_application_usage(entity.work_type)
         predicate_prefix = normalize_for_application_usage(predicate)
-        [File.join(entity_prefix, predicate_prefix), predicate_prefix]
+        [
+          [entity_prefix, predicate_prefix],
+          [predicate_prefix]
+        ]
       end
 
     end

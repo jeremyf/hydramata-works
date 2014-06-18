@@ -31,7 +31,10 @@ module Hydramata
       def default_partial_prefixes
         entity_prefix = normalize_for_application_usage(entity.work_type)
         fieldset_prefix = normalize_for_application_usage(name)
-        [File.join(entity_prefix, fieldset_prefix), fieldset_prefix]
+        [
+          [entity_prefix, fieldset_prefix],
+          [fieldset_prefix]
+        ]
       end
     end
   end

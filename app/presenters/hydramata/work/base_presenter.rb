@@ -1,4 +1,6 @@
 require 'delegate'
+require 'active_support/core_ext/array/wrap'
+
 module Hydramata
   module Work
     # Responsible for coordinating the rendering of an in-memory data structure
@@ -84,7 +86,7 @@ module Hydramata
       end
 
       def partial_name(*current_partial_prefixes)
-        partial_prefix = current_partial_prefixes.flatten.compact.join("/")
+        partial_prefix = Array.wrap(current_partial_prefixes).join("/")
         File.join('hydramata/work', view_path_slug_for_object, partial_prefix , presentation_context.to_s)
       end
 
