@@ -12,6 +12,7 @@ module Hydramata
       def initialize(collaborators = {})
         @entity = collaborators.fetch(:entity)
         super(@entity, collaborators)
+        # @TODO - Create default presentation structure; What would this look like?
         @presentation_structure = collaborators.fetch(:presentation_structure)
         @presented_fieldset_builder = collaborators.fetch(:presented_fieldset_builder) { default_presented_fieldset_builder }
       end
