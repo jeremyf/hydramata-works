@@ -36,7 +36,7 @@ module Hydramata
       end
 
       def translate(key)
-        translator.t(translation_scope_for(key), default: default_translation_for(key))
+        translator.t(translation_scope_for(key), partial_prefixes, default: default_translation_for(key))
       end
       alias_method :t, :translate
 
@@ -101,12 +101,12 @@ module Hydramata
       end
 
       def translation_scope_for(key)
-        "hydramata.work.#{view_path_slug_for_object}.#{key}"
+        "#{view_path_slug_for_object}.#{key}"
       end
 
       def default_translator
-        require 'i18n'
-        I18n
+        require 'hydramata/work/translator'
+        Translator
       end
 
       # Because actually testing this is somewhat of a nightmare given the

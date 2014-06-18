@@ -2,7 +2,16 @@ require 'active_support/core_ext/array/wrap'
 
 module Hydramata
   module Work
+    # Responsible for handling the translation via diminishing specificity
     class Translator
+
+      class << self
+        def translate(key, scopes, options = {})
+          new(options).translate(key, scopes, options)
+        end
+        alias_method :t, :translate
+      end
+
       attr_reader :base_scope, :translation_service, :translation_service_error
       def initialize(options = {})
         self.base_scope = options.fetch(:base_scope) { default_base_scope }
@@ -10,10 +19,10 @@ module Hydramata
         @translation_service_error = options.fetch(:translation_service_error) { default_translation_service_error }
       end
 
-      def translate(key, specific_scopes)
-        translated_value = nil
-        translate_key_for_specific_scopes(key, specific_scopes) || translate_key_for_general_case(key)
+      def translate(key, specific_scopes, options = {})
+        translate_key_for_specific_scopes(key, specific_scopes) || translate_key_for_general_case(key, options)
       end
+      alias_method :t, :translate
 
       private
 
@@ -32,8 +41,9 @@ module Hydramata
         returning_value
       end
 
-      def translate_key_for_general_case(key)
-        translation_service.translate(key, scope: base_scope)
+      def translate_key_for_general_case(key, options = {})
+        options[:scope] = base_scope
+        translation_service.translate(key, options)
       end
 
       def base_scope=(values)

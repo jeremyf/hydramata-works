@@ -16,6 +16,15 @@ module Hydramata
       let(:translation_service_error) { ArgumentError }
 
       context '#translate' do
+        it 'passes options to the default rendering' do
+          expect(translation_service).to receive(:translate).
+            with('child', scope: base_scope, default: 'default').
+            ordered.
+            and_return('With Default')
+
+          expect(subject.translate('child', [], default: 'default')).to eq('With Default')
+        end
+
         it 'attempts to translate through each scope then finally via the base scope' do
           expect(translation_service).to receive(:translate).
             with('child', scope: (base_scope + ['grandparent', 'parent']), raise: true).
