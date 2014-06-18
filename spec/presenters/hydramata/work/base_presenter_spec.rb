@@ -30,7 +30,7 @@ module Hydramata
 
       it 'should translate attribute keys' do
         subject.translate(:name)
-        expect(translator).to have_received(:t).with('base.name', scopes: [], default: instance_of(Proc))
+        expect(translator).to have_received(:t).with(:name, base_scope: ['hydramata', 'work', 'base'], scopes: [], default: instance_of(Proc))
       end
 
       context '#dom_class' do

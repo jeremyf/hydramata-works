@@ -1,18 +1,18 @@
 en:
   hydramata:
     work:
-      work_type_translated:
-        property_set_translated:
+      works:
+        work_type_translated:
           fieldsets:
-            name: I Am a Translated Property Set for a Translated Work Type!
-        property_translated:
+            property_set_translated:
+              name: I Am a Translated Property Set for a Translated Work Type!
           properties:
-            name: I Am a Translated Property for a Translated Work Type!
-        works:
+            property_translated:
+              name: I Am a Translated Property for a Translated Work Type!
           name: I Am a Translated Work Type!
-      property_set_translated:
-        fieldsets:
+      fieldsets:
+        property_set_translated:
           name: I Am a Translated Property Set with a non-Translated Work Type!
-      property_translated:
-        properties:
+      properties:
+        property_translated:
           name: I Am a Translated Property with a non-Translated Work Type!

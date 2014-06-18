@@ -38,7 +38,12 @@ module Hydramata
       end
 
       def translate(key)
-        translator.t(translation_scope_for(key), scopes: partial_prefixes, default: default_translation_for(key))
+        translator.t(
+          key,
+          base_scope: ['hydramata', 'work', view_path_slug_for_object],
+          scopes: partial_prefixes,
+          default: default_translation_for(key)
+        )
       end
       alias_method :t, :translate
 
@@ -100,10 +105,6 @@ module Hydramata
 
       def default_translation_for(key)
         proc { send(key).to_s }
-      end
-
-      def translation_scope_for(key)
-        "#{view_path_slug_for_object}.#{key}"
       end
 
       def default_translator
