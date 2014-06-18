@@ -12,6 +12,7 @@ module Hydramata
         super(property, collaborators)
       end
 
+
       private
 
       def default_presentation_context
@@ -31,6 +32,14 @@ module Hydramata
         ]
       end
 
+      def default_translation_scopes
+        entity_prefix = normalize_for_application_usage(entity.work_type)
+        predicate_prefix = normalize_for_application_usage(predicate)
+        [
+          ['works', entity_prefix, view_path_slug_for_object, predicate_prefix],
+          [view_path_slug_for_object, predicate_prefix]
+        ]
+      end
     end
   end
 end

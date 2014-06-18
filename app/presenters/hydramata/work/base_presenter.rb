@@ -6,12 +6,13 @@ module Hydramata
     # Responsible for coordinating the rendering of an in-memory data structure
     # object to an output buffer.
     class BasePresenter < SimpleDelegator
-      attr_reader :presentation_context, :translator, :partial_prefixes, :template_missing_error
+      attr_reader :presentation_context, :translator, :partial_prefixes, :template_missing_error, :translation_scopes
       def initialize(object, collaborators = {})
         __setobj__(object)
         @presentation_context = collaborators.fetch(:presentation_context) { default_presentation_context }
         @translator = collaborators.fetch(:translator) { default_translator }
         @partial_prefixes = collaborators.fetch(:partial_prefixes) { default_partial_prefixes }
+        @translation_scopes = collaborators.fetch(:translation_scopes) { default_translation_scopes }
         @template_missing_error = collaborators.fetch(:template_missing_exception) { default_template_missing_exception }
       end
 
@@ -38,12 +39,7 @@ module Hydramata
       end
 
       def translate(key)
-        translator.t(
-          key,
-          base_scope: ['hydramata', 'work', view_path_slug_for_object],
-          scopes: partial_prefixes,
-          default: default_translation_for(key)
-        )
+        translator.t(key, scopes: translation_scopes, default: default_translation_for(key))
       end
       alias_method :t, :translate
 
@@ -84,6 +80,10 @@ module Hydramata
         []
       end
 
+      def default_translation_scopes
+        []
+      end
+
       def rendering_options_for(options = {})
         returning_options = { object: self }
         returning_options[:locals] = options[:locals] if options.key?(:locals)
@@ -92,7 +92,9 @@ module Hydramata
 
       def partial_name(*current_partial_prefixes)
         partial_prefix = Array.wrap(current_partial_prefixes).join("/")
-        File.join('hydramata/work', view_path_slug_for_object, partial_prefix , presentation_context.to_s)
+        File.join('hydramata/work', view_path_slug_for_object, partial_prefix , presentation_context.to_s).tap {|a|
+          puts a
+        }
       end
 
       def default_presentation_context

@@ -31,7 +31,7 @@ module Hydramata
       end
 
       it 'should have a default partial prefixes' do
-        expect(subject.partial_prefixes).to eq(['my_work_type'])
+        expect(subject.partial_prefixes).to eq([['my_work_type']])
       end
 
       it 'should render as per the template' do

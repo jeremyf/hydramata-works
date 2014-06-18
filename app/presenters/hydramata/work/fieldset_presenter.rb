@@ -36,6 +36,15 @@ module Hydramata
           [fieldset_prefix]
         ]
       end
+
+      def default_translation_scopes
+        entity_prefix = normalize_for_application_usage(entity.work_type)
+        fieldset_prefix = normalize_for_application_usage(name)
+        [
+          ['works', entity_prefix, view_path_slug_for_object, fieldset_prefix],
+          [view_path_slug_for_object, fieldset_prefix]
+        ]
+      end
     end
   end
 end

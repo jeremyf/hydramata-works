@@ -23,12 +23,12 @@ module Hydramata
 
       private
 
-      def base_dom_class
-        entity.work_type.to_s.downcase.gsub(/[\W_]+/, '-')
-      end
-
       def view_path_slug_for_object
         'works'
+      end
+
+      def base_dom_class
+        entity.work_type.to_s.downcase.gsub(/[\W_]+/, '-')
       end
 
       def default_presented_fieldset_builder
@@ -36,7 +36,15 @@ module Hydramata
       end
 
       def default_partial_prefixes
-        [normalize_for_application_usage(entity.work_type)]
+        [
+          [normalize_for_application_usage(entity.work_type)]
+        ]
+      end
+
+      def default_translation_scopes
+        [
+          ['works', normalize_for_application_usage(entity.work_type)]
+        ]
       end
 
     end
