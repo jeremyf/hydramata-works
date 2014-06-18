@@ -76,6 +76,7 @@ module Hydramata
           # @TODO - The structure of the hash is not ideal. The order of keys is
           # somewhat counter-intuitive.
           old_backend = I18n.backend
+          I18n.backend = old_backend.clone
           I18n.backend.store_translations(
             :en, { hydramata: { work: {
                                   'title' => { properties: { name: 'My Special Title' } },
