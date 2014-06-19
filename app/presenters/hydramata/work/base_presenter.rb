@@ -92,9 +92,7 @@ module Hydramata
 
       def partial_name(*current_partial_prefixes)
         partial_prefix = Array.wrap(current_partial_prefixes).join("/")
-        File.join('hydramata/work', view_path_slug_for_object, partial_prefix , presentation_context.to_s).tap {|a|
-          puts a
-        }
+        File.join('hydramata/work', view_path_slug_for_object, partial_prefix , presentation_context.to_s)
       end
 
       def default_presentation_context
