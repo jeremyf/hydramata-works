@@ -37,6 +37,10 @@ module Hydramata
           it 'should convert a Hash to a property' do
             expect(Property(predicate: 'a predicate')).to be_an_instance_of(Property)
           end
+
+          it 'should convert a Hash with values' do
+            expect(Property(predicate: 'a predicate', values: [1,2,3]).values).to eq([1,2,3])
+          end
         end
 
         context 'with 2 args' do

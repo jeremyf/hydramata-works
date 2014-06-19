@@ -12,7 +12,7 @@ module Hydramata
           raise ConversionError.new(:Property, args)
         else
           input = args.first
-          values = args[-1..1]
+          values = args[1..-1]
           case input
           when Property then input << values
           when Predicate then Property.new(predicate: input, values: values)
