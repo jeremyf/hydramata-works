@@ -1,4 +1,4 @@
-require 'hydramata/work/conversions'
+require 'hydramata/work/conversions/presented_fieldsets'
 require 'hydramata/work/base_presenter'
 
 module Hydramata
