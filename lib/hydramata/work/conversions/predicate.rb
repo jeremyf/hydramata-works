@@ -9,11 +9,14 @@ module Hydramata
       def Predicate(input)
         case input
         when Predicate then input
-        when Predicates::Storage then Predicate.new(input.attributes)
         when String, Symbol then Predicates.find(input)
         when Hash then Predicates.find(input.fetch(:identity), input)
         else
-          raise ConversionError.new(:Predicate, input)
+          if input.respond_to?(:to_predicate)
+            input.to_predicate
+          else
+            raise ConversionError.new(:Predicate, input)
+          end
         end
       end
     end

@@ -1,4 +1,4 @@
-require 'feature_helper'
+require 'active_record_spec_helper'
 require 'hydramata/work/conversions/predicate'
 require 'hydramata/work/linters/implement_predicate_interface_matcher'
 
@@ -33,8 +33,9 @@ module Hydramata
           expect { Predicate([]) }.to raise_error
         end
 
-        it 'should converate a "stored predicate" to a predicate' do
-          expect(Predicate(Predicates::Storage.new(identity: 'hello'))).to implement_predicate_interface
+        it 'should converate an object that responds to #to_predicate to a predicate' do
+          object = double(to_predicate: Predicate.new)
+          expect(Predicate(object)).to implement_predicate_interface
         end
       end
     end

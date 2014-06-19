@@ -1,4 +1,6 @@
 require 'active_record'
+require 'hydramata/work/predicates'
+
 module Hydramata
   module Work
     module Predicates
@@ -19,6 +21,10 @@ module Hydramata
           # But for testing, I don't always want to hit the database, so
           # I'm capturing this exception
           { identity: identity }
+        end
+
+        def to_predicate
+          Predicate.new(attributes)
         end
       end
     end
