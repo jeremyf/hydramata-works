@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby -w
+require 'time'
+require 'rake'
+
+File.open("tmp/run_each_spec_in_isolation.txt", 'w+') do |file|
+  FileList['spec/**/*_spec.rb'].select do |fn|
+    start_time = Time.now
+    puts "rspec #{fn}"
+    system "rspec #{fn}"
+    end_time = Time.now
+    file.puts format("%#.7g\t%s", (end_time - start_time), fn)
+  end
+end
