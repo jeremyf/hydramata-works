@@ -12,7 +12,6 @@ module Hydramata
 
       attr_accessor :work_type
       attr_accessor :presentation_sequence
-      attr_accessor :name_for_application_usage
       attr_reader :predicates
 
       def <=>(other)

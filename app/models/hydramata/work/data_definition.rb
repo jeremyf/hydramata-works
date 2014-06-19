@@ -4,6 +4,7 @@ module Hydramata
       include Comparable
 
       attr_reader :identity
+      attr_writer :name_for_application_usage
 
       def initialize(attributes = {})
         attributes.each do |key, value|
@@ -12,6 +13,10 @@ module Hydramata
         yield self if block_given?
         validate!
         self.freeze
+      end
+
+      def name_for_application_usage
+        @name_for_application_usage || identity
       end
 
       def identity=(value)

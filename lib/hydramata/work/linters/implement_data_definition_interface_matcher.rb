@@ -4,8 +4,12 @@ require 'rspec/matchers'
 RSpec::Matchers.define :implement_data_definition_interface do
 
   match do |subject|
-    [:identity, :identity=].all? { |method_name|
-      subject.respond_to?(method_name)
+    [:identity, :identity=, :name_for_application_usage, '<=>', :name_for_application_usage=].all? { |method_name|
+      begin
+        subject.public_method(method_name)
+      rescue NameError
+        false
+      end
     }
   end
 

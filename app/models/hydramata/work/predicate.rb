@@ -4,7 +4,6 @@ module Hydramata
   module Work
     class Predicate < DataDefinition
 
-      attr_accessor :name_for_application_usage
       attr_accessor :datastream_name
       attr_accessor :value_coercer_name
       attr_accessor :value_parser_name
