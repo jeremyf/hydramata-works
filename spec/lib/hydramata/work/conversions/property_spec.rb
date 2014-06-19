@@ -48,6 +48,10 @@ module Hydramata
             expect(Property('a predicate', 'a value')).to be_an_instance_of(Property)
           end
 
+          it 'should gracefully handle two arguements where last arguement is an array' do
+            expect(Property('a predicate', ['a value']).values).to eq([['a value']])
+          end
+
           it 'should preserve the property but append the values' do
             property = Property.new(predicate: 'a predicate')
             expect {

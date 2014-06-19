@@ -12,15 +12,18 @@ module Hydramata
           raise ConversionError.new(:Property, args)
         else
           input = args.first
-          values = args[1..-1]
+          property =
           case input
-          when Property then input << values
-          when Predicate then Property.new(predicate: input, values: values)
-          when Hash then Property.new(input) << values
+          when Property then input
+          when Predicate then Property.new(predicate: input)
+          when Hash then Property.new(input)
           else
             predicate = Predicate(input)
-            Property.new(predicate: predicate, values: values)
+            Property.new(predicate: predicate)
           end
+          values = args[1..-1]
+          property << values
+          property
         end
       end
     end
