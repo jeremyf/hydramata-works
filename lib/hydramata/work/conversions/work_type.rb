@@ -7,16 +7,13 @@ module Hydramata
     module Conversions
       private
       def WorkType(input)
+        return input.to_work_type if input.respond_to?(:to_work_type)
         case input
         when WorkType then input
         when String, Symbol then WorkTypes.find(input)
         when Hash then WorkTypes.find(input.fetch(:identity), input)
         else
-          if input.respond_to?(:to_work_type)
-            input.to_work_type
-          else
-            raise ConversionError.new(:WorkType, input)
-          end
+          raise ConversionError.new(:WorkType, input)
         end
       end
     end

@@ -1,4 +1,4 @@
-require 'feature_helper'
+require 'fast_helper'
 require 'hydramata/work/conversions/property_set'
 require 'hydramata/work/conversions/predicate_set'
 require 'hydramata/work/linters/implement_property_set_interface_matcher'

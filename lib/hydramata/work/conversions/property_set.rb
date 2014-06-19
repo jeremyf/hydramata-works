@@ -1,6 +1,5 @@
 require 'hydramata/work/conversions/exceptions'
 require 'hydramata/work/conversions/predicate_set'
-require 'hydramata/work/predicate_sets/storage'
 require 'hydramata/work/predicate_set'
 require 'hydramata/work/property_set'
 
