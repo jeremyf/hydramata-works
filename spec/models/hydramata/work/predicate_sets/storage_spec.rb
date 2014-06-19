@@ -10,7 +10,6 @@ module Hydramata
     module PredicateSets
 
       describe Storage do
-        subject { described_class.new }
         it { should implement_predicate_set_interface }
 
         let(:identity) { 'a predicate' }
@@ -28,10 +27,8 @@ module Hydramata
           expect(subject.work_type).to eq(work_type)
         end
 
-        it 'has #predicate_set_attributes' do
-          expect(subject.predicate_set_attributes.fetch(:work_type)).to eq(work_type)
-          expect(subject.predicate_set_attributes.fetch(:predicates)).to respond_to(:each)
-          expect(subject.predicate_set_attributes.fetch(:identity)).to eq(identity)
+        it 'has #to_predicate_set' do
+          expect(described_class.new.to_predicate_set).to implement_predicate_set_interface
         end
 
       end

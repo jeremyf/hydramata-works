@@ -1,4 +1,4 @@
-require 'feature_helper'
+require 'fast_helper'
 require 'hydramata/work/conversions/predicate_set'
 require 'hydramata/work/linters/implement_predicate_set_interface_matcher'
 
@@ -40,9 +40,9 @@ module Hydramata
           expect(PredicateSet('An Identity')).to implement_predicate_set_interface
         end
 
-        it 'should converate a "stored predicate" to a predicate' do
-          storage = PredicateSets::Storage.new(identity: 'hello', work_type: WorkTypes::Storage.new(identity: 'Work Type'))
-          expect(PredicateSet(storage)).to implement_predicate_set_interface
+        it 'should use #to_predicate_set for conversion if input responds to #to_predicate_set' do
+          object = double(to_predicate_set: PredicateSet.new(identity: 'hello'))
+          expect(PredicateSet(object)).to implement_predicate_set_interface
         end
       end
     end

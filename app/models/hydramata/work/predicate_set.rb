@@ -34,7 +34,7 @@ module Hydramata
 
       def validate!
         if identity.nil?
-          raise RuntimeError, "#{self.class}(#{attributes.inspect}) is invalid"
+          raise RuntimeError, "#{self.class}(#{inspect}) is invalid"
         else
           true
         end

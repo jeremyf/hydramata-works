@@ -1,4 +1,5 @@
 require 'active_record'
+require 'hydramata/work/predicate_set'
 require 'hydramata/work/work_types/storage'
 require 'hydramata/work/predicates/storage'
 require 'hydramata/work/predicate_presentation_sequences/storage'
@@ -28,9 +29,16 @@ module Hydramata
           through: :predicate_presentation_sequences
         )
 
+        def to_predicate_set
+          PredicateSet.new(predicate_set_attributes)
+        end
+
+        private
+
         def predicate_set_attributes
           attributes.with_indifferent_access.merge(predicates: predicates, work_type: work_type)
         end
+
       end
     end
   end

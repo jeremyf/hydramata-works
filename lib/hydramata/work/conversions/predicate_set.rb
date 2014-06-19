@@ -1,16 +1,14 @@
 require 'hydramata/work/conversions/exceptions'
+require 'hydramata/work/predicate_set'
 
 module Hydramata
   module Work
     module Conversions
       private
       def PredicateSet(input)
-        require 'hydramata/work/predicate_sets/storage'
-        require 'hydramata/work/predicate_set'
-
+        return input.to_predicate_set if input.respond_to?(:to_predicate_set)
         case input
         when PredicateSet then input
-        when PredicateSets::Storage then PredicateSet.new(input.predicate_set_attributes)
         when Hash then PredicateSet.new(input)
         when String then PredicateSet.new(identity: input)
         when Array then
