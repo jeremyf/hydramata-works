@@ -109,6 +109,7 @@ But are instead a parking lot that may be cleared or added to.
 - [X] Improve internationalization support by providing a better key path.
 - [X] Add view tests for show templates
 - [ ] Add view tests for edit templates
+- [ ] Review view rendering path options; Presently the top level work type is created.
 - [X] Add internationalization for Work Type contexts:
   - [X] Work type name
   - [X] Work type description
