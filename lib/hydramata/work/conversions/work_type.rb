@@ -9,11 +9,14 @@ module Hydramata
       def WorkType(input)
         case input
         when WorkType then input
-        when WorkTypes::Storage then WorkType.new(input.attributes)
         when String, Symbol then WorkTypes.find(input)
         when Hash then WorkTypes.find(input.fetch(:identity), input)
         else
-          raise ConversionError.new(:WorkType, input)
+          if input.respond_to?(:to_work_type)
+            input.to_work_type
+          else
+            raise ConversionError.new(:WorkType, input)
+          end
         end
       end
     end

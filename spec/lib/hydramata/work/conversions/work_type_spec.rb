@@ -1,4 +1,4 @@
-require 'feature_helper'
+require 'fast_helper'
 require 'hydramata/work/conversions/work_type'
 require 'hydramata/work/linters/implement_work_type_interface_matcher'
 
@@ -25,8 +25,8 @@ module Hydramata
           expect(WorkType(identity: 'hello')).to implement_work_type_interface
         end
 
-        it 'should convert a "store work type" to a WorkType object' do
-          stored_object = WorkTypes::Storage.new(identity: 'hello')
+        it 'should convert a "#to_work_type" to a WorkType object' do
+          stored_object = double('Object', to_work_type: WorkType.new)
           expect(WorkType(stored_object)).to implement_work_type_interface
         end
 

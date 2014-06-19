@@ -1,5 +1,7 @@
 require 'active_record'
 require 'hydramata/work/predicate_sets/storage'
+require 'hydramata/work/work_type'
+
 module Hydramata
   module Work
     module WorkTypes
@@ -23,6 +25,10 @@ module Hydramata
           # But for testing, I don't always want to hit the database, so
           # I'm capturing this exception
           { identity: identity }
+        end
+
+        def to_work_type
+          WorkType.new(attributes)
         end
       end
     end
