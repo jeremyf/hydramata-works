@@ -1,3 +1,6 @@
+require 'hydramata/work/conversions/property_set'
+require 'hydramata/work/conversions/predicate_set'
+require 'hydramata/work/fieldset_presenter'
 module Hydramata
   module Work
     module Conversions
@@ -11,7 +14,10 @@ module Hydramata
           predicate_set = PredicateSet(predicate_set)
           predicates = predicate_set.predicates
           property_set = PropertySet(predicate_set)
-          property_builder = ->(property) { PropertyPresenter.new(property: property, fieldset: property_set, entity: entity) }
+          property_builder = ->(property) {
+            require 'hydramata/work/property_presenter'
+            PropertyPresenter.new(property: property, fieldset: property_set, entity: entity)
+          }
           entity.properties.subset(predicates, property_set, property_builder)
           presented_fieldset = FieldsetPresenter.new(entity: entity, fieldset: property_set)
           collector << presented_fieldset
