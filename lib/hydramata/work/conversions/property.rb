@@ -7,15 +7,20 @@ module Hydramata
   module Work
     module Conversions
       private
-      def Property(input)
-
-        case input
-        when Property then input
-        when Predicate then Property.new(predicate: input)
-        when Hash then Property.new(input)
+      def Property(*args)
+        if args.size == 0
+          raise ConversionError.new(:Property, args)
         else
-          predicate = Predicate(input)
-          Property.new(predicate: predicate)
+          input = args.first
+          values = args[-1..1]
+          case input
+          when Property then input << values
+          when Predicate then Property.new(predicate: input, values: values)
+          when Hash then Property.new(input) << values
+          else
+            predicate = Predicate(input)
+            Property.new(predicate: predicate, values: values)
+          end
         end
       end
     end
