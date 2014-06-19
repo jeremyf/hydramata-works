@@ -81,7 +81,8 @@ In each layer, there is a concept of a Work and its data structure.
 - [ ] Memory -> Solr
 - [ ] Memory -> New HTML
 - [ ] Memory -> Solr Document
-- [ ] UI Input -> Memory
+- [X] UI Input for New -> Memory
+- [ ] UI Input for Edit -> Memory
 - [ ] Validation in Memory Object
 
 ## Low Level Tasks
