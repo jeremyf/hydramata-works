@@ -1,4 +1,5 @@
 require 'fast_helper'
+require 'date'
 require 'hydramata/work/value'
 require 'hydramata/work/linters/implement_value_interface_matcher'
 
@@ -31,7 +32,7 @@ module Hydramata
             expect(described_class.new(value: 123) == described_class.new(value: 1234)).to be_falsey
           end
           it 'should be true if underlying objects match' do
-            expect(described_class.new(value: Date.parse('2013-1-3')) == described_class.new(value: Date.parse('2013-1-3'))).to be_truthy
+            expect(described_class.new(value: Date.new(2013,1,3)) == described_class.new(value: Date.new(2013,1,3))).to be_truthy
           end
         end
         context 'for integers' do
@@ -49,9 +50,9 @@ module Hydramata
         end
 
         context 'for dates' do
-          let(:value) { Date.parse('2013-1-3') }
+          let(:value) { Date.new(2013,1,3) }
           it 'should be equal when base value is the same' do
-            expect(subject == Date.parse('2013-1-3')).to be_truthy
+            expect(subject == Date.new(2013,1,3)).to be_truthy
           end
         end
       end
