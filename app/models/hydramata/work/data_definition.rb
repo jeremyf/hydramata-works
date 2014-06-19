@@ -1,5 +1,9 @@
 module Hydramata
   module Work
+
+    # DataDefinition is an abstract class for the Plain Old Ruby Objects (PORO)
+    # that are loaded from the database storage. The irony that I am using
+    # inheritance for these POROs is not lost on me.
     class DataDefinition
       include Comparable
 
