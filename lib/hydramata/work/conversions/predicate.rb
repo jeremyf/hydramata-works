@@ -1,11 +1,12 @@
 require 'hydramata/work/conversions/exceptions'
+require 'hydramata/work/predicate'
+require 'hydramata/work/predicates'
 
 module Hydramata
   module Work
     module Conversions
       private
       def Predicate(input)
-        require 'hydramata/work/predicates'
         case input
         when Predicate then input
         when Predicates::Storage then Predicate.new(input.attributes)

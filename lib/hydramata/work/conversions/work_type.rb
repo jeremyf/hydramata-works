@@ -1,11 +1,12 @@
 require 'hydramata/work/conversions/exceptions'
+require 'hydramata/work/work_type'
+require 'hydramata/work/work_types'
 
 module Hydramata
   module Work
     module Conversions
       private
       def WorkType(input)
-        require 'hydramata/work/work_types'
         case input
         when WorkType then input
         when WorkTypes::Storage then WorkType.new(input.attributes)
