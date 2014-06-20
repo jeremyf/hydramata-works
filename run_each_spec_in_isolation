@@ -10,11 +10,14 @@ File.open("run_each_spec_in_isolation.txt", 'w+') do |file|
     system "rspec #{fn}"
     spec_end_time = Time.now
     file.puts format("%#.3f\t%s", (spec_end_time - spec_start_time), fn)
+    file.puts ''
   end
   suite_end_time = Time.now
   file.puts format("%#.3f\t%s", (suite_end_time - suite_start_time), "total-time-for-specs-run-in-isolation")
+  file.puts ''
   combined_start_time = Time.now
   system('rspec')
   combined_end_time = Time.now
   file.puts format("%#.3f\t%s", (combined_start_time - combined_end_time), "total-time-for-specs-run-together")
+  file.puts ''
 end
