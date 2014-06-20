@@ -1,4 +1,4 @@
-require 'feature_helper'
+require 'fast_helper'
 require 'hydramata/work/conversions/value'
 require 'hydramata/work/linters/implement_value_interface_matcher'
 
@@ -10,6 +10,11 @@ module Hydramata
       context '#Value' do
         it 'should convert a Hash to a Value object' do
           expect(Value(value: 'hello')).to implement_value_interface
+        end
+
+        it 'should convert an object that implements #to_value' do
+          object = double(to_value: Value.new(value: 'Value'))
+          expect(Value(object)).to eq(object.to_value)
         end
 
         it 'should convert a String to a Value object' do
