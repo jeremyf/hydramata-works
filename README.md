@@ -110,7 +110,7 @@ But are instead a parking lot that may be cleared or added to.
 - [X] Add view tests for show templates
 - [ ] Add view tests for edit templates
 - [ ] Review view rendering path options; Presently the top level work type is created.
-- [ ] Create a NullWorkType concept.
+- [X] Create a NullWorkType concept.
       It would be helpful to create a Null Work Type, so our application doesn't choke.
 - [X] Add internationalization for Work Type contexts:
   - [X] Work type name
