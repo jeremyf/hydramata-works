@@ -8,6 +8,14 @@ module Hydramata
       include Conversions
 
       context '#WorkType' do
+        it 'should convert an empty value to a WorkType null object' do
+          expect(WorkType()).to implement_work_type_interface.with(:identity, 'unknown')
+        end
+
+        it 'should convert an Array to a WorkType null object' do
+          expect(WorkType([])).to implement_work_type_interface.with(:identity, 'unknown')
+        end
+
         it 'should convert Nil to a WorkType null object' do
           expect(WorkType(nil)).to implement_work_type_interface.with(:identity, 'unknown')
         end
@@ -38,9 +46,6 @@ module Hydramata
           expect { WorkType(other: 'hello') }.to raise_error
         end
 
-        it 'should raise an error object is unexpected' do
-          expect { WorkType([]) }.to raise_error
-        end
       end
     end
   end
