@@ -1,6 +1,10 @@
-require 'feature_helper'
+require 'fast_helper'
 require 'hydramata/work/conversions/property_set'
 require 'hydramata/work/conversions/property'
+require 'hydramata/work/entity'
+require 'hydramata/work/entity_presenter'
+require 'hydramata/work/property_presenter'
+require 'hydramata/work/fieldset_presenter'
 
 module Hydramata
   module Work
@@ -14,6 +18,12 @@ module Hydramata
           let(:work_type) { 'Work Type Translated' }
           it 'translates its :name from the lookup table' do
             expect(presenter.t(:name)).to eq('I Am a Translated Work Type!')
+          end
+        end
+        context 'with :name_for_application_usage set' do
+          let(:work_type) { WorkType.new(identity: 'Work Type Translated', name_for_application_usage: 'Work Type with Translated Name') }
+          it 'translates its :name from the lookup table' do
+            expect(presenter.t(:name)).to eq('I Am Translating the Name for Application Usage!')
           end
         end
         context 'without existing work type translations' do

@@ -1,11 +1,13 @@
 require 'delegate'
 require 'active_support/core_ext/array/wrap'
+require 'hydramata/work/conversions/translation_key_fragment'
 
 module Hydramata
   module Work
     # Responsible for coordinating the rendering of an in-memory data structure
     # object to an output buffer.
     class BasePresenter < SimpleDelegator
+      include Conversions
       attr_reader :presentation_context, :translator, :partial_prefixes, :template_missing_error, :translation_scopes
       def initialize(object, collaborators = {})
         __setobj__(object)
@@ -113,7 +115,7 @@ module Hydramata
       end
 
       def normalize_for_application_usage(value)
-        String(value).downcase.gsub(/\W+/, '_')
+        TranslationKeyFragment(value)
       end
 
       # Because actually testing this is somewhat of a nightmare given the

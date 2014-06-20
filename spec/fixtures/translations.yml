@@ -2,6 +2,8 @@ en:
   hydramata:
     work:
       works:
+        work_type_with_translated_name:
+          name: I Am Translating the Name for Application Usage!
         work_type_translated:
           fieldsets:
             property_set_translated:
