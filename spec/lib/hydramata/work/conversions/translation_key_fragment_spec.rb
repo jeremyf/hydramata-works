@@ -19,13 +19,8 @@ module Hydramata
             expect(TranslationKeyFragment(:hello)).to eq('hello')
           end
 
-          it 'an object that implements #name_for_application_usage' do
-            object = double(name_for_application_usage: 'fragment')
-            expect(TranslationKeyFragment(object)).to eq('fragment')
-          end
-
-          it 'a Hash with :name_for_application_usage key' do
-            object = { name_for_application_usage: 'fragment' }
+          it 'a Hash with :to_translation_key_fragment key' do
+            object = { to_translation_key_fragment: 'fragment' }
             expect(TranslationKeyFragment(object)).to eq('fragment')
           end
 
