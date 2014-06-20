@@ -1,23 +1,15 @@
 #!/usr/bin/env ruby -w
 require 'time'
 require 'rake'
+require 'benchmark'
 
 File.open("run_each_spec_in_isolation.txt", 'w+') do |file|
-  suite_start_time = Time.now
   FileList['spec/**/*_spec.rb'].sort.select do |fn|
-    spec_start_time = Time.now
     puts "rspec #{fn}"
-    system "rspec #{fn}"
-    spec_end_time = Time.now
-    file.puts format("%#.1f\t%s", (spec_end_time - spec_start_time), fn)
+    measurement = Benchmark.measure { system "rspec #{fn}" }
+    file.puts format("%#.1f\t%s", (measurement.total), fn)
     file.puts ''
   end
-  suite_end_time = Time.now
-  file.puts format("%#.1f\t%s", (suite_end_time - suite_start_time), "total-time-for-specs-run-in-isolation")
-  file.puts ''
-  combined_start_time = Time.now
-  system('rspec')
-  combined_end_time = Time.now
-  file.puts format("%#.1f\t%s", (combined_end_time - combined_start_time), "total-time-for-specs-run-together")
-  file.puts ''
+  measurement = Benchmark.measure { system('rspec') }
+  file.puts format("%#.1f\t%s", (measurement.total), "total-time-for-specs-run-together")
 end
