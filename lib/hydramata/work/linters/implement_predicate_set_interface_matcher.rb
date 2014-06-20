@@ -2,11 +2,7 @@
 require 'rspec/matchers'
 
 RSpec::Matchers.define :implement_predicate_set_interface do
-  match do |subject|
-    [:work_type, :identity, :presentation_sequence, :name_for_application_usage, :predicates].all? do |method_name|
-      subject.respond_to?(method_name)
-    end
-  end
-
-  description { 'implemenents the PredicateSet interface' }
+  Hydramata::Work::Linters::InterfaceMatcherBuilder.call(
+    self, 'PredicateSet', [:work_type, :identity, :presentation_sequence, :name_for_application_usage, :predicates]
+  )
 end

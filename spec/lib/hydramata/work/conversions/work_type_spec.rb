@@ -8,6 +8,10 @@ module Hydramata
       include Conversions
 
       context '#WorkType' do
+        it 'should convert Nil to a WorkType null object' do
+          expect(WorkType(nil)).to implement_work_type_interface.with(:identity, 'unknown')
+        end
+
         it 'should convert a String to a WorkType object' do
           expect(WorkType('hello')).to implement_work_type_interface
         end

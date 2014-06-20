@@ -2,11 +2,7 @@
 require 'rspec/matchers'
 
 RSpec::Matchers.define :implement_property_set_interface do
-  match do |subject|
-    [:<<, :[], :predicates, :fetch, :==, :each, :subset].all? do |method_name|
-      subject.respond_to?(method_name)
-    end
-  end
-
-  description { 'implemenents the PropertySet interface' }
+  Hydramata::Work::Linters::InterfaceMatcherBuilder.call(
+    self, 'PropertySet', [:<<, :[], :predicates, :fetch, :==, :each, :subset]
+  )
 end

@@ -2,20 +2,16 @@
 require 'rspec/matchers'
 
 RSpec::Matchers.define :implement_predicate_interface do
-  PREDICATE_INTERFACE_METHODS = [
-    :identity,
-    :name_for_application_usage,
-    :datastream_name,
-    :value_coercer_name,
-    :value_parser_name,
-    :indexing_strategy
-  ].freeze unless defined?(PREDICATE_INTERFACE_METHODS)
-
-  match do |subject|
-    PREDICATE_INTERFACE_METHODS.all? { |method_name|
-      subject.respond_to?(method_name)
-    }
-  end
-
-  description { 'implemenents the Predicate interface' }
+  Hydramata::Work::Linters::InterfaceMatcherBuilder.call(
+    self,
+    'DataDefinition',
+    [
+      :identity,
+      :name_for_application_usage,
+      :datastream_name,
+      :value_coercer_name,
+      :value_parser_name,
+      :indexing_strategy
+    ]
+  )
 end

@@ -12,6 +12,7 @@ module Hydramata
         when WorkType then input
         when String, Symbol then WorkTypes.find(input)
         when Hash then WorkTypes.find(input.fetch(:identity), input)
+        when NilClass then WorkType.new(identity: 'unknown')
         else
           raise ConversionError.new(:WorkType, input)
         end

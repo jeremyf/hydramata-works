@@ -1,11 +1,10 @@
 # RSpec matcher to spec delegations.
 require 'rspec/matchers'
 
+require 'hydramata/work/linters/interface_matcher_builder'
+
 RSpec::Matchers.define :implement_value_interface do
-
-  match do |subject|
-    subject.respond_to?(:raw_object)
-  end
-
-  description { 'implemenents the Value interface' }
+  Hydramata::Work::Linters::InterfaceMatcherBuilder.call(
+    self, 'Value', [:raw_object]
+  )
 end
