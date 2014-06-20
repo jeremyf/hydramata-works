@@ -1,0 +1,24 @@
+require 'spec_view_helper'
+require 'active_support/core_ext/hash/reverse_merge'
+
+# As of 3.0.x :type tags are no longer inferred.
+# This means, without the `type: :view` tag, the render method does not exist
+# in the example context
+describe 'hydramata/work/works/_edit.html.erb', type: :view do
+  let(:object) { double('Object', fieldsets: [fieldset1, fieldset2], dom_class: 'my-dom-class') }
+
+  # A short circuit as the render does not normally
+  let(:fieldset1) { double('Fieldset', render: '<div class="set1">Fieldset 1</div>'.html_safe) }
+  let(:fieldset2) { double('Fieldset', render: '<div class="set2">Fieldset 2</div>'.html_safe) }
+
+  it 'renders the object and fieldsets' do
+    render partial: 'hydramata/work/works/edit', object: object
+
+    expect(fieldset1).to have_received(:render).with(template: view, locals: { form: kind_of(ActionView::Helpers::FormBuilder) })
+    expect(fieldset2).to have_received(:render).with(template: view, locals: { form: kind_of(ActionView::Helpers::FormBuilder) })
+    expect(rendered).to have_tag('form.work.my-dom-class') do
+      with_tag('.set1', text: 'Fieldset 1')
+      with_tag('.set2', text: 'Fieldset 2')
+    end
+  end
+end
