@@ -1,6 +1,6 @@
 # Instead of using spec_helper, I'm using the twice as fast custom helper
 # for active record objects.
-require 'active_record_spec_helper'
+require 'spec_active_record_helper'
 require 'hydramata/work/work_type'
 require 'hydramata/work/linters/implement_work_type_interface_matcher'
 require 'hydramata/work/linters/implement_data_definition_interface_matcher'

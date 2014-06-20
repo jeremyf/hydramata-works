@@ -1,4 +1,4 @@
-require 'fast_helper'
+require 'spec_fast_helper'
 require 'hydramata/work/entity_presenter'
 require 'hydramata/work/linters'
 

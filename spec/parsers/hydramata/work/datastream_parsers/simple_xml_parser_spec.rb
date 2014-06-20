@@ -1,4 +1,4 @@
-require 'fast_helper'
+require 'spec_fast_helper'
 require 'hydramata/work/datastream_parsers/simple_xml_parser'
 require 'hydramata/work/linters'
 

@@ -1,4 +1,4 @@
-require 'feature_helper'
+require 'spec_slow_helper'
 require 'hydramata/work/work_types/storage'
 require 'hydramata/work/conversions'
 

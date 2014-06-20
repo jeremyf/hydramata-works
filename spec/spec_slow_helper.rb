@@ -1,4 +1,4 @@
-# Why is this a slow_spec_helper instead of spec_helper
+# Why is this a spec_slow_helper instead of spec_helper
 # Because it is extremely slow to load all of the following dependencies:
 #
 # * SimpleCov

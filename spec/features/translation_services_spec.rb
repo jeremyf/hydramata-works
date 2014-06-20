@@ -1,4 +1,4 @@
-require 'fast_helper'
+require 'spec_fast_helper'
 require 'hydramata/work/conversions/property_set'
 require 'hydramata/work/conversions/property'
 require 'hydramata/work/entity'

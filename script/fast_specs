@@ -6,7 +6,7 @@ require 'rake'
 module Fast
   module_function
   def spec?(fn)
-    open(fn) { |f| f.gets =~ /fast_helper/ }
+    open(fn) { |f| f.gets =~ /spec_fast_helper/ }
   end
 end
 

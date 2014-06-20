@@ -1,4 +1,4 @@
-require 'fast_helper'
+require 'spec_fast_helper'
 require 'date'
 require 'hydramata/work/value'
 require 'hydramata/work/linters/implement_value_interface_matcher'

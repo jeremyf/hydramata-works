@@ -1,4 +1,4 @@
-require 'fast_helper'
+require 'spec_fast_helper'
 require 'hydramata/work/conversions/predicate_set'
 require 'hydramata/work/linters/implement_predicate_set_interface_matcher'
 

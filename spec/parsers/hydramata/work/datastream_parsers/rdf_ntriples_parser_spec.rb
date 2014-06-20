@@ -1,4 +1,4 @@
-require 'fast_helper'
+require 'spec_fast_helper'
 require 'hydramata/work/datastream_parsers/rdf_ntriples_parser'
 require 'hydramata/work/linters'
 require 'rdf'

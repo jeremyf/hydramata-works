@@ -1,4 +1,4 @@
-require 'feature_helper'
+require 'spec_slow_helper'
 
 # This spec verifies that the Entity -> Fieldset -> Properties render chain
 # uses the same presentation context for the entire render process.

@@ -1,4 +1,4 @@
-require 'fast_helper'
+require 'spec_fast_helper'
 require 'hydramata/work/work_types'
 require 'hydramata/work/linters/implement_work_type_interface_matcher'
 
