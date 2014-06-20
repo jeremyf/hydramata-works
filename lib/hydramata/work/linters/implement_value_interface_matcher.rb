@@ -1,6 +1,4 @@
-# RSpec matcher to spec delegations.
 require 'rspec/matchers'
-
 require 'hydramata/work/linters/interface_matcher_builder'
 
 RSpec::Matchers.define :implement_value_interface do
