@@ -3,6 +3,9 @@
 #
 # * SimpleCov
 # * EngineCart (and therefore the underlying internal Rails application)
+# * Rails
+#
+# But overtime the slowness has grown.
 ENV['RAILS_ENV'] ||= 'test'
 if ENV['COV'] || ENV['COVERAGE']
   require 'simplecov'
