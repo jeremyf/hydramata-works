@@ -22,7 +22,15 @@ module Hydramata
         @work_type = WorkType(value)
       end
 
-      attr_reader :properties, :work_type
+      def work_type
+        @work_type ||= WorkType()
+      end
+
+      attr_reader :properties
+
+      def to_translation_key_fragment
+        work_type.to_translation_key_fragment
+      end
 
       def name_for_application_usage
         work_type.name_for_application_usage

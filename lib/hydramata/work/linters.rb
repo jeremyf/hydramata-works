@@ -70,6 +70,13 @@ shared_examples 'a work entity' do |entity_builder|
     end
   end
 
+  context 'instance methods' do
+    subject { entity_class.new }
+    it { should respond_to(:to_translation_key_fragment) }
+    it { should respond_to(:work_type) }
+    it { should respond_to(:name_for_application_usage) }
+  end
+
   context 'its #properties method' do
     subject { entity_class.new.properties }
     it { should be_a_kind_of(Enumerable) }
