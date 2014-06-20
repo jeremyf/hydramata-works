@@ -1,5 +1,4 @@
 require 'spec_view_helper'
-require 'active_support/core_ext/hash/reverse_merge'
 
 # As of 3.0.x :type tags are no longer inferred.
 # This means, without the `type: :view` tag, the render method does not exist

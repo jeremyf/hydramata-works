@@ -6,6 +6,8 @@ require 'active_support'
 require 'action_view'
 require 'action_controller'
 
+require 'active_support/core_ext/hash/reverse_merge'
+
 require 'rspec/rails'
 require 'rspec-html-matchers'
 
