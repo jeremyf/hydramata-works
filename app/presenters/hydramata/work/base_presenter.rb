@@ -114,10 +114,6 @@ module Hydramata
         Translator
       end
 
-      def normalize_for_application_usage(value)
-        TranslationKeyFragment(value)
-      end
-
       # Because actually testing this is somewhat of a nightmare given the
       # 5+ parameters that are required when instantiating this exception.
       def default_template_missing_exception

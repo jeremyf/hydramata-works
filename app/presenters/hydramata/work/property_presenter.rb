@@ -24,8 +24,8 @@ module Hydramata
       end
 
       def default_partial_prefixes
-        entity_prefix = normalize_for_application_usage(entity.work_type)
-        predicate_prefix = normalize_for_application_usage(predicate)
+        entity_prefix = TranslationKeyFragment(entity.work_type)
+        predicate_prefix = TranslationKeyFragment(predicate)
         [
           [entity_prefix, predicate_prefix],
           [predicate_prefix]
@@ -33,8 +33,8 @@ module Hydramata
       end
 
       def default_translation_scopes
-        entity_prefix = normalize_for_application_usage(entity.work_type)
-        predicate_prefix = normalize_for_application_usage(predicate)
+        entity_prefix = TranslationKeyFragment(entity.work_type)
+        predicate_prefix = TranslationKeyFragment(predicate)
         [
           ['works', entity_prefix, view_path_slug_for_object, predicate_prefix],
           [view_path_slug_for_object, predicate_prefix]
