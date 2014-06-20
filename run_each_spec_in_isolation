@@ -2,8 +2,8 @@
 require 'time'
 require 'rake'
 
-File.open("tmp/run_each_spec_in_isolation.txt", 'w+') do |file|
-  FileList['spec/**/*_spec.rb'].select do |fn|
+File.open("run_each_spec_in_isolation.out", 'w+') do |file|
+  FileList['spec/**/*_spec.rb'].sort.select do |fn|
     start_time = Time.now
     puts "rspec #{fn}"
     system "rspec #{fn}"
