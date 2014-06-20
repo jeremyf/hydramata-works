@@ -1,24 +1,26 @@
-2.1	spec/features/fedora_to_in_memory_spec.rb
+Using Benchmark.measure.total
 
-1.9	spec/features/format_and_view_path_overrides_spec.rb
+4.9	spec/features/fedora_to_in_memory_spec.rb
 
-1.9	spec/features/in_memory_to_output_buffer_spec.rb
+4.4	spec/features/format_and_view_path_overrides_spec.rb
+
+4.6	spec/features/in_memory_to_output_buffer_spec.rb
 
 1.9	spec/features/new_user_input_to_in_memory_spec.rb
 
-1.9	spec/features/translation_services_spec.rb
+2.0	spec/features/translation_services_spec.rb
 
 1.2	spec/lib/hydramata-work_spec.rb
 
 1.8	spec/lib/hydramata/work/conversions/predicate_set_spec.rb
 
-1.7	spec/lib/hydramata/work/conversions/predicate_spec.rb
+1.8	spec/lib/hydramata/work/conversions/predicate_spec.rb
 
-1.9	spec/lib/hydramata/work/conversions/presented_fieldsets_spec.rb
+4.1	spec/lib/hydramata/work/conversions/presented_fieldsets_spec.rb
 
-1.7	spec/lib/hydramata/work/conversions/property_set_spec.rb
+1.8	spec/lib/hydramata/work/conversions/property_set_spec.rb
 
-1.8	spec/lib/hydramata/work/conversions/property_spec.rb
+2.0	spec/lib/hydramata/work/conversions/property_spec.rb
 
 1.2	spec/lib/hydramata/work/conversions/translation_key_fragment_spec.rb
 
@@ -26,13 +28,13 @@
 
 1.8	spec/lib/hydramata/work/conversions/work_type_spec.rb
 
-1.7	spec/lib/hydramata/work/translator_spec.rb
+3.9	spec/lib/hydramata/work/translator_spec.rb
 
-1.2	spec/models/hydramata/work/data_definition_spec.rb
+1.4	spec/models/hydramata/work/data_definition_spec.rb
 
-1.8	spec/models/hydramata/work/entity_spec.rb
+2.1	spec/models/hydramata/work/entity_spec.rb
 
-1.8	spec/models/hydramata/work/predicate_presentation_sequences/storage_spec.rb
+1.9	spec/models/hydramata/work/predicate_presentation_sequences/storage_spec.rb
 
 1.9	spec/models/hydramata/work/predicate_set_spec.rb
 
@@ -40,21 +42,21 @@
 
 1.8	spec/models/hydramata/work/predicate_spec.rb
 
-1.8	spec/models/hydramata/work/predicates/storage_spec.rb
+2.0	spec/models/hydramata/work/predicates/storage_spec.rb
 
-1.8	spec/models/hydramata/work/predicates_spec.rb
+1.7	spec/models/hydramata/work/predicates_spec.rb
 
-1.3	spec/models/hydramata/work/presentation_structure_spec.rb
+1.2	spec/models/hydramata/work/presentation_structure_spec.rb
 
 1.8	spec/models/hydramata/work/property_set_spec.rb
 
-1.7	spec/models/hydramata/work/property_spec.rb
+1.8	spec/models/hydramata/work/property_spec.rb
 
-1.4	spec/models/hydramata/work/value_spec.rb
+1.2	spec/models/hydramata/work/value_spec.rb
 
-2.0	spec/models/hydramata/work/work_type_spec.rb
+2.1	spec/models/hydramata/work/work_type_spec.rb
 
-1.8	spec/models/hydramata/work/work_types/storage_spec.rb
+2.0	spec/models/hydramata/work/work_types/storage_spec.rb
 
 1.7	spec/models/hydramata/work/work_types_spec.rb
 
@@ -66,30 +68,30 @@
 
 1.2	spec/parsers/hydramata/work/predicate_parser_spec.rb
 
-1.2	spec/parsers/hydramata/work/predicate_parsers/simple_parser_spec.rb
+1.3	spec/parsers/hydramata/work/predicate_parsers/simple_parser_spec.rb
 
 1.3	spec/parsers/hydramata/work/value_parser_spec.rb
 
-1.3	spec/parsers/hydramata/work/value_parsers/simple_parser_spec.rb
+1.2	spec/parsers/hydramata/work/value_parsers/simple_parser_spec.rb
 
 1.2	spec/parsers/hydramata/work/value_parsers_spec.rb
 
 1.2	spec/presenters/hydramata/work/base_presenter_spec.rb
 
-1.7	spec/presenters/hydramata/work/entity_presenter_spec.rb
+1.8	spec/presenters/hydramata/work/entity_presenter_spec.rb
 
 1.2	spec/presenters/hydramata/work/fieldset_presenter_spec.rb
 
-1.5	spec/presenters/hydramata/work/property_presenter_spec.rb
+1.3	spec/presenters/hydramata/work/property_presenter_spec.rb
 
-1.4	spec/renderers/hydramata/work/entity_renderer_spec.rb
+1.2	spec/renderers/hydramata/work/entity_renderer_spec.rb
 
-1.8	spec/views/hydramata/work/fieldsets/_show.html.erb_spec.rb
+1.9	spec/views/hydramata/work/fieldsets/_show.html.erb_spec.rb
 
-2.3	spec/views/hydramata/work/properties/_show.html.erb_spec.rb
+2.0	spec/views/hydramata/work/properties/_show.html.erb_spec.rb
 
-1.8	spec/views/hydramata/work/works/_show.html.erb_spec.rb
+2.3	spec/views/hydramata/work/works/_show.html.erb_spec.rb
 
-1.3	spec/wranglers/hydramata/work/fedora_wrangler_spec.rb
+2.0	spec/wranglers/hydramata/work/fedora_wrangler_spec.rb
 
-3.1	total-time-for-specs-run-together
+6.5	total-time-for-specs-run-together
