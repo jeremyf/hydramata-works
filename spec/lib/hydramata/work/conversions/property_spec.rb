@@ -1,4 +1,4 @@
-require 'spec_slow_helper'
+require 'spec_fast_helper'
 require 'hydramata/work/conversions/property'
 
 module Hydramata
