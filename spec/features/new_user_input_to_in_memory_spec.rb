@@ -1,6 +1,8 @@
-require 'spec_slow_helper'
+require 'spec_active_record_helper'
+require 'hydramata/work/entity'
 require 'hydramata/work/work_types/storage'
-require 'hydramata/work/conversions'
+require 'hydramata/work/conversions/work_type'
+require 'hydramata/work/conversions/property'
 
 module Hydramata
   module Work
