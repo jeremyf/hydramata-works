@@ -8,6 +8,7 @@ module Hydramata
     module Conversions
       private
       def PropertySet(input)
+        return input.to_property_set if input.respond_to?(:to_property_set)
 
         case input
         when PropertySet then input

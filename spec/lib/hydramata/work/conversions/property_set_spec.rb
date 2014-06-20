@@ -9,8 +9,13 @@ module Hydramata
       include Conversions
 
       context '#PropertySet' do
+        it 'should convert an object that implements #to_property_set' do
+          object = double('Object', to_property_set: PropertySet.new )
+          expect(PropertySet(object)).to implement_property_set_interface
+        end
+
         it 'should raise an error object is unexpected' do
-          expect { PredicateSet([]) }.to raise_error
+          expect { PropertySet([]) }.to raise_error
         end
 
         it 'should convert a PredicateSet to a PropertySet' do
