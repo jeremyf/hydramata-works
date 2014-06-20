@@ -11,6 +11,7 @@ module Hydramata
       context '#PresentedFieldsets' do
         let(:entity) do
           Entity.new.tap do |entity|
+            entity.work_type = 'Hello'
             entity.properties << { predicate: :title, value: 'Hello' }
             entity.properties << { predicate: :title, value: 'World' }
             entity.properties << { predicate: :title, value: 'Bang!' }
