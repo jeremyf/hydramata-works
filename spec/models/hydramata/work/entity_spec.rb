@@ -1,19 +1,16 @@
 require 'spec_fast_helper'
 require 'hydramata/work/entity'
-require 'hydramata/work/linters'
+require 'hydramata/work/linters/implement_entity_interface_matcher'
 
 module Hydramata
   module Work
     describe Entity do
       subject { described_class.new }
-      it_behaves_like 'a work entity'
+      it { should implement_entity_interface }
 
       let(:predicate) { :title }
       let(:value) { 'Hello' }
       let(:property) { Property.new(predicate: predicate, value: value) }
-
-      it { should respond_to :work_type }
-      it { should respond_to :work_type= }
 
       context '#properties' do
         it 'can be appended' do

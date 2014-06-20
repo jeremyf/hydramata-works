@@ -57,32 +57,3 @@ shared_examples 'a value parser' do |default_parser|
     end
   end
 end
-
-shared_examples 'a work entity' do |entity_builder|
-  let(:entity_class) { (entity_builder || described_class) }
-
-  context 'its #initialize method' do
-    it 'does not have a required first parameter' do
-      expect(entity_class.instance_method(:initialize).parameters.first[0]).to eq(:opt)
-    end
-    it 'takes a block' do
-      expect(entity_class.instance_method(:initialize).parameters.last[1]).to eq(:block)
-    end
-  end
-
-  context 'instance methods' do
-    subject { entity_class.new }
-    it { should respond_to(:to_translation_key_fragment) }
-    it { should respond_to(:work_type) }
-    it { should respond_to(:name_for_application_usage) }
-  end
-
-  context 'its #properties method' do
-    subject { entity_class.new.properties }
-    it { should be_a_kind_of(Enumerable) }
-    it { should respond_to(:<<) }
-    it { should respond_to(:[]) }
-    it { should respond_to(:each) }
-    it { should respond_to(:fetch) }
-  end
-end
