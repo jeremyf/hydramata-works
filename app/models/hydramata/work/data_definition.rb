@@ -7,8 +7,6 @@ module Hydramata
     class DataDefinition
       include Comparable
 
-      attr_reader :identity
-      attr_writer :name_for_application_usage
 
       def initialize(attributes = {})
         attributes.each do |key, value|
@@ -19,10 +17,16 @@ module Hydramata
         self.freeze
       end
 
+      attr_writer :name_for_application_usage
       def name_for_application_usage
         @name_for_application_usage || identity
       end
 
+      def to_translation_key_fragment
+        name_for_application_usage
+      end
+
+      attr_reader :identity
       def identity=(value)
         @identity = value.to_s
       end

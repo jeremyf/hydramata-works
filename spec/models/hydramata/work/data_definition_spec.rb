@@ -37,13 +37,14 @@ module Hydramata
         end
       end
 
-      context '#name_for_application_usage' do
+      context '#to_translation_key_fragment' do
         it 'should default to identity if no name is given for application usage' do
-          expect(subject.name_for_application_usage).to eq subject.identity
+          expect(subject.to_translation_key_fragment).to eq subject.identity
         end
+
         it 'should default to identity if no name is given for application usage' do
           subject = described_class.new(identity: 'My Identity', name_for_application_usage: 'Twonky')
-          expect(subject.name_for_application_usage).to eq 'Twonky'
+          expect(subject.to_translation_key_fragment).to eq 'Twonky'
         end
       end
 
