@@ -1,4 +1,4 @@
-<fieldset class="<%= edit.dom_class %>">
-  <caption><%= edit.translate(:name) %></caption>
-  <% edit.each do |property| %><%= property.render(template: self, locals: { form: form }) %><% end %>
+<fieldset class="<%= edit.dom_class %> fieldset">
+  <caption><%= edit.t(:name) %></caption>
+  <% edit.properties.each do |property| %><%= property.render(template: self, locals: { form: form }) %><% end %>
 </fieldset>
