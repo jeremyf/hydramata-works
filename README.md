@@ -109,6 +109,7 @@ But are instead a parking lot that may be cleared or added to.
 - [X] Improve internationalization support by providing a better key path.
 - [X] Add view tests for show templates
 - [ ] Add view tests for edit templates
+- [ ] Reify an object from persistence then apply value changes
 - [ ] Review view rendering path options; Presently the top level work type is created.
 - [X] Create a NullWorkType concept.
       It would be helpful to create a Null Work Type, so our application doesn't choke.
