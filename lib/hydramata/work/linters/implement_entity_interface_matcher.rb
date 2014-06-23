@@ -6,6 +6,7 @@ RSpec::Matchers.define :implement_entity_interface do
     self,
     'Entity',
     properties: [:<<, :each, :fetch, :[]],
+    has_property?: [],
     name_for_application_usage: [],
     work_type: [],
     identity: [],

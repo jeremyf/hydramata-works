@@ -43,6 +43,19 @@ module Hydramata
 
       private
 
+      def respond_to_missing?(method_name, include_all = false)
+        super || __getobj__.has_property?(method_name)
+      end
+
+      def method_missing(method_name, *args, &block)
+        if __getobj__.has_property?(method_name)
+          # @TODO - The Law of Demeter is being violated.
+          __getobj__.properties.fetch(method_name).values
+        else
+          super
+        end
+      end
+
       def default_error_container
         require 'active_model/errors'
         ActiveModel::Errors.new(self)
