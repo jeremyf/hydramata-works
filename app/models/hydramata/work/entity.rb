@@ -32,6 +32,10 @@ module Hydramata
         @identity = value
       end
 
+      def has_property?(predicate)
+        properties.key?(predicate)
+      end
+
       attr_reader :properties, :identity
 
       def to_translation_key_fragment

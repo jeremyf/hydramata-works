@@ -63,6 +63,16 @@ module Hydramata
           end
         end
 
+        context '#key?' do
+          it 'should be false if predicate does not exist' do
+            expect(subject.key?(:missing)).to be_falsey
+          end
+
+          it 'should return the values if the predicate exists' do
+            expect(subject.key?(property.predicate)).to be_truthy
+          end
+        end
+
         context '#[]' do
           it 'should return nil if the predicate is not found' do
             expect(subject[:missing]).to eq(Property.new(predicate: :missing))

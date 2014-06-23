@@ -12,6 +12,15 @@ module Hydramata
       let(:value) { 'Hello' }
       let(:property) { Property.new(predicate: predicate, value: value) }
 
+      context '#has_property?' do
+        it 'changes from false to true when the property is added' do
+          expect { subject.properties << property }.
+            to change { subject.has_property?(predicate) }.
+            from(false).
+            to(true)
+        end
+      end
+
       context '#properties' do
         it 'can be appended' do
           expect { subject.properties << property }.

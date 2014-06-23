@@ -40,6 +40,10 @@ module Hydramata
         property_store.fetch(key.to_s)
       end
 
+      def key?(key)
+        property_store.key?(key.to_s)
+      end
+
       def ==(other)
         # Because property_store is a private method.
         (other.instance_of?(property_store.class) && property_store == other) ||
