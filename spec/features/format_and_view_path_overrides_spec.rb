@@ -46,7 +46,7 @@ module Hydramata
       end
 
       let(:entity) do
-        Entity.new.tap do |entity|
+        Entity.new do |entity|
           entity.work_type = 'article'
           entity.properties << { predicate: :title, value: 'Hello' }
         end

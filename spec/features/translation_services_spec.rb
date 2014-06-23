@@ -10,7 +10,7 @@ module Hydramata
   module Work
     describe 'translation services' do
       include Conversions
-      let(:entity) { Entity.new.tap {|e| e.work_type = work_type } }
+      let(:entity) { Entity.new {|e| e.work_type = work_type } }
 
       context 'for entities' do
         let(:presenter) { EntityPresenter.new(entity: entity, presentation_structure: nil) }

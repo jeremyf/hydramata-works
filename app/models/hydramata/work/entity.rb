@@ -14,6 +14,8 @@ module Hydramata
       include Conversions
 
       def initialize(collaborators = {}, &block)
+        self.work_type = collaborators[:work_type] if collaborators.key?(:work_type)
+        self.identity = collaborators[:identity] if collaborators.key?(:identity)
         @properties = collaborators.fetch(:properties_container) { default_properties_container }
         block.call(self) if block_given?
       end
@@ -26,7 +28,11 @@ module Hydramata
         @work_type ||= WorkType()
       end
 
-      attr_reader :properties
+      def identity=(value)
+        @identity = value
+      end
+
+      attr_reader :properties, :identity
 
       def to_translation_key_fragment
         work_type.to_translation_key_fragment

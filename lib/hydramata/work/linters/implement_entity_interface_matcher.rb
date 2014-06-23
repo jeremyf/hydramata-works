@@ -8,6 +8,7 @@ RSpec::Matchers.define :implement_entity_interface do
     properties: [:<<, :each, :fetch, :[]],
     name_for_application_usage: [],
     work_type: [],
+    identity: [],
     to_translation_key_fragment: []
   )
 end
