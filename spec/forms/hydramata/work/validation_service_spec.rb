@@ -17,12 +17,12 @@ module Hydramata
       end
       let(:predicates_with_validations) { [ [:title, { presence: true } ] ] }
       let(:entity_form) { EntityForm.new(entity) }
-      subject { described_class.new(entity_form) }
+      subject { described_class }
 
       context '#call' do
         it 'runs validations attached to each predicate' do
           expect(entity_form).to receive(:predicates_with_validations).and_return(predicates_with_validations)
-          expect { subject.call }.
+          expect { subject.call(entity_form) }.
             to change { entity_form.errors.full_messages }.
             from([]).
             to(['title can\'t be blank'])
@@ -30,7 +30,7 @@ module Hydramata
 
         it 'returns nil regardless of errors' do
           expect(entity_form).to receive(:predicates_with_validations).and_return([])
-          expect(subject.call).to be_nil
+          expect(subject.call(entity_form)).to be_nil
         end
 
       end
