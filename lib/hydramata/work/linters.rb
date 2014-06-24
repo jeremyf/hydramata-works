@@ -60,9 +60,9 @@ end
 
 # put the file into spec/support
 shared_examples_for 'ActiveModel' do
-  require 'test/unit/assertions'
+  require 'minitest/assertions'
   require 'active_model/lint'
-  include Test::Unit::Assertions
+  include MiniTest::Assertions
   include ActiveModel::Lint::Tests
 
   # to_s is to support ruby-1.9
@@ -74,5 +74,11 @@ shared_examples_for 'ActiveModel' do
 
   def model
     subject
+  end
+
+  # Because minitest assumes a method #assertions that is an integer.
+  attr_accessor :assertions
+  def assertions
+    @assertions ||= 0
   end
 end
