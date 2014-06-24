@@ -7,14 +7,31 @@ module Hydramata
   module Work
     describe EntityForm do
       let(:identity) { nil }
+      let(:validation_service) { double(call: true) }
       let(:entity) do
         Entity.new(identity: identity) do |entity|
           entity.properties << { predicate: :first_name, value: 'Jeremy' }
         end
       end
-      subject { described_class.new(entity) }
+      subject { described_class.new(entity, validation_service: validation_service) }
 
       it_behaves_like 'ActiveModel'
+
+      context 'valid?' do
+        context 'when errors are not set' do
+          let(:validation_service) { double(call: true) }
+          it 'should be true (eg valid)' do
+            expect(subject.valid?).to be_truthy
+            expect(validation_service).to have_received(:call)
+          end
+        end
+        context 'when errors are encountered' do
+          let(:validation_service) { ->(entity) { entity.errors.add(:base, 'Found some errors!') } }
+          it 'should be false (eg not valid)' do
+            expect(subject.valid?).to be_falsey
+          end
+        end
+      end
 
       it 'has a meaningful inspect' do
         expect(subject.inspect).to include("EntityForm")
