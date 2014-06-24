@@ -21,7 +21,7 @@ module Hydramata
               method_expectations[method_name] = value
             end
 
-            description { "implemenents the #{input_klass_name} interface" }
+            description { "implemenent the #{input_klass_name} interface" }
           end
 
           context.module_exec do
