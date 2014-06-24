@@ -8,7 +8,7 @@ module Hydramata
       it_behaves_like 'a presented entity'
 
       let(:presentation_structure) { double('PresentationStructure') }
-      let(:entity) { double('Entity', work_type: 'My Work Type') }
+      let(:entity) { Entity.new(work_type: 'My Work Type') }
       let(:presented_fieldset_builder) { double('Builder', call: true) }
       let(:template) { double('Template', render: true) }
       subject do
@@ -23,11 +23,6 @@ module Hydramata
       it 'should have #fieldsets that are extracted from the #entity and #presentation_structure' do
         subject.fieldsets
         expect(presented_fieldset_builder).to have_received(:call).with(entity: subject, presentation_structure: presentation_structure)
-      end
-
-      it 'delegates :work_type to :entity' do
-        subject.work_type
-        expect(entity).to have_received(:work_type).at_least(1).times
       end
 
       it 'should have a default partial prefixes' do

@@ -36,13 +36,13 @@ module Hydramata
 
       def default_partial_prefixes
         [
-          [TranslationKeyFragment(work_type)]
+          [TranslationKeyFragment(self)]
         ]
       end
 
       def default_translation_scopes
         [
-          ['works', TranslationKeyFragment(work_type)]
+          ['works', TranslationKeyFragment(self)]
         ]
       end
 
