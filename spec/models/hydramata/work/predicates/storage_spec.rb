@@ -10,7 +10,6 @@ module Hydramata
 
       describe Storage do
         subject { described_class.new }
-        it { should implement_predicate_interface }
 
         let(:identity) { 'http://hello.com/world' }
         let(:predicate) do
@@ -20,7 +19,8 @@ module Hydramata
             datastream_name: 'descMetadata',
             value_coercer_name: 'SimpleParser',
             value_parser_name: 'SimpleParser',
-            indexing_strategy: 'dsti'
+            indexing_strategy: 'dsti',
+            validations: '{ "presence": { "on": "create" } }'
           )
         end
 
@@ -34,7 +34,7 @@ module Hydramata
 
           it 'returns a Predicate object when identity exists' do
             predicate # creating the object
-            expect(described_class.find_by_identity!(identity)).to implement_predicate_interface
+            expect(described_class.find_by_identity!(identity)).to eq(predicate)
           end
 
           it 'returns nil when identity is missing' do

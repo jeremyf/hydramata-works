@@ -14,8 +14,9 @@ module Hydramata
 
       attr_reader :predicate_sets
       def predicate_sets=(things)
+        @predicate_sets = []
         Array.wrap(things).each do |thing|
-          self.predicate_sets << PredicateSet(thing)
+          @predicate_sets << PredicateSet(thing)
         end
       end
 

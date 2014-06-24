@@ -8,6 +8,7 @@ module Hydramata
       # strategy for predicates.
       class Storage < ActiveRecord::Base
         self.table_name = :hydramata_work_predicates
+
         def self.find_by_identity!(identity)
           where(identity: identity).first!
         end

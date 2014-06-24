@@ -114,6 +114,7 @@ But are instead a parking lot that may be cleared or added to.
 - [X] Add PresentationStructure builder by WorkType; This is done by interrogating the
       data storage.
 - [ ] Add support for multi rails
+- [ ] When persisting Validations make sure to validate that the serialized document is valid
 - [X] Conversion for Entity to EntityPresenter; Or Presenter() conversion
 - [X] Create a NullWorkType concept.
       It would be helpful to create a Null Work Type, so our application doesn't choke.
