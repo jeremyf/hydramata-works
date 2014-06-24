@@ -10,12 +10,14 @@ module Hydramata
       def initialize(entity, collaborators = {})
         __setobj__(entity)
         @errors = collaborators.fetch(:error_container) { default_error_container }
+        @validation_service = collaborators.fetch(:validation_service) { default_validation_service }
       end
 
-      attr_reader :errors
+      attr_reader :errors, :validation_service
 
-      def inspect
-        format('#<%s:%#0x entity=%s>', EntityForm, __id__, __getobj__.inspect)
+      def valid?
+        validate
+        errors.size == 0
       end
 
       def to_key
@@ -35,10 +37,24 @@ module Hydramata
         identity.present?
       end
 
+      # Needed for Validator interaction
+      def self.human_attribute_name(attr, options = {})
+        attr
+      end
+
       def self.model_name
         # @TODO - allow overwrite of the ActiveModel::Name, which may require
         # overwriting #class to be something else.
         @_model_name ||= ActiveModel::Name.new(self, Hydramata::Work)
+      end
+
+      # Needed for Validator interaction
+      def read_attribute_for_validation(attribute_name)
+        send(attribute_name)
+      end
+
+      def inspect
+        format('#<%s:%#0x entity=%s>', EntityForm, __id__, __getobj__.inspect)
       end
 
       private
@@ -60,6 +76,16 @@ module Hydramata
         require 'active_model/errors'
         ActiveModel::Errors.new(self)
       end
+
+      def default_validation_service
+        require 'hydramata/work/validation_service'
+        ValidationService
+      end
+
+      def validate
+        validation_service.call(self)
+      end
+
     end
   end
 end
