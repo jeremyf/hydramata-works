@@ -17,6 +17,7 @@ module Hydramata
         self.work_type = collaborators[:work_type] if collaborators.key?(:work_type)
         self.identity = collaborators[:identity] if collaborators.key?(:identity)
         @properties = collaborators.fetch(:properties_container) { default_properties_container }
+        @presenter_builder = collaborators.fetch(:presenter_builder) { default_presenter_builder }
         block.call(self) if block_given?
       end
 
@@ -46,11 +47,24 @@ module Hydramata
         work_type.name_for_application_usage
       end
 
+      attr_reader :presenter_builder
+      private :presenter_builder
+
+      def to_presenter
+        presenter_builder.call(self)
+      end
+
       private
+
 
       def default_properties_container
         require 'hydramata/work/property_set'
         PropertySet.new(entity: self)
+      end
+
+      def default_presenter_builder
+        require 'hydramata/work/entity_presenter'
+        ->(entity) { EntityPresenter.new(entity: entity) }
       end
     end
   end

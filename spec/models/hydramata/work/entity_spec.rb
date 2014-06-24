@@ -12,6 +12,16 @@ module Hydramata
       let(:value) { 'Hello' }
       let(:property) { Property.new(predicate: predicate, value: value) }
 
+
+      context '#to_presenter' do
+        let(:presenter_builder) { double('Presenter Builder', call: :built) }
+        subject { described_class.new(presenter_builder: presenter_builder) }
+        it 'should call the presenter_builder' do
+          expect(subject.to_presenter).to eq(:built)
+          expect(presenter_builder).to have_received(:call).with(subject)
+        end
+      end
+
       context '#has_property?' do
         it 'changes from false to true when the property is added' do
           expect { subject.properties << property }.

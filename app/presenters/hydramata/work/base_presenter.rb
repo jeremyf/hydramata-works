@@ -49,6 +49,10 @@ module Hydramata
         __getobj__.respond_to?(:name) ? __getobj__.name : __getobj__.name_for_application_usage
       end
 
+      def to_presenter
+        self
+      end
+
       private
 
       def base_dom_class

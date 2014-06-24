@@ -15,6 +15,10 @@ module Hydramata
       let(:translator) { double('Translator', t: true) }
       subject { described_class.new(object, translator: translator) }
 
+      it 'should return self for #to_presenter' do
+        expect(subject.to_presenter.object_id).to eq(subject.object_id)
+      end
+
       it 'should have a friendly inspect message, because tracking it down could be a pain' do
         expect(subject.inspect).to include("#{described_class}")
         expect(subject.inspect).to include(object.inspect)

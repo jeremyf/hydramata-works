@@ -111,10 +111,10 @@ But are instead a parking lot that may be cleared or added to.
 - [ ] Add view tests for edit templates
 - [ ] Reify an object from persistence then apply value changes
 - [ ] Review view rendering path options; Presently the top level work type is created.
-- [ ] Add PresentationStructure builder by WorkType; This is done by interrogating the
+- [X] Add PresentationStructure builder by WorkType; This is done by interrogating the
       data storage.
 - [ ] Add support for multi rails
-- [ ] Conversion for Entity to EntityPresenter; Or Presenter() conversion
+- [X] Conversion for Entity to EntityPresenter; Or Presenter() conversion
 - [X] Create a NullWorkType concept.
       It would be helpful to create a Null Work Type, so our application doesn't choke.
 - [X] Add internationalization for Work Type contexts:
