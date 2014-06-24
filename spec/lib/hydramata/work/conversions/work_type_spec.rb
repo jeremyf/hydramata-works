@@ -8,6 +8,9 @@ module Hydramata
       include Conversions
 
       context '#WorkType' do
+        it 'should not convert something that is not empty' do
+          expect{ WorkType(double(:empty? => false)) }.to raise_error
+        end
         it 'should convert an empty value to a WorkType null object' do
           expect(WorkType()).to implement_work_type_interface.with(:identity, 'unknown')
         end
