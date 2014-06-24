@@ -1,10 +1,12 @@
-require 'hydramata/work/conversions/value'
 require 'hydramata/work/conversions/predicate'
-require 'hydramata/work/conversions/work_type'
-require 'hydramata/work/conversions/property'
 require 'hydramata/work/conversions/predicate_set'
-require 'hydramata/work/conversions/property_set'
 require 'hydramata/work/conversions/presented_fieldsets'
+require 'hydramata/work/conversions/presenter'
+require 'hydramata/work/conversions/property'
+require 'hydramata/work/conversions/property_set'
+require 'hydramata/work/conversions/translation_key_fragment'
+require 'hydramata/work/conversions/value'
+require 'hydramata/work/conversions/work_type'
 
 module Hydramata
   module Work
