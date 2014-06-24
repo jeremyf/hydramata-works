@@ -95,19 +95,11 @@ module Hydramata
         end
       end
 
-      let(:presentation_structure) do
-        PresentationStructure.new do |structure|
-          structure.fieldsets << predicate_set_required
-          structure.fieldsets << predicate_set_optional
-        end
-      end
-
       let(:presentation_context) { :show }
 
       let(:entity_presenter) do
         EntityPresenter.new(
           entity: entity,
-          presentation_structure: presentation_structure,
           presentation_context: presentation_context
         )
       end
