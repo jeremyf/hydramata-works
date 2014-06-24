@@ -18,6 +18,8 @@ module Hydramata
           self.predicate_sets << PredicateSet(thing)
         end
       end
+
+      alias_method :fieldsets, :predicate_sets
     end
   end
 end
