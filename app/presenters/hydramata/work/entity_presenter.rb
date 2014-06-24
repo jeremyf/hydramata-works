@@ -8,10 +8,10 @@ module Hydramata
     class EntityPresenter < BasePresenter
       include Conversions
 
-      attr_reader :entity, :presentation_structure, :presented_fieldset_builder
+      attr_reader :presentation_structure, :presented_fieldset_builder
       def initialize(collaborators = {})
-        @entity = collaborators.fetch(:entity)
-        super(@entity, collaborators)
+        entity = collaborators.fetch(:entity)
+        super(entity, collaborators)
         @presentation_structure = collaborators.fetch(:presentation_structure) { default_presentation_structure }
         @presented_fieldset_builder = collaborators.fetch(:presented_fieldset_builder) { default_presented_fieldset_builder }
       end
@@ -27,7 +27,7 @@ module Hydramata
       end
 
       def base_dom_class
-        entity.work_type.to_s.downcase.gsub(/[\W_]+/, '-')
+        work_type.to_s.downcase.gsub(/[\W_]+/, '-')
       end
 
       def default_presented_fieldset_builder
@@ -36,13 +36,13 @@ module Hydramata
 
       def default_partial_prefixes
         [
-          [TranslationKeyFragment(entity.work_type)]
+          [TranslationKeyFragment(work_type)]
         ]
       end
 
       def default_translation_scopes
         [
-          ['works', TranslationKeyFragment(entity.work_type)]
+          ['works', TranslationKeyFragment(work_type)]
         ]
       end
 
