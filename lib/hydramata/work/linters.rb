@@ -62,7 +62,7 @@ end
 shared_examples_for 'ActiveModel' do
   require 'minitest/assertions'
   require 'active_model/lint'
-  include MiniTest::Assertions
+  include Minitest::Assertions
   include ActiveModel::Lint::Tests
 
   # to_s is to support ruby-1.9
