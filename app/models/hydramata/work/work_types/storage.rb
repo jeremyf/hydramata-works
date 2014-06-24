@@ -28,7 +28,12 @@ module Hydramata
         end
 
         def to_work_type
-          WorkType.new(attributes)
+          WorkType.new(attributes_for_work_type)
+        end
+
+        private
+        def attributes_for_work_type
+          attributes.merge(predicate_sets: predicate_sets)
         end
       end
     end

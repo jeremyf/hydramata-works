@@ -12,6 +12,12 @@ module Hydramata
       it { should implement_work_type_interface }
       it { should implement_data_definition_interface }
 
+      context '#predicate_sets=' do
+        it 'handles predicate set conversion' do
+          subject = described_class.new(identity: 'My Identity', predicate_sets: ['one predicate', 'two predicate'])
+          expect(subject.predicate_sets).to eq([PredicateSet.new(identity: 'one predicate'), PredicateSet.new(identity: 'two predicate')])
+        end
+      end
     end
   end
 end
