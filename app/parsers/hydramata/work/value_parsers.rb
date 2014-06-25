@@ -9,7 +9,12 @@ module Hydramata
       def find(options = {})
         predicate = options.fetch(:predicate)
         parser_class_name = predicate.value_parser_name
-        if const_defined?(parser_class_name)
+
+        # Catching behavioral difference between const_defined? in Ruby 2.0 and
+        # Ruby 2.1
+        if parser_class_name =~ /\A::/
+          SimpleParser
+        elsif const_defined?(parser_class_name)
           const_get(parser_class_name)
         else
           SimpleParser
