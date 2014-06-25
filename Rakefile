@@ -13,6 +13,9 @@ rescue LoadError
   puts "Unable to load all app tasks for #{APP_RAKEFILE}"
 end
 
+# http://stackoverflow.com/questions/23165506/rails-spring-breaking-generators
+# https://github.com/cbeer/engine_cart/issues/15
+ENV['ENGINE_CART_RAILS_OPTIONS'] ||= '--skip-spring'
 require 'engine_cart/rake_task'
 require 'rspec/core/rake_task'
 
