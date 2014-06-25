@@ -58,27 +58,42 @@ shared_examples 'a value parser' do |default_parser|
   end
 end
 
-# put the file into spec/support
 shared_examples_for 'ActiveModel' do
-  require 'minitest/assertions'
-  require 'active_model/lint'
-  include Minitest::Assertions
-  include ActiveModel::Lint::Tests
-
-  # to_s is to support ruby-1.9
-  ActiveModel::Lint::Tests.public_instance_methods.map{|m| m.to_s}.grep(/^test/).each do |method_name|
-    example method_name.gsub('_',' ') do
-      send method_name
-    end
+  # From the ActiveModel::Lint::Test model
+  it 'implements #to_key' do
+    expect(subject).to respond_to(:to_key)
+    def subject.persisted?() false end
+    expect(subject.to_key).to be_nil
   end
 
-  def model
-    subject
+  it 'implements #to_param' do
+    expect(subject).to respond_to(:to_param)
+    def subject.to_key() [1] end
+    def subject.persisted?() false end
+    expect(subject.to_param).to be_nil
   end
 
-  # Because minitest assumes a method #assertions that is an integer.
-  attr_accessor :assertions
-  def assertions
-    @assertions ||= 0
+  def test_to_partial_path
+    expect(subject).to respond_to(:to_partial_path)
+    expect(subject.to_partial_path).to be_a_kind_of(String)
+  end
+
+  def test_persisted?
+    expect(subject).to respond_to(:persisted?)
+    expect([true, false]).to include(subject.persisted?)
+  end
+
+  def test_model_naming
+    expect(subject.class).to respond_to(:model_name)
+    model_name = subject.class.model_name
+    expect(model_name).to respond_to(:to_str)
+    expect(model_name.human).to respond_to(:to_str)
+    expect(model_name.singular).to respond_to(:to_str)
+    expect(model_name.plural).to respond_to(:to_str)
+  end
+
+  def test_errors_aref
+    expect(subject).to respond_to(:errors)
+    expect(subject.errors[:hello]).to be_an_instance_of(Array)
   end
 end
