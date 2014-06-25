@@ -17,7 +17,12 @@ module Hydramata
 
         context '#to_work_type' do
           it 'returns a WorkType object' do
-            expect(described_class.new.to_work_type).to implement_work_type_interface
+            work_type = described_class.new do |work_type|
+              work_type.predicate_sets.build(identity: 'hello')
+            end.to_work_type
+
+            expect(work_type).to implement_work_type_interface
+            expect(work_type.predicate_sets.size).to eq(1)
           end
         end
 
