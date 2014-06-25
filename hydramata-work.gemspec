@@ -32,6 +32,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'psych', '~> 2.0.5'
 
   s.add_development_dependency 'engine_cart', '~> 0.3'
+  s.add_development_dependency 'minitest'
   s.add_development_dependency 'rspec', '~> 3.0'
   s.add_development_dependency 'rspec-rails', '~> 3.0'
   s.add_development_dependency 'rspec-html-matchers', '~>0.6'
