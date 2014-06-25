@@ -24,6 +24,8 @@ module Hydramata
           )
         end
 
+        it { should implement_predicate_interface }
+
         context '#to_predicate' do
           it 'coerces itself to a predicate' do
             expect(described_class.new.to_predicate).to implement_predicate_interface
@@ -34,7 +36,7 @@ module Hydramata
 
           it 'returns a Predicate object when identity exists' do
             predicate # creating the object
-            expect(described_class.find_by_identity!(identity)).to eq(predicate)
+            expect(described_class.find_by_identity!(identity)).to implement_predicate_interface
           end
 
           it 'returns nil when identity is missing' do

@@ -10,7 +10,7 @@ RSpec::Matchers.define :implement_predicate_interface do
     datastream_name: [],
     value_coercer_name: [],
     value_parser_name: [],
-    validations: [:each],
+    validations: [],
     indexing_strategy: []
   )
 end
