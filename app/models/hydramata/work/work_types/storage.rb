@@ -17,7 +17,9 @@ module Hydramata
         end
 
         def self.existing_attributes_for(identity)
-          find_by_identity!(identity).attributes
+          # @TODO - Is this the pattern I want to pursue? I liked the method
+          # :as_work_type being private
+          find_by_identity!(identity).as_work_type
         rescue ActiveRecord::RecordNotFound
           { identity: identity }
         rescue ActiveRecord::ConnectionNotEstablished
@@ -28,11 +30,10 @@ module Hydramata
         end
 
         def to_work_type
-          WorkType.new(attributes_for_work_type)
+          WorkType.new(as_work_type)
         end
 
-        private
-        def attributes_for_work_type
+        def as_work_type
           attributes.merge(predicate_sets: predicate_sets)
         end
       end
