@@ -16,6 +16,7 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/jeremyf/hydramata-work'
   s.summary     = 'A Thought Experiement on Modeling Hydramata::Work'
   s.description = 'A Thought Experiement on Modeling Hydramata::Work'
+  s.required_ruby_version = '~> 2.0'
 
   s.license = 'APACHE2'
 

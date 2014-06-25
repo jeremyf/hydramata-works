@@ -12,3 +12,4 @@ documents/**/*.png
 documents/**/*.pdf
 .yardoc
 doc/
+.ruby-version
