@@ -73,17 +73,17 @@ shared_examples_for 'ActiveModel' do
     expect(subject.to_param).to be_nil
   end
 
-  def test_to_partial_path
+  it 'implements #to_partial_path' do
     expect(subject).to respond_to(:to_partial_path)
     expect(subject.to_partial_path).to be_a_kind_of(String)
   end
 
-  def test_persisted?
+  it 'implements #persisted?' do
     expect(subject).to respond_to(:persisted?)
     expect([true, false]).to include(subject.persisted?)
   end
 
-  def test_model_naming
+  it 'implements .model_naming' do
     expect(subject.class).to respond_to(:model_name)
     model_name = subject.class.model_name
     expect(model_name).to respond_to(:to_str)
@@ -92,7 +92,7 @@ shared_examples_for 'ActiveModel' do
     expect(model_name.plural).to respond_to(:to_str)
   end
 
-  def test_errors_aref
+  it 'implements #errors'
     expect(subject).to respond_to(:errors)
     expect(subject.errors[:hello]).to be_an_instance_of(Array)
   end
