@@ -20,6 +20,12 @@ module Hydramata
         @fieldsets ||= presented_fieldset_builder.call(entity: self, presentation_structure: presentation_structure)
       end
 
+      def container_content_tag_attributes
+        {
+          :class => ['work', dom_class]
+        }
+      end
+
       private
 
       def view_path_slug_for_object

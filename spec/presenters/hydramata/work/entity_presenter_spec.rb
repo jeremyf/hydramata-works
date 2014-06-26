@@ -1,5 +1,6 @@
 require 'spec_fast_helper'
 require 'hydramata/work/entity_presenter'
+require 'hydramata/work/entity'
 require 'hydramata/work/linters'
 
 module Hydramata
@@ -14,10 +15,14 @@ module Hydramata
       subject do
         described_class.new(
           entity: entity,
-          presentation_structure: presentation_structure,
+          # presentation_structure: presentation_structure,
           presented_fieldset_builder: presented_fieldset_builder,
           template_missing_exception: [RuntimeError]
         )
+      end
+
+      it 'should have #container_content_tag_attributes' do
+        expect(subject.container_content_tag_attributes).to have_key(:class)
       end
 
       it 'should have #fieldsets that are extracted from the #entity and #presentation_structure' do

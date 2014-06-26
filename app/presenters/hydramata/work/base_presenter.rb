@@ -51,6 +51,10 @@ module Hydramata
         self
       end
 
+      def container_content_tag_attributes
+        {}
+      end
+
       private
 
       def base_dom_class
