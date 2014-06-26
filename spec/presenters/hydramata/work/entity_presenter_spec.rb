@@ -15,7 +15,7 @@ module Hydramata
       subject do
         described_class.new(
           entity: entity,
-          # presentation_structure: presentation_structure,
+          presentation_structure: presentation_structure,
           presented_fieldset_builder: presented_fieldset_builder,
           template_missing_exception: [RuntimeError]
         )
