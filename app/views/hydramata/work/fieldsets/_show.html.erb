@@ -1,4 +1,4 @@
-<section class="<%= show.dom_class %>">
-  <h1 class="heading"><%= show.t(:name)  %></h1>
+<%= content_tag('section', class: "#{show.dom_class}") do %>
+  <%= content_tag('h1', show.t(:name), class: 'heading') %>
   <% show.properties.each do |property| %><%= property.render(template: self) %><% end %>
-</section>
+<% end %>
