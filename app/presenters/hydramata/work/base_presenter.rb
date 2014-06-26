@@ -32,12 +32,10 @@ module Hydramata
         super || __getobj__.instance_of?(klass)
       end
 
-      def dom_class(prefix = nil)
-        if prefix.to_s.strip.size == 0
-          base_dom_class
-        else
-          "#{prefix}-#{base_dom_class}"
-        end
+      def dom_class(options = {})
+        prefix = options.fetch(:prefix, nil)
+        suffix = options.fetch(:suffix, nil)
+        [prefix, base_dom_class, suffix].compact.join('-')
       end
 
       def translate(key)

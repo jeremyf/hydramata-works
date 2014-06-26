@@ -43,7 +43,15 @@ module Hydramata
         end
 
         it 'allows a prefix' do
-          expect(subject.dom_class('edit')).to eq('edit-hello-world')
+          expect(subject.dom_class(prefix: 'edit')).to eq('edit-hello-world')
+        end
+
+        it 'allows a suffix' do
+          expect(subject.dom_class(suffix: '1')).to eq('hello-world-1')
+        end
+
+        it 'allows a prefix and a suffix' do
+          expect(subject.dom_class(prefix: 'edit', suffix: '1')).to eq('edit-hello-world-1')
         end
       end
 
