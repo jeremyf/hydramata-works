@@ -18,6 +18,10 @@ module Hydramata
         __getobj__.work_type || entity.work_type
       end
 
+      def container_content_tag_attributes
+        { class: dom_class}
+      end
+
       private
 
       def default_presentation_context

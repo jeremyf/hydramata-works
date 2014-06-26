@@ -26,6 +26,10 @@ module Hydramata
         expect(subject.render(template: template)).to eq('YES')
       end
 
+      it 'should have #container_content_tag_attributes' do
+        expect(subject.container_content_tag_attributes).to have_key(:class)
+      end
+
       it 'should have an #work_type' do
         expect(subject.work_type).to eq(entity.work_type)
       end
