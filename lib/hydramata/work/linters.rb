@@ -92,7 +92,7 @@ shared_examples_for 'ActiveModel' do
     expect(model_name.plural).to respond_to(:to_str)
   end
 
-  it 'implements #errors'
+  it 'implements #errors' do
     expect(subject).to respond_to(:errors)
     expect(subject.errors[:hello]).to be_an_instance_of(Array)
   end
