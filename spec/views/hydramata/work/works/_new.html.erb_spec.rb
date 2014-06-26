@@ -11,11 +11,11 @@ describe 'hydramata/work/works/_new.html.erb', type: :view do
   let(:fieldset2) { double('Fieldset', render: '<div class="set2">Fieldset 2</div>'.html_safe) }
 
   it 'renders the object and fieldsets' do
-    render partial: 'hydramata/work/works/show', object: object
+    render partial: 'hydramata/work/works/new', object: object
 
-    expect(fieldset1).to have_received(:render).with(template: view)
-    expect(fieldset2).to have_received(:render).with(template: view)
-    expect(rendered).to have_tag('article.work.my-dom-class') do
+    expect(fieldset1).to have_received(:render).with(template: view, locals: { form: kind_of(ActionView::Helpers::FormBuilder) })
+    expect(fieldset2).to have_received(:render).with(template: view, locals: { form: kind_of(ActionView::Helpers::FormBuilder) })
+    expect(rendered).to have_tag('form.work.my-dom-class') do
       with_tag('.set1', text: 'Fieldset 1')
       with_tag('.set2', text: 'Fieldset 2')
     end

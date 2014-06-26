@@ -1,8 +1,8 @@
 <%# @TODO
-Consider replacing form_for with form_tag. By using form_for, the given `edit`
+Consider replacing form_for with form_tag. By using form_for, the given `new`
 object must expose all of the property methods. This may work out as I steer
 towards a solution.
 %>
-<%= form_for new, as: :work, url: '/', method: :post, html: { class: edit.dom_class(prefix: 'new') } do |form| %>
+<%= form_for new, as: :work, url: '/', method: :post, html: { class: [new.dom_class(prefix: 'new'), 'work'] } do |form| %>
   <% new.fieldsets.each do |fieldset| %><%= fieldset.render(template: self, locals: { form: form } ) %><% end %>
 <% end %>
