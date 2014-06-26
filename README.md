@@ -83,7 +83,7 @@ In each layer, there is a concept of a Work and its data structure.
 - [ ] Memory -> Solr Document
 - [X] UI Input for New -> Memory
 - [ ] UI Input for Edit -> Memory
-- [ ] Validation in Memory Object
+- [X] Validation in Memory Object
 
 ## Low Level Tasks
 
@@ -105,7 +105,8 @@ But are instead a parking lot that may be cleared or added to.
 - [X] Create some rudimentary seeds for Work Types presentation structure
 - [X] Create some rudimentary seeds for Predicates
 - [ ] Disambigutate identity vs. name for application usage
-- [ ] Allow for the declaration of validations for a given Predicate
+- [X] Allow for the declaration of validations for a given Predicate
+- [ ] Tidy up validation services; Presently it has lots of knowledge of Entity's structure
 - [X] Improve internationalization support by providing a better key path.
 - [X] Add view tests for show templates
 - [ ] Add view tests for edit templates
