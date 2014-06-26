@@ -35,6 +35,10 @@ module Hydramata
         identity
       end
 
+      def to_sym
+        to_translation_key_fragment.to_sym
+      end
+
       def <=>(other)
         if other.instance_of?(self.class)
           identity <=> other.identity

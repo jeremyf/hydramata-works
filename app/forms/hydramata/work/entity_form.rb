@@ -2,11 +2,12 @@ require 'delegate'
 require 'active_support/core_ext/module/delegation'
 require 'active_support/core_ext/object/blank'
 require 'active_model/naming'
+require 'hydramata/work/conversions/translation_key_fragment'
 
 module Hydramata
   module Work
     class EntityForm < SimpleDelegator
-
+      include Conversions
       def initialize(entity, collaborators = {})
         __setobj__(entity)
         @errors = collaborators.fetch(:error_container) { default_error_container }
@@ -50,7 +51,7 @@ module Hydramata
 
       # Needed for Validator interaction
       def read_attribute_for_validation(attribute_name)
-        send(attribute_name)
+        send(TranslationKeyFragment(attribute_name))
       end
 
       def inspect

@@ -10,6 +10,7 @@ RSpec::Matchers.define :implement_data_definition_interface do
       :identity=,
       :name_for_application_usage,
       '<=>',
+      :to_sym,
       :name_for_application_usage=
     ]
   )
