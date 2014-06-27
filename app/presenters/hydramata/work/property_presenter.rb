@@ -13,6 +13,10 @@ module Hydramata
 
       private
 
+      def default_dom_attributes
+        { class: [dom_class] }
+      end
+
       def default_presentation_context
         entity.respond_to?(:presentation_context) ? entity.presentation_context : 'show'
       end

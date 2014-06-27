@@ -1,8 +1,4 @@
-<div class="<%= show.dom_class %>">
-  <p class="label"><%= show.t(:name) %></p>
-  <ul>
-<%- show.values.each do |value| -%>
-    <li class="value"><%= value %></li>
+<%= content_tag('dt', show.t(:name), show.container_content_tag_attributes(class: 'label')) %>
+<%- show.values.each_with_index do |value, index| -%>
+  <%= content_tag('dd', value, show.container_content_tag_attributes(class: 'value')) %>
 <%- end -%>
-  </ul>
-</div>

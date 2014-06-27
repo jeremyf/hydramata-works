@@ -18,8 +18,8 @@ describe 'hydramata/work/fieldsets/_show.html.erb', type: :view do
     expect(property2).to have_received(:render).with(template: view)
     expect(rendered).to have_tag('section.my-dom-class') do
       with_tag('.heading', text: 'Heading')
-      with_tag('.property1', text: 'Property 1')
-      with_tag('.property2', text: 'Property 2')
+      with_tag('.metadata .property1', text: 'Property 1')
+      with_tag('.metadata .property2', text: 'Property 2')
     end
   end
 end

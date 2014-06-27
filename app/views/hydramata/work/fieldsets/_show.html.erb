@@ -2,5 +2,7 @@
   <hgroup>
     <%= content_tag('h1', show.t(:name), class: 'heading') %>
   </hgroup>
-  <% show.properties.each do |property| %><%= property.render(template: self) %><% end %>
+  <dl class="metadata">
+    <% show.properties.each do |property| %><%= property.render(template: self) %><% end %>
+  </dl>
 <% end %>
