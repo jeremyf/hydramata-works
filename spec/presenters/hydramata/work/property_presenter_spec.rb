@@ -1,11 +1,12 @@
 require 'spec_fast_helper'
 require 'hydramata/work/property_presenter'
+require 'hydramata/work/entity'
 
 module Hydramata
   module Work
     describe PropertyPresenter do
       let(:fieldset) { double('Fieldset') }
-      let(:entity) { double('Entity', work_type: 'an entity type') }
+      let(:entity) { Entity.new(work_type: 'an entity type') }
       let(:property) { double('Property', predicate: 'my_property') }
       let(:template) { double('Template', render: true) }
       subject do

@@ -1,12 +1,15 @@
 require 'spec_fast_helper'
 require 'hydramata/work/fieldset_presenter'
+require 'hydramata/work/entity'
+require 'hydramata/work/work_type'
 
 module Hydramata
   module Work
     describe FieldsetPresenter do
       let(:fieldset_class) { Struct.new(:name, :work_type) }
-      let(:fieldset) { fieldset_class.new('my_fieldset', 'an entity type') }
-      let(:entity) { double('Entity', work_type: 'an entity type') }
+      let(:fieldset) { fieldset_class.new('my_fieldset', work_type) }
+      let(:work_type) { WorkType.new(identity: 'an entity type') }
+      let(:entity) { Entity.new(work_type: work_type) }
       let(:template) { double('Template', render: true) }
       subject { described_class.new(entity: entity, fieldset: fieldset, presentation_context: 'show', template_missing_exception: [RuntimeError]) }
 
