@@ -1,3 +1,5 @@
+require 'active_support/core_ext/array/wrap'
+
 module Hydramata
   module Work
     # Responsible for coordinating the potentially complicated dom attributes
@@ -10,9 +12,9 @@ module Hydramata
         returning_value = attributes.dup
         defaults.each_pair do |key, value|
           if returning_value.key?(key)
-            returning_value[key] += value
+            returning_value[key] = Array.wrap(returning_value[key]) + Array.wrap(value)
           else
-            returning_value[key] = value
+            returning_value[key] = Array.wrap(value)
           end
         end
         returning_value
