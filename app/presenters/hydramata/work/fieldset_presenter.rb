@@ -21,7 +21,7 @@ module Hydramata
       private
 
       def default_dom_attributes
-        { class: dom_class}
+        { class: [dom_class, presenter_dom_class] }
       end
 
       def default_presentation_context

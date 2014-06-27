@@ -24,10 +24,14 @@ module Hydramata
 
       def default_dom_attributes
         {
-          :class => ['work', dom_class],
+          :class => [dom_class, presenter_dom_class],
           :itemscope => true,
           :itemtype => itemtype_schema_dot_org
         }
+      end
+
+      def presenter_dom_class
+        'work'
       end
 
       def view_path_slug_for_object

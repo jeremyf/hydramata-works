@@ -56,6 +56,10 @@ module Hydramata
         dom_attributes_builder.call(self, options, default_dom_attributes)
       end
 
+      def presenter_dom_class
+        self.class.to_s.split('::').last.sub(/presenter\Z/i,'').downcase
+      end
+
       private
 
       attr_reader :dom_attributes_builder
@@ -82,8 +86,8 @@ module Hydramata
           begin
             rendered = template.render(rendering_options.merge(partial: partial_name(partial_prefix)))
             break
-          # By using the splat operator I am allowing multiple exceptions to
-          # be caught and pass to the next rendering context.
+            # By using the splat operator I am allowing multiple exceptions to
+            # be caught and pass to the next rendering context.
           rescue *template_missing_error
             next
           end

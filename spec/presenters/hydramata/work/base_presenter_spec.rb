@@ -15,6 +15,10 @@ module Hydramata
       let(:translator) { double('Translator', t: true) }
       subject { described_class.new(object, translator: translator) }
 
+      it 'should have #presenter_dom_class' do
+        expect(subject.presenter_dom_class).to eq('base')
+      end
+
       it 'should return self for #to_presenter' do
         expect(subject.to_presenter.object_id).to eq(subject.object_id)
       end
