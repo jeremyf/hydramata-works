@@ -21,6 +21,15 @@ module Hydramata
         @validations = ValidationsParser.call(value)
       end
 
+      attr_reader :itemprop_schema_dot_org
+      def itemprop_schema_dot_org=(value)
+        string = value.to_s.strip
+        if string.size == 0
+          @itemprop_schema_dot_org = nil
+        else
+          @itemprop_schema_dot_org = string
+        end
+      end
     end
   end
 end
