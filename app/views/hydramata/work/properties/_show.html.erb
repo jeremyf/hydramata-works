@@ -1,7 +1,7 @@
 <div class="<%= show.dom_class %>">
   <p class="label"><%= show.t(:name) %></p>
   <ul>
-<%- show.each do |value| -%>
+<%- show.values.each do |value| -%>
     <li class="value"><%= value %></li>
 <%- end -%>
   </ul>

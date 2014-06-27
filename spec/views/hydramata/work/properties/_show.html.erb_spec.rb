@@ -4,10 +4,9 @@ require 'spec_view_helper'
 # This means, without the `type: :view` tag, the render method does not exist
 # in the example context
 describe 'hydramata/work/properties/_show.html.erb', type: :view do
-  let(:object) { double('Object', t: true, dom_class: 'my-dom-class') }
+  let(:object) { double('Object', t: true, dom_class: 'my-dom-class', values: ['value1', 'value2']) }
 
   it 'renders the object and fieldsets' do
-    expect(object).to receive(:each).and_yield('value1').and_yield('value2')
     expect(object).to receive(:t).with(:name).and_return('Label')
     render partial: 'hydramata/work/properties/show', object: object
 
