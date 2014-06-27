@@ -11,7 +11,6 @@ module Hydramata
         super(property, collaborators)
       end
 
-
       private
 
       def default_presentation_context

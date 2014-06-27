@@ -18,11 +18,11 @@ module Hydramata
         __getobj__.work_type || entity.work_type
       end
 
-      def container_content_tag_attributes
+      private
+
+      def default_dom_attributes
         { class: dom_class}
       end
-
-      private
 
       def default_presentation_context
         entity.respond_to?(:presentation_context) ? entity.presentation_context : 'show'

@@ -16,6 +16,7 @@ module Hydramata
         @partial_prefixes = collaborators.fetch(:partial_prefixes) { default_partial_prefixes }
         @translation_scopes = collaborators.fetch(:translation_scopes) { default_translation_scopes }
         @template_missing_error = collaborators.fetch(:template_missing_exception) { default_template_missing_exception }
+        @dom_attributes_builder = collaborators.fetch(:dom_attributes_builder) { default_dom_attributes_builder }
       end
 
       def render(options = {})
@@ -51,11 +52,21 @@ module Hydramata
         self
       end
 
-      def container_content_tag_attributes
-        {}
+      def container_content_tag_attributes(options = {})
+        dom_attributes_builder.call(self, options, default_dom_attributes)
       end
 
       private
+
+      attr_reader :dom_attributes_builder
+      def default_dom_attributes_builder
+        require 'hydramata/work/dom_attributes_builder'
+        DomAttributesBuilder
+      end
+
+      def default_dom_attributes
+        {}
+      end
 
       def base_dom_class
         name.to_s.downcase.gsub(/[\W_]+/, '-')

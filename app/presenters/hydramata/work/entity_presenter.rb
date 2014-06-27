@@ -20,17 +20,15 @@ module Hydramata
         @fieldsets ||= presented_fieldset_builder.call(entity: self, presentation_structure: presentation_structure)
       end
 
-      def container_content_tag_attributes
-        # :itemtype should immediately follow :itemscope
-        # See: http://schema.org/docs/gs.html#microdata_itemscope_itemtype
+      private
+
+      def default_dom_attributes
         {
           :class => ['work', dom_class],
           :itemscope => true,
           :itemtype => itemtype_schema_dot_org
         }
       end
-
-      private
 
       def view_path_slug_for_object
         'works'
