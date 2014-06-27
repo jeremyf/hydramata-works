@@ -5,7 +5,6 @@ require 'hydramata/work/entity'
 module Hydramata
   module Work
     describe PropertyPresenter do
-      let(:fieldset) { double('Fieldset') }
       let(:entity) { Entity.new(work_type: 'an entity type') }
       let(:property) { double('Property', predicate: 'my_property') }
       let(:template) { double('Template', render: true) }
@@ -13,7 +12,6 @@ module Hydramata
         described_class.new(
           property: property,
           entity: entity,
-          fieldset: fieldset,
           presentation_context: 'show',
           template_missing_exception: [RuntimeError]
         )

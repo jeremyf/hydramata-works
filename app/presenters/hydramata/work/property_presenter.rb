@@ -4,10 +4,9 @@ module Hydramata
     # Responsible for coordinating the rendering of an in-memory Property-like
     # object to an output buffer.
     class PropertyPresenter < BasePresenter
-      attr_reader :fieldset, :entity
+      attr_reader :entity
       def initialize(collaborators = {})
         property = collaborators.fetch(:property)
-        @fieldset = collaborators.fetch(:fieldset)
         @entity = collaborators.fetch(:entity)
         super(property, collaborators)
       end
