@@ -1,4 +1,6 @@
 <%= content_tag('dt', show.t(:name), show.container_content_tag_attributes(class: 'label')) %>
 <%- show.values.each_with_index do |value, index| -%>
-  <%= content_tag('dd', value, show.container_content_tag_attributes(class: 'value')) %>
+  <%= content_tag('dd', value.container_content_tag_attributes(class: 'value')) do %>
+    <%= value.render(template: template) %>
+  <%- end -%>
 <%- end -%>

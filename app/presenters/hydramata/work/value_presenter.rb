@@ -1,21 +1,22 @@
 require 'hydramata/work/base_presenter'
 module Hydramata
   module Work
-    # Responsible for coordinating the rendering of an in-memory Property-like
+    # Responsible for coordinating the rendering of an in-memory Value-like
     # object to an output buffer.
-    class PropertyPresenter < BasePresenter
-      attr_reader :entity
+    class ValuePresenter < BasePresenter
+      attr_reader :entity, :predicate
       def initialize(collaborators = {})
-        property = collaborators.fetch(:property)
+        value = collaborators.fetch(:value)
+        @predicate = collaborators.fetch(:predicate)
         @entity = collaborators.fetch(:entity)
-        super(property, collaborators)
-      end
-
-      def values
-        @values ||= __getobj__.values.collect {|value| ValuePresenter.new(value: value, predicate: self, entity: entity) }
+        super(value, collaborators)
       end
 
       private
+
+      def name
+        "#{predicate.name}_value"
+      end
 
       def default_dom_attributes
         { class: [dom_class, presenter_dom_class] }
@@ -26,7 +27,7 @@ module Hydramata
       end
 
       def view_path_slug_for_object
-        'properties'
+        'values'
       end
 
       def default_partial_prefixes
