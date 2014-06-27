@@ -118,8 +118,7 @@ But are instead a parking lot that may be cleared or added to.
 - [ ] dom_class should derive from system symbol for identifier
 - [ ] dom_class should accept prefix and suffix
 - [ ] itemprop: for the Property presenter (for Microdata)
-- [ ] property: for the Property presenter (for RDFa)
-- [ ] itemtype and typeof for WorkType presenter (RDFa and Microdata)
+- [X] itemtype for WorkType presenter (RDFa and Microdata)
 - [ ] When persisting Validations make sure to validate that the serialized document is valid
 - [X] Conversion for Entity to EntityPresenter; Or Presenter() conversion
 - [X] Create a NullWorkType concept.
