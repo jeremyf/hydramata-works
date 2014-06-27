@@ -1,7 +1,11 @@
 module Hydramata
   module Work
+    # Responsible for coordinating the potentially complicated dom attributes
+    # for a given context.
     module DomAttributesBuilder
       module_function
+      # context - a data structure; provided as a placeholder; Maybe we could
+      # supply additional attributes based on the context
       def call(context, attributes = {}, defaults = {})
         returning_value = attributes.dup
         defaults.each_pair do |key, value|
