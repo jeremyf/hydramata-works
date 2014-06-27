@@ -7,6 +7,7 @@ RSpec::Matchers.define :implement_work_type_interface do
     'WorkType',
     identity: [],
     name_for_application_usage: [],
-    predicate_sets: [:each]
+    predicate_sets: [:each],
+    itemtype_schema_dot_org: []
   )
 end

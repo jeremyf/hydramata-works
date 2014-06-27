@@ -26,7 +26,7 @@ module Hydramata
         {
           :class => ['work', dom_class],
           :itemscope => true,
-          :itemtype => 'http://schema.org/Thing'
+          :itemtype => itemtype_schema_dot_org
         }
       end
 

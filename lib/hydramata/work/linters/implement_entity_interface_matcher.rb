@@ -10,6 +10,7 @@ RSpec::Matchers.define :implement_entity_interface do
     name_for_application_usage: [],
     work_type: [],
     identity: [],
-    to_translation_key_fragment: []
+    to_translation_key_fragment: [],
+    itemtype_schema_dot_org: []
   )
 end

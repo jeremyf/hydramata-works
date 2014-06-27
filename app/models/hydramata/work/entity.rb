@@ -47,6 +47,10 @@ module Hydramata
         work_type.name_for_application_usage
       end
 
+      def itemtype_schema_dot_org
+        work_type.itemtype_schema_dot_org
+      end
+
       attr_reader :presenter_builder
       private :presenter_builder
 
