@@ -22,7 +22,7 @@ module Hydramata
       end
 
       it 'should have #container_content_tag_attributes' do
-        expect(subject.container_content_tag_attributes).to have_key(:class)
+        expect(subject.container_content_tag_attributes.keys).to eq([:class, :itemscope, :itemtype])
       end
 
       it 'should have #fieldsets that are extracted from the #entity and #presentation_structure' do

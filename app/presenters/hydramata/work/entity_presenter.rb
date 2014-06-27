@@ -21,8 +21,12 @@ module Hydramata
       end
 
       def container_content_tag_attributes
+        # :itemtype should immediately follow :itemscope
+        # See: http://schema.org/docs/gs.html#microdata_itemscope_itemtype
         {
-          :class => ['work', dom_class]
+          :class => ['work', dom_class],
+          :itemscope => true,
+          :itemtype => 'http://schema.org/Thing'
         }
       end
 
