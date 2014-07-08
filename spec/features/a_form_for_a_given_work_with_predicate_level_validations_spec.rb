@@ -18,6 +18,7 @@ module Hydramata
       it 'should enforce validations' do
         expect(form.valid?).to be_falsey
         expect(form.errors.size).to eq(1)
+        expect(form.errors[:title]).to eq(["can't be blank"])
       end
     end
   end
