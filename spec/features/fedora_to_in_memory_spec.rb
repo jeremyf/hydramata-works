@@ -1,5 +1,5 @@
 require 'spec_slow_helper'
-require 'hydramata/work/fedora_wrangler'
+require 'hydramata/works/fedora_wrangler'
 
 require 'vcr'
 require 'webmock'
@@ -15,7 +15,7 @@ def logger
 end
 
 module Hydramata
-  module Work
+  module Works
 
     describe 'An in Fedora object is loaded into an in memory work' do
       let(:pid) { 'und:f4752f8687n' }

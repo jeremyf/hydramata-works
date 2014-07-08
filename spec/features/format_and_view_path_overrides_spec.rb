@@ -3,7 +3,7 @@ require 'spec_slow_helper'
 # This spec verifies that the Entity -> Fieldset -> Properties render chain
 # uses the same presentation context for the entire render process.
 module Hydramata
-  module Work
+  module Works
     describe 'An entity and presentation structure' do
       context 'with view_path override and format' do
         it 'uses the found views instead of the defaults' do
@@ -35,13 +35,13 @@ module Hydramata
       end
 
       def generate_template(name, *lines)
-        path = File.expand_path("../../../#{view_path}/hydramata/work/#{name}/_#{presentation_context}.#{format}.erb", __FILE__)
+        path = File.expand_path("../../../#{view_path}/hydramata/works/#{name}/_#{presentation_context}.#{format}.erb", __FILE__)
         FileUtils.mkdir_p(File.dirname(path))
         File.open(path, 'w+') { |f| f.puts lines.join("\n") }
       end
 
       def cleanup_template(name)
-        path = File.expand_path("../../../#{view_path}/hydramata/work/#{name}/_#{presentation_context}.#{format}.erb", __FILE__)
+        path = File.expand_path("../../../#{view_path}/hydramata/works/#{name}/_#{presentation_context}.#{format}.erb", __FILE__)
         File.unlink(path) if File.exist?(path)
       end
 

@@ -8,7 +8,7 @@ Permissions will be easier to do in isolation whereas Workflow will require grea
 
 Once the Work, Permissions, and Workflow components are complete, most other components could proceed.
 
-## Hydramata::Work
+## Hydramata::Works
 
 A way to suggest the properties and structure of different work types (ie Article, Dataset, etc) while allowing the persisted work to be the authority of its properties.
 
@@ -17,7 +17,7 @@ Responsible for defining how a work is:
 * Represented at three different levels (ie Persistence, Application Object, and User Output).
 * Transformed from one level to another (ie Persistence -> Application Object; Application Object -> User Output).
 
-### What pain points is Hydramata::Work addressing?
+### What pain points is Hydramata::Works addressing?
 
 * Remove duplication of knowledge of a work's data and structure.
   Presently knowledge of a work's data is in the ActiveFedora model, datastreams, show page, and edit page.
@@ -47,7 +47,7 @@ And the action could be:
 * Expose a well-defined narrow interface for Groups, so that each institution could create an adaptor that suits them.
 * Allow institutions to add new roles to represent a set of abilities (ie a "Librarian" role could edit all AIPs)
 
-## Hydramata::Workflow
+## Hydramata::Worksflow
 
 A common processing architecture for running tasks that need not be run within a request cycle.
 

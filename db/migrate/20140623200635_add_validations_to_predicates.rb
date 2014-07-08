@@ -1,5 +1,5 @@
 class AddValidationsToPredicates < ActiveRecord::Migration
   def change
-    add_column :hydramata_work_predicates, :validations, :text
+    add_column :hydramata_works_predicates, :validations, :text
   end
 end

@@ -1,4 +1,4 @@
-# Hydramata::Work
+# Hydramata::Works
 
 [![Version](https://badge.fury.io/rb/hydramata-work.png)](http://badge.fury.io/rb/hydramata-work)
 [![Build Status](https://travis-ci.org/jeremyf/hydramata-work.png?branch=master)](https://travis-ci.org/jeremyf/hydramata-work)
@@ -15,7 +15,7 @@ Responsible for providing a well defined data-structure to ease the interaction 
 
 ## Getting Started
 
-Presently Hydramata::Work is a work in progress, and very much not ready for production usage.
+Presently Hydramata::Works is a work in progress, and very much not ready for production usage.
 
 But I would encourage you to:
 
@@ -30,7 +30,7 @@ Once you have the `spec/internal` directory built, you can run `rspec` or `rake 
 
 ## Resources
 
-* [Vision of Hydramata::Work](./VISION.md)
+* [Vision of Hydramata::Works](./VISION.md)
 * [Contributing Guidelines](./CONTRIBUTING.md)
 * [Todo](./TODO.md)
 * [Design Documents](./documents/)

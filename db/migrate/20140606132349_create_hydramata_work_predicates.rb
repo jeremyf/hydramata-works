@@ -1,6 +1,6 @@
 class CreateHydramataWorkPredicates < ActiveRecord::Migration
   def change
-    create_table :hydramata_work_predicates do |t|
+    create_table :hydramata_works_predicates do |t|
       t.string :identity, index: { unique: true }, null: false
       t.string :name_for_application_usage
       t.string :datastream_name

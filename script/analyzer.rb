@@ -111,10 +111,10 @@ class DependencyAnalyzer < MethodBasedSexpProcessor
 end
 
 if __FILE__ == $0
-  collaborator = Collector.new('Hydramata::Work')
+  collaborator = Collector.new('Hydramata::Works')
   analyzer = DependencyAnalyzer.new(collaborator)
   FileList['app/**/*.rb', 'lib/**/*.rb'].each do |filename|
-  # filename = '/Users/jfriesen/Repositories/hydramata-work/app/parsers/hydramata/work/predicate_parsers/simple_parser.rb'
+  # filename = '/Users/jfriesen/Repositories/hydramata-work/app/parsers/hydramata/works/predicate_parsers/simple_parser.rb'
     file_content = File.read(filename)
     parsed_file = RubyParser.for_current_ruby.parse(file_content)
     # break

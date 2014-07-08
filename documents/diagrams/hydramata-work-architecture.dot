@@ -1,5 +1,5 @@
 digraph "G" {
-    label="Hydramata::Work Architecture"
+    label="Hydramata::Works Architecture"
     compound=true;
     node[color="grey15" style=filled fillcolor=white shape=oval penwidth=2 margin="0.15, 0.15"];
 

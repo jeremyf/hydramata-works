@@ -1,7 +1,7 @@
 require 'spec_slow_helper'
 
 module Hydramata
-  module Work
+  module Works
     describe 'An entity and presentation structure' do
       context 'renders :show action' do
         let(:presentation_context) { :show }

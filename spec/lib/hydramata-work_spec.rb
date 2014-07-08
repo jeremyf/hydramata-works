@@ -1,10 +1,10 @@
 require 'spec_fast_helper'
-require 'hydramata-work'
+require 'hydramata-works'
 
 module Hydramata
-  describe Work do
+  describe Works do
     it 'has a .table_name_prefix to conform to Rails::Engine' do
-      expect(described_class.table_name_prefix).to eq('hydramata_work_')
+      expect(described_class.table_name_prefix).to eq('hydramata_works_')
     end
 
     it 'has a .use_relative_model_naming? to conform to Rails::Engine' do

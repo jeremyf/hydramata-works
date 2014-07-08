@@ -1,11 +1,11 @@
 require 'spec_active_record_helper'
-require 'hydramata/work/entity'
-require 'hydramata/work/work_types/storage'
-require 'hydramata/work/conversions/work_type'
-require 'hydramata/work/conversions/property'
+require 'hydramata/works/entity'
+require 'hydramata/works/work_types/storage'
+require 'hydramata/works/conversions/work_type'
+require 'hydramata/works/conversions/property'
 
 module Hydramata
-  module Work
+  module Works
     class UserInputToEntityCoercer
       def self.call(collaborators = {})
         new(collaborators).call
