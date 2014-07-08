@@ -29,7 +29,7 @@ module Hydramata
     describe 'New user input to in memory' do
       include Conversions
 
-      it 'should create an appropriate object' do
+      it 'should append properties the given work object' do
         UserInputToWorkCoercer.call(work: work, input: input.fetch(:work))
 
         expect(work.work_type).to eq(WorkType('Special Work Type'))
