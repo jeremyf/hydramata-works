@@ -4,14 +4,13 @@ require 'hydramata/works/fedora_wrangler'
 module Hydramata
   module Works
 
-    describe 'An in Fedora object is loaded into an in memory work' do
+    describe 'An in Fedora object loaded into an in memory work' do
       let(:pid) { 'und:f4752f8687n' }
       let(:work_wrangler) { FedoraWrangler.new(entity: entity) }
       let(:entity) { Entity.new }
 
-      it 'should parse the Fedora object and assign the predicates' do
-        seed_predicates!
-        VCR.use_cassette('fedora-object', record: :none) do
+      it 'should parse the Fedora object, assigning predicates and values' do
+        seed_predicates! do
           work_wrangler.call(pid, with_datastreams: true)
           expect { |b| entity.properties.each(&b) }.
           to yield_successive_args(
@@ -29,7 +28,8 @@ module Hydramata
         end
       end
 
-      def seed_predicates!
+      private
+      def seed_predicates!(vcr_cassette = 'fedora-object')
         Predicates::Storage.delete_all
         Predicates::Storage.create!(identity: 'depositor')
         Predicates::Storage.create!(identity: 'http://purl.org/dc/terms/created', value_parser_name: 'DateParser')
@@ -41,6 +41,9 @@ module Hydramata
         Predicates::Storage.create!(identity: 'http://purl.org/dc/terms/rights', value_parser_name: 'InterrogationParser')
         Predicates::Storage.create!(identity: 'http://purl.org/dc/terms/creator', value_parser_name: 'InterrogationParser')
         Predicates::Storage.create!(identity: 'http://purl.org/dc/terms/description', value_parser_name: 'InterrogationParser')
+        VCR.use_cassette(vcr_cassette, record: :none) do
+          yield
+        end
       end
     end
   end
