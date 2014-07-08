@@ -1,4 +1,9 @@
-require 'spec_slow_helper'
+require 'spec_active_record_helper'
+require 'hydramata/works/work_types/storage'
+require 'hydramata/works/predicate_sets/storage'
+require 'hydramata/works/predicates/storage'
+require 'hydramata/works/property'
+require 'hydramata/works/work'
 
 module Hydramata
   module Works
