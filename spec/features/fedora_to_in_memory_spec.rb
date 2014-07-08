@@ -1,19 +1,6 @@
 require 'spec_slow_helper'
 require 'hydramata/works/fedora_wrangler'
 
-require 'vcr'
-require 'webmock'
-
-VCR.configure do |config|
-  config.cassette_library_dir = 'spec/fixtures/cassettes'
-  config.hook_into :webmock
-end
-
-# Because of Rubydora this is required
-def logger
-  @logger ||= Logger.new("/dev/null")
-end
-
 module Hydramata
   module Works
 
@@ -57,4 +44,17 @@ module Hydramata
       end
     end
   end
+end
+
+require 'vcr'
+require 'webmock'
+
+VCR.configure do |config|
+  config.cassette_library_dir = 'spec/fixtures/cassettes'
+  config.hook_into :webmock
+end
+
+# Because of Rubydora this is required
+def logger
+  @logger ||= Logger.new("/dev/null")
 end
