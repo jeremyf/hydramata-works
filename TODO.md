@@ -72,3 +72,4 @@ But are instead a parking lot that may be cleared or added to.
   - [X] Predicate label
   - [X] Predicate description (hint)
   - [X] Predicate verbose description (fallback to description)
+- [ ] Setting a predicate by identity or name_for_application_usage should be the same! These are surrogates for each other.
