@@ -23,6 +23,10 @@ module Hydramata
           to([value])
       end
 
+      it 'should have a #to_translation_key_fragment' do
+        expect(subject.to_translation_key_fragment).to eq(subject.predicate.to_translation_key_fragment)
+      end
+
       context 'case equality' do
         it 'should delegate to the compared object' do
           object = double('Double')
