@@ -19,8 +19,8 @@ Presently Hydramata::Works is a work in progress, and very much not ready for pr
 
 But I would encourage you to:
 
-1. Clone the repository: `git clone https://github.com/jeremyf/hydramata-work.git hydramata-work`
-1. Change to the repository's directory: `cd hydramata-work`
+1. Clone the repository: `git clone https://github.com/jeremyf/hydramata-works.git hydramata-works`
+1. Change to the repository's directory: `cd hydramata-works`
 1. Install the base dependencies: `bundle install`
 1. Run the default rake task: `rake`
 
