@@ -6,26 +6,6 @@ shared_examples 'a presented work' do |default_presented_work_class|
   end
 end
 
-shared_examples 'a datastream parser' do |default_parser|
-  let(:parser) { default_parser || described_class }
-  it 'responds to .call' do
-    expect(parser).to respond_to(:call)
-  end
-
-  it 'responds to .match?' do
-    expect(parser).to respond_to(:match?)
-  end
-
-  context 'its .call method' do
-    it 'has a required first parameter' do
-      expect(parser.method(:call).parameters.first[0]).to eq(:req)
-    end
-    it 'takes a block' do
-      expect(parser.method(:call).parameters.last[1]).to eq(:block)
-    end
-  end
-end
-
 shared_examples 'a predicate parser' do |default_parser|
   let(:parser) { default_parser || described_class }
   it 'responds to #call' do

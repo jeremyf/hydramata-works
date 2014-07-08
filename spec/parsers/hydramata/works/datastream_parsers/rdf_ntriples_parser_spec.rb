@@ -1,13 +1,12 @@
 require 'spec_fast_helper'
 require 'hydramata/works/datastream_parsers/rdf_ntriples_parser'
-require 'hydramata/works/linters'
+require 'hydramata/works/linters/implement_datastream_parser_interface_matcher'
 require 'rdf'
 
 module Hydramata
   module Works
     module DatastreamParsers
       describe RdfNtriplesParser do
-        it_behaves_like 'a datastream parser'
 
         let(:rdf_subject) { 'info:fedora/und:f4752f8687n' }
         let(:rdf_predicate) { 'http://purl.org/dc/terms/dateSubmitted' }
@@ -16,6 +15,8 @@ module Hydramata
         let(:data) { "<#{rdf_subject}> <#{rdf_predicate}> #{rdf_object} ." }
 
         subject { described_class }
+
+        it { should implement_datastream_parser_interface }
 
         context '.match?' do
           let(:ntriples_datastream) { double(content: data, mimeType: 'text/plain') }
