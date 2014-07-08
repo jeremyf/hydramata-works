@@ -1,7 +1,12 @@
-require 'spec_slow_helper'
+require 'spec_fast_helper'
+require 'hydramata/works/predicate'
+require 'hydramata/works/property'
+require 'hydramata/works/work'
+require 'hydramata/works/work_form'
+
 module Hydramata
   module Works
-    describe 'validate work based on work type structure' do
+    describe 'a form for a given work with predicate level validations' do
       let(:predicate) { Predicate.new(identity: 'title', validations: '{"presence": true}') }
       let(:work) do
         Work.new(work_type: 'article') do |work|
