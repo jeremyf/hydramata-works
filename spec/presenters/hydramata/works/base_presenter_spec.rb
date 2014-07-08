@@ -32,6 +32,13 @@ module Hydramata
         expect(subject.instance_of?(object.class)).to be_truthy
       end
 
+      it 'should generate container_content_tag_attributes' do
+        builder = double(call: true)
+        subject = described_class.new(object, translator: translator, dom_attributes_builder: builder)
+        subject.container_content_tag_attributes(hello: :world)
+        expect(builder).to have_received(:call).with(subject, { hello: :world }, {})
+      end
+
       it 'should also be an instance of the presenter class' do
         expect(subject.instance_of?(described_class)).to be_truthy
       end
