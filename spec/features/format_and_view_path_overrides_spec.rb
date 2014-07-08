@@ -6,6 +6,18 @@ module Hydramata
   module Works
     describe 'An entity and presentation structure' do
       context 'with view_path override and format' do
+        let(:entity) do
+          Entity.new(work_type: 'article') do |entity|
+            entity.properties << { predicate: :title, value: 'Hello' }
+          end
+        end
+
+        let(:presentation_structure) do
+          PresentationStructure.new do |struct|
+            struct.fieldsets << [:required, [:title]]
+          end
+        end
+
         it 'uses the found views instead of the defaults' do
           rendered_output = renderer.render
           expect(rendered_output.strip).to eq("ENTITY article\nFIELDSET required\nPROPERTY title")
@@ -43,19 +55,6 @@ module Hydramata
       def cleanup_template(name)
         path = File.expand_path("../../../#{view_path}/hydramata/works/#{name}/_#{presentation_context}.#{format}.erb", __FILE__)
         File.unlink(path) if File.exist?(path)
-      end
-
-      let(:entity) do
-        Entity.new do |entity|
-          entity.work_type = 'article'
-          entity.properties << { predicate: :title, value: 'Hello' }
-        end
-      end
-
-      let(:presentation_structure) do
-        PresentationStructure.new.tap do |struct|
-          struct.fieldsets << [:required, [:title]]
-        end
       end
 
       let(:presentation_context) { :nonsense }
