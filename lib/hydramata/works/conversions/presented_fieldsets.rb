@@ -6,9 +6,9 @@ module Hydramata
     module Conversions
       def PresentedFieldsets(collaborators)
         # @TODO - This could be packaged up into a tidier location.
-        # The collaboration with an entity's PropertySet#subset is convoluted.
+        # The collaboration with an work's PropertySet#subset is convoluted.
         # I also don't know if I need.
-        entity = collaborators.fetch(:entity)
+        work = collaborators.fetch(:work)
         presentation_structure = collaborators.fetch(:presentation_structure)
         presentation_structure.fieldsets.each_with_object([]) do |predicate_set, collector|
           predicate_set = PredicateSet(predicate_set)
@@ -16,10 +16,10 @@ module Hydramata
           property_set = PropertySet(predicate_set)
           property_builder = ->(property) {
             require 'hydramata/works/property_presenter'
-            PropertyPresenter.new(property: property, fieldset: property_set, entity: entity)
+            PropertyPresenter.new(property: property, fieldset: property_set, work: work)
           }
-          entity.properties.subset(predicates, property_set, property_builder)
-          presented_fieldset = FieldsetPresenter.new(entity: entity, fieldset: property_set)
+          work.properties.subset(predicates, property_set, property_builder)
+          presented_fieldset = FieldsetPresenter.new(work: work, fieldset: property_set)
           collector << presented_fieldset
         end
       end

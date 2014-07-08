@@ -1,19 +1,19 @@
 require 'spec_fast_helper'
 require 'hydramata/works/value_presenter'
-require 'hydramata/works/entity'
+require 'hydramata/works/work'
 require 'hydramata/works/predicate'
 
 module Hydramata
   module Works
     describe ValuePresenter do
-      let(:entity) { Entity.new(work_type: 'an entity type') }
+      let(:work) { Work.new(work_type: 'an work type') }
       let(:predicate) { Predicate.new(identity: 'a predicate') }
       let(:value) { double('Value') }
       let(:template) { double('Template', render: true) }
       subject do
         described_class.new(
           value: value,
-          entity: entity,
+          work: work,
           predicate: predicate,
           presentation_context: 'show',
           template_missing_exception: [RuntimeError]
@@ -22,7 +22,7 @@ module Hydramata
 
       it 'should attempt to render with diminishing specificity' do
         expect(template).to receive(:render).
-          with(partial: 'hydramata/works/values/an_entity_type/a_predicate/show', object: subject).
+          with(partial: 'hydramata/works/values/an_work_type/a_predicate/show', object: subject).
           ordered.
           and_raise(RuntimeError)
         expect(template).to receive(:render).
@@ -42,7 +42,7 @@ module Hydramata
       end
 
       it 'should have a default partial prefixes' do
-        expect(subject.partial_prefixes).to eq([['an_entity_type','a_predicate'], ['a_predicate']])
+        expect(subject.partial_prefixes).to eq([['an_work_type','a_predicate'], ['a_predicate']])
       end
     end
   end

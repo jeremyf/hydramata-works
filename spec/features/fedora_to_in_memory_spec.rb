@@ -6,13 +6,13 @@ module Hydramata
 
     describe 'An in Fedora object loaded into an in memory work' do
       let(:pid) { 'und:f4752f8687n' }
-      let(:work_wrangler) { FedoraWrangler.new(entity: entity) }
-      let(:entity) { Entity.new }
+      let(:work_wrangler) { FedoraWrangler.new(work: work) }
+      let(:work) { Work.new }
 
       it 'should parse the Fedora object, assigning predicates and values' do
         seed_predicates! do
           work_wrangler.call(pid, with_datastreams: true)
-          expect { |b| entity.properties.each(&b) }.
+          expect { |b| work.properties.each(&b) }.
           to yield_successive_args(
             Property.new(predicate: 'depositor', value: 'username-1'),
             Property.new(predicate: 'http://purl.org/dc/terms/created', value: Date.new(2014, 6, 2)),

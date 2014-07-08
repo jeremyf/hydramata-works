@@ -1,14 +1,14 @@
 require 'spec_slow_helper'
 
-# This spec verifies that the Entity -> Fieldset -> Properties render chain
+# This spec verifies that the Work -> Fieldset -> Properties render chain
 # uses the same presentation context for the entire render process.
 module Hydramata
   module Works
-    describe 'An entity and presentation structure' do
+    describe 'An work and presentation structure' do
       context 'with view_path override and format' do
-        let(:entity) do
-          Entity.new(work_type: 'article') do |entity|
-            entity.properties << { predicate: :title, value: 'Hello' }
+        let(:work) do
+          Work.new(work_type: 'article') do |work|
+            work.properties << { predicate: :title, value: 'Hello' }
           end
         end
 
@@ -61,11 +61,11 @@ module Hydramata
       let(:view_path) { 'app/views/articles' }
       let(:format) { :elvis }
 
-      let(:entity_presenter) do
-        EntityPresenter.new(entity: entity, presentation_structure: presentation_structure, presentation_context: presentation_context)
+      let(:work_presenter) do
+        WorkPresenter.new(work: work, presentation_structure: presentation_structure, presentation_context: presentation_context)
       end
 
-      let(:renderer) { EntityRenderer.new(entity: entity_presenter, format: format, view_path: view_path) }
+      let(:renderer) { WorkRenderer.new(work: work_presenter, format: format, view_path: view_path) }
     end
   end
 end

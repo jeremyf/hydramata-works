@@ -1,12 +1,12 @@
 require 'spec_fast_helper'
-require 'hydramata/works/entity'
-require 'hydramata/works/linters/implement_entity_interface_matcher'
+require 'hydramata/works/work'
+require 'hydramata/works/linters/implement_work_interface_matcher'
 
 module Hydramata
   module Works
-    describe Entity do
+    describe Work do
       subject { described_class.new }
-      it { should implement_entity_interface }
+      it { should implement_work_interface }
 
       let(:predicate) { :title }
       let(:value) { 'Hello' }

@@ -3,21 +3,21 @@ require 'hydramata/works/base_presenter'
 
 module Hydramata
   module Works
-    # Responsible for coordinating the rendering of an in-memory Entity-like
+    # Responsible for coordinating the rendering of an in-memory Work-like
     # object to an output buffer.
-    class EntityPresenter < BasePresenter
+    class WorkPresenter < BasePresenter
       include Conversions
 
       attr_reader :presentation_structure, :presented_fieldset_builder
       def initialize(collaborators = {})
-        entity = collaborators.fetch(:entity)
-        super(entity, collaborators)
+        work = collaborators.fetch(:work)
+        super(work, collaborators)
         @presentation_structure = collaborators.fetch(:presentation_structure) { default_presentation_structure }
         @presented_fieldset_builder = collaborators.fetch(:presented_fieldset_builder) { default_presented_fieldset_builder }
       end
 
       def fieldsets
-        @fieldsets ||= presented_fieldset_builder.call(entity: self, presentation_structure: presentation_structure)
+        @fieldsets ||= presented_fieldset_builder.call(work: self, presentation_structure: presentation_structure)
       end
 
       private

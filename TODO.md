@@ -27,7 +27,7 @@ In each layer, there is a concept of a Work and its data structure.
 These should not be considered exhaustive.
 But are instead a parking lot that may be cleared or added to.
 
-- [X] Default entity rendering to include work_type as one of the partial
+- [X] Default work rendering to include work_type as one of the partial
       prefixes.
 - [X] Default fieldset rendering to include work_type and fieldset name as the
       partial prefixes.
@@ -43,7 +43,7 @@ But are instead a parking lot that may be cleared or added to.
 - [X] Create some rudimentary seeds for Predicates
 - [ ] Disambigutate identity vs. name for application usage
 - [X] Allow for the declaration of validations for a given Predicate
-- [ ] Tidy up validation services; Presently it has lots of knowledge of Entity's structure
+- [ ] Tidy up validation services; Presently it has lots of knowledge of Work's structure
 - [X] Improve internationalization support by providing a better key path.
 - [X] Add view tests for show templates
 - [ ] Add view tests for edit templates
@@ -57,7 +57,7 @@ But are instead a parking lot that may be cleared or added to.
 - [ ] itemprop: for the Property presenter (for Microdata)
 - [X] itemtype for WorkType presenter (RDFa and Microdata)
 - [ ] When persisting Validations make sure to validate that the serialized document is valid
-- [X] Conversion for Entity to EntityPresenter; Or Presenter() conversion
+- [X] Conversion for Work to WorkPresenter; Or Presenter() conversion
 - [X] Create a NullWorkType concept.
       It would be helpful to create a Null Work Type, so our application doesn't choke.
 - [X] Add internationalization for Work Type contexts:

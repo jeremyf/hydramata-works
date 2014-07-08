@@ -2,17 +2,17 @@ module Hydramata
   module Works
     # For some reason if you want to render the object outside of the context
     # of a controller, this provides the wrapper.
-    class EntityRenderer
-      attr_reader :template, :format, :entity, :view_path
+    class WorkRenderer
+      attr_reader :template, :format, :work, :view_path
       def initialize(options = {})
-        @entity = options.fetch(:entity)
+        @work = options.fetch(:work)
         @format = options.fetch(:format) { default_format }
         @view_path = options.fetch(:view_path) { default_view_path }
         @template = options.fetch(:template) { default_template }
       end
 
       def render
-        entity.render(template: template)
+        work.render(template: template)
       end
 
       private

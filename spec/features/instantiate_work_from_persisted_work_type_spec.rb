@@ -2,7 +2,7 @@ require 'spec_slow_helper'
 
 module Hydramata
   module Works
-    describe 'instantiating an entity from a persisted work type' do
+    describe 'instantiating an work from a persisted work type' do
       before do
         @article = Hydramata::Works::WorkTypes::Storage.create!(identity: 'article', name_for_application_usage: 'article')
         @predicate_set = Hydramata::Works::PredicateSets::Storage.create!(identity: 'required', work_type: @article, presentation_sequence: 1, name_for_application_usage: 'required')
@@ -14,7 +14,7 @@ module Hydramata
 
       let(:property) { Property.new(predicate: 'title', values: ['Hello', 'World']) }
       let(:work) do
-        Entity.new(work_type: 'article') do |work|
+        Work.new(work_type: 'article') do |work|
           work.properties << property
         end
       end

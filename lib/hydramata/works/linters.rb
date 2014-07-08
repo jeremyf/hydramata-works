@@ -1,7 +1,7 @@
-shared_examples 'a presented entity' do |default_presented_entity_class|
-  let(:presented_entity_class) { (default_presented_entity_class || described_class) }
+shared_examples 'a presented work' do |default_presented_work_class|
+  let(:presented_work_class) { (default_presented_work_class || described_class) }
   it 'responds to #fieldsets' do
-    expect { presented_entity_class.instance_method(:fieldsets) }.
+    expect { presented_work_class.instance_method(:fieldsets) }.
       to_not raise_error
   end
 end

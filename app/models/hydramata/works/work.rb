@@ -5,12 +5,12 @@ module Hydramata
     #
     # Unlike the [ActiveRecord pattern](http://www.martinfowler.com/eaaCatalog/activeRecord.html),
     # there is no direct connection to a data storage. This is instead analogous
-    # to the Entity of the [DataMapper pattern](http://www.martinfowler.com/eaaCatalog/dataMapper.html)
+    # to the Work of the [DataMapper pattern](http://www.martinfowler.com/eaaCatalog/dataMapper.html)
     # as implemented in [Lotus::Models](https://github.com/lotus/model#entities).
     #
     # Unlike a Lotus::Model, the Work is an arbitrary collection of Property
     # objects, as defined in the PropertySet.
-    class Entity
+    class Work
       include Conversions
 
       def initialize(collaborators = {}, &block)
@@ -63,12 +63,12 @@ module Hydramata
 
       def default_properties_container
         require 'hydramata/works/property_set'
-        PropertySet.new(entity: self)
+        PropertySet.new(work: self)
       end
 
       def default_presenter_builder
-        require 'hydramata/works/entity_presenter'
-        ->(entity) { EntityPresenter.new(entity: entity) }
+        require 'hydramata/works/work_presenter'
+        ->(work) { WorkPresenter.new(work: work) }
       end
     end
   end

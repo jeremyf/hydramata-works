@@ -1,10 +1,10 @@
-require 'hydramata/works/entity'
+require 'hydramata/works/work'
 module Hydramata
   module Works
     module Entities
       module_function
       def find(identifier)
-        Entity.new(identifier: identifier)
+        Work.new(identifier: identifier)
       end
     end
   end
