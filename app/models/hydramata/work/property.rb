@@ -32,6 +32,10 @@ module Hydramata
       # Because who wants to remember which way to access this?
       alias_method :value, :values
 
+      def to_translation_key_fragment
+        predicate.to_translation_key_fragment
+      end
+
       def each(&block)
         values.each(&block)
       end
