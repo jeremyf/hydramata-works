@@ -4,7 +4,9 @@ require 'spec_view_helper'
 # This means, without the `type: :view` tag, the render method does not exist
 # in the example context
 describe 'hydramata/work/properties/_show.html.erb', type: :view do
-  let(:object) { double('Object', t: true, dom_class: 'my-dom-class', values: ['value1', 'value2']) }
+  let(:value1) { double('Value 1', render: '<dd class="my-dom-class value">value1</dd>'.html_safe ) }
+  let(:value2) { double('Value 2', render: '<dd class="my-dom-class value">value2</dd>'.html_safe ) }
+  let(:object) { double('Object', t: true, dom_class: 'my-dom-class', values: [value1, value2]) }
 
   it 'renders the object and fieldsets' do
     expect(object).to receive(:container_content_tag_attributes).with(class: 'label').and_return(class: ['my-dom-class', 'label'])
