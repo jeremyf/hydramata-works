@@ -8,12 +8,12 @@ class TestAppGenerator < Rails::Generators::Base
   # after setting up the application
 
   # def install_engine
-  #   generate 'hydramata-work:install'
+  #   generate 'hydramata-works:install'
   # end
 
   def run_migrations
     rake 'db:create'
-    rake 'hydramata_work:install:migrations'
+    rake 'hydramata_works:install:migrations'
     rake 'db:migrate'
     rake 'db:test:prepare'
   end

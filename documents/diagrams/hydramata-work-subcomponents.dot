@@ -10,13 +10,13 @@ digraph "G" {
     }
 
     subgraph cluster_2 {
-      label="Hydramata::Work"
+      label="Hydramata::Works"
       fillcolor=orange
       style=filled
     }
 
     subgraph cluster_3 {
-      label="Hydramata::Workflow"
+      label="Hydramata::Worksflow"
       fillcolor=lightblue
       style=filled
     }

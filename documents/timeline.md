@@ -47,7 +47,7 @@ Presently this exists in the Actor and spread across numerous callbacks for Hydr
 ### Replacement Strategy
 
 1. Create or leverage existing Workflow project (i.e. push Heracles over the hump) to implement an asynchronous messaging system.
-1. Create single-focus tasks (i.e. hydramata/work/tasks/generate_derivatives) that behave well within the Workflow subsystems
+1. Create single-focus tasks (i.e. hydramata/works/tasks/generate_derivatives) that behave well within the Workflow subsystems
 1. Replace existing Curate actors with data-driven Workflows.
    This will obviate the need for the WorkActorShim as the Workflows expect to interact with objects that implement the Work interface.
 

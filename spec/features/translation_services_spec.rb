@@ -1,13 +1,13 @@
 require 'spec_fast_helper'
-require 'hydramata/work/conversions/property_set'
-require 'hydramata/work/conversions/property'
-require 'hydramata/work/entity'
-require 'hydramata/work/entity_presenter'
-require 'hydramata/work/property_presenter'
-require 'hydramata/work/fieldset_presenter'
+require 'hydramata/works/conversions/property_set'
+require 'hydramata/works/conversions/property'
+require 'hydramata/works/entity'
+require 'hydramata/works/entity_presenter'
+require 'hydramata/works/property_presenter'
+require 'hydramata/works/fieldset_presenter'
 
 module Hydramata
-  module Work
+  module Works
     describe 'translation services' do
       include Conversions
       let(:entity) { Entity.new {|e| e.work_type = work_type } }

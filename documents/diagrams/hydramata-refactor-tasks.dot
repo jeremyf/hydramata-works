@@ -12,7 +12,7 @@ digraph "G" {
     }
 
     subgraph cluster_2 {
-      label="Hydramata::Work"
+      label="Hydramata::Works"
       fillcolor=orange
       style=filled
       articulate_work_responsibility[label="{Articulate Work Responsibility | 1 week }"]
@@ -21,11 +21,11 @@ digraph "G" {
       define_predicate_interfaces[label="{ Define Predicates Interfaces | 3 weeks }"]
       define_existing_predicates[label="{ Define Existing Predicates | 3 weeks | SWARM! }"]
       splice_work_wrangler[label="{ Splice Work Wrangler for Fedora | 3 weeks }"]
-      splice_actor_shim[label="{ Splice Actor Shim for Hydramata::Work | 2 weeks | SWARM? }"]
+      splice_actor_shim[label="{ Splice Actor Shim for Hydramata::Works | 2 weeks | SWARM? }"]
     }
 
     subgraph cluster_3 {
-      label="Hydramata::Workflow"
+      label="Hydramata::Worksflow"
       fillcolor=lightblue
       style=filled
       articulate_workflow_responsibility[label="{Articulate WorkFlow Responsibility | 1 week }"]
