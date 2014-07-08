@@ -36,35 +36,6 @@ The Hydramata::Work project is positioning to allow for:
 
 At present, the core functionality is being built out.
 
-## Prototypical Story
-
-### Bootstrapping:
-
-* Get a Rails app up and running
-* Include the Works gem
-* Run the Hydramata::Work generators
-  * Will need to create Work Type, Presentation Structure, and Predicates
-* Create controller for a new work
-
-### Epic - Create HTML form for new Work context
-
-#### Story - Article
-
-For each fieldset of the Article,
-
-  * Define semantically well-formed HTML markup (ie proper classes, ids, data-attributes, and aria-roles)
-  * Internationalize captions
-
-Then for each of the [Article predicates](http://ndlib.github.io/metadata_application_profile/templates/#article_template)
-
-  * Define semantically well-formed HTML markup (ie proper classes, ids, data-attributes, and aria-roles). CSS is out of scope.
-  * Internationalized labels and hints
-  * Assume multi-value inputs as default
-  * Consumers are: a person, javascript, and accessibility tools.
-  * Write a spec to verify that the view is well-formed
-
-  For the first pass, done will be worked out betweens the Dans.
-
 ## Top Level Features
 
 These features reflect the movement of data from one layer to another.
