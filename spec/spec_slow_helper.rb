@@ -5,7 +5,8 @@
 # * EngineCart (and therefore the underlying internal Rails application)
 # * Rails
 #
-# But overtime the slowness has grown.
+# But overtime the slowness grows. See the sibling helpers: ./spec/*_helper.rb
+# (i.e. spec_active_record_helper.rb, spec_fast_helper.rb, spec_view_helper.rb)
 ENV['RAILS_ENV'] ||= 'test'
 if ENV['COV'] || ENV['COVERAGE']
   require 'simplecov'

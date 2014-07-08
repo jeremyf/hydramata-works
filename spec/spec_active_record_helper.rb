@@ -1,12 +1,23 @@
-# This helper provides a x2 speed increase over the 'spec_slow_helper'
+# This helper provides at least a x2 speed increase over the 'spec_slow_helper'.
 #
-# To validate this assumption, find a spec for an ActiveRecord object
-# (eg spec/hydramata/works/predicate_spec.rb)
-# $ time rspec spec/hydramata/works/predicate_spec.rb
+# To validate this assumption, find a spec for an ActiveRecord object, and run
+# with `rspec -r spec/spec_active_record_helper.rb ./path/to/spec.rb`
 #
-# Then change the "require 'spec_active_record_helper'" to "require 'spec_slow_helper'"
-# $ time rspec spec/hydramata/works/predicate_spec.rb
-
+# Example:
+# $ time rspec -r spec/spec_active_record_helper.rb spec/features/new_user_input_to_in_memory_spec.rb
+#
+#     real  0m1.576s
+#     user  0m1.093s
+#     sys   0m0.295s
+#
+# Compared to `rspec -r spec/spec_slow_helper.rb ./path/to/spec.rb`
+#
+# Example:
+# $ time rspec -r spec/spec_slow_helper.rb spec/features/new_user_input_to_in_memory_spec.rb
+#
+#     real  0m3.546s
+#     user  0m2.417s
+#     sys   0m0.702s
 require 'active_record'
 require 'spec_fast_helper'
 

@@ -34,3 +34,4 @@ Once you have the `spec/internal` directory built, you can run `rspec` or `rake 
 * [Contributing Guidelines](./CONTRIBUTING.md)
 * [Todo](./TODO.md)
 * [Design Documents](./documents/)
+* [Test related README](./spec/README.md)
