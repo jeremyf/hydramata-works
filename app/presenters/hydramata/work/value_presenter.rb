@@ -12,6 +12,14 @@ module Hydramata
         super(value, collaborators)
       end
 
+      def render(*args, &block)
+        begin
+          super(*args, &block)
+        rescue *template_missing_error
+          __getobj__.to_s
+        end
+      end
+
       private
 
       def name

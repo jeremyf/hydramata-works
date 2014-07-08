@@ -36,6 +36,11 @@ module Hydramata
         expect(subject.render(template: template)).to eq('YES')
       end
 
+      it 'should render the value as a string' do
+        allow(template).to receive(:render).and_raise(RuntimeError)
+        expect(subject.render(template: template)).to eq(value.to_s)
+      end
+
       it 'should have a default partial prefixes' do
         expect(subject.partial_prefixes).to eq([['an_entity_type','a_predicate'], ['a_predicate']])
       end
