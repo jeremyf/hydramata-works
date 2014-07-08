@@ -1,20 +1,20 @@
 require 'spec_fast_helper'
-require 'hydramata/works/entity_presenter'
-require 'hydramata/works/entity'
+require 'hydramata/works/work_presenter'
+require 'hydramata/works/work'
 require 'hydramata/works/linters'
 
 module Hydramata
   module Works
-    describe EntityPresenter do
-      it_behaves_like 'a presented entity'
+    describe WorkPresenter do
+      it_behaves_like 'a presented work'
 
       let(:presentation_structure) { double('PresentationStructure') }
-      let(:entity) { Entity.new(work_type: 'My Work Type') }
+      let(:work) { Work.new(work_type: 'My Work Type') }
       let(:presented_fieldset_builder) { double('Builder', call: true) }
       let(:template) { double('Template', render: true) }
       subject do
         described_class.new(
-          entity: entity,
+          work: work,
           presentation_structure: presentation_structure,
           presented_fieldset_builder: presented_fieldset_builder,
           template_missing_exception: [RuntimeError]
@@ -25,9 +25,9 @@ module Hydramata
         expect(subject.container_content_tag_attributes.keys).to eq([:class, :itemscope, :itemtype])
       end
 
-      it 'should have #fieldsets that are extracted from the #entity and #presentation_structure' do
+      it 'should have #fieldsets that are extracted from the #work and #presentation_structure' do
         subject.fieldsets
-        expect(presented_fieldset_builder).to have_received(:call).with(entity: subject, presentation_structure: presentation_structure)
+        expect(presented_fieldset_builder).to have_received(:call).with(work: subject, presentation_structure: presentation_structure)
       end
 
       it 'should have a default partial prefixes' do

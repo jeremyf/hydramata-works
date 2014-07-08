@@ -1,8 +1,8 @@
 require 'spec_fast_helper'
 require 'hydramata/works/conversions/property_set'
 require 'hydramata/works/conversions/property'
-require 'hydramata/works/entity'
-require 'hydramata/works/entity_presenter'
+require 'hydramata/works/work'
+require 'hydramata/works/work_presenter'
 require 'hydramata/works/property_presenter'
 require 'hydramata/works/fieldset_presenter'
 
@@ -10,10 +10,10 @@ module Hydramata
   module Works
     describe 'translation services' do
       include Conversions
-      let(:entity) { Entity.new {|e| e.work_type = work_type } }
+      let(:work) { Work.new {|e| e.work_type = work_type } }
 
       context 'for entities' do
-        let(:presenter) { EntityPresenter.new(entity: entity, presentation_structure: nil) }
+        let(:presenter) { WorkPresenter.new(work: work, presentation_structure: nil) }
         context 'with existing work type translations' do
           let(:work_type) { 'Work Type Translated' }
           it 'translates its :name from the lookup table' do
@@ -35,7 +35,7 @@ module Hydramata
       end
 
       context 'for property_sets' do
-        let(:presenter) { FieldsetPresenter.new(entity: entity, fieldset: fieldset) }
+        let(:presenter) { FieldsetPresenter.new(work: work, fieldset: fieldset) }
         context 'with existing property set and work type translations' do
           let(:fieldset) { PropertySet(identity: 'Property Set Translated') }
           let(:work_type) { 'Work Type Translated' }
@@ -61,7 +61,7 @@ module Hydramata
       end
 
       context 'for properts' do
-        let(:presenter) { PropertyPresenter.new(entity: entity, fieldset: fieldset, property: property) }
+        let(:presenter) { PropertyPresenter.new(work: work, fieldset: fieldset, property: property) }
         context 'with existing property and work type translations' do
           let(:fieldset) { PropertySet(identity: 'Property Set Translated') }
           let(:property) { Property('Property Translated') }

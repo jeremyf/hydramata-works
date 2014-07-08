@@ -1,8 +1,8 @@
 require 'spec_fast_helper'
 require 'hydramata/works/validation_service'
-require 'hydramata/works/entity_form'
+require 'hydramata/works/work_form'
 require 'hydramata/works/predicate'
-require 'hydramata/works/entity'
+require 'hydramata/works/work'
 require 'active_model/validations/presence'
 
 module Hydramata
@@ -10,18 +10,18 @@ module Hydramata
     describe ValidationService do
       let(:title) { nil }
       let(:title_predicate) { Predicate.new(identity: 'title', validations: { presence: true }) }
-      let(:entity) do
-        Entity.new(work_type: 'article') do |entity|
-          entity.properties << { predicate: title_predicate }
+      let(:work) do
+        Work.new(work_type: 'article') do |work|
+          work.properties << { predicate: title_predicate }
         end
       end
-      let(:entity_form) { EntityForm.new(entity) }
+      let(:work_form) { WorkForm.new(work) }
       subject { described_class }
 
       context '#call' do
         it 'runs validations attached to each predicate' do
-          expect { subject.call(entity_form) }.
-            to change { entity_form.errors.full_messages }.
+          expect { subject.call(work_form) }.
+            to change { work_form.errors.full_messages }.
             from([]).
             to(['title can\'t be blank'])
         end

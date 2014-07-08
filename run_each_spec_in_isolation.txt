@@ -9,7 +9,7 @@ Using Benchmark.measure.real
 
 2.4	spec/features/translation_services_spec.rb
 
-3.1	spec/forms/hydramata/works/entity_form_spec.rb
+3.1	spec/forms/hydramata/works/work_form_spec.rb
 
 2.4	spec/forms/hydramata/works/validation_service_spec.rb
 
@@ -37,7 +37,7 @@ Using Benchmark.measure.real
 
 1.7	spec/models/hydramata/works/entities_spec.rb
 
-2.4	spec/models/hydramata/works/entity_spec.rb
+2.4	spec/models/hydramata/works/work_spec.rb
 
 2.4	spec/models/hydramata/works/predicate_presentation_sequences/storage_spec.rb
 
@@ -83,13 +83,13 @@ Using Benchmark.measure.real
 
 1.7	spec/presenters/hydramata/works/base_presenter_spec.rb
 
-2.3	spec/presenters/hydramata/works/entity_presenter_spec.rb
+2.3	spec/presenters/hydramata/works/work_presenter_spec.rb
 
 1.6	spec/presenters/hydramata/works/fieldset_presenter_spec.rb
 
 1.5	spec/presenters/hydramata/works/property_presenter_spec.rb
 
-1.5	spec/renderers/hydramata/works/entity_renderer_spec.rb
+1.5	spec/renderers/hydramata/works/work_renderer_spec.rb
 
 2.4	spec/views/hydramata/works/fieldsets/_edit.html.erb_spec.rb
 

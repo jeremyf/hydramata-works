@@ -1,19 +1,19 @@
 require 'spec_fast_helper'
-require 'hydramata/works/entity_form'
+require 'hydramata/works/work_form'
 require 'hydramata/works/linters'
-require 'hydramata/works/entity'
+require 'hydramata/works/work'
 
 module Hydramata
   module Works
-    describe EntityForm do
+    describe WorkForm do
       let(:identity) { nil }
       let(:validation_service) { double(call: true) }
-      let(:entity) do
-        Entity.new(identity: identity) do |entity|
-          entity.properties << { predicate: :first_name, value: 'Jeremy' }
+      let(:work) do
+        Work.new(identity: identity) do |work|
+          work.properties << { predicate: :first_name, value: 'Jeremy' }
         end
       end
-      subject { described_class.new(entity, validation_service: validation_service) }
+      subject { described_class.new(work, validation_service: validation_service) }
 
       it_behaves_like 'ActiveModel'
 
@@ -26,7 +26,7 @@ module Hydramata
           end
         end
         context 'when errors are encountered' do
-          let(:validation_service) { ->(entity) { entity.errors.add(:base, 'Found some errors!') } }
+          let(:validation_service) { ->(work) { work.errors.add(:base, 'Found some errors!') } }
           it 'should be false (eg not valid)' do
             expect(subject.valid?).to be_falsey
           end
@@ -34,11 +34,11 @@ module Hydramata
       end
 
       it 'has a meaningful inspect' do
-        expect(subject.inspect).to include("EntityForm")
-        expect(subject.inspect).to include(entity.inspect)
+        expect(subject.inspect).to include("WorkForm")
+        expect(subject.inspect).to include(work.inspect)
       end
 
-      context 'entity\'s properties' do
+      context 'work\'s properties' do
         it 'should respond to a given predicate' do
           expect(subject).to respond_to(:first_name)
         end
@@ -48,7 +48,7 @@ module Hydramata
         end
       end
 
-      context 'with collaborating entity without an identity' do
+      context 'with collaborating work without an identity' do
         let(:identity) { '' }
         it 'is not #persisted?' do
           expect(subject.persisted?).to be_falsey
@@ -63,17 +63,17 @@ module Hydramata
         end
       end
 
-      context 'with collaborating entity with an identity' do
+      context 'with collaborating work with an identity' do
         let(:identity) { '1234' }
         it 'is #persisted?' do
           expect(subject.persisted?).to be_truthy
         end
 
-        it 'uses the entity#identity to derive #to_param' do
+        it 'uses the work#identity to derive #to_param' do
           expect(subject.to_param).to eq(identity)
         end
 
-        it 'uses the entity#identity to derive #to_key' do
+        it 'uses the work#identity to derive #to_key' do
           expect(subject.to_key).to eq([identity])
         end
 

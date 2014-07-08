@@ -6,10 +6,10 @@ require 'hydramata/works/conversions/translation_key_fragment'
 
 module Hydramata
   module Works
-    class EntityForm < SimpleDelegator
+    class WorkForm < SimpleDelegator
       include Conversions
-      def initialize(entity, collaborators = {})
-        __setobj__(entity)
+      def initialize(work, collaborators = {})
+        __setobj__(work)
         @errors = collaborators.fetch(:error_container) { default_error_container }
         @validation_service = collaborators.fetch(:validation_service) { default_validation_service }
       end
@@ -55,7 +55,7 @@ module Hydramata
       end
 
       def inspect
-        format('#<%s:%#0x entity=%s>', EntityForm, __id__, __getobj__.inspect)
+        format('#<%s:%#0x work=%s>', WorkForm, __id__, __getobj__.inspect)
       end
 
       private

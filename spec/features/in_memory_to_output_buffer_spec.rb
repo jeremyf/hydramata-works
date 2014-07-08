@@ -2,17 +2,17 @@ require 'spec_slow_helper'
 
 module Hydramata
   module Works
-    describe 'An entity and presentation structure' do
+    describe 'An work and presentation structure' do
 
-      let(:entity) do
-        Entity.new do |entity|
-          entity.work_type = work_type
-          entity.properties << { predicate: predicate_title, value: 'Hello' }
-          entity.properties << { predicate: predicate_title, value: 'World' }
-          entity.properties << { predicate: predicate_title, value: 'Bang!' }
-          entity.properties << { predicate: predicate_abstract, value: 'Long Text' }
-          entity.properties << { predicate: predicate_abstract, value: 'Longer Text' }
-          entity.properties << { predicate: predicate_keyword, value: 'Programming' }
+      let(:work) do
+        Work.new do |work|
+          work.work_type = work_type
+          work.properties << { predicate: predicate_title, value: 'Hello' }
+          work.properties << { predicate: predicate_title, value: 'World' }
+          work.properties << { predicate: predicate_title, value: 'Bang!' }
+          work.properties << { predicate: predicate_abstract, value: 'Long Text' }
+          work.properties << { predicate: predicate_abstract, value: 'Longer Text' }
+          work.properties << { predicate: predicate_keyword, value: 'Programming' }
         end
       end
 
@@ -20,7 +20,7 @@ module Hydramata
         let(:presentation_context) { :show }
 
         it 'writes a well-structured HTML document' do
-          renderer = EntityRenderer.new(entity: entity_presenter, format: :html)
+          renderer = WorkRenderer.new(work: work_presenter, format: :html)
           rendered_output = renderer.render
 
           expect(rendered_output).to have_tag('.work') do
@@ -37,12 +37,12 @@ module Hydramata
         end
 
         it 'writes a well-structure JSON document' do
-          renderer = EntityRenderer.new(entity: entity_presenter, format: :json)
+          renderer = WorkRenderer.new(work: work_presenter, format: :json)
           output = renderer.render
           json = JSON.parse(output)
           expect(json['work'].keys.sort).to eq(['properties', 'work_type'])
 
-          expect(json['work']['work_type']).to eq(entity_presenter.work_type.to_s)
+          expect(json['work']['work_type']).to eq(work_presenter.work_type.to_s)
           expect(json['work']['properties'].keys).to eq(['title', 'abstract', 'keyword'])
           expect(json['work']['properties']['title']).to eq(['Hello', 'World', 'Bang!'])
           expect(json['work']['properties']['abstract']).to eq(['Long Text', 'Longer Text'])
@@ -54,7 +54,7 @@ module Hydramata
         let(:presentation_context) { :edit }
 
         it 'writes a well-structured HTML document' do
-          renderer = EntityRenderer.new(entity: entity_presenter, format: :html)
+          renderer = WorkRenderer.new(work: work_presenter, format: :html)
           rendered_output = renderer.render
 
           expect(rendered_output).to have_tag('form.edit-special-work-type', with: { method: 'post', action: '/' }) do
@@ -98,9 +98,9 @@ module Hydramata
 
       let(:presentation_context) { :show }
 
-      let(:entity_presenter) do
-        EntityPresenter.new(
-          entity: entity,
+      let(:work_presenter) do
+        WorkPresenter.new(
+          work: work,
           presentation_context: presentation_context
         )
       end

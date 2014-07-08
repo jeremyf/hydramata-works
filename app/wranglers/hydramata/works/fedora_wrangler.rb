@@ -1,14 +1,14 @@
 module Hydramata
   module Works
     # Responsible for wrangling up data from Fedora and passing that data to
-    # visiting :entity.
+    # visiting :work.
     class FedoraWrangler
 
-      attr_reader :repository_connection, :entity, :datastream_parser
+      attr_reader :repository_connection, :work, :datastream_parser
       def initialize(collaborators = {})
         @repository_connection = collaborators.fetch(:repository_connection) { default_repository_connection }
         @datastream_parser = collaborators.fetch(:datastream_parser) { default_datastream_parser }
-        @entity = collaborators.fetch(:entity)
+        @work = collaborators.fetch(:work)
       end
 
       private
@@ -43,7 +43,7 @@ module Hydramata
       def assign_work_type_from(object)
         object.models.each do |model|
           if model =~ /\Ainfo:fedora\/afmodel\:(.*)\Z/
-            entity.work_type = Regexp.last_match[1]
+            work.work_type = Regexp.last_match[1]
             break
           end
         end
@@ -56,8 +56,8 @@ module Hydramata
       end
 
       def parse_datastream_content(datastream)
-        datastream_parser.call(datastream: datastream, entity: entity) do |property|
-          entity.properties << property
+        datastream_parser.call(datastream: datastream, work: work) do |property|
+          work.properties << property
         end
       end
 

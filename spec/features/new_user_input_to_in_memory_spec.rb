@@ -1,28 +1,28 @@
 require 'spec_active_record_helper'
-require 'hydramata/works/entity'
+require 'hydramata/works/work'
 require 'hydramata/works/work_types/storage'
 require 'hydramata/works/conversions/work_type'
 require 'hydramata/works/conversions/property'
 
 module Hydramata
   module Works
-    class UserInputToEntityCoercer
+    class UserInputToWorkCoercer
       def self.call(collaborators = {})
         new(collaborators).call
       end
-      attr_reader :input, :entity
+      attr_reader :input, :work
       def initialize(collaborators = {})
         @input = collaborators.fetch(:input)
-        @entity = collaborators.fetch(:entity)
+        @work = collaborators.fetch(:work)
       end
 
       def call
-        entity.work_type = input.fetch(:work_type)
+        work.work_type = input.fetch(:work_type)
         input.each do |predicate, values|
           next if predicate.to_s == 'work_type'
-          entity.properties << { predicate: predicate, values: values }
+          work.properties << { predicate: predicate, values: values }
         end
-        entity
+        work
       end
     end
 
@@ -30,12 +30,12 @@ module Hydramata
       include Conversions
 
       it 'should create an appropriate object' do
-        UserInputToEntityCoercer.call(entity: entity, input: input.fetch(:work))
+        UserInputToWorkCoercer.call(work: work, input: input.fetch(:work))
 
-        expect(entity.work_type).to eq(WorkType('Special Work Type'))
-        expect(entity.properties.fetch(:title)).to eq(Property(:title, 'Hello', 'World', 'Bang!'))
-        expect(entity.properties.fetch(:abstract)).to eq(Property(:abstract, 'Long Text', 'Longer Text'))
-        expect(entity.properties.fetch(:keyword)).to eq(Property(:keyword, 'Programming'))
+        expect(work.work_type).to eq(WorkType('Special Work Type'))
+        expect(work.properties.fetch(:title)).to eq(Property(:title, 'Hello', 'World', 'Bang!'))
+        expect(work.properties.fetch(:abstract)).to eq(Property(:abstract, 'Long Text', 'Longer Text'))
+        expect(work.properties.fetch(:keyword)).to eq(Property(:keyword, 'Programming'))
       end
 
       let(:input) do
@@ -68,7 +68,7 @@ module Hydramata
         PredicatePresentationSequences::Storage.create!(predicate: predicate_keyword, predicate_set: predicate_set_optional, presentation_sequence: 2)
       end
 
-      let(:entity) { Entity.new }
+      let(:work) { Work.new }
 
     end
   end
