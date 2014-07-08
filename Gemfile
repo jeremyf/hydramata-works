@@ -19,13 +19,14 @@ gem 'coveralls', require: false
 if ! ENV['TRAVIS']
   gem 'simplecov', require: false
   gem 'guard-rspec'
-  gem 'pry'
   gem 'guard-bundler'
   gem 'guard-rails'
   gem 'rb-fsevent'
   gem 'terminal-notifier-guard'
   gem 'sexp_processor'
   gem 'ruby_parser'
+  gem 'pry', '~> 0.9.7'
+  gem 'pry-nav'
 end
 
 file = File.expand_path("Gemfile", ENV['ENGINE_CART_DESTINATION'] || ENV['RAILS_ROOT'] || File.expand_path("../spec/internal", __FILE__))
