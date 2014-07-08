@@ -3,10 +3,23 @@ require 'spec_slow_helper'
 module Hydramata
   module Works
     describe 'An entity and presentation structure' do
-      context 'renders :show action' do
+
+      let(:entity) do
+        Entity.new do |entity|
+          entity.work_type = work_type
+          entity.properties << { predicate: predicate_title, value: 'Hello' }
+          entity.properties << { predicate: predicate_title, value: 'World' }
+          entity.properties << { predicate: predicate_title, value: 'Bang!' }
+          entity.properties << { predicate: predicate_abstract, value: 'Long Text' }
+          entity.properties << { predicate: predicate_abstract, value: 'Longer Text' }
+          entity.properties << { predicate: predicate_keyword, value: 'Programming' }
+        end
+      end
+
+      context 'rendering a :show action' do
         let(:presentation_context) { :show }
 
-        it 'as a well-structured HTML document' do
+        it 'writes a well-structured HTML document' do
           renderer = EntityRenderer.new(entity: entity_presenter, format: :html)
           rendered_output = renderer.render
 
@@ -23,7 +36,7 @@ module Hydramata
           end
         end
 
-        it 'as a JSON document' do
+        it 'writes a well-structure JSON document' do
           renderer = EntityRenderer.new(entity: entity_presenter, format: :json)
           output = renderer.render
           json = JSON.parse(output)
@@ -37,10 +50,10 @@ module Hydramata
         end
       end
 
-      context 'renders :edit action' do
+      context 'rendering an :edit action' do
         let(:presentation_context) { :edit }
 
-        it 'as a well-structured HTML document' do
+        it 'writes a well-structured HTML document' do
           renderer = EntityRenderer.new(entity: entity_presenter, format: :html)
           rendered_output = renderer.render
 
@@ -81,18 +94,6 @@ module Hydramata
         PredicatePresentationSequences::Storage.create!(predicate: predicate_title, predicate_set: predicate_set_required, presentation_sequence: 1)
         PredicatePresentationSequences::Storage.create!(predicate: predicate_abstract, predicate_set: predicate_set_optional, presentation_sequence: 1)
         PredicatePresentationSequences::Storage.create!(predicate: predicate_keyword, predicate_set: predicate_set_optional, presentation_sequence: 2)
-      end
-
-      let(:entity) do
-        Entity.new do |entity|
-          entity.work_type = work_type
-          entity.properties << { predicate: predicate_title, value: 'Hello' }
-          entity.properties << { predicate: predicate_title, value: 'World' }
-          entity.properties << { predicate: predicate_title, value: 'Bang!' }
-          entity.properties << { predicate: predicate_abstract, value: 'Long Text' }
-          entity.properties << { predicate: predicate_abstract, value: 'Longer Text' }
-          entity.properties << { predicate: predicate_keyword, value: 'Programming' }
-        end
       end
 
       let(:presentation_context) { :show }
