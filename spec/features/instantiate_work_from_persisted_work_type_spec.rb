@@ -24,11 +24,11 @@ module Hydramata
         end
       end
 
-      it 'should assign a work type' do
+      it 'assigns a work type' do
         expect(work.work_type).to eq(@article.to_work_type)
       end
 
-      it 'should retrieve, via a predicate, the property and values that were set' do
+      it 'retrieves, via a predicate, the property and values that were set' do
         expect(work.properties[:title].values).to eq(['Hello', 'World'])
       end
     end

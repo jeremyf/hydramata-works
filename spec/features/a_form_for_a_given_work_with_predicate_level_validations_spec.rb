@@ -15,7 +15,7 @@ module Hydramata
       end
       let(:form) { WorkForm.new(work) }
 
-      it 'should enforce validations' do
+      it 'enforces validations' do
         expect(form.valid?).to be_falsey
         expect(form.errors.size).to eq(1)
         expect(form.errors[:title]).to eq(["can't be blank"])

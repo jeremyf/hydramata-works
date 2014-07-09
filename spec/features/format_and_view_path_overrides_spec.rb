@@ -4,7 +4,7 @@ require 'spec_slow_helper'
 # uses the same presentation context for the entire render process.
 module Hydramata
   module Works
-    describe 'An work and presentation structure' do
+    describe 'A work and presentation structure' do
       context 'with view_path override and format' do
         let(:work) do
           Work.new(work_type: 'article') do |work|

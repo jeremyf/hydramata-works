@@ -60,7 +60,7 @@ module Hydramata
         end
       end
 
-      context 'for properts' do
+      context 'for properties' do
         let(:presenter) { PropertyPresenter.new(work: work, fieldset: fieldset, property: property) }
         context 'with existing property and work type translations' do
           let(:fieldset) { PropertySet(identity: 'Property Set Translated') }

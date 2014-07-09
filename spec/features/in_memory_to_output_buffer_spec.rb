@@ -2,7 +2,7 @@ require 'spec_slow_helper'
 
 module Hydramata
   module Works
-    describe 'An work and presentation structure' do
+    describe 'A work and presentation structure' do
 
       let(:work) do
         Work.new do |work|

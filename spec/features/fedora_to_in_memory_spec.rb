@@ -12,7 +12,7 @@ module Hydramata
       let(:work_wrangler) { FedoraWrangler.new(work: work) }
       let(:work) { Work.new }
 
-      it 'should parse the Fedora object, assigning predicates and values' do
+      it 'parses the Fedora object, assigning predicates and values' do
         seed_predicates! do
           work_wrangler.call(pid, with_datastreams: true)
           expect { |b| work.properties.each(&b) }.
