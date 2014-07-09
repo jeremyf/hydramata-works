@@ -30,7 +30,7 @@ Once you have the `spec/internal` directory built, you can run `rspec` or `rake 
 
 ## Data Structure and Definition
 
-```
+<pre>
 +-------------+         +--------------+
 | Work        | >------ | WorkType     |
 +-------------+         +--------------+
@@ -49,7 +49,7 @@ Once you have the `spec/internal` directory built, you can run `rspec` or `rake 
 +-------------+
 | Value       +
 +-------------+
-```
+</pre>
 
 
 ## Resources
