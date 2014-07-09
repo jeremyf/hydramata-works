@@ -12,7 +12,7 @@ module Hydramata
         let(:a_parser) { double('A Parser', call: true) }
         let(:parser_finder) { double('Parser Finder', call: a_parser) }
         let(:options) { { predicate: predicate, work_type: 'article', parser_finder: parser_finder, value: value } }
-        it 'should find the appropriate parser based on the predicate and work_type' do
+        it 'finds the appropriate parser based on the predicate and work_type' do
           expect(described_class.parser_for(options)).to eq(a_parser)
           expect(parser_finder).to have_received(:call).with(options)
         end

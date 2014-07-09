@@ -10,11 +10,11 @@ module Hydramata
       subject { described_class.new(identity: 'My Identity') }
       it { should implement_data_definition_interface }
 
-      it 'should initialize via attributes' do
+      it 'initializes via attributes' do
         expect(subject.identity).to eq('My Identity')
       end
 
-      it 'should have a meaningful #to_s' do
+      it 'has a meaningful #to_s' do
         expect(subject.to_s).to eq('My Identity')
       end
 
@@ -38,11 +38,11 @@ module Hydramata
       end
 
       context '#to_translation_key_fragment' do
-        it 'should default to identity if no name is given for application usage' do
+        it 'defaults to identity if no name is given for application usage' do
           expect(subject.to_translation_key_fragment).to eq subject.identity
         end
 
-        it 'should default to identity if no name is given for application usage' do
+        it 'defaults to identity if no name is given for application usage' do
           subject = described_class.new(identity: 'My Identity', name_for_application_usage: 'Twonky')
           expect(subject.to_translation_key_fragment).to eq 'Twonky'
         end

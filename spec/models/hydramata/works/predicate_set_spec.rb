@@ -8,11 +8,11 @@ module Hydramata
       subject { described_class.new(identity: 'My Identity') }
       it { should implement_predicate_set_interface }
 
-      it 'should initialize via attributes' do
+      it 'initializes via attributes' do
         expect(subject.identity).to eq('My Identity')
       end
 
-      it 'should initialize via attributes' do
+      it 'initializes via attributes' do
         expect(subject.identity).to eq('My Identity')
       end
 

@@ -19,23 +19,23 @@ module Hydramata
         end
       end
 
-      it 'should have #fieldsets that is an alias of #predicate_sets' do
+      it 'has #fieldsets that is an alias of #predicate_sets' do
         subject = described_class.new(identity: 'My Identity', predicate_sets: ['one predicate', 'two predicate'])
         expect(subject.fieldsets).to eq(subject.predicate_sets)
       end
 
       context '#itemtype_schema_dot_org' do
-        it 'should utilize the default' do
+        it 'utilizes the default' do
           subject = described_class.new(identity: 'My Identity')
           expect(subject.itemtype_schema_dot_org).to match(/\Ahttps?:\/\/schema.org/)
         end
 
-        it 'should prepend http://schema.org if is missing' do
+        it 'prepends http://schema.org if is missing' do
           subject = described_class.new(identity: 'My Identity', itemtype_schema_dot_org: 'Thing')
           expect(subject.itemtype_schema_dot_org).to eq('http://schema.org/Thing')
         end
 
-        it 'should accept http directly' do
+        it 'accepts http directly' do
           subject = described_class.new(identity: 'My Identity', itemtype_schema_dot_org: 'http://schema.org/CreativeWork')
           expect(subject.itemtype_schema_dot_org).to eq('http://schema.org/CreativeWork')
         end

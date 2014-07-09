@@ -28,7 +28,7 @@ module Hydramata
           end
         end
 
-        it 'should munge together the presentation structure and work' do
+        it 'munges together the presentation structure and work' do
           presented_fieldsets = PresentedFieldsets(work: work, presentation_structure: presentation_structure)
 
           expect(presented_fieldsets.count).to eq(2)

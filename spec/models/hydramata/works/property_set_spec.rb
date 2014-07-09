@@ -48,63 +48,63 @@ module Hydramata
         before { subject << property }
 
         context '#predicates' do
-          it 'should be the predicate names' do
+          it 'is a collection of predicate names' do
             expect(subject.predicates).to eq [property.predicate.to_s]
           end
         end
 
         context '#fetch' do
-          it 'should raise an error if the predicate is not found' do
+          it 'raises an error if the predicate is not found' do
             expect { subject.fetch(:missing) }.to raise_error(KeyError)
           end
 
-          it 'should return the values if the predicate exists' do
+          it 'returns the values if the predicate exists' do
             expect(subject.fetch(property.predicate)).to eq(property)
           end
         end
 
         context '#key?' do
-          it 'should be false if predicate does not exist' do
+          it 'returns false if predicate does not exist' do
             expect(subject.key?(:missing)).to be_falsey
           end
 
-          it 'should return the values if the predicate exists' do
+          it 'returns the values if the predicate exists' do
             expect(subject.key?(property.predicate)).to be_truthy
           end
         end
 
         context '#[]' do
-          it 'should return nil if the predicate is not found' do
+          it 'returns nil if the predicate is not found' do
             expect(subject[:missing]).to eq(Property.new(predicate: :missing))
           end
 
-          it 'should return the values if the predicate exists' do
+          it 'returns the values if the predicate exists' do
             expect(subject[property.predicate]).to eq(property)
           end
         end
 
         context '#each' do
-          it 'should yield the predicate and normalized values' do
+          it 'yields the predicate and normalized values' do
             expect { |b| subject.each(&b) }.to yield_with_args(property)
           end
         end
 
         context '#==' do
-          it 'should return true if underlying properties are identical' do
+          it 'returns true if underlying properties are identical' do
             property_set = described_class.new
             other = described_class.new
 
             expect(property_set == other).to be_truthy
           end
 
-          it 'should return false if different classes' do
+          it 'returns false if different classes' do
             property_set = described_class.new
             other = 'abc'
 
             expect(property_set == other).to be_falsey
           end
 
-          it 'should return false if underlyng properties are different' do
+          it 'returns false if underlyng properties are different' do
             property_set = described_class.new
             other = described_class.new
             property_set << property
@@ -112,7 +112,7 @@ module Hydramata
             expect(property_set == other).to be_falsey
           end
 
-          it 'should return true if empty property set and hash are compared' do
+          it 'returns true if empty property set and hash are compared' do
             property_set = described_class.new
             other = {}
 
@@ -122,7 +122,7 @@ module Hydramata
 
         context '#subset' do
           let(:a_second_property) { { predicate: :another_predicate, value: 'another value' } }
-          it 'should return a property set that only has the specified keys' do
+          it 'returns a property set that only has the specified keys' do
             subject << a_second_property
             subset = described_class.new
             subset << property

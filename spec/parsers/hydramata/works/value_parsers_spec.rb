@@ -13,7 +13,7 @@ module Hydramata
 
       context 'existing parser in ValueParsers namespace' do
         let(:parser_class_name) { 'MockParser' }
-        it 'should use that' do
+        it 'uses that parser' do
           expect(described_class.find(predicate: predicate)).to eq ValueParsers::MockParser
         end
       end

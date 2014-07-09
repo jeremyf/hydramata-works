@@ -17,19 +17,17 @@ module Hydramata
 
       it_behaves_like 'ActiveModel'
 
-      context 'valid?' do
-        context 'when errors are not set' do
-          let(:validation_service) { double(call: true) }
-          it 'should be true (eg valid)' do
-            expect(subject.valid?).to be_truthy
-            expect(validation_service).to have_received(:call)
-          end
+      context 'when errors are not set' do
+        let(:validation_service) { double(call: true) }
+        it 'is not valid' do
+          expect(subject.valid?).to be_truthy
+          expect(validation_service).to have_received(:call)
         end
-        context 'when errors are encountered' do
-          let(:validation_service) { ->(work) { work.errors.add(:base, 'Found some errors!') } }
-          it 'should be false (eg not valid)' do
-            expect(subject.valid?).to be_falsey
-          end
+      end
+      context 'when errors are encountered' do
+        let(:validation_service) { ->(work) { work.errors.add(:base, 'Found some errors!') } }
+        it 'is valid' do
+          expect(subject.valid?).to be_falsey
         end
       end
 
@@ -39,11 +37,11 @@ module Hydramata
       end
 
       context 'work\'s properties' do
-        it 'should respond to a given predicate' do
+        it 'responds to a given predicate' do
           expect(subject).to respond_to(:first_name)
         end
 
-        it 'should expose the predicate name as a method' do
+        it 'exposes the predicate name as a method' do
           expect(subject.first_name).to eq(['Jeremy'])
         end
       end

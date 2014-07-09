@@ -11,7 +11,7 @@ module Hydramata
       it { should respond_to :values }
       it { should respond_to :name }
 
-      it 'should delegate #each to #values' do
+      it 'delegates #each to #values' do
         subject << value
         expect { |b| subject.each(&b) }.to yield_with_args(value)
       end
@@ -23,12 +23,12 @@ module Hydramata
           to([value])
       end
 
-      it 'should have a #to_translation_key_fragment' do
+      it 'has a #to_translation_key_fragment' do
         expect(subject.to_translation_key_fragment).to eq(subject.predicate.to_translation_key_fragment)
       end
 
       context 'case equality' do
-        it 'should delegate to the compared object' do
+        it 'delegates to the compared object' do
           object = double('Double')
           expect(object).
             to receive(:instance_of?).

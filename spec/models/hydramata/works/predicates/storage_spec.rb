@@ -46,7 +46,7 @@ module Hydramata
         end
 
         context '.existing_attributes_for' do
-          it 'should return the existing predicate attributes' do
+          it 'returns the existing predicate attributes' do
             predicate
             keys = [
               :id,
@@ -62,11 +62,11 @@ module Hydramata
             expect(actual_values).to eq(predicate.attributes.values_at(keys))
           end
 
-          it 'should return the identity if a matching predicate was not found' do
+          it 'returns the identity if a matching predicate was not found' do
             expect(described_class.existing_attributes_for(identity)).to eq(identity: identity)
           end
 
-          it 'should handle connection failed' do
+          it 'handles connection failed' do
             expect(described_class).to receive(:find_by_identity!).and_raise(ActiveRecord::ConnectionNotEstablished)
             expect(described_class.existing_attributes_for(identity)).to eq(identity: identity)
           end

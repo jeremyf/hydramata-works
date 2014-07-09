@@ -20,7 +20,7 @@ module Hydramata
         )
       end
 
-      it 'should attempt to render with diminishing specificity' do
+      it 'attempts to render with diminishing specificity' do
         expect(template).to receive(:render).
           with(partial: 'hydramata/works/values/an_work_type/a_predicate/show', object: subject).
           ordered.
@@ -36,12 +36,12 @@ module Hydramata
         expect(subject.render(template: template)).to eq('YES')
       end
 
-      it 'should render the value as a string' do
+      it 'renders the value as a string' do
         allow(template).to receive(:render).and_raise(RuntimeError)
         expect(subject.render(template: template)).to eq(value.to_s)
       end
 
-      it 'should have a default partial prefixes' do
+      it 'has a default partial prefixes' do
         expect(subject.partial_prefixes).to eq([['an_work_type','a_predicate'], ['a_predicate']])
       end
     end

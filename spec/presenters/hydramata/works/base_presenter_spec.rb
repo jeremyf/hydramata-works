@@ -15,35 +15,35 @@ module Hydramata
       let(:translator) { double('Translator', t: true) }
       subject { described_class.new(object, translator: translator) }
 
-      it 'should have #presenter_dom_class' do
+      it 'has #presenter_dom_class' do
         expect(subject.presenter_dom_class).to eq('base')
       end
 
-      it 'should return self for #to_presenter' do
+      it 'returns self for #to_presenter' do
         expect(subject.to_presenter.object_id).to eq(subject.object_id)
       end
 
-      it 'should have a friendly inspect message, because tracking it down could be a pain' do
+      it 'has a friendly inspect message, because tracking it down could be a pain' do
         expect(subject.inspect).to include("#{described_class}")
         expect(subject.inspect).to include(object.inspect)
       end
 
-      it 'should be an instance of the presented object\'s class' do
+      it 'is an instance of the presented object\'s class' do
         expect(subject.instance_of?(object.class)).to be_truthy
       end
 
-      it 'should generate container_content_tag_attributes' do
+      it 'generates container_content_tag_attributes' do
         builder = double(call: true)
         subject = described_class.new(object, translator: translator, dom_attributes_builder: builder)
         subject.container_content_tag_attributes(hello: :world)
         expect(builder).to have_received(:call).with(subject, { hello: :world }, {})
       end
 
-      it 'should also be an instance of the presenter class' do
+      it 'is also an instance of the presenter class' do
         expect(subject.instance_of?(described_class)).to be_truthy
       end
 
-      it 'should translate attribute keys' do
+      it 'translates attribute keys' do
         subject.translate(:name)
         expect(translator).to have_received(:t).with(:name, scopes: [], default: instance_of(Proc))
       end
@@ -69,12 +69,12 @@ module Hydramata
       context '#render' do
         let(:template) { double('Template', render: true)}
 
-        it 'should delegate render to the template' do
+        it 'delegates render to the template' do
           subject.render(template: template)
           expect(template).to have_received(:render).with(partial: 'hydramata/works/base/show', object: subject)
         end
 
-        it 'should handle a partial_prefixes rendering in less and less specificity' do
+        it 'handles a partial_prefixes rendering in less and less specificity' do
           subject = described_class.new(object, translator: translator, partial_prefixes: ['article/required', 'article'], presentation_context: 'show', template_missing_exception: [RuntimeError, NoMethodError])
           expect(template).to receive(:render).
             with(partial: 'hydramata/works/base/article/required/show', object: subject).
@@ -90,7 +90,7 @@ module Hydramata
           subject.render(template: template)
         end
 
-        it 'should stop rendering chain once we sucessfully render a template' do
+        it 'stops rendering chain once we sucessfully render a template' do
           subject = described_class.new(object, translator: translator, partial_prefixes: ['article/required', 'article'], presentation_context: 'show', template_missing_exception: [RuntimeError, NoMethodError])
           expect(template).to receive(:render).
             with(partial: 'hydramata/works/base/article/required/show', object: subject).
@@ -104,7 +104,7 @@ module Hydramata
           subject.render(template: template)
         end
 
-        it 'should raise exception if we are rendering as general as possible' do
+        it 'raises exception if we are rendering as general as possible' do
           subject = described_class.new(object, translator: translator, presentation_context: 'show')
           expect(template).to receive(:render).
             with(partial: 'hydramata/works/base/show', object: subject).

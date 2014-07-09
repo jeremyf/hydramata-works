@@ -21,20 +21,20 @@ module Hydramata
         )
       end
 
-      it 'should have #container_content_tag_attributes' do
+      it 'has #container_content_tag_attributes' do
         expect(subject.container_content_tag_attributes.keys).to eq([:class, :itemscope, :itemtype])
       end
 
-      it 'should have #fieldsets that are extracted from the #work and #presentation_structure' do
+      it 'has #fieldsets that are extracted from the #work and #presentation_structure' do
         subject.fieldsets
         expect(presented_fieldset_builder).to have_received(:call).with(work: subject, presentation_structure: presentation_structure)
       end
 
-      it 'should have a default partial prefixes' do
+      it 'has a default partial prefixes' do
         expect(subject.partial_prefixes).to eq([['my_work_type']])
       end
 
-      it 'should render as per the template' do
+      it 'renders as per the template' do
         expect(template).to receive(:render).
           with(partial: 'hydramata/works/works/my_work_type/show', object: subject).
           ordered.

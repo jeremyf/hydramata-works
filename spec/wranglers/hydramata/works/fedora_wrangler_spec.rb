@@ -13,7 +13,7 @@ module Hydramata
       let(:work) { MockWork.new }
       subject { described_class.new(repository_connection: repository_connection, work: work) }
 
-      it 'should assign the work type to the collaborating work' do
+      it 'assigns the work type to the collaborating work' do
         expect(repository_connection).to receive(:find).and_return(digital_object)
         expect { subject.call(:pid) }.
           to change { work.work_type }.

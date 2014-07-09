@@ -11,12 +11,12 @@ module Hydramata
         Hydramata::Works::WorkRenderer.new(work: work, format: :html, template: template)
       end
 
-      it 'should render the template based on all the inputs' do
+      it 'renders the template based on all the inputs' do
         subject.render
         expect(work).to have_received(:render).with(template: template)
       end
 
-      it 'should default to :html format' do
+      it 'defaults to :html format' do
         renderer = Hydramata::Works::WorkRenderer.new(work: work, template: template)
         expect(renderer.format).to eq(:html)
       end

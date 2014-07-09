@@ -21,21 +21,21 @@ module Hydramata
         context '.match?' do
           let(:ntriples_datastream) { double(content: data, mimeType: 'text/plain') }
           let(:not_ntriples_datastream) { double(content: '', mimeType: 'application/xml') }
-          it 'should not match when no datastream is provided' do
+          it 'does not match when no datastream is provided' do
             expect(described_class.match?).to be_falsey
           end
 
-          it 'should match when an RDF ntriples datastream is provided' do
+          it 'matches when an RDF ntriples datastream is provided' do
             expect(described_class.match?(datastream: ntriples_datastream)).to eq(described_class)
           end
 
-          it 'should not match when the data stream does not appear to be RDF ntriples' do
+          it 'does not match when the data stream does not appear to be RDF ntriples' do
             expect(described_class.match?(datastream: not_ntriples_datastream)).to be_falsey
           end
         end
 
         context 'with single value encountered' do
-          it 'should yield each encountered property' do
+          it 'yields each encountered property' do
             expect { |b| subject.call(data, &b) }.to yield_with_args(predicate: rdf_predicate, value: instance_of(RDF::Literal::Date))
           end
         end
@@ -52,7 +52,7 @@ module Hydramata
             ].join("\n")
           end
 
-          it 'should yield each encountered property' do
+          it 'yields each encountered property' do
             expect { |b| subject.call(data, &b) }.
             to yield_successive_args(
               { predicate: rdf_predicate, value: instance_of(RDF::Literal::Date) },
