@@ -1,5 +1,6 @@
 require 'spec_fast_helper'
 require 'hydramata/works/work'
+require 'hydramata/works/property'
 require 'hydramata/works/linters/implement_work_interface_matcher'
 require 'hydramata/works/linters/implement_property_interface_matcher'
 

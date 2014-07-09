@@ -1,5 +1,6 @@
 require 'active_support/core_ext/array/wrap'
-require 'hydramata/works/conversions'
+require 'hydramata/works/conversions/predicate'
+require 'hydramata/works/conversions/value'
 
 module Hydramata
   module Works

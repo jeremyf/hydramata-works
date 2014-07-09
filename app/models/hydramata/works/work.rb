@@ -1,4 +1,4 @@
-require 'hydramata/works/conversions'
+require 'hydramata/works/conversions/work_type'
 module Hydramata
   module Works
     # Responsible for being the in ruby representation of a set of Properties.

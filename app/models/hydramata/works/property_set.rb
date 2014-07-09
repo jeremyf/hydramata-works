@@ -1,5 +1,7 @@
 require 'active_support/core_ext/array/wrap'
-require 'hydramata/works/conversions'
+require 'hydramata/works/conversions/property'
+require 'hydramata/works/conversions/predicate_set'
+
 module Hydramata
   module Works
     # A container for Property objects. It provides ordered access to
