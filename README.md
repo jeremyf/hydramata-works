@@ -28,10 +28,34 @@ The rake task will build the internal rails application and run all of the tests
 
 Once you have the `spec/internal` directory built, you can run `rspec` or `rake spec:all`.
 
+## Data Structure and Definition
+
+```
++-------------+         +--------------+
+| Work        | >------ | WorkType     |
++-------------+         +--------------+
+       |                       |
+       ^                       ^
++-------------+         +--------------+
+| PropertySet + >------ | PredicateSet |
++-------------+         +--------------+
+       |                       |
+       ^                       |
++-------------+         +--------------+
+| Property    + >------ | Predicate    |
++-------------+         +--------------+
+       |
+       ^
++-------------+
+| Value       +
++-------------+
+```
+
+
 ## Resources
 
 * [Vision of Hydramata::Works](./VISION.md)
 * [Contributing Guidelines](./CONTRIBUTING.md)
 * [Todo](./TODO.md)
-* [Design Documents](./documents/)
+* [Design Documents](./documents/) - as with any documentation these will less and less reflect the state of Hydramata::Works but are a reference point.
 * [Test related README](./spec/README.md)
