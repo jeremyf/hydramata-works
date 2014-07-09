@@ -19,7 +19,7 @@ module Hydramata
 
       it 'attempts to render with diminishing specificity' do
         expect(template).to receive(:render).
-          with(partial: 'hydramata/works/properties/an_work_type/my_property/show', object: subject).
+          with(partial: 'hydramata/works/properties/a_work_type/my_property/show', object: subject).
           ordered.
           and_raise(RuntimeError)
         expect(template).to receive(:render).
@@ -34,7 +34,7 @@ module Hydramata
       end
 
       it 'has a default partial prefixes' do
-        expect(subject.partial_prefixes).to eq([['an_work_type','my_property'], ['my_property']])
+        expect(subject.partial_prefixes).to eq([['a_work_type','my_property'], ['my_property']])
       end
 
     end

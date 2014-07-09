@@ -15,7 +15,7 @@ module Hydramata
 
       it 'renders as per the template' do
         expect(template).to receive(:render).
-          with(partial: 'hydramata/works/fieldsets/an_work_type/my_fieldset/show', object: subject).
+          with(partial: 'hydramata/works/fieldsets/a_work_type/my_fieldset/show', object: subject).
           ordered.
           and_raise(RuntimeError)
         expect(template).to receive(:render).
@@ -50,7 +50,7 @@ module Hydramata
       end
 
       it 'has a default partial prefixes' do
-        expect(subject.partial_prefixes).to eq([['an_work_type', 'my_fieldset'], ['my_fieldset']])
+        expect(subject.partial_prefixes).to eq([['a_work_type', 'my_fieldset'], ['my_fieldset']])
       end
 
     end
