@@ -4,6 +4,7 @@ require 'hydramata/works/fieldset_presenter'
 module Hydramata
   module Works
     module Conversions
+      private
       def PresentedFieldsets(collaborators)
         # @TODO - This could be packaged up into a tidier location.
         # The collaboration with an work's PropertySet#subset is convoluted.
