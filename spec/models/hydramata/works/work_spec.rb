@@ -1,6 +1,7 @@
 require 'spec_fast_helper'
 require 'hydramata/works/work'
 require 'hydramata/works/linters/implement_work_interface_matcher'
+require 'hydramata/works/linters/implement_property_interface_matcher'
 
 module Hydramata
   module Works
@@ -43,6 +44,12 @@ module Hydramata
         it 'returns matching predicates' do
           subject.properties << property
           expect(subject.properties[predicate]).to eq(property)
+        end
+
+        it 'returns a property with empty values if the predicate was not assigned' do
+          property_with_undefined_predicate = subject.properties[:obviously_missing]
+          expect(property_with_undefined_predicate).to implement_property_interface
+          expect(property_with_undefined_predicate.values).to eq([])
         end
       end
     end
