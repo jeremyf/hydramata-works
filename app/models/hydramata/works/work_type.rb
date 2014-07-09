@@ -4,6 +4,13 @@ require 'active_support/core_ext/array/wrap'
 
 module Hydramata
   module Works
+    # Responsible for defining the suggested structure for a Work.
+    #
+    # The structure is based on the order of the #predicate_sets and within
+    # those, their #predicates.
+    # And it is suggested because Hydramata::Works acknowledges that each Work
+    # is unique and may have additional properties (and therefore predicates)
+    # defined.
     class WorkType < DataDefinition
       include Conversions
 
