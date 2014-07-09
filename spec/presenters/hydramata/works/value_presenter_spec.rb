@@ -6,7 +6,7 @@ require 'hydramata/works/predicate'
 module Hydramata
   module Works
     describe ValuePresenter do
-      let(:work) { Work.new(work_type: 'an work type') }
+      let(:work) { Work.new(work_type: 'a work type') }
       let(:predicate) { Predicate.new(identity: 'a predicate') }
       let(:value) { double('Value') }
       let(:template) { double('Template', render: true) }

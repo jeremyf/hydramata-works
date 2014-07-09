@@ -5,7 +5,7 @@ require 'hydramata/works/work'
 module Hydramata
   module Works
     describe PropertyPresenter do
-      let(:work) { Work.new(work_type: 'an work type') }
+      let(:work) { Work.new(work_type: 'a work type') }
       let(:property) { double('Property', predicate: 'my_property') }
       let(:template) { double('Template', render: true) }
       subject do

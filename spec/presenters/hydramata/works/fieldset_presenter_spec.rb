@@ -8,7 +8,7 @@ module Hydramata
     describe FieldsetPresenter do
       let(:fieldset_class) { Struct.new(:name, :work_type) }
       let(:fieldset) { fieldset_class.new('my_fieldset', work_type) }
-      let(:work_type) { WorkType.new(identity: 'an work type') }
+      let(:work_type) { WorkType.new(identity: 'a work type') }
       let(:work) { Work.new(work_type: work_type) }
       let(:template) { double('Template', render: true) }
       subject { described_class.new(work: work, fieldset: fieldset, presentation_context: 'show', template_missing_exception: [RuntimeError]) }

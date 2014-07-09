@@ -7,7 +7,7 @@ require 'hydramata/works/work'
 
 module Hydramata
   module Works
-    describe 'Instantiating an work from a persisted work type' do
+    describe 'Instantiating a work from a persisted work type' do
       before do
         @article = Hydramata::Works::WorkTypes::Storage.create!(identity: 'article', name_for_application_usage: 'article')
         @predicate_set = Hydramata::Works::PredicateSets::Storage.create!(identity: 'required', work_type: @article, presentation_sequence: 1, name_for_application_usage: 'required')
