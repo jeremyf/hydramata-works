@@ -8,7 +8,7 @@ require 'hydramata/works/fieldset_presenter'
 
 module Hydramata
   module Works
-    describe 'translation services' do
+    describe 'Translation services' do
       include Conversions
       let(:work) { Work.new {|e| e.work_type = work_type } }
 

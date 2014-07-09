@@ -6,7 +6,7 @@ require 'hydramata/works/work_form'
 
 module Hydramata
   module Works
-    describe 'a form for a given work with predicate level validations' do
+    describe 'A form for a given work with predicate level validations' do
       let(:predicate) { Predicate.new(identity: 'title', validations: '{"presence": true}') }
       let(:work) do
         Work.new(work_type: 'article') do |work|

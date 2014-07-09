@@ -7,7 +7,7 @@ require 'hydramata/works/work'
 
 module Hydramata
   module Works
-    describe 'instantiating an work from a persisted work type' do
+    describe 'Instantiating an work from a persisted work type' do
       before do
         @article = Hydramata::Works::WorkTypes::Storage.create!(identity: 'article', name_for_application_usage: 'article')
         @predicate_set = Hydramata::Works::PredicateSets::Storage.create!(identity: 'required', work_type: @article, presentation_sequence: 1, name_for_application_usage: 'required')
@@ -24,16 +24,12 @@ module Hydramata
         end
       end
 
-      it 'should have a #work_type' do
+      it 'should assign a work type' do
         expect(work.work_type).to eq(@article.to_work_type)
       end
 
-      it 'should retrieve a property via a key' do
+      it 'should retrieve, via a predicate, the property and values that were set' do
         expect(work.properties[:title].values).to eq(['Hello', 'World'])
-      end
-
-      it 'should retrieve a property with values that were not explicitly set' do
-        expect(work.properties[:alternate].values).to eq([])
       end
     end
   end
