@@ -1,0 +1,65 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <title>{{ page.title }}</title>
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{ page.title }}">
+{% if page.author %}{% for author in site.authors %}{% if author.id == page.author %}
+    <meta name="author" content="{{ author.name }}">{% if author.twitter %}
+    <meta name="twitter:creator" content="@{{ author.twitter }}">
+{% endif %}{% endif %}{% endfor %}{% endif %}{% if page.description %}
+    <meta name="description" content="{{ page.description }}">
+    <meta name="twitter:description" content="{{ page.description }}">
+{% elsif page.author %}
+    <meta name="description" content="{{ page.content| markdownify | strip_html | truncatewords:50 }}">
+    <meta name="twitter:description" content="{{ page.content| markdownify | strip_html | truncatewords:50 }}">
+{% endif %}
+    <meta name="twitter:url" content="http://{{ site.host }}{{ page.url }}">
+{% if page.reblog %}
+    <link rel="canonical" href="{{ page.reblog }}" />
+{% else %}
+    <link rel="canonical" href="http://{{ site.host }}{{ page.url }}" />
+{% endif %}
+    <link rel="alternate" href="http://{{ site.host }}/feed" title="ATOM Feed" type="application/atom+xml" />
+
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="{{ baseurl }}/stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="{{ baseurl }}/stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="{{ baseurl }}/stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body class="{{ page.presenter }} {{ page.category }}">
+  <header>
+    <div class="inner">
+      <h1>{{ site.name }}</h1>
+      <h2>{{ site.description }}</h2>
+      <a href="{{ site.repo_url }}" class="button"><small>View project on</small>GitHub</a>
+    </div>
+  </header>
+
+  <div id="content-wrapper">
+    <div class="inner clearfix">
+    {{ content }}
+    </div>
+  </div>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      ga('create','{{ site.analytics_token }}','{{ site.host }}');ga('send','pageview');
+    </script>
+
+  </body>
+</html>

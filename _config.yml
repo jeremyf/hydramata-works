@@ -1,0 +1,45 @@
+port: 4000
+analytics_token: 'UA-2118378-32'
+
+markdown: rdiscount
+rdiscount:
+  extensions: [smart]
+
+pygments:  true
+permalink: /:categories/:title/
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - README.md
+
+sorted_categories:
+  - practices
+  - planning
+  - procedures
+
+host: jeremyf.github.io
+baseurl: /hydramata-works
+url: http://jeremyf.github.io/hydramata-works
+repo_url: https://github.com/jeremyf/hydramata-works
+repo_owner_url: https://github.com/jeremyf/
+description: Providing a well defined data-structure to ease the interaction between differing layers of a Hydra application.
+name: Hydramata::Works
+
+authors:
+# - id:             github_username
+#   google_plus_id: https://plus.google.com/THIS_PART_HERE/posts
+#   name:           Your Full Name
+#   twitter:        twitter_username_without_@
+#   url:            http://url-to-representation-of-person.com
+# - id:             danhorst
+#   google_plus_id: 112599365298738218884
+#   name:           Dan Brubaker Horst
+#   twitter:        danhorst
+#   url:            http://dan.brubakerhorst.com/
+  - id:             jeremyf
+    google_plus_id: 112258979021033246325
+    name:           Jeremy Friesen
+    twitter:        jeremyfriesen
+    url:            http://takeonrules.com/
