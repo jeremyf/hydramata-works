@@ -20,7 +20,7 @@
 {% elsif page.author %}
     <meta name="description" content="{{ page.content| markdownify | strip_html | truncatewords:50 }}">
     <meta name="twitter:description" content="{{ page.content| markdownify | strip_html | truncatewords:50 }}">
-{% elsif %}
+{% else %}
     <meta name="description" content="{{ site.description }}">
     <meta name="twitter:description" content="{{ site.description }}">
 {% endif %}
