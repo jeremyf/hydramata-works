@@ -2,7 +2,7 @@
 author:   jeremyf
 category: demos
 filename: 2014-06-10-work-type-and-predicate-definition.md
-layout:   post
+layout:   demo
 title:    Work Type and Predicate Definition
 tags:     demo, work-type, schema
 ---

@@ -91,7 +91,7 @@ Also a detailed spec for [translations services](/spec/features/translation_serv
 
 ## Notes
 
-I'm not yet satisified with the custom view paths.
+I'm not yet satisfied with the custom view paths.
 In particular I don't know the exact lookup methods I want to use.
 
 I recently discovered the `:variant` option of the view_path pattern matcher.
