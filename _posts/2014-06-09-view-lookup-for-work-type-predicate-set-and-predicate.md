@@ -1,7 +1,7 @@
 ---
 author:   jeremyf
 category: demos
-filename: 2014-06-10-view-lookup-for-work-type-predicate-set-and-predicate.md
+filename: 2014-06-09-view-lookup-for-work-type-predicate-set-and-predicate.md
 layout:   demo
 title:    View Lookup for Work Type, Predicate Set, and Predicate
 tags:     demo, rails, view_paths

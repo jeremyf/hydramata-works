@@ -1,7 +1,7 @@
 ---
 author:   jeremyf
 category: demos
-filename: 2014-06-10-design-and-development-goals.md
+filename: 2014-06-07-design-and-development-goals.md
 layout:   demo
 title:    Design and Development Goals
 tags:     demo, rails, design, development
