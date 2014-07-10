@@ -20,9 +20,12 @@
 {% elsif page.author %}
     <meta name="description" content="{{ page.content| markdownify | strip_html | truncatewords:50 }}">
     <meta name="twitter:description" content="{{ page.content| markdownify | strip_html | truncatewords:50 }}">
+{% elsif %}
+    <meta name="description" content="{{ site.description }}">
+    <meta name="twitter:description" content="{{ site.description }}">
 {% endif %}
-    <meta name="twitter:url" content="{{ site.url }}{{ page.url }}">
     <meta name="twitter:image" content="{{ site.url }}{{ site.twitter_image_path }}"
+    <meta name="twitter:url" content="{{ site.url }}{{ page.url }}">
 {% if page.reblog %}
     <link rel="canonical" href="{{ page.reblog }}" />
 {% else %}
