@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print" />
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Hydramata::Works by jeremyf</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Hydramata::Works</h1>
+        <h2>Provide a well defined data-structure to ease the interaction between differing layers of a Hydra application.</h2>
+        <a href="https://github.com/jeremyf/hydramata-works" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a name="hydramataworks" class="anchor" href="#hydramataworks"><span class="octicon octicon-link"></span></a>Hydramata::Works</h1>
+
+<p><a href="http://badge.fury.io/rb/hydramata-work"><img src="https://badge.fury.io/rb/hydramata-work.png" alt="Version"></a>
+<a href="https://travis-ci.org/jeremyf/hydramata-work"><img src="https://travis-ci.org/jeremyf/hydramata-work.png?branch=master" alt="Build Status"></a>
+<a href="https://codeclimate.com/github/jeremyf/hydramata-work"><img src="https://codeclimate.com/github/jeremyf/hydramata-work.png" alt="Code Climate"></a>
+<a href="https://coveralls.io/r/jeremyf/hydramata-work"><img src="https://img.shields.io/coveralls/jeremyf/hydramata-work.svg" alt="Coverage Status"></a>
+<a href="http://rubydoc.info/github/jeremyf/hydramata-work/master/frames/"><img src="http://img.shields.io/badge/API-docs-blue.svg" alt="API Docs"></a>
+<a href="./LICENSE"><img src="http://img.shields.io/badge/APACHE2-license-blue.svg" alt="APACHE 2 License"></a></p>
+
+<p>Responsible for providing a well defined data-structure to ease the interaction between differing layers of an application:</p>
+
+<ul>
+<li>Persistence Layer</li>
+<li>In Memory</li>
+<li>Rendering/Output Buffer</li>
+</ul><h2>
+<a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting Started</h2>
+
+<p>Presently Hydramata::Works is a work in progress, and very much not ready for production usage.</p>
+
+<p>But I would encourage you to:</p>
+
+<ol>
+<li>Clone the repository: <code>git clone https://github.com/jeremyf/hydramata-works.git hydramata-works</code>
+</li>
+<li>Change to the repository's directory: <code>cd hydramata-works</code>
+</li>
+<li>Install the base dependencies: <code>bundle install</code>
+</li>
+<li>Run the default rake task: <code>rake</code>
+</li>
+</ol><p>The rake task will build the internal rails application and run all of the tests.</p>
+
+<p>Once you have the <code>spec/internal</code> directory built, you can run <code>rspec</code> or <code>rake spec:all</code>.</p>
+
+<h2>
+<a name="data-structure-and-definition" class="anchor" href="#data-structure-and-definition"><span class="octicon octicon-link"></span></a>Data Structure and Definition</h2>
+
+<pre>
++-------------+         +--------------+
+| Work        | &gt;------ | WorkType     |
++-------------+         +--------------+
+       |                       |
+       ^                       ^
++-------------+         +--------------+
+| PropertySet + &gt;------ | PredicateSet |
++-------------+         +--------------+
+       |                       |
+       ^                       |
++-------------+         +--------------+
+| Property    + &gt;------ | Predicate    |
++-------------+         +--------------+
+       |
+       ^
++-------------+
+| Value       +
++-------------+
+</pre>
+
+<h2>
+<a name="resources" class="anchor" href="#resources"><span class="octicon octicon-link"></span></a>Resources</h2>
+
+<ul>
+<li><a href="./VISION.md">Vision of Hydramata::Works</a></li>
+<li><a href="./CONTRIBUTING.md">Contributing Guidelines</a></li>
+<li><a href="./TODO.md">Todo</a></li>
+<li>
+<a href="./documents/">Design Documents</a> - as with any documentation these will less and less reflect the state of Hydramata::Works but are a reference point.</li>
+<li><a href="./spec/README.md">Test related README</a></li>
+</ul>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/jeremyf/hydramata-works/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/jeremyf/hydramata-works/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/jeremyf/hydramata-works"></a> is maintained by <a href="https://github.com/jeremyf">jeremyf</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
