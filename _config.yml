@@ -22,6 +22,7 @@ sorted_categories:
 host: jeremyf.github.io
 baseurl: /hydramata-works
 url: http://jeremyf.github.io/hydramata-works
+twitter_image_path: /images/projecthydra-mascot.png
 repo_url: https://github.com/jeremyf/hydramata-works
 repo_owner_url: https://github.com/jeremyf/
 description: Moving Data throughout Hydra Applications
