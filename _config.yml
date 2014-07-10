@@ -6,7 +6,7 @@ rdiscount:
   extensions: [smart]
 
 pygments:  true
-permalink: /:categories/:title/
+permalink: /hydramata-works/:categories/:title/
 
 exclude:
   - Gemfile

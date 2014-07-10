@@ -21,19 +21,22 @@
     <meta name="description" content="{{ page.content| markdownify | strip_html | truncatewords:50 }}">
     <meta name="twitter:description" content="{{ page.content| markdownify | strip_html | truncatewords:50 }}">
 {% endif %}
-    <meta name="twitter:url" content="http://{{ site.host }}{{ page.url }}">
+    <meta name="twitter:url" content="{{ site.url }}{{ page.url }}">
 {% if page.reblog %}
     <link rel="canonical" href="{{ page.reblog }}" />
 {% else %}
-    <link rel="canonical" href="http://{{ site.host }}{{ page.url }}" />
+    <link rel="canonical" href="{{ site.url }}/{{ page.url }}" />
 {% endif %}
-    <link rel="alternate" href="http://{{ site.host }}/feed" title="ATOM Feed" type="application/atom+xml" />
+    <link rel="alternate" href="{{ site.url }}/feed" title="ATOM Feed" type="application/atom+xml" />
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/stylesheets/pygment_trac.css">
+    <link rel="stylesheet" href="{{ site.baseurl }}/stylesheets/site.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -59,7 +62,7 @@
       <div class="col-sm-8">
         {{ content }}
       </div>
-      <div class="col-sm-4">
+      <div class="col-sm-4 aside">
         {% include aside.html %}
       </div>
     </div>

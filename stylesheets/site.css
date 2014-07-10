@@ -1,0 +1,8 @@
+.aside .aside-list {
+  padding-left: 0;
+  list-style-type: none;
+}
+
+.aside .aside-list li {
+  padding-bottom: 0.25em;
+}
