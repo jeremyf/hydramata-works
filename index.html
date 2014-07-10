@@ -29,7 +29,7 @@ title:    Hydramata::Works
       {% for post in site.categories.demos %}
       <li itemscope itemtype="http://schema.org/BlogPosting">
         <h3 class="title">
-          <a itemprop="url" href="{{ post.url }}"><span itemprop="name">{{ post.title }}</span></a>
+          <a itemprop="url" href="{{ site.baseurl }}{{ post.url }}"><span itemprop="name">{{ post.title }}</span></a>
         </h3>
         <p class="muted">
         {% if post.author %}{% for author in site.authors %}{% if author.id == post.author %}{% if author.url %}
