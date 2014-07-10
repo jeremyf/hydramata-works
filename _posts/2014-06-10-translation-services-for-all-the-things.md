@@ -1,8 +1,11 @@
-# Translation Services for All the Things
-
-*As with all demos, repeating these steps later on may or may not work.*
-*Syntax changes. Things move around.*
-*Please refer to the specs for the most accurate reflection of what is going on at this point in time.*
+---
+author:   jeremyf
+category: demos
+filename: 2014-06-10-translation-services-for-all-the-things.md
+layout:   demo
+title:    Translation Services for All the Things
+tags:     demo, rails, i18n
+---
 
 ## Introduction to Rails Translation Services
 

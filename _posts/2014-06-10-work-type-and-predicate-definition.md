@@ -6,9 +6,6 @@ layout:   post
 title:    Work Type and Predicate Definition
 tags:     demo, work-type, schema
 ---
-*As with all demos, repeating these steps later on may or may not work.*
-*Syntax changes. Things move around.*
-*Please refer to the specs for the most accurate reflection of what is going on at this point in time.*
 
 Hydramata::Works eschews creating custom classes for each possible type of work (i.e. there is no [Article class as there was in Curate](https://github.com/projecthydra-labs/curate/blob/develop/app/repository_models/article.rb)).
 Instead, Hydramata::Works allows [types of works to be arbitrary, defined, and persisted](./app/models/hydramata/works/work_types/storage.rb).
