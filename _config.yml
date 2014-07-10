@@ -24,7 +24,7 @@ baseurl: /hydramata-works
 url: http://jeremyf.github.io/hydramata-works
 repo_url: https://github.com/jeremyf/hydramata-works
 repo_owner_url: https://github.com/jeremyf/
-description: Providing a well defined data-structure to ease the interaction between differing layers of a Hydra application.
+description: Moving Data throughout Hydra Applications
 name: Hydramata::Works
 
 authors:

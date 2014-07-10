@@ -2,58 +2,48 @@
 layout:    boilerplate
 presenter: post
 ---
-
 <section role="main" class="page container" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="page-header">
+    {% if page.tagline %}
+    <hgroup itemprop="headline">
+    <h1 class="headline instapaper_ignore">{{ page.title }}</h1> <span class="hidden">&mdash;</span>
+    <h2 class="tagline">{{ page.tagline }}</h2>
+    </hgroup>
+    {% else %}
+    <h1 itemprop="headline" class="headline instapaper_ignore">{{ page.title }}</h1>
+    {% endif %}
+    <p class="muted">
+    {% if page.author %}{% for author in site.authors %}{% if author.id == page.author %}{% if author.url %}
+    <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <a itemprop="url" href="{{ author.url }}"><span itemprop="name">{{ author.name }}</span></a>
+    </span> &mdash;
+    {% else %}
+    <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <span itemprop="name">{{ author.name }}</span>
+    </span> &mdash;
+    {% endif %}{% endif %}{% endfor %}{% endif %}{% if page.revised %}
+    <time datetime="{{ page.date | date:"%Y-%m-%d %H:%M" }}" itemprop="dateCreated">{{ page.date | date:"%B %e, %Y" }}</time>, revised on <time datetime="{{ page.revised | date:"%Y-%m-%d %H:%M" }}" itemprop="dateRevised">{{ page.revised | date:"%B %e, %Y" }}</time>
+    {% else %}
+    <time datetime="{{ page.date | date:"%Y-%m-%d %H:%M" }}" itemprop="dateCreated">{{ page.date | date:"%B %e, %Y" }}</time>
+    {% endif %}
 
-  <div class="row">
+    <span class="pull-right">
+      <a itemprop="url" href="http://{{ site.host }}{{page.url}}">Permalink</a>
+    </span>
+    </p>
+  </header>
 
-    <header class="span8 offset2 page-header">
-      {% if page.tagline %}
-      <hgroup itemprop="headline">
-      <h1 class="headline instapaper_ignore">{{ page.title }}</h1> <span class="hidden">&mdash;</span>
-      <h2 class="tagline">{{ page.tagline }}</h2>
-      </hgroup>
-      {% else %}
-      <h1 itemprop="headline" class="headline instapaper_ignore">{{ page.title }}</h1>
-      {% endif %}
-      <p class="muted">
-      {% if page.author %}{% for author in site.authors %}{% if author.id == page.author %}{% if author.url %}
-      <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <a itemprop="url" href="{{ author.url }}"><span itemprop="name">{{ author.name }}</span></a>
-      </span> &mdash;
-      {% else %}
-      <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-        <span itemprop="name">{{ author.name }}</span>
-      </span> &mdash;
-      {% endif %}{% endif %}{% endfor %}{% endif %}{% if page.revised %}
-      <time datetime="{{ page.date | date:"%Y-%m-%d %H:%M" }}" itemprop="dateCreated">{{ page.date | date:"%B %e, %Y" }}</time>, revised on <time datetime="{{ page.revised | date:"%Y-%m-%d %H:%M" }}" itemprop="dateRevised">{{ page.revised | date:"%B %e, %Y" }}</time>
-      {% else %}
-      <time datetime="{{ page.date | date:"%Y-%m-%d %H:%M" }}" itemprop="dateCreated">{{ page.date | date:"%B %e, %Y" }}</time>
-      {% endif %}
+  <article itemprop="articleBody" class="instapaper_body">
 
-      <span class="pull-right">
-        <a itemprop="url" href="http://{{ site.host }}{{page.url}}">Permalink</a>
-      </span>
-      </p>
-    </header>
+    {{ content }}
+    {% if page.reblog %}
+    <hr/>
 
-  </div>
-
-  <div class="row">
-
-    <article itemprop="articleBody" class="span8 offset2 instapaper_body">
-
-      {{ content }}
-      {% if page.reblog %}
-      <hr/>
-
-      <blockquote class="reblog-notice">
-        <p>This post was origionally published on another site: <a href="{{ page.reblog }}">{{ page.reblog }}</a></p>
-      </blockquote>
-      {% endif %}
-    </article>
-
-  </div>
+    <blockquote class="reblog-notice">
+      <p>This post was origionally published on another site: <a href="{{ page.reblog }}">{{ page.reblog }}</a></p>
+    </blockquote>
+    {% endif %}
+  </article>
 
 </section>
 

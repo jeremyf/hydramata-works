@@ -1,7 +1,6 @@
 .bundle/
 log/*.log
 pkg/
-
 Gemfile.lock
 spec/internal
 ./spec/internal
@@ -13,3 +12,4 @@ documents/**/*.pdf
 .yardoc
 doc/
 .ruby-version
+_site/*

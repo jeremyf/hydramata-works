@@ -1,11 +1,12 @@
 ---
 author:   jeremyf
 category: demos
-filename: 2014-06-10-work-type-and-predicate-definition.md
+filename: 2014-06-10-view-lookup-for-work-type-predicate-set-and-predicate.md
 layout:   demo
-title:    Work Type and Predicate Definition
-tags:     demo
+title:    View Lookup for Work Type, Predicate Set, and Predicate
+tags:     demo, rails, view_paths
 ---
+
 Building on the [idea that Hydramata::Works allows the definition of arbitrary work types and predicates](./work_type_and_predicate_definition.md), I'm going to go into the view rendering.
 
 ## Introduction to Rails View Paths

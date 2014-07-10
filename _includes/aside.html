@@ -1,0 +1,34 @@
+<aside class="panel panel-default get-the-code">
+  <header class="panel-heading">
+    <h3 class="panel-title">Get the Code</h3>
+  </header>
+  <ul>
+    <li><a href="{{ site.repo_url }}" class="btn btn-primary"><small>View project on </small>GitHub</a></li>
+    <li><a href="{{ site.repo_url }}/zipball/master" class="btn btn-primary"><small>Download</small> .zip file</a></li>
+    <li><a href="{{ site.repo_url }}/tarball/master" class="btn btn-primary"><small>Download</small> .tar.gz file</a></li>
+  </ul>
+</aside>
+
+<aside class="panel panel-default project-status">
+  <header class="panel-heading">
+    <h3 class="panel-title">Project Status
+  </header>
+  <ul>
+    <li><a href="http://badge.fury.io/rb/hydramata-works"><img src="https://badge.fury.io/rb/hydramata-works.png" alt="Version"></a></li>
+    <li><a href="https://travis-ci.org/jeremyf/hydramata-works"><img src="https://travis-ci.org/jeremyf/hydramata-works.png?branch=master" alt="Build Status"></a></li>
+    <li><a href="https://codeclimate.com/github/jeremyf/hydramata-works"><img src="https://codeclimate.com/github/jeremyf/hydramata-works.png" alt="Code Climate"></a></li>
+    <li><a href="https://coveralls.io/r/jeremyf/hydramata-works"><img src="https://img.shields.io/coveralls/jeremyf/hydramata-works.svg" alt="Coverage Status"></a></li>
+    <li><a href="http://rubydoc.info/github/jeremyf/hydramata-works/master/frames/"><img src="http://img.shields.io/badge/API-docs-blue.svg" alt="API Docs"></a></li>
+    <li><a href="./LICENSE"><img src="http://img.shields.io/badge/APACHE2-license-blue.svg" alt="APACHE 2 License"></a></li>
+  </ul>
+</aside>
+
+<aside class="panel panel-default project-maintainers">
+  <header class="panel-heading">
+    <h3 class="panel-title">Maintained By
+  </header>
+
+<ul class="repo-owner list-contributors">{% for author in site.authors %}
+  <li><a href="https://twitter.com/{{ author.twitter }}">{{ author.name }}</a></li>
+{% endfor %}</ul>
+</aside>
