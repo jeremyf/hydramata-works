@@ -40,7 +40,7 @@ In fact, I want to provide rudimentary support for work types that may not be de
 
 However, I want to allow different view for different work types.
 
-Enter the concept of [rendering with diminishing specificity](https://github.com/jeremyf/hydramata-works/blob/2ad3a9a1b56591fa303194988adfade7ec014639/app/presenters/hydramata/works/base_presenter.rb#L79-L96).
+Enter the concept of [rendering with diminishing specificity]({{ site.repo_url }}/blob/2ad3a9a1b56591fa303194988adfade7ec014639/app/presenters/hydramata/works/base_presenter.rb#L79-L96).
 
 This concept introduces a pivot point in the view paths.
 It adds the behavior that for each view path, attempt to first render a template for the given work type then for the generic work type.
@@ -57,7 +57,7 @@ The first one we found would be rendered, all of the others would be skipped.
 
 **And yes I know `hydramata/works/works` looks a bit silly. I'm working on that.**
 
-This case is asserted in the [WorkPresenter spec](/spec/presenters/hydramata/works/work_presenter_spec.rb).
+This case is asserted in the [WorkPresenter spec]({{ site.repo_url_file_prefix}}/spec/presenters/hydramata/works/work_presenter_spec.rb).
 
 ## But Wait, There's More
 
@@ -85,9 +85,9 @@ These two cases are asserted in the [FieldsetPresenter spec](/spec/presenters/hy
 
 ## Supporting specs
 
-If you want to see this in action, please look at the feature spec that demonstrates the [format and view path overrides](/spec/features/format_and_view_path_overrides_spec.rb). This is further supported by the [BasePresenter#render specs](/spec/presenters/hydramata/works/base_presenter_spec.rb)
+If you want to see this in action, please look at the feature spec that demonstrates the [format and view path overrides]({{ site.repo_url_file_prefix}}/spec/features/format_and_view_path_overrides_spec.rb). This is further supported by the [BasePresenter#render specs]({{ site.repo_url_file_prefix}}/spec/presenters/hydramata/works/base_presenter_spec.rb)
 
-Also a detailed spec for [translations services](/spec/features/translation_services_spec.rb) shows the lookup strategy.
+Also a detailed spec for [translations services]({{ site.repo_url_file_prefix}}/spec/features/translation_services_spec.rb) shows the lookup strategy.
 
 ## Notes
 

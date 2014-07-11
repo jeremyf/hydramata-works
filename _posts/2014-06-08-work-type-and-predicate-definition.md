@@ -8,7 +8,7 @@ tags:     demo, work-type, schema
 ---
 
 Hydramata::Works eschews creating custom classes for each possible type of work (i.e. there is no [Article class as there was in Curate](https://github.com/projecthydra-labs/curate/blob/develop/app/repository_models/article.rb)).
-Instead, Hydramata::Works allows [types of works to be arbitrary, defined, and persisted](./app/models/hydramata/works/work_types/storage.rb).
+Instead, Hydramata::Works allows [types of works to be arbitrary, defined, and persisted]({{ site.repo_url_file_prefix }}app/models/hydramata/works/work_types/storage.rb).
 
 It is a database-backed means of declaring the suggested structure for implementations of specific types of works.
 This means that each institution could define their own suggested structure for an Article work type.
@@ -90,7 +90,7 @@ For good measures I've added the validation that the DC:Title will always be req
 
 When I go to create a new Article, the form has inputs for DC:Title and DC:Alternate.
 
-![New Article Form](./files/new-article-form.png "Screen capture of New Article Form in base app")
+<img src="{{ site.baseurl }}/images/new-article-form.png" class="img-thumbnail" title="New Article Form" alt="Screen capture of New Article Form in base app">
 
 The above screen grab was from a [custom Rails application](https://github.com/ndlib/predicate-rendering) that uses the Hydramata::Works gem.
 Its a scratch pad, but the `#new` action's controller was:
@@ -108,8 +108,8 @@ But that is a future goal.
 
 ## Supporting specs
 
-If you want to see this in action, please look at the feature spec that [instantiates a work from a persisted work type](/spec/features/instantiate_work_from_persisted_work_type_spec.rb).
-You may also find it helpful to see [how validations are applied](/spec/features/a_form_for_a_given_work_with_predicate_level_validations_spec.rb).
+If you want to see this in action, please look at the feature spec that [instantiates a work from a persisted work type]({{ {{ site.repo_url_file_prefix}}spec/features/instantiate_work_from_persisted_work_type_spec.rb).
+You may also find it helpful to see [how validations are applied]({{ site.repo_url_file_prefix}}spec/features/a_form_for_a_given_work_with_predicate_level_validations_spec.rb).
 
 ## Notes
 
@@ -117,9 +117,9 @@ An astute reader will notice that there is some duplication in the :identity and
 I'm working out the kinks in this concept.
 
 I am separating the persistence logic from the structural logic.
-[Hydramata::Works::WorkType](./app/models/hydramata/works/work_type.rb) defines the data structure. This data structure is used throughout much of Hydramata::Works.
+[Hydramata::Works::WorkType]({{ site.repo_url_file_prefix }}app/models/hydramata/works/work_type.rb) defines the data structure. This data structure is used throughout much of Hydramata::Works.
 
-[Hydramata::Works::WorkTypes::Storage](./app/models/hydramata/works/work_types/storage.rb) is responsible for persisting and reifying the Work Type data structure.
+[Hydramata::Works::WorkTypes::Storage]({{ site.repo_url_file_prefix }}app/models/hydramata/works/work_types/storage.rb) is responsible for persisting and reifying the Work Type data structure.
 Think of it as an intermediary between the actual WorkType data structure and the database.
 
 As an added bonus to the development, by defining a very lightweight WorkType that is not an ActiveRecord model, the concerns are separated and the tests can run faster.

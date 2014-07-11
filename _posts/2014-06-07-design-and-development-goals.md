@@ -130,7 +130,7 @@ This has been inspired, in part by [Virtus](https://github.com/solnic/virtus) an
 ## Presenters, Forms, Parsers, Renderers, Wranglers, Validators
 
 There are several nameable concepts that are introduced in this application.
-I'm exploring what this means, but I know that I don't want a "app/services" dumping ground.
+I'm exploring what this means, but I know that I don't want an `app/services` dumping ground.
 
 ### Presenters
 

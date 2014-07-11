@@ -21,8 +21,8 @@ This includes:
 
 ## Example
 
-Given that [I've taken the time to allow for custom view rendering](./view_lookup_for_work_type_and_property_set_and_property.md), I need a similar way to make sure each Work Type, Fieldset, and Property's labels, hints, etc. are flexible.
-This is handled by [Hydramata::Works::Translator](/lib/hydramata/works/translator.rb).
+Given that [I've taken the time to allow for custom view rendering](../view-lookup-for-work-type-predicate-set-and-predicate), I need a similar way to make sure each Work Type, Fieldset, and Property's labels, hints, etc. are flexible.
+This is handled by [Hydramata::Works::Translator]({{ site.repo_url_file_prefix }}/lib/hydramata/works/translator.rb).
 
 This again uses the idea of diminishing specificity.
 After all most of the time the "hint" for a work's DC:Title predicate will be the same regardless of the work type.
@@ -61,4 +61,4 @@ en:
 
 ## Supporting Specs
 
-The gory details of the Internationalization is asserted in the [Translation Services spec](/spec/features/translation_services_spec.rb)
+The gory details of the Internationalization is asserted in the [Translation Services spec]({{ site.repo_url_file_prefix }}/spec/features/translation_services_spec.rb)
