@@ -100,7 +100,7 @@ Thus I've taken the time to create Linters.
 These are analogous to [ActiveModel::Lint::Tests](http://api.rubyonrails.org/classes/ActiveModel/Lint/Tests.html).
 At present this is a mixed bag.
 
-The more terse 'implements_<klass>_interface' matchers are easiest to include inline.
+The more terse `implements_<klass>_interface` matchers are easiest to include inline.
 I will perhaps migrate the ones that use shared_behavior.
 
 The linters can be found in [`./lib/hydramata/works/linters.rb`](/lib/hydramata/works/linters.rb) and [`./lib/hydramata/works/linters/`](/lib/hydramata/works/linters/).
