@@ -19,13 +19,13 @@ sorted_categories:
   - planning
   - procedures
 
-host: jeremyf.github.io
+host: ndlib.github.io
 baseurl: /hydramata-works
-url: http://jeremyf.github.io/hydramata-works
+url: http://ndlib.github.io/hydramata-works
 twitter_image_path: /images/projecthydra-mascot.png
-repo_url: https://github.com/jeremyf/hydramata-works
-repo_owner_url: https://github.com/jeremyf
-repo_url_file_prefix: https://github.com/jeremyf/hydramata-works/tree/master
+repo_url: https://github.com/ndlib/hydramata-works
+repo_owner_url: https://github.com/ndlib
+repo_url_file_prefix: https://github.com/ndlib/hydramata-works/tree/master
 description: Moving Data throughout Hydra Applications
 name: Hydramata::Works
 
