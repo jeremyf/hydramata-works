@@ -1,5 +1,4 @@
-<p>{{ site.baseurl + '/demos/index.html' }}</p>
-<nav class="navbar navbar-default" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -16,16 +15,16 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li class="dropdown">
-          <a href="{{ site.baseurl }}/demos/" data-toggle="dropdown" class="dropdown-toggle {% if page.url contains '/demos/' %} active{% endif %}">Demos <span class="caret"></span></a>
+          <a href="{{ site.baseurl }}/demos/" data-toggle="dropdown" class="dropdown-toggle">Demos <span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="{{ site.baseurl }}/demos/">All Demos</a></li>
+            <li  {% if page.url contains '/demos/' %}class="active"{% endif %}><a href="{{ site.baseurl }}/demos/">All Demos</a></li>
             <li class="divider"></li>
             {% for demo in site.categories.demos %}
               <li><a href="#">{{ demo.title }}</a></li>
             {% endfor %}
           </ul>
         </li>
-        <li><a href="{{ site.baseurl }}/about/" {% if page.url contains '/about/index.html' %}class="active"{% endif %}>About</a></li>
+        <li {% if page.url contains '/about/index.html' %}class="active"{% endif %}><a href="{{ site.baseurl }}/about/">About</a></li>
       </ul>
     </div>
   </div>
