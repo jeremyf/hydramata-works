@@ -27,7 +27,7 @@ module Hydramata
       end
 
       def name
-        predicate
+        predicate.name
       end
 
       # Because who wants to remember which way to access this?

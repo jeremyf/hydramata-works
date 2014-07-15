@@ -27,7 +27,7 @@ In each layer, there is a concept of a Work and its data structure.
 These should not be considered exhaustive.
 But are instead a parking lot that may be cleared or added to.
 
-- [ ] Disambigutate identity vs. name for application usage
+- [X] Disambigutate identity vs. name for application usage
 - [ ] Tidy up validation services; Presently it has lots of knowledge of Work's structure
 - [ ] Reify an object from persistence then apply value changes
 - [ ] Review view rendering path options; Presently the top level work type is created.

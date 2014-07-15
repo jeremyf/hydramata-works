@@ -77,9 +77,9 @@ module Hydramata
         end
       end
 
-      let(:predicate_title) { Predicates::Storage.new(identity: 'title') }
-      let(:predicate_abstract) { Predicates::Storage.new(identity: 'abstract') }
-      let(:predicate_keyword) { Predicates::Storage.new(identity: 'keyword') }
+      let(:predicate_title) { Predicates::Storage.new(identity: 'http://purl.org/dc/terms/dc_title', name_for_application_usage: 'title') }
+      let(:predicate_abstract) { Predicates::Storage.new(identity: 'http://purl.org/dc/terms/dc_abstract', name_for_application_usage: 'abstract') }
+      let(:predicate_keyword) { Predicates::Storage.new(identity: 'http://purl.org/dc/terms/dc_keyword', name_for_application_usage: 'keyword') }
       let(:work_type) { WorkTypes::Storage.new(identity: 'Special Work Type') }
       let(:predicate_set_required) { PredicateSets::Storage.new(identity: 'required', work_type: work_type, presentation_sequence: 1) }
       let(:predicate_set_optional) { PredicateSets::Storage.new(identity: 'optional', work_type: work_type, presentation_sequence: 2) }

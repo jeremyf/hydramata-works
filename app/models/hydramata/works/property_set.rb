@@ -17,7 +17,7 @@ module Hydramata
       attr_reader :predicate_set
 
       def name
-        predicate_set
+        predicate_set.name
       end
 
       def <<(input)

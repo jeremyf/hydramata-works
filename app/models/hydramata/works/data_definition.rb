@@ -26,13 +26,17 @@ module Hydramata
         name_for_application_usage
       end
 
+      def name
+        name_for_application_usage
+      end
+
       attr_reader :identity
       def identity=(value)
         @identity = value.to_s
       end
 
       def to_s
-        identity
+        name_for_application_usage
       end
 
       def to_sym

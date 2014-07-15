@@ -9,45 +9,57 @@ module Hydramata
     describe DataDefinition do
       subject { described_class.new(identity: 'My Identity') }
       it { should implement_data_definition_interface }
-
       it 'initializes via attributes' do
         expect(subject.identity).to eq('My Identity')
       end
 
-      it 'has a meaningful #to_s' do
-        expect(subject.to_s).to eq('My Identity')
+      context 'with #name_for_application_usage assigned' do
+        subject { described_class.new(identity: 'My Identity', name_for_application_usage: 'My Name') }
+
+        it 'has a meaningful #to_s' do
+          expect(subject.to_s).to eq('My Name')
+        end
+
+        context '#to_translation_key_fragment' do
+          it 'defaults to name_for_application_usage if no name is given for application usage' do
+            expect(subject.to_translation_key_fragment).to eq subject.name_for_application_usage
+          end
+        end
+
       end
 
-      context '#==' do
+      context 'without #name_for_application_usage assigned' do
         subject { described_class.new(identity: 'My Identity') }
 
-        it 'be true if class and identity is equal' do
-          other = described_class.new(identity: subject.identity)
-          expect(subject == other).to be_truthy
+        it 'has a meaningful #to_s' do
+          expect(subject.to_s).to eq('My Identity')
         end
 
-        it 'be false if identity is equal but not class' do
-          other = double(identity: subject.identity)
-          expect(subject == other).to be_falsey
+        context '#==' do
+
+          it 'be true if class and identity is equal' do
+            other = described_class.new(identity: subject.identity)
+            expect(subject == other).to be_truthy
+          end
+
+          it 'be false if identity is equal but not class' do
+            other = double(identity: subject.identity)
+            expect(subject == other).to be_falsey
+          end
+
+          it 'be false if class is equal but not identity' do
+            other = subject.class.new(identity: "#{subject.identity}1")
+            expect(subject == other).to be_falsey
+          end
         end
 
-        it 'be false if class is equal but not identity' do
-          other = subject.class.new(identity: "#{subject.identity}1")
-          expect(subject == other).to be_falsey
+        context '#to_translation_key_fragment' do
+          it 'defaults to identity if no name is given for application usage' do
+            expect(subject.to_translation_key_fragment).to eq subject.identity
+          end
         end
+
       end
-
-      context '#to_translation_key_fragment' do
-        it 'defaults to identity if no name is given for application usage' do
-          expect(subject.to_translation_key_fragment).to eq subject.identity
-        end
-
-        it 'defaults to identity if no name is given for application usage' do
-          subject = described_class.new(identity: 'My Identity', name_for_application_usage: 'Twonky')
-          expect(subject.to_translation_key_fragment).to eq 'Twonky'
-        end
-      end
-
     end
   end
 end
