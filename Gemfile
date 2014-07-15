@@ -27,6 +27,7 @@ if ! ENV['TRAVIS']
   gem 'ruby_parser'
   gem 'pry', '~> 0.9.7'
   gem 'pry-nav'
+  gem 'byebug'
 end
 
 file = File.expand_path("Gemfile", ENV['ENGINE_CART_DESTINATION'] || ENV['RAILS_ROOT'] || File.expand_path("../spec/internal", __FILE__))
