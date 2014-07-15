@@ -20,7 +20,7 @@
             <li  {% if page.url contains '/demos/' %}class="active"{% endif %}><a href="{{ site.baseurl }}/demos/">All Demos</a></li>
             <li class="divider"></li>
             {% for demo in site.categories.demos %}
-              <li><a href="#">{{ demo.title }}</a></li>
+              <li><a href="{{ demo.url }}">{{ demo.title }}</a></li>
             {% endfor %}
           </ul>
         </li>
