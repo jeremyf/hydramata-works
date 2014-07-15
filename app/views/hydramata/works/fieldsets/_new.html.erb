@@ -1,0 +1,4 @@
+<fieldset class="<%= new.dom_class %> fieldset">
+  <caption><%= new.t(:name) %></caption>
+  <% new.properties.each do |property| %><%= property.render(template: self, locals: { form: form }) %><% end %>
+</fieldset>
