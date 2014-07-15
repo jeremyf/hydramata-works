@@ -13,6 +13,12 @@ Responsible for providing a well defined data-structure to ease the interaction 
 * In Memory
 * Rendering/Output Buffer
 
+## Project Homepage
+
+Are you looking for Demos and High Level Documentation? Take a look at the [Project Homepage](https://jeremyf.github.io/hydramata-works).
+
+Are you looking for the Code and how to Get Started? Then **this is the right place**.
+
 ## Getting Started
 
 Presently Hydramata::Works is a work in progress, and very much not ready for production usage.
