@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.email       = [
     'jeremy.n.friesen@gmail.com'
   ]
-  s.homepage    = 'https://github.com/jeremyf/hydramata-work'
+  s.homepage    = 'https://ndlib.github.io/hydramata-works'
   s.summary     = 'Provide a well defined data-structure to ease the interaction between differing layers of a Hydra application.'
   s.description = 'Provide a well defined data-structure to ease the interaction between differing layers of a Hydra application.'
   s.required_ruby_version = '~> 2.0'
