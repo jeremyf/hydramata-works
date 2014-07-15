@@ -14,7 +14,7 @@ In each layer, there is a concept of a Work and its data structure.
 - [ ] Database -> Memory
 - [ ] Solr -> Memory
 - [ ] Memory -> Fedora
-- [ ] Memory -> Database
+- [X] Memory -> Database
 - [ ] Memory -> Solr
 - [x] Memory -> New HTML
 - [ ] Memory -> Solr Document
