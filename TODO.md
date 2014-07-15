@@ -16,7 +16,7 @@ In each layer, there is a concept of a Work and its data structure.
 - [ ] Memory -> Fedora
 - [ ] Memory -> Database
 - [ ] Memory -> Solr
-- [ ] Memory -> New HTML
+- [x] Memory -> New HTML
 - [ ] Memory -> Solr Document
 - [X] UI Input for New -> Memory
 - [ ] UI Input for Edit -> Memory
@@ -27,12 +27,6 @@ In each layer, there is a concept of a Work and its data structure.
 These should not be considered exhaustive.
 But are instead a parking lot that may be cleared or added to.
 
-- [X] Default work rendering to include work_type as one of the partial
-      prefixes.
-- [X] Default fieldset rendering to include work_type and fieldset name as the
-      partial prefixes.
-- [X] Default fieldset rendering to include work_type, fieldset name, and
-      predicate name as the partial prefixes.
 - [ ] Disambigutate identity vs. name for application usage
 - [ ] Tidy up validation services; Presently it has lots of knowledge of Work's structure
 - [ ] Reify an object from persistence then apply value changes
@@ -45,6 +39,12 @@ But are instead a parking lot that may be cleared or added to.
 - [ ] Explore the meaning of the variants attribute for Rendering http://api.rubyonrails.org/classes/ActionDispatch/Http/MimeNegotiation.html#method-i-variant-3D
 - [ ] Look to leveraging Autoload at the Engine level. In doing this all files will be loaded and any dependencies won't invalidate the cache (https://charlie.bz/blog/things-that-clear-rubys-method-cache)
 - [ ] Can we have closures for Datastreams. Instead of requesting each datastream and its contents, maybe request the list and hold the references in memory?
+- [X] Default work rendering to include work_type as one of the partial
+      prefixes.
+- [X] Default fieldset rendering to include work_type and fieldset name as the
+      partial prefixes.
+- [X] Default fieldset rendering to include work_type, fieldset name, and
+      predicate name as the partial prefixes.
 - [X] Create Work Type persistence
 - [X] Create Work Type conversion
 - [X] Create Work Type presentation structure persistence
