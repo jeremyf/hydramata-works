@@ -6,3 +6,7 @@
 .aside .aside-list li {
   padding-bottom: 0.25em;
 }
+
+.page .footer {
+  margin-top: 40px;
+}

@@ -50,18 +50,18 @@ presenter: demo
     {% endif %}
   </article>
 
-</section>
+  <footer class="footer well">
+    <section>
+  {% if page.author %}{% for author in site.authors %}{% if author.id == page.author %}{% if author.twitter %}
+      <p>
+        Please direct any comments or questions to <a href="https://www.twitter.com/{{ author.twitter }}">@{{ author.twitter }}</a>.
+      </p>
+  {% endif %}{% if author.google_plus_id %}
+      <p class="google-authorship">
+        Find out more about the author on <a href="https://plus.google.com/{{ author.google_plus_id }}?rel=author">Google+</a>.
+      </p>
+  {% endif %}{% endif %}{% endfor %}{% endif %}
+    </section>
+  </footer>
 
-<footer class="footer well">
-  <section>
-{% if page.author %}{% for author in site.authors %}{% if author.id == page.author %}{% if author.twitter %}
-    <p>
-      Please direct any comments or questions to <a href="https://www.twitter.com/{{ author.twitter }}">@{{ author.twitter }}</a>.
-    </p>
-{% endif %}{% if author.google_plus_id %}
-    <p class="google-authorship">
-      Find out more about the author on <a href="https://plus.google.com/{{ author.google_plus_id }}?rel=author">Google+</a>.
-    </p>
-{% endif %}{% endif %}{% endfor %}{% endif %}
-  </section>
-</footer>
+</section>
