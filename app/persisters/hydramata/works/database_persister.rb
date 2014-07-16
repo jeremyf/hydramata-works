@@ -32,6 +32,8 @@ module Hydramata
           work_type: work_type.to_s,
           properties: properties
         )
+        work.identity = pid
+        self
       end
 
       attr_reader :work, :storage_service, :pid_minting_service
@@ -49,7 +51,8 @@ module Hydramata
       end
 
       def default_pid_minting_service
-        lambda { rand 100000 }
+        # @TODO - This is not the final form, but a placeholder
+        lambda { rand(100000).to_s }
       end
 
       def assign_a_pid!

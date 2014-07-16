@@ -15,6 +15,23 @@ module Hydramata
         end
       end
 
+      context 'and loaded a database' do
+
+        before do
+          persister.call
+        end
+        let(:persister) { DatabasePersister.new(work: work) }
+        let(:stored_work) { Works::DatabaseStorage.where(pid: persister.pid).first }
+
+        it 'is equal to the original work' do
+          reified_work = stored_work.to_work
+          expect(reified_work.work_type).to eq(work.work_type)
+          expect(reified_work.properties).to eq(work.properties)
+          expect(reified_work.identity).to eq(work.identity)
+          # @TODO make this work --> expect(reified_work).to eq(work)
+        end
+      end
+
       let(:work) do
         Work.new do |work|
           work.work_type = work_type

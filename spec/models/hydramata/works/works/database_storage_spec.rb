@@ -2,6 +2,7 @@
 # for active record objects.
 require 'spec_active_record_helper'
 require 'hydramata/works/works/database_storage'
+require 'hydramata/works/linters/implement_work_interface_matcher'
 
 module Hydramata
   module Works
@@ -14,6 +15,10 @@ module Hydramata
           expect { subject.save! }.
             to change { described_class.count }.
             by(1)
+        end
+
+        it 'should implement #to_work' do
+          expect(subject.to_work).to implement_work_interface
         end
       end
     end
