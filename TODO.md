@@ -11,16 +11,15 @@ In each layer, there is a concept of a Work and its data structure.
 - [x] Memory -> Show HTML
 - [x] Memory -> Show JSON
 - [x] Memory -> Edit HTML
-- [ ] Database -> Memory
+- [x] Database -> Memory
 - [ ] Solr -> Memory
 - [ ] Memory -> Fedora
-- [X] Memory -> Database
+- [x] Memory -> Database
 - [ ] Memory -> Solr
 - [x] Memory -> New HTML
-- [ ] Memory -> Solr Document
-- [X] UI Input for New -> Memory
+- [x] UI Input for New -> Memory
 - [ ] UI Input for Edit -> Memory
-- [X] Validation in Memory Object
+- [x] Validation in Memory Object
 
 ## Low Level Tasks
 
