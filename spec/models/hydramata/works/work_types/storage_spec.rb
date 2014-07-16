@@ -13,7 +13,8 @@ module Hydramata
         it { should implement_work_type_interface }
 
         let(:identity) { 'http://hello.com/world' }
-        subject { described_class.create(identity: identity, name_for_application_usage: 'hello_world') }
+        let(:name_for_application_usage) { 'hello_world' }
+        subject { described_class.create(identity: identity, name_for_application_usage: name_for_application_usage) }
 
         context '#to_work_type' do
           it 'returns a WorkType object' do
@@ -31,6 +32,11 @@ module Hydramata
           it 'returns a WorkType object when identity exists' do
             subject # creating the object
             expect(described_class.find_by_identity!(identity)).to implement_work_type_interface
+          end
+
+          it 'returns a WorkType object when name_for_application_usage is used' do
+            subject # creating the object
+            expect(described_class.find_by_identity!(name_for_application_usage)).to implement_work_type_interface
           end
 
           it 'returns nil when identity is missing' do

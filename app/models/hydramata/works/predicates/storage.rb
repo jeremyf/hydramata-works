@@ -11,6 +11,8 @@ module Hydramata
 
         def self.find_by_identity!(identity)
           where(identity: identity).first!
+        rescue ActiveRecord::RecordNotFound
+          where(name_for_application_usage: identity).first!
         end
 
         def self.existing_attributes_for(identity)

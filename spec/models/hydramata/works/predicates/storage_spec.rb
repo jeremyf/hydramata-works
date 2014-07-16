@@ -12,10 +12,11 @@ module Hydramata
         subject { described_class.new }
 
         let(:identity) { 'http://hello.com/world' }
+        let(:name_for_application_usage) { 'hello-world' }
         let(:predicate) do
           described_class.create(
             identity: identity,
-            name_for_application_usage: 'hello-world',
+            name_for_application_usage: name_for_application_usage,
             datastream_name: 'descMetadata',
             value_coercer_name: 'SimpleParser',
             value_parser_name: 'SimpleParser',
@@ -32,11 +33,16 @@ module Hydramata
           end
         end
 
-        context '.find_by_identity' do
+        context '.find_by_identity!' do
 
           it 'returns a Predicate object when identity exists' do
             predicate # creating the object
             expect(described_class.find_by_identity!(identity)).to implement_predicate_interface
+          end
+
+          it 'returns a Predicate object when finding by name_for_application_usage' do
+            predicate # creating the object
+            expect(described_class.find_by_identity!(name_for_application_usage)).to implement_predicate_interface
           end
 
           it 'returns nil when identity is missing' do
