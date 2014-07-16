@@ -40,6 +40,11 @@ Article
     Location: Notre Dame, IN
 ```
 
+Where did this `Additional Predicates` come from?
+Hydramata::Works, as it was retrieving the object parsed the object and found new predicates that it could handle.
+But, the suggested structure of the `Article` work type doesn't indicate where the predicate should be displayed.
+So the rendering engine drops it into the proverbial junk drawer.
+
 The ability to append predicates to any given work becomes a privilege that could be granted to one or more people.
 
 As could the ability to edit a given predicate. Or display that predicate.
