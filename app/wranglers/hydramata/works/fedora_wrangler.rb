@@ -41,8 +41,11 @@ module Hydramata
       end
 
       def assign_work_type_from(object)
-        object.models.each do |model|
+        object.models.reverse.each do |model|
           if model =~ /\Ainfo:fedora\/afmodel\:(.*)\Z/
+            # @TODO - Should we make sure this exists in the data storage?
+            #         Is it a matter of finding either the most specific or
+            #         the one that exists? What is the retrieval scheme?
             work.work_type = Regexp.last_match[1]
             break
           end
