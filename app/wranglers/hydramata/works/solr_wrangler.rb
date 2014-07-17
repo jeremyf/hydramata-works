@@ -46,8 +46,10 @@ module Hydramata
         document.each do |key, values|
           case key
           when 'has_model_ssim', 'id'
+          # @TODO - Only grab the metadata with a datastreams prefix. This is
+          # inadequate.
           when /__/
-            # @TODO - If we've already visited the predicate, don't revisit
+            # @TODO - If we've already visited the predicate, don't revisit.
             predicate = normalized_predicate(key)
             unless visited.include?(predicate)
               work.properties << { predicate: predicate , values: values }
