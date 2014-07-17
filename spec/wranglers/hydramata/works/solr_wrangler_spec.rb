@@ -23,6 +23,11 @@ module Hydramata
         expect(work.properties[:language].values).to eq(['English'])
       end
 
+      it 'assigns a predicate only once to the collaborating work' do
+        subject.call
+        expect(work.properties[:title].values).to eq(['Title 1'])
+      end
+
       it 'skips non_metadata attributes' do
         subject.call
         expect { work.properties.fetch(:read_access_group) }.to raise_error

@@ -42,11 +42,17 @@ module Hydramata
       end
 
       def assign_properties
+        visited = []
         document.each do |key, values|
           case key
           when 'has_model_ssim', 'id'
           when /__/
-            work.properties << { predicate: normalized_predicate(key), values: values }
+            # @TODO - If we've already visited the predicate, don't revisit
+            predicate = normalized_predicate(key)
+            unless visited.include?(predicate)
+              work.properties << { predicate: predicate , values: values }
+              visited << predicate
+            end
           else
           end
         end
