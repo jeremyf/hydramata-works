@@ -7,12 +7,12 @@ require 'hydramata/works/property'
 module Hydramata
   module Works
 
-    describe 'An in Fedora object loaded into an in memory work' do
+    describe 'A Fedora object loaded into an in memory work' do
       let(:pid) { 'und:f4752f8687n' }
       let(:work_wrangler) { FedoraWrangler.new(work: work) }
       let(:work) { Work.new }
 
-      it 'parses the Fedora object, assigning predicates and values' do
+      it 'parses the Fedora object, assigning predicates and values to the work' do
         seed_predicates! do
           work_wrangler.call(pid, with_datastreams: true)
           expect { |b| work.properties.each(&b) }.
