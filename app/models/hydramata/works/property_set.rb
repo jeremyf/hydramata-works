@@ -1,4 +1,5 @@
 require 'active_support/core_ext/array/wrap'
+require 'active_support/core_ext/module/delegation'
 require 'hydramata/works/conversions/property'
 require 'hydramata/works/conversions/predicate_set'
 
@@ -16,9 +17,7 @@ module Hydramata
       end
       attr_reader :predicate_set
 
-      def name
-        predicate_set.name
-      end
+      delegate :name, to: :predicate_set
 
       def <<(input)
         property = Property(input)
@@ -80,7 +79,7 @@ module Hydramata
       attr_reader :property_store
 
       def default_predicate_set
-        { identity: 'identity' }
+        { identity: 'unknown' }
       end
 
       def predicate_set=(value)

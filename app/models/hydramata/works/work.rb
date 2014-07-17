@@ -1,4 +1,6 @@
 require 'hydramata/works/conversions/work_type'
+require 'active_support/core_ext/module/delegation'
+
 module Hydramata
   module Works
     # Responsible for being the in ruby representation of a set of Properties.
@@ -39,17 +41,12 @@ module Hydramata
 
       attr_reader :properties, :identity
 
-      def to_translation_key_fragment
-        work_type.to_translation_key_fragment
-      end
-
-      def name_for_application_usage
-        work_type.name_for_application_usage
-      end
-
-      def itemtype_schema_dot_org
-        work_type.itemtype_schema_dot_org
-      end
+      delegate(
+        :to_translation_key_fragment,
+        :name_for_application_usage,
+        :itemtype_schema_dot_org,
+        to: :work_type
+      )
 
       attr_reader :presenter_builder
       private :presenter_builder

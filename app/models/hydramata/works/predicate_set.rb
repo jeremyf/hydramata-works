@@ -10,8 +10,14 @@ module Hydramata
     class PredicateSet < DataDefinition
       include Conversions
 
+      # The WorkType associated with this PredicateSet.
       attr_accessor :work_type
+
+      # Relative to other PredicateSets, when should this be presented?
       attr_accessor :presentation_sequence
+
+      # What are the predicates associated with this PredicateSet.
+      # Order is significant.
       attr_reader :predicates
 
       def <=>(other)

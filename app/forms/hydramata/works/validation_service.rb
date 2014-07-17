@@ -2,6 +2,10 @@ require 'active_support/core_ext/array/wrap'
 
 module Hydramata
   module Works
+    # Responsible for performing validations on the given Work object.
+    #
+    # @TODO - Ensure the Work object is a validatable object; In other words
+    #         something that has errors. The WorkForm has this interface.
     class ValidationService
       def self.call(work)
         new(work).call

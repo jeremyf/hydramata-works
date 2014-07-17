@@ -1,4 +1,5 @@
 require 'active_support/core_ext/array/wrap'
+require 'active_support/core_ext/module/delegation'
 require 'hydramata/works/conversions/predicate'
 require 'hydramata/works/conversions/value'
 
@@ -17,7 +18,6 @@ module Hydramata
       include ::Enumerable
       include Conversions
 
-      attr_reader :predicate, :values, :value_parser
       def initialize(options = {})
         self.predicate = options.fetch(:predicate)
         @value_parser = options.fetch(:value_parser) { default_value_parser }
@@ -26,20 +26,18 @@ module Hydramata
         push(options[:value])
       end
 
-      def name
-        predicate.name
-      end
-
+      attr_reader :predicate
+      attr_reader :values
       # Because who wants to remember which way to access this?
       alias_method :value, :values
 
-      def to_translation_key_fragment
-        predicate.to_translation_key_fragment
-      end
+      attr_reader :value_parser
+      private :value_parser
 
-      def each(&block)
-        values.each(&block)
-      end
+      delegate :name, to: :predicate
+      delegate :to_translation_key_fragment, to: :predicate
+      delegate :each, to: :values
+
 
       def <<(values)
         Array.wrap(values).each do |value|

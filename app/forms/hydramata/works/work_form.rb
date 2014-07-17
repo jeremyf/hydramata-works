@@ -6,6 +6,8 @@ require 'hydramata/works/conversions/translation_key_fragment'
 
 module Hydramata
   module Works
+    # Responsible for wrapping a given Work such that it can interact with
+    # form rendering in HTML as well as exposing validation behavior.
     class WorkForm < SimpleDelegator
       include Conversions
       def initialize(work, collaborators = {})
@@ -14,7 +16,8 @@ module Hydramata
         @validation_service = collaborators.fetch(:validation_service) { default_validation_service }
       end
 
-      attr_reader :errors, :validation_service
+      attr_reader :errors
+      attr_reader :validation_service
 
       def valid?
         validate
