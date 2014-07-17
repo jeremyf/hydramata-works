@@ -1,20 +1,31 @@
 require 'spec_fast_helper'
 require 'hydramata/works/solr_wrangler'
+require 'hydramata/works/work'
 
 module Hydramata
   module Works
     describe SolrWrangler do
-      let(:work) { double('Work', :work_type= => true, :identity= => true) }
+      let(:work) { Work.new }
       subject { described_class.new(document: document, work: work) }
 
       it 'assigns the work type to the collaborating work' do
         subject.call
-        expect(work).to have_received(:work_type=).with('SeniorThesis')
+        expect(work.work_type.to_s).to eq('SeniorThesis')
       end
 
       it 'assigns the identity to the collaborating work' do
         subject.call
-        expect(work).to have_received(:work_type=).with('SeniorThesis')
+        expect(work.identity).to eq('the_namespace:the_noid')
+      end
+
+      it 'assigns a predicate to the collaborating work' do
+        subject.call
+        expect(work.properties[:language].values).to eq(['English'])
+      end
+
+      it 'skips non_metadata attributes' do
+        subject.call
+        expect { work.properties.fetch(:read_access_group) }.to raise_error
       end
 
       let(:document) {
@@ -23,7 +34,7 @@ module Hydramata
           'system_modified_dtsi'=>'2014-07-17T15:37:53Z',
           'object_state_ssi'=>'A',
           'active_fedora_model_ssi'=>'SeniorThesis',
-          'id'=>'namespace:the_noid',
+          'id'=>'the_namespace:the_noid',
           'depositor_tesim'=>['username-1'],
           'read_access_group_ssim'=>['registered'],
           'edit_access_person_ssim'=>['username-1'],
