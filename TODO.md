@@ -7,18 +7,18 @@ This is a non-exhaustive scratch pad for TODO items.
 These features reflect the movement of data from one layer to another.
 In each layer, there is a concept of a Work and its data structure.
 
+- [ ] Solr -> Memory
+- [ ] Memory -> Fedora
+- [ ] Memory -> Solr
+- [ ] UI Input for Edit -> Memory
 - [x] Fedora -> Memory
 - [x] Memory -> Show HTML
 - [x] Memory -> Show JSON
 - [x] Memory -> Edit HTML
 - [x] Database -> Memory
-- [ ] Solr -> Memory
-- [ ] Memory -> Fedora
 - [x] Memory -> Database
-- [ ] Memory -> Solr
 - [x] Memory -> New HTML
 - [x] UI Input for New -> Memory
-- [ ] UI Input for Edit -> Memory
 - [x] Validation in Memory Object
 
 ## Low Level Tasks
