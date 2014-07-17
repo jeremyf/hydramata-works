@@ -1,0 +1,97 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://localhost:8983/solr/development/select?q=_query_:%22%7B!raw%20f=id:%22namespace%5C:noid%22&qt=standard&sort=system_create_dtsi%20asc&wt=ruby
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers: {}
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Last-Modified:
+      - Thu, 17 Jul 2014 15:37:53 GMT
+      Etag:
+      - '"YjUwMDAwMDAwMDAwMDAwMFNvbHI="'
+      Content-Type:
+      - text/plain; charset=utf-8
+      Transfer-Encoding:
+      - chunked
+      Server:
+      - Jetty(6.1-SNAPSHOT)
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          'responseHeader'=>{
+            'status'=>0,'QTime'=>4,
+            'params'=>{
+              'sort'=>'system_create_dtsi asc','wt'=>'ruby','qt'=>'standard','q'=>'_query_:"{!raw f=has_model_ssim}info:fedora/afmodel:SeniorThesis" AND id:"the_namepsace\\:the_noid"'}
+              },
+              'response'=>{
+                'numFound'=>1,'start'=>0,
+                'docs'=>[
+                {
+                  'system_create_dtsi'=>'2014-07-17T15:37:51Z',
+                  'system_modified_dtsi'=>'2014-07-17T15:37:53Z',
+                  'object_state_ssi'=>'A',
+                  'active_fedora_model_ssi'=>'SeniorThesis',
+                  'id'=>'namespace:the_noid',
+                  'object_profile_ssm'=>[
+                    '{
+                      "datastreams":{
+                        "RELS-EXT":{
+                          "dsLabel":"Fedora Object-to-Object Relationship Metadata","dsVersionID":"RELS-EXT.0","dsCreateDate":"2014-07-17T15:37:52Z","dsState":"A","dsMIME":"application/rdf+xml","dsFormatURI":null,"dsControlGroup":"X","dsSize":317,"dsVersionable":true,"dsInfoType":null,"dsLocation":"the_namepsace:the_noid+RELS-EXT+RELS-EXT.0","dsLocationType":null,"dsChecksumType":"DISABLED","dsChecksum":"none"
+                        },
+                        "properties":{
+                          "dsLabel":null,"dsVersionID":"properties.0","dsCreateDate":"2014-07-17T15:37:52Z","dsState":"A","dsMIME":"text/xml","dsFormatURI":null,"dsControlGroup":"M","dsSize":54,"dsVersionable":true,"dsInfoType":null,"dsLocation":"the_namepsace:the_noid+properties+properties.0","dsLocationType":"INTERNAL_ID","dsChecksumType":"DISABLED","dsChecksum":"none"
+                        },
+                        "rightsMetadata":{
+                          "dsLabel":null,"dsVersionID":"rightsMetadata.0","dsCreateDate":"2014-07-17T15:37:52Z","dsState":"A","dsMIME":"text/xml","dsFormatURI":null,"dsControlGroup":"M","dsSize":556,"dsVersionable":true,"dsInfoType":null,"dsLocation":"the_namepsace:the_noid+rightsMetadata+rightsMetadata.0","dsLocationType":"INTERNAL_ID","dsChecksumType":"DISABLED","dsChecksum":"none"
+                        },
+                        "descMetadata":{
+                          "dsLabel":null,"dsVersionID":"descMetadata.0","dsCreateDate":"2014-07-17T15:37:53Z","dsState":"A","dsMIME":"text/plain","dsFormatURI":null,"dsControlGroup":"M","dsSize":847,"dsVersionable":true,"dsInfoType":null,"dsLocation":"the_namepsace:the_noid+descMetadata+descMetadata.0","dsLocationType":"INTERNAL_ID","dsChecksumType":"DISABLED","dsChecksum":"none"
+                        }
+                      },
+                    "objLabel":null,
+                    "objOwnerId":"fedoraAdmin",
+                    "objModels":["info:fedora/fedora-system:FedoraObject-3.0"],
+                    "objCreateDate":"2014-07-17T15:37:51Z",
+                    "objLastModDate":"2014-07-17T15:37:51Z",
+                    "objDissIndexViewURL":"http://localhost:8983/fedora/objects/the_namepsace%3Athe_noid/methods/fedora-system%3A3/viewMethodIndex",
+                    "objItemIndexViewURL":"http://localhost:8983/fedora/objects/the_namepsace%3Athe_noid/methods/fedora-system%3A3/viewItemIndex",
+                    "objState":"A"
+                    }'],
+                    'depositor_tesim'=>['username-1'],
+                    'read_access_group_ssim'=>['registered'],
+                    'edit_access_person_ssim'=>['username-1'],
+                    'desc_metadata__language_tesim'=>['English'],
+                    'desc_metadata__publisher_tesim'=>['University of Notre Dame'],
+                    'desc_metadata__publisher_ssm'=>['University of Notre Dame'],
+                    'desc_metadata__title_tesim'=>['Title 1'],
+                    'desc_metadata__title_ssm'=>['Title 1'],
+                    'desc_metadata__date_uploaded_dtsim'=>['2014-07-17T00:00:00Z'],
+                    'desc_metadata__date_uploaded_ssm'=>['2014-07-17'],
+                    'desc_metadata__date_modified_dtsim'=>['2014-07-17T00:00:00Z'],
+                    'desc_metadata__date_modified_ssm'=>['2014-07-17'],
+                    'desc_metadata__rights_tesim'=>['Attribution 3.0 United States'],
+                    'desc_metadata__rights_ssm'=>['Attribution 3.0 United States'],
+                    'desc_metadata__creator_tesim'=>['Creator Name1'],
+                    'desc_metadata__creator_ssm'=>['Creator Name1'],
+                    'desc_metadata__description_tesim'=>['Hello World!'],
+                    'desc_metadata__description_ssm'=>['Hello World!'],
+                    'has_model_ssim'=>['info:fedora/afmodel:SeniorThesis'],
+                    'human_readable_type_tesim'=>['Senior Thesis'],
+                    'noid_tsi'=>'the_noid',
+                    'date_created_derived_dtsim'=>['2014-07-17T00:00:00Z'],
+                    'timestamp'=>'2014-07-17T15:37:53.181Z'
+                  }
+                ]
+              }
+          }
+    http_version:
+  recorded_at: Thu, 17 Jul 2014 15:37:53 GMT
+recorded_with: VCR 2.9.2

@@ -42,6 +42,7 @@ module Hydramata
 
       def assign_work_type_from(object)
         object.models.reverse.each do |model|
+          # @TODO - This is similar to the SolrWrangler behavior
           if model =~ /\Ainfo:fedora\/afmodel\:(.*)\Z/
             # @TODO - Should we make sure this exists in the data storage?
             #         Is it a matter of finding either the most specific or
