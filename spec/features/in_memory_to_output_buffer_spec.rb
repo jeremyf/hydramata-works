@@ -77,6 +77,26 @@ module Hydramata
         end
       end
 
+      context 'rendering an :new action' do
+        let(:presentation_context) { :new }
+        let(:work) { Work.new(work_type: work_type) }
+
+        it 'writes a well-structured HTML document' do
+          renderer = WorkRenderer.new(work: work_presenter, format: :html)
+          rendered_output = renderer.render
+          expect(rendered_output).to have_tag('form.new-special-work-type.work', with: { method: 'post', action: '/' }) do
+            with_tag('fieldset.required caption', text: 'required')
+            with_tag('fieldset.required .title label', text: 'title')
+            with_tag('fieldset.required .title .values input', value: '', with: { name: 'work[title][]' })
+            with_tag('fieldset.optional caption', text: 'optional')
+            with_tag('fieldset.optional .abstract label', text: 'abstract')
+            with_tag('fieldset.optional .abstract .values input', value: '', with: { name: 'work[abstract][]' })
+            with_tag('fieldset.optional .keyword label', text: 'keyword')
+            with_tag('fieldset.optional .keyword .values input', value: '', with: { name: 'work[keyword][]' })
+          end
+        end
+      end
+
       let(:predicate_title) { Predicates::Storage.new(identity: 'http://purl.org/dc/terms/dc_title', name_for_application_usage: 'title') }
       let(:predicate_abstract) { Predicates::Storage.new(identity: 'http://purl.org/dc/terms/dc_abstract', name_for_application_usage: 'abstract') }
       let(:predicate_keyword) { Predicates::Storage.new(identity: 'http://purl.org/dc/terms/dc_keyword', name_for_application_usage: 'keyword') }
