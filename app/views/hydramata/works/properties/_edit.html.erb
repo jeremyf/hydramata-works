@@ -5,8 +5,8 @@ Tidy this up. Not yet certain how to do this.
   <%= label_tag("work_#{edit.predicate}", edit.t(:predicate)) %>
   <div class="values">
   <% edit.each_with_index do |value, index| %>
-    <%= text_field_tag("work_#{edit.predicate}_#{index+1}", value, name: "work[#{edit.predicate}][]") %>
+    <%= text_field_tag("work_#{edit.predicate}_#{index+1}", value, name: "work[#{edit.predicate}][]", class: 'existing-input') %>
   <% end %>
-    <%= text_field_tag("work_#{edit.predicate}_0", nil, name: "work[#{edit.predicate}][]") %>
+    <%= text_field_tag("work_#{edit.predicate}_0", nil, name: "work[#{edit.predicate}][]", class: 'blank-input') %>
   </div>
 </div>

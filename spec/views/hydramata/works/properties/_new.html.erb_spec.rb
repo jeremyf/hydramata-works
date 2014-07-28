@@ -14,9 +14,9 @@ describe 'hydramata/works/properties/_new.html.erb', type: :view do
 
     expect(rendered).to have_tag('.my-dom-class') do
       with_tag('label', text: 'Label')
-      with_tag('.values input#work_my_predicate_0', value: '', with: { name: 'work[my_predicate][]' })
-      with_tag('.values input#work_my_predicate_1', value: 'value1', with: { name: 'work[my_predicate][]' })
-      with_tag('.values input#work_my_predicate_2', value: 'value2', with: { name: 'work[my_predicate][]' })
+      with_tag('.values input#work_my_predicate_0.blank-input', with: { name: 'work[my_predicate][]' })
+      with_tag('.values input#work_my_predicate_1.existing-input', with: { name: 'work[my_predicate][]', value: 'value1' })
+      with_tag('.values input#work_my_predicate_2.existing-input', with: { name: 'work[my_predicate][]', value: 'value2' })
     end
   end
 end
