@@ -34,7 +34,7 @@ This works well for RDF but I believe is extensible beyond RDF.
 | PropertySet + >------ | PredicateSet |
 +-------------+         +--------------+
        |                       |
-       ^                       |
+       ^                       ^
 +-------------+         +--------------+
 | Property    + >------ | Predicate    |
 +-------------+         +--------------+

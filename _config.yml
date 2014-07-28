@@ -7,6 +7,7 @@ rdiscount:
 
 pygments:  true
 permalink: /:categories/:title/
+timezone: America/Indiana/Indianapolis
 
 exclude:
   - Gemfile
