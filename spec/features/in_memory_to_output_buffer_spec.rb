@@ -4,20 +4,19 @@ module Hydramata
   module Works
     describe 'A work and presentation structure' do
 
-      let(:work) do
-        Work.new do |work|
-          work.work_type = work_type
-          work.properties << { predicate: predicate_title, value: 'Hello' }
-          work.properties << { predicate: predicate_title, value: 'World' }
-          work.properties << { predicate: predicate_title, value: 'Bang!' }
-          work.properties << { predicate: predicate_abstract, value: 'Long Text' }
-          work.properties << { predicate: predicate_abstract, value: 'Longer Text' }
-          work.properties << { predicate: predicate_keyword, value: 'Programming' }
-        end
-      end
-
       context 'rendering a :show action' do
         let(:presentation_context) { :show }
+        let(:work) do
+          Work.new do |work|
+            work.work_type = work_type
+            work.properties << { predicate: predicate_title, value: 'Hello' }
+            work.properties << { predicate: predicate_title, value: 'World' }
+            work.properties << { predicate: predicate_title, value: 'Bang!' }
+            work.properties << { predicate: predicate_abstract, value: 'Long Text' }
+            work.properties << { predicate: predicate_abstract, value: 'Longer Text' }
+            work.properties << { predicate: predicate_keyword, value: 'Programming' }
+          end
+        end
 
         it 'writes a well-structured HTML document' do
           renderer = WorkRenderer.new(work: work_presenter, format: :html)
@@ -52,26 +51,42 @@ module Hydramata
 
       context 'rendering an :edit action' do
         let(:presentation_context) { :edit }
+        let(:work) do
+          Work.new do |work|
+            work.work_type = work_type
+            work.properties << { predicate: predicate_title, value: 'Hello' }
+            work.properties << { predicate: predicate_title, value: 'World' }
+            work.properties << { predicate: predicate_title, value: 'Bang!' }
+            work.properties << { predicate: predicate_abstract, value: 'Long Text' }
+            work.properties << { predicate: predicate_abstract, value: 'Longer Text' }
+            work.properties << { predicate: predicate_keyword, value: 'Programming' }
+          end
+        end
 
         it 'writes a well-structured HTML document' do
           renderer = WorkRenderer.new(work: work_presenter, format: :html)
           rendered_output = renderer.render
-          expect(rendered_output).to have_tag('form.edit-special-work-type.work#new_work', with: { method: 'post', action: '/' }) do
+
+          expect(rendered_output).to have_tag('form.edit-special-work-type.work#edit_work', with: { method: 'post', action: '/' }) do
             with_tag('input', with: { name: '_method', value: 'patch' } )
-            with_tag('fieldset.required caption', text: 'required')
-            with_tag('fieldset.required .title label', text: 'title')
-            with_tag('fieldset.required .title .values input', value: 'Hello', with: { name: 'work[title][]' })
-            with_tag('fieldset.required .title .values input', value: 'World', with: { name: 'work[title][]' })
-            with_tag('fieldset.required .title .values input', value: 'Bang!', with: { name: 'work[title][]' })
-            with_tag('fieldset.required .title .values input', value: '', with: { name: 'work[title][]' })
-            with_tag('fieldset.optional caption', text: 'optional')
-            with_tag('fieldset.optional .abstract label', text: 'abstract')
-            with_tag('fieldset.optional .abstract .values input', value: 'Long Text', with: { name: 'work[abstract][]' })
-            with_tag('fieldset.optional .abstract .values input', value: 'Longer Text', with: { name: 'work[abstract][]' })
-            with_tag('fieldset.optional .abstract .values input', value: '', with: { name: 'work[abstract][]' })
-            with_tag('fieldset.optional .keyword label', text: 'keyword')
-            with_tag('fieldset.optional .keyword .values input', value: 'Programming', with: { name: 'work[keyword][]' })
-            with_tag('fieldset.optional .keyword .values input', value: '', with: { name: 'work[keyword][]' })
+            with_tag('fieldset.required') do
+              with_tag('caption', text: 'required')
+              with_tag('.title label', text: 'title')
+              with_tag('.title .values input.existing-input', with: { name: 'work[title][]', value: 'Hello' })
+              with_tag('.title .values input.existing-input', with: { name: 'work[title][]', value: 'World' })
+              with_tag('.title .values input.existing-input', with: { name: 'work[title][]', value: 'Bang!' })
+              with_tag('.title .values input.blank-input', with: { name: 'work[title][]' })
+            end
+            with_tag('fieldset.optional') do
+              with_tag('caption', text: 'optional')
+              with_tag('.abstract label', text: 'abstract')
+              with_tag('.abstract .values input.existing-input', with: { name: 'work[abstract][]', value: 'Long Text' })
+              with_tag('.abstract .values input.existing-input', with: { name: 'work[abstract][]', value: 'Longer Text' })
+              with_tag('.abstract .values input.blank-input', with: { name: 'work[abstract][]'})
+              with_tag('.keyword label', text: 'keyword')
+              with_tag('.keyword .values input.existing-input', with: { name: 'work[keyword][]', value: 'Programming' })
+              with_tag('.keyword .values input.blank-input', with: { name: 'work[keyword][]'})
+            end
           end
         end
       end
@@ -84,14 +99,19 @@ module Hydramata
           renderer = WorkRenderer.new(work: work_presenter, format: :html)
           rendered_output = renderer.render
           expect(rendered_output).to have_tag('form.new-special-work-type.work#new_work', with: { method: 'post', action: '/' }) do
-            with_tag('fieldset.required caption', text: 'required')
-            with_tag('fieldset.required .title label', text: 'title')
-            with_tag('fieldset.required .title .values input', value: '', with: { name: 'work[title][]' })
-            with_tag('fieldset.optional caption', text: 'optional')
-            with_tag('fieldset.optional .abstract label', text: 'abstract')
-            with_tag('fieldset.optional .abstract .values input', value: '', with: { name: 'work[abstract][]' })
-            with_tag('fieldset.optional .keyword label', text: 'keyword')
-            with_tag('fieldset.optional .keyword .values input', value: '', with: { name: 'work[keyword][]' })
+            with_tag('fieldset.required') do
+              with_tag('caption', text: 'required')
+              with_tag('.title label', text: 'title')
+              with_tag('.title .values input.blank-input', with: { name: 'work[title][]'})
+            end
+
+            with_tag('fieldset.optional') do
+              with_tag('caption', text: 'optional')
+              with_tag('.abstract label', text: 'abstract')
+              with_tag('.abstract .values input.blank-input', with: { name: 'work[abstract][]'})
+              with_tag('.keyword label', text: 'keyword')
+              with_tag('.keyword .values input.blank-input', with: { name: 'work[keyword][]'})
+            end
           end
         end
       end
@@ -115,14 +135,7 @@ module Hydramata
         PredicatePresentationSequences::Storage.create!(predicate: predicate_keyword, predicate_set: predicate_set_optional, presentation_sequence: 2)
       end
 
-      let(:presentation_context) { :show }
-
-      let(:work_presenter) do
-        WorkPresenter.new(
-          work: work,
-          presentation_context: presentation_context
-        )
-      end
+      let(:work_presenter) { WorkPresenter.new(work: work, presentation_context: presentation_context) }
 
     end
   end
