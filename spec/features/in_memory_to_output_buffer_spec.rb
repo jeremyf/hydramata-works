@@ -56,8 +56,7 @@ module Hydramata
         it 'writes a well-structured HTML document' do
           renderer = WorkRenderer.new(work: work_presenter, format: :html)
           rendered_output = renderer.render
-
-          expect(rendered_output).to have_tag('form.edit-special-work-type', with: { method: 'post', action: '/' }) do
+          expect(rendered_output).to have_tag('form.edit-special-work-type.work#new_work', with: { method: 'post', action: '/' }) do
             with_tag('input', with: { name: '_method', value: 'patch' } )
             with_tag('fieldset.required caption', text: 'required')
             with_tag('fieldset.required .title label', text: 'title')
@@ -84,7 +83,7 @@ module Hydramata
         it 'writes a well-structured HTML document' do
           renderer = WorkRenderer.new(work: work_presenter, format: :html)
           rendered_output = renderer.render
-          expect(rendered_output).to have_tag('form.new-special-work-type.work', with: { method: 'post', action: '/' }) do
+          expect(rendered_output).to have_tag('form.new-special-work-type.work#new_work', with: { method: 'post', action: '/' }) do
             with_tag('fieldset.required caption', text: 'required')
             with_tag('fieldset.required .title label', text: 'title')
             with_tag('fieldset.required .title .values input', value: '', with: { name: 'work[title][]' })
