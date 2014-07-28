@@ -14,11 +14,6 @@ exclude:
   - LICENSE
   - README.md
 
-sorted_categories:
-  - practices
-  - planning
-  - procedures
-
 host: ndlib.github.io
 baseurl: /hydramata-works
 url: http://ndlib.github.io/hydramata-works
