@@ -11,6 +11,18 @@ module Hydramata
       subject { described_class.new }
       it { should implement_predicate_interface }
       it { should implement_data_definition_interface }
+
+      context '#itemprop_schema_dot_org=' do
+        it 'sets a string value' do
+          predicate = described_class.new(itemprop_schema_dot_org: 'hello')
+          expect(predicate.itemprop_schema_dot_org).to eq('hello')
+        end
+
+        it 'sets an empty string as nil' do
+          predicate = described_class.new(itemprop_schema_dot_org: '')
+          expect(predicate.itemprop_schema_dot_org).to eq(nil)
+        end
+      end
     end
   end
 end
