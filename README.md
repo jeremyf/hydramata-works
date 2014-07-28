@@ -1,9 +1,9 @@
 # Hydramata::Works
 
-[![Version](https://badge.fury.io/rb/hydramata-works.png)](http://badge.fury.io/rb/hydramata-work)
-[![Build Status](https://travis-ci.org/ndlib/hydramata-works.png?branch=master)](https://travis-ci.org/ndlib/hydramata-work)
-[![Code Climate](https://codeclimate.com/github/ndlib/hydramata-works.png)](https://codeclimate.com/github/ndlib/hydramata-work)
-[![Coverage Status](https://img.shields.io/coveralls/ndlib/hydramata-works.svg)](https://coveralls.io/r/ndlib/hydramata-work)
+[![Version](https://badge.fury.io/rb/hydramata-works.png)](http://badge.fury.io/rb/hydramata-works)
+[![Build Status](https://travis-ci.org/ndlib/hydramata-works.png?branch=master)](https://travis-ci.org/ndlib/hydramata-works)
+[![Code Climate](https://codeclimate.com/github/ndlib/hydramata-works.png)](https://codeclimate.com/github/ndlib/hydramata-works)
+[![Coverage Status](https://img.shields.io/coveralls/ndlib/hydramata-works.svg)](https://coveralls.io/r/ndlib/hydramata-works)
 [![API Docs](http://img.shields.io/badge/API-docs-blue.svg)](http://rubydoc.info/github/ndlib/hydramata-work/master/frames/)
 [![APACHE 2 License](http://img.shields.io/badge/APACHE2-license-blue.svg)](./LICENSE)
 
