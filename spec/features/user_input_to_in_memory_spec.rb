@@ -26,28 +26,31 @@ module Hydramata
       end
     end
 
-    describe 'New user input to in memory' do
+    describe 'User input to in memory' do
       include Conversions
-
-      it 'appends properties to the collaborating work object' do
-        UserInputToWorkCoercer.call(work: work, input: input.fetch(:work))
-
-        expect(work.work_type).to eq(WorkType('Special Work Type'))
-        expect(work.properties.fetch(:title)).to eq(Property(:title, 'Hello', 'World', 'Bang!'))
-        expect(work.properties.fetch(:abstract)).to eq(Property(:abstract, 'Long Text', 'Longer Text'))
-        expect(work.properties.fetch(:keyword)).to eq(Property(:keyword, 'Programming'))
-      end
-
-      let(:input) do
-        {
-          work: {
-            work_type: 'Special Work Type',
-            title: ['Hello', 'World', 'Bang!'],
-            abstract: ['Long Text', 'Longer Text'],
-            keyword: ['Programming']
+      context 'for :new object' do
+        let(:work) { Work.new }
+        let(:input) do
+          {
+            work: {
+              work_type: 'Special Work Type',
+              title: ['Hello', 'World', 'Bang!'],
+              abstract: ['Long Text', 'Longer Text'],
+              keyword: ['Programming']
+            }
           }
-        }
+        end
+
+        it 'appends properties to the collaborating work object' do
+          UserInputToWorkCoercer.call(work: work, input: input.fetch(:work))
+
+          expect(work.work_type).to eq(WorkType('Special Work Type'))
+          expect(work.properties.fetch(:title)).to eq(Property(:title, 'Hello', 'World', 'Bang!'))
+          expect(work.properties.fetch(:abstract)).to eq(Property(:abstract, 'Long Text', 'Longer Text'))
+          expect(work.properties.fetch(:keyword)).to eq(Property(:keyword, 'Programming'))
+        end
       end
+
 
       let(:predicate_title) { Predicates::Storage.new(identity: 'title') }
       let(:predicate_abstract) { Predicates::Storage.new(identity: 'abstract') }
@@ -67,8 +70,6 @@ module Hydramata
         PredicatePresentationSequences::Storage.create!(predicate: predicate_abstract, predicate_set: predicate_set_optional, presentation_sequence: 1)
         PredicatePresentationSequences::Storage.create!(predicate: predicate_keyword, predicate_set: predicate_set_optional, presentation_sequence: 2)
       end
-
-      let(:work) { Work.new }
 
     end
   end
