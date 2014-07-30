@@ -8,6 +8,8 @@ RSpec::Matchers.define :implement_property_interface do
     :name => [],
     :each => [],
     :<< => [],
+    :replace_values => [],
+    :append_values => [],
     :values => [:each],
     :predicate => []
   )

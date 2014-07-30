@@ -17,10 +17,18 @@ module Hydramata
       end
 
       it 'can append to values' do
-        expect { subject << value }.
+        expect { subject.append_values value }.
           to change { subject.values }.
           from([]).
           to([value])
+      end
+
+      it 'can replace values' do
+        subject << value
+        expect { subject.replace_values('New') }.
+          to change { subject.values }.
+          from([value]).
+          to(['New'])
       end
 
       it 'has a #to_translation_key_fragment' do

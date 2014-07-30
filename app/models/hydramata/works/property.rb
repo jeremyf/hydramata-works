@@ -38,6 +38,10 @@ module Hydramata
       delegate :to_translation_key_fragment, to: :predicate
       delegate :each, to: :values
 
+      def replace_values(values)
+        @values = []
+        append_values(values)
+      end
 
       def <<(values)
         Array.wrap(values).each do |value|
@@ -48,6 +52,7 @@ module Hydramata
         self
       end
       alias_method :push, :<<
+      alias_method :append_values, :<<
 
       def ==(other)
         super ||
