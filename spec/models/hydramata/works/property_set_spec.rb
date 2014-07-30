@@ -21,6 +21,11 @@ module Hydramata
         end
       end
 
+
+      it 'raises exception if you specify an invalid push strategy' do
+        expect { PropertySet.new(property_value_strategy: :invalid) }.to raise_error
+      end
+
       it 'exposes #properties' do
         subject << property
         expect(subject.properties).to eq([property])
@@ -32,16 +37,42 @@ module Hydramata
           by(1)
       end
 
-      it 'amends an existing property if a common predicate is found' do
-        property = Property.new(predicate: :title, value: 'value one')
-        property_with_same_predicate = Property.new(predicate: :title, value: 'another')
-        subject << property
-        expect do
-          expect { subject << property_with_same_predicate }.
-            to_not change { subject.count }
-        end.to change { property.values }.
-          from(['value one']).
-          to(['value one', 'another'])
+      context 'push strategy' do
+        subject { PropertySet.new(property_value_strategy: property_value_strategy) }
+
+        it 'defaults to :append_values' do
+          expect(described_class.new.property_value_strategy).to eq(:append_values)
+        end
+
+        context ':append_values' do
+          let(:property_value_strategy) { :append_values }
+          it 'amends an existing property if a common predicate is found' do
+            property = Property.new(predicate: :title, value: 'value one')
+            property_with_same_predicate = Property.new(predicate: :title, value: 'another')
+            subject << property
+            expect do
+              expect { subject << property_with_same_predicate }.
+                to_not change { subject.count }
+            end.to change { property.values }.
+              from(['value one']).
+              to(['value one', 'another'])
+          end
+        end
+
+        context ':replace_values' do
+          let(:property_value_strategy) { :replace_values }
+          it "replaces an existing property's values" do
+            property = Property.new(predicate: :title, value: 'value one')
+            property_with_same_predicate = Property.new(predicate: :title, value: 'another')
+            subject << property
+            expect do
+              expect { subject << property_with_same_predicate }.
+                to_not change { subject.count }
+            end.to change { property.values }.
+              from(['value one']).
+              to(['another'])
+          end
+        end
       end
 
       context 'data retrieval methods' do
