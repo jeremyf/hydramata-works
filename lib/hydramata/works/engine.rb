@@ -18,12 +18,13 @@ module Hydramata
         app.config.paths.add 'app/persisters', eager_load: true
         app.config.paths.add 'app/presenters', eager_load: true
         app.config.paths.add 'app/parsers', eager_load: true
+        app.config.paths.add 'app/services', eager_load: true
         app.config.autoload_paths += %W(
           #{config.root}/app/renderers
           #{config.root}/app/forms
           #{config.root}/app/persisters
           #{config.root}/app/presenters
-          #{config.root}/app/parsers
+          #{config.root}/app/services
         )
       end
     end
