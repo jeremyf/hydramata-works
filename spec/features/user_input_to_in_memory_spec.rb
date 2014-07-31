@@ -6,7 +6,7 @@ require 'hydramata/works/conversions/property'
 
 module Hydramata
   module Works
-    class UserInputToWorkCoercer
+    class ApplyUserInputToWork
       def self.call(collaborators = {})
         new(collaborators).call
       end
@@ -42,7 +42,7 @@ module Hydramata
         end
 
         it 'appends properties to the collaborating work object' do
-          UserInputToWorkCoercer.call(work: work, input: input.fetch(:work))
+          ApplyUserInputToWork.call(work: work, input: input.fetch(:work))
 
           expect(work.work_type).to eq(WorkType(work_type_identity))
           expect(work.properties.fetch(:title)).to eq(Property(:title, 'Hello', 'World', 'Bang!'))
@@ -70,7 +70,7 @@ module Hydramata
         end
 
         it 'appends explicit properties to the collaborating work object' do
-          UserInputToWorkCoercer.call(work: work, input: input.fetch(:work))
+          ApplyUserInputToWork.call(work: work, input: input.fetch(:work))
 
           expect(work.work_type).to eq(WorkType(work_type_identity))
           expect(work.properties.fetch(:title)).to eq(Property(:title, 'Hello', 'World', 'Bang!'))
