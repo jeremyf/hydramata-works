@@ -3,29 +3,10 @@ require 'hydramata/works/work'
 require 'hydramata/works/work_types/storage'
 require 'hydramata/works/conversions/work_type'
 require 'hydramata/works/conversions/property'
+require 'hydramata/works/apply_user_input_to_work'
 
 module Hydramata
   module Works
-    class ApplyUserInputToWork
-      def self.call(collaborators = {})
-        new(collaborators).call
-      end
-      attr_reader :input, :work
-      def initialize(collaborators = {})
-        @input = collaborators.fetch(:input)
-        @work = collaborators.fetch(:work)
-      end
-
-      def call
-        work.work_type = input.fetch(:work_type)
-        input.each do |predicate, values|
-          next if predicate.to_s == 'work_type'
-          work.properties << { predicate: predicate, values: values }
-        end
-        work
-      end
-    end
-
     describe 'User input to in memory' do
       include Conversions
       context 'for :new object' do
