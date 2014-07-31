@@ -24,6 +24,7 @@ module Hydramata
           #{config.root}/app/forms
           #{config.root}/app/persisters
           #{config.root}/app/presenters
+          #{config.root}/app/parsers
           #{config.root}/app/services
         )
       end
