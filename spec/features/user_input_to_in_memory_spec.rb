@@ -7,11 +7,11 @@ require 'hydramata/works/apply_user_input_to_work'
 
 module Hydramata
   module Works
-    describe 'User input to in memory' do
+      describe 'User input to in memory' do
       include Conversions
       context 'for :new object' do
         let(:work) { Work.new }
-        let(:input) do
+        let(:user_input) do
           {
             work: {
               work_type: work_type_identity,
@@ -23,7 +23,7 @@ module Hydramata
         end
 
         it 'appends properties to the collaborating work object' do
-          ApplyUserInputToWork.call(work: work, input: input.fetch(:work))
+          ApplyUserInputToWork.call(work: work, input: user_input.fetch(:work))
 
           expect(work.work_type).to eq(WorkType(work_type_identity))
           expect(work.properties.fetch(:title)).to eq(Property(:title, 'Hello', 'World', 'Bang!'))
@@ -40,7 +40,7 @@ module Hydramata
             work.properties << { predicate: :keyword, values: 'Programming'}
           end
         end
-        let(:input) do
+        let(:user_input) do
           {
             work: {
               work_type: work_type_identity,
@@ -51,7 +51,7 @@ module Hydramata
         end
 
         it 'appends explicit properties to the collaborating work object' do
-          ApplyUserInputToWork.call(work: work, input: input.fetch(:work))
+          ApplyUserInputToWork.call(work: work, input: user_input.fetch(:work))
 
           expect(work.work_type).to eq(WorkType(work_type_identity))
           expect(work.properties.fetch(:title)).to eq(Property(:title, 'Hello', 'World', 'Bang!'))

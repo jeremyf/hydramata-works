@@ -10,7 +10,7 @@ In each layer, there is a concept of a Work and its data structure.
 - [ ] Solr -> Memory
 - [ ] Memory -> Fedora
 - [ ] Memory -> Solr
-- [ ] UI Input for Edit -> Memory
+- [x] UI Input for Edit -> Memory
 - [x] Fedora -> Memory
 - [x] Memory -> Show HTML
 - [x] Memory -> Show JSON
