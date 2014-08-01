@@ -14,15 +14,17 @@ module Hydramata
       def initialize(options = {})
         @property_store = {}
         self.predicate_set = options.fetch(:predicate_set) { default_predicate_set }
+        self.property_value_strategy = options.fetch(:property_value_strategy) { default_property_value_strategy }
       end
-      attr_reader :predicate_set
+      attr_reader :predicate_set, :property_value_strategy
 
       delegate :name, to: :predicate_set
 
       def <<(input)
         property = Property(input)
-        if property_store[property.predicate.to_s]
-          property_store[property.predicate.to_s] << property.values
+        existing_property = property_store[property.predicate.to_s]
+        if existing_property
+          existing_property.send(property_value_strategy, property.values)
         else
           property_store[property.predicate.to_s] = property
         end
@@ -76,11 +78,28 @@ module Hydramata
 
       private
 
+      def property_value_strategy=(value)
+        if valid_property_value_strategy?(value)
+          @property_value_strategy = value
+        else
+          raise RuntimeError, "Invalid property_value_strategy #{value.inspect}."
+        end
+      end
+
       attr_reader :property_store
+
+      def valid_property_value_strategy?(value)
+        [:append_values, :replace_values].include?(value)
+      end
+
+      def default_property_value_strategy
+        :append_values
+      end
 
       def default_predicate_set
         { identity: 'unknown' }
       end
+
 
       def predicate_set=(value)
         @predicate_set = PredicateSet(value)
