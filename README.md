@@ -4,7 +4,7 @@
 [![Build Status](https://travis-ci.org/ndlib/hydramata-works.png?branch=master)](https://travis-ci.org/ndlib/hydramata-works)
 [![Code Climate](https://codeclimate.com/github/ndlib/hydramata-works.png)](https://codeclimate.com/github/ndlib/hydramata-works)
 [![Coverage Status](https://img.shields.io/coveralls/ndlib/hydramata-works.svg)](https://coveralls.io/r/ndlib/hydramata-works)
-[![API Docs](http://img.shields.io/badge/API-docs-blue.svg)](http://rubydoc.info/github/ndlib/hydramata-work/master/frames/)
+[![API Docs](http://img.shields.io/badge/API-docs-blue.svg)](http://rubydoc.info/github/ndlib/hydramata-works/master/frames/)
 [![APACHE 2 License](http://img.shields.io/badge/APACHE2-license-blue.svg)](./LICENSE)
 
 Responsible for providing a well defined data-structure to ease the interaction between differing layers of an application:
