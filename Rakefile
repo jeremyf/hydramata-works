@@ -28,7 +28,7 @@ namespace :spec do
   task :travis do
     ENV['RAILS_ENV'] = 'test'
     spec_helper = File.expand_path('../spec/spec_slow_helper.rb', __FILE__)
-    ENV['SPEC_OPTS'] = "--profile 20 --require #{spec_helper}"
+    ENV['SPEC_OPTS'] = "--profile 5 --require #{spec_helper}"
     Rake::Task['engine_cart:clean'].invoke
     Rake::Task['engine_cart:generate'].invoke
     Rake::Task['spec:all'].invoke
