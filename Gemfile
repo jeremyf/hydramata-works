@@ -14,6 +14,7 @@ gemspec path: File.expand_path('..', __FILE__)
 # gem 'debugger'
 
 gem 'equivalent-xml', github: 'jeremyf/equivalent-xml', branch: 'updating-rspec-for-rspec-3'
+gem "hydramata-translations", github: 'ndlib/hydramata-translations'
 gem "rake"
 gem 'coveralls', require: false
 if ! ENV['TRAVIS']

@@ -7,9 +7,6 @@ class TestAppGenerator < Rails::Generators::Base
   # into the test app, this generator will be run immediately
   # after setting up the application
 
-  # def install_engine
-  #   generate 'hydramata-works:install'
-  # end
 
   def run_migrations
     rake 'db:create'

@@ -131,8 +131,8 @@ module Hydramata
       end
 
       def default_translator
-        require 'hydramata/works/translator'
-        Translator
+        require 'hydramata/translations/translator'
+        Translations::Translator
       end
 
       # Because actually testing this is somewhat of a nightmare given the
