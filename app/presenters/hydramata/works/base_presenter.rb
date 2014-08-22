@@ -1,5 +1,6 @@
 require 'delegate'
 require 'active_support/core_ext/array/wrap'
+require 'active_support/core_ext/hash/reverse_merge'
 require 'hydramata/works/conversions/translation_key_fragment'
 
 module Hydramata
@@ -39,8 +40,8 @@ module Hydramata
         [prefix, base_dom_class, suffix].compact.join('-')
       end
 
-      def translate(key)
-        translator.t(key, scopes: translation_scopes, default: default_translation_for(key))
+      def translate(key, options = {})
+        translator.t(key, options.reverse_merge(scopes: translation_scopes, default: default_translation_for(key)))
       end
       alias_method :t, :translate
 

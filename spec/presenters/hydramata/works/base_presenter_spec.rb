@@ -43,9 +43,21 @@ module Hydramata
         expect(subject.instance_of?(described_class)).to be_truthy
       end
 
-      it 'translates attribute keys' do
-        subject.translate(:name)
-        expect(translator).to have_received(:t).with(:name, scopes: [], default: instance_of(Proc))
+      context '#translate' do
+        it 'translates attribute keys' do
+          subject.translate(:name)
+          expect(translator).to have_received(:t).with(:name, scopes: [], default: instance_of(Proc))
+        end
+
+        it 'passes along options' do
+          subject.translate(:name, raise: true)
+          expect(translator).to have_received(:t).with(:name, scopes: [], default: instance_of(Proc), raise: true)
+        end
+
+        it 'allows defaults to be overridden' do
+          subject.translate(:name, raise: true, default: nil)
+          expect(translator).to have_received(:t).with(:name, scopes: [], default: nil, raise: true)
+        end
       end
 
       context '#dom_class' do
