@@ -1,12 +1,11 @@
 require 'spec_fast_helper'
 require 'hydramata/works/work_presenter'
 require 'hydramata/works/work'
-require 'hydramata/works/linters'
+require 'hydramata/works/linters/implement_work_presenter_interface_matcher'
 
 module Hydramata
   module Works
     describe WorkPresenter do
-      it_behaves_like 'a presented work'
 
       let(:presentation_structure) { double('PresentationStructure') }
       let(:work) { Work.new(work_type: 'My Work Type') }
@@ -20,6 +19,8 @@ module Hydramata
           template_missing_exception: [RuntimeError]
         )
       end
+
+      it { should implement_work_presenter_interface }
 
       it 'has #container_content_tag_attributes' do
         expect(subject.container_content_tag_attributes.keys).to eq([:class, :itemscope, :itemtype])

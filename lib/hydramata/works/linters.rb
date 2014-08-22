@@ -1,11 +1,3 @@
-shared_examples 'a presented work' do |default_presented_work_class|
-  let(:presented_work_class) { (default_presented_work_class || described_class) }
-  it 'responds to #fieldsets' do
-    expect { presented_work_class.instance_method(:fieldsets) }.
-      to_not raise_error
-  end
-end
-
 shared_examples 'a predicate parser' do |default_parser|
   let(:parser) { default_parser || described_class }
   it 'responds to #call' do
