@@ -2,6 +2,7 @@ require 'spec_fast_helper'
 require 'hydramata/works/work_form'
 require 'hydramata/works/linters'
 require 'hydramata/works/work'
+require 'hydramata/works/linters/implement_work_form_interface_matcher'
 
 module Hydramata
   module Works
@@ -16,6 +17,10 @@ module Hydramata
       subject { described_class.new(work, validation_service: validation_service) }
 
       it_behaves_like 'ActiveModel'
+
+      it { should be_an_instance_of WorkForm }
+      it { should be_an_instance_of Work }
+      it { should implement_work_form_interface }
 
       context 'when errors are not set' do
         let(:validation_service) { double(call: true) }

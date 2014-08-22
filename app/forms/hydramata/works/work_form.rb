@@ -61,6 +61,10 @@ module Hydramata
         format('#<%s:%#0x work=%s>', WorkForm, __id__, __getobj__.inspect)
       end
 
+      def instance_of?(klass)
+        super || __getobj__.instance_of?(klass)
+      end
+
       private
 
       def respond_to_missing?(method_name, include_all = false)
