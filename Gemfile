@@ -13,8 +13,8 @@ gemspec path: File.expand_path('..', __FILE__)
 # To use debugger
 # gem 'debugger'
 
-gem 'equivalent-xml', github: 'jeremyf/equivalent-xml', branch: 'updating-rspec-for-rspec-3'
-gem "hydramata-translations", github: 'ndlib/hydramata-translations'
+gem 'equivalent-xml', '~> 0.4'
+gem "hydramata-core", github: 'ndlib/hydramata-core', branch: 'master'
 gem "rake"
 gem 'coveralls', require: false
 if ! ENV['TRAVIS']

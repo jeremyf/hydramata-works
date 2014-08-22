@@ -131,8 +131,8 @@ module Hydramata
       end
 
       def default_translator
-        require 'hydramata/translations/translator'
-        Translations::Translator
+        require 'hydramata/core/translator'
+        Core::Translator.new(base_scope: ['hydramata', 'core'])
       end
 
       # Because actually testing this is somewhat of a nightmare given the
