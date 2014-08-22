@@ -1,15 +1,15 @@
 require 'spec_slow_helper'
-require 'hydramata/works/service_repository_methods'
+require 'hydramata/works/service_methods'
 require 'hydramata/works/linters/implement_work_interface_matcher'
 require 'hydramata/works/linters/implement_work_presenter_interface_matcher'
 require 'hydramata/works/linters/implement_work_form_interface_matcher'
 
 module Hydramata
   module Works
-    describe ServiceRepositoryMethods do
+    describe ServiceMethods do
       let(:service) do
         Class.new do
-          include ServiceRepositoryMethods
+          include ServiceMethods
         end.new
       end
       let(:context) { double('Context') }

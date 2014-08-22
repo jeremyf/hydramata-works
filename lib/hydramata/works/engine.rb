@@ -26,6 +26,12 @@ module Hydramata
           #{config.root}/app/services
         )
       end
+
+      initializer 'hydramata_works.services' do |app|
+        ActiveSupport.on_load(:hydramata_core_services) do
+          include Hydramata::Works::ServiceMethods
+        end
+      end
     end
   end
 end
