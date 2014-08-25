@@ -12,9 +12,13 @@ en:
             property_translated:
               name: I Am a Translated Property for a Translated Work Type!
           name: I Am a Translated Work Type!
+          actions:
+            create: Create a Translated Work
       fieldsets:
         property_set_translated:
           name: I Am a Translated Property Set with a non-Translated Work Type!
       properties:
         property_translated:
           name: I Am a Translated Property with a non-Translated Work Type!
+      actions:
+        create: Create a Work
