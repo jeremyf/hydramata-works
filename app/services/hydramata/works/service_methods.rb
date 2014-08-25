@@ -4,10 +4,11 @@ module Hydramata
     # for negotiating between a context (i.e. a Controller request ) and the 
     # domain model.
     module ServiceMethods
-      def new_work_for(context, work_type, attributes)
+      def new_work_for(context, work_type, attributes, &block)
         work = Hydramata::Works::Work.new(work_type: work_type)
         presenter = Hydramata::Works::WorkPresenter.new(work: work, presentation_context: :new)
-        Hydramata::Works::WorkForm.new(presenter)
+        presenter.append_action(:create)
+        Hydramata::Works::WorkForm.new(presenter, &block)
       end
     end
   end

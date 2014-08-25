@@ -5,6 +5,7 @@ require 'hydramata/works/work'
 require 'hydramata/works/work_presenter'
 require 'hydramata/works/property_presenter'
 require 'hydramata/works/fieldset_presenter'
+require 'hydramata/works/action_presenter'
 
 module Hydramata
   module Works
@@ -30,6 +31,23 @@ module Hydramata
           let(:work_type) { 'Non-Translated Work Type' }
           it 'translates its :name by using the work type directly' do
             expect(presenter.t(:name)).to eq('Non-Translated Work Type')
+          end
+        end
+      end
+
+      context 'for actions' do
+        let(:work_presenter) { WorkPresenter.new(work: work, presentation_structure: nil) }
+        let(:presenter) { ActionPresenter.new(context: work_presenter, action_name: :create) }
+        context 'with existing work type translations' do
+          let(:work_type) { 'Work Type Translated' }
+          it 'translates its :name from the lookup table' do
+            expect(presenter.value).to eq("Create a Translated Work")
+          end
+        end
+        context 'without existing work type translations' do
+          let(:work_type) { 'Non-Translated Work Type' }
+          it 'translates its :name by using the key directly' do
+            expect(presenter.value).to eq('Create a Work')
           end
         end
       end
