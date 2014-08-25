@@ -26,7 +26,7 @@ module Hydramata
           expect(returned_object).to be_an_instance_of(WorkForm)
           expect(returned_object).to be_an_instance_of(WorkPresenter)
           expect(returned_object).to be_an_instance_of(Work)
-          expect(returned_object.actions.size).to eq(1)
+          expect(returned_object.actions.count).to eq(1)
         end
       end
     end
