@@ -8,17 +8,20 @@ module Hydramata
     class WorkPresenter < BasePresenter
       include Conversions
 
-      attr_reader :presentation_structure, :presented_fieldset_builder
+      attr_reader :presentation_structure, :presented_fieldset_builder, :actions
+
       def initialize(collaborators = {})
         work = collaborators.fetch(:work)
         super(work, collaborators)
         @presentation_structure = collaborators.fetch(:presentation_structure) { default_presentation_structure }
         @presented_fieldset_builder = collaborators.fetch(:presented_fieldset_builder) { default_presented_fieldset_builder }
+        @actions = collaborators.fetch(:actions_container) { default_actions_container }
       end
 
       def fieldsets
         @fieldsets ||= presented_fieldset_builder.call(work: self, presentation_structure: presentation_structure)
       end
+
 
       private
 
@@ -56,6 +59,10 @@ module Hydramata
         [
           ['works', TranslationKeyFragment(self)]
         ]
+      end
+
+      def default_actions_container
+        Array.new
       end
 
       def default_presentation_structure

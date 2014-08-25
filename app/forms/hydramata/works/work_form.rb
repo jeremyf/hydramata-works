@@ -14,6 +14,7 @@ module Hydramata
         __setobj__(work)
         @errors = collaborators.fetch(:error_container) { default_error_container }
         @validation_service = collaborators.fetch(:validation_service) { default_validation_service }
+        yield(self) if block_given?
       end
 
       attr_reader :errors

@@ -5,4 +5,7 @@ towards a solution.
 %>
 <%= form_for new, as: :work, url: '/', method: :post, html: { class: [new.dom_class(prefix: 'new'), 'work'] } do |form| %>
   <% new.fieldsets.each do |fieldset| %><%= fieldset.render(template: self, locals: { form: form } ) %><% end %>
+  <div class="actions">
+    <% new.actions.each do |action| %><%= action.render(template: self, locals: { form: form } ) %><% end %>
+  </div>
 <% end %>
