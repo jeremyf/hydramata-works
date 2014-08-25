@@ -4,38 +4,23 @@ module Hydramata
   module Works
     class ActionPresenter
       include Conversions
-      attr_reader :action_name, :work
+      attr_reader :action_name, :context
 
       def initialize(collaborators = {})
         @action_name = collaborators.fetch(:action_name)
-        @work = collaborators.fetch(:work)
-        @translator = collaborators.fetch(:translator) { default_translator }
+        @context = collaborators.fetch(:context)
       end
 
       def render(options = {})
         template = options.fetch(:template)
-        template.submit_tag(action_name)
+        action_options = options.fetch(:action_options, {})
+        template.submit_tag(value, action_options)
       end
 
-      def translate(key, options = {})
-        translator.t("actions.#{key}", options.reverse_merge(scopes: translation_scopes, default: key))
-      end
-      alias_method :t, :translate
-
-      private
-      attr_reader :translator
-      private :translator
-
-      def default_translator
-        require 'hydramata/core/translator'
-        Core::Translator.new(base_scope: ['hydramata', 'core'])
+      def value
+        context.translate("actions.#{action_name}.value", default: 'Save changes')
       end
 
-      def translation_scopes
-        [
-          ['works', TranslationKeyFragment(work)]
-        ]
-      end
     end
   end
 end

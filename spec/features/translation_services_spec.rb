@@ -41,13 +41,13 @@ module Hydramata
         context 'with existing work type translations' do
           let(:work_type) { 'Work Type Translated' }
           it 'translates its :name from the lookup table' do
-            expect(presenter.t(:create)).to eq('Create a Translated Work')
+            expect(presenter.value).to eq("Create a Translated Work")
           end
         end
         context 'without existing work type translations' do
           let(:work_type) { 'Non-Translated Work Type' }
           it 'translates its :name by using the key directly' do
-            expect(presenter.t(:create)).to eq('Create a Work')
+            expect(presenter.value).to eq('Create a Work')
           end
         end
       end
