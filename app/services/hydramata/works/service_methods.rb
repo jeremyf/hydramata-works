@@ -7,7 +7,8 @@ module Hydramata
       def new_work_for(context, work_type, attributes, &block)
         work = Hydramata::Works::Work.new(work_type: work_type)
         presenter = Hydramata::Works::WorkPresenter.new(work: work, presentation_context: :new)
-        presenter.actions << ActionPresenter.new(context: presenter, action_name: :create)
+        presenter.append_action(:create)
+        presenter.append_action(:cancel)
         Hydramata::Works::WorkForm.new(presenter, &block)
       end
     end

@@ -3,6 +3,7 @@ require 'hydramata/works/conversions/translation_key_fragment'
 module Hydramata
   module Works
     class ActionPresenter
+
       include Conversions
       attr_reader :action_name, :context
 
