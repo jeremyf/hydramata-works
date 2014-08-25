@@ -8,7 +8,6 @@ module Hydramata
         work = Hydramata::Works::Work.new(work_type: work_type)
         presenter = Hydramata::Works::WorkPresenter.new(work: work, presentation_context: :new)
         presenter.append_action(:create)
-        presenter.append_action(:cancel)
         Hydramata::Works::WorkForm.new(presenter, &block)
       end
     end
