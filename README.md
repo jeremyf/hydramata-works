@@ -34,6 +34,12 @@ The rake task will build the internal rails application and run all of the tests
 
 Once you have the `spec/internal` directory built, you can run `rspec` or `rake spec:all`.
 
+## Getting Your Bearings
+
+Take a look at the [ServiceMethods module](./app/services/hydramata/works/service_methods.rb).
+The ServiceMethods defines the public API of this gem.
+It illustrates what is possible and how it is done.
+
 ## Data Structure and Definition
 
 <pre>
