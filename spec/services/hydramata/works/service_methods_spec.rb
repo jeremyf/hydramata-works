@@ -3,6 +3,7 @@ require 'hydramata/works/service_methods'
 require 'hydramata/works/property'
 require 'hydramata/works/linters/implement_work_interface_matcher'
 require 'hydramata/works/linters/implement_work_presenter_interface_matcher'
+require 'hydramata/works/linters/implement_work_type_presenter_interface_matcher'
 require 'hydramata/works/linters/implement_work_form_interface_matcher'
 require 'hydramata/works/conversions/work_type'
 
@@ -42,6 +43,8 @@ module Hydramata
         it 'should return an enumerable of work types' do
           returned_object = service.available_work_types(context)
           expect(returned_object).to eq([WorkType('article'), WorkType('book')])
+          expect(returned_object[0]).to implement_work_type_presenter_interface
+          expect(returned_object[1]).to implement_work_type_presenter_interface
         end
       end
     end

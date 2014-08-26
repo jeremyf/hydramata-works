@@ -46,6 +46,11 @@ module Hydramata
         end
       end
 
+      def to_presenter
+        require 'hydramata/works/work_type_presenter'
+        WorkTypePresenter.new(self)
+      end
+
       private
 
       def default_itemtype_schema_dot_org

@@ -3,6 +3,7 @@
 require 'spec_fast_helper'
 require 'hydramata/works/work_type'
 require 'hydramata/works/linters/implement_work_type_interface_matcher'
+require 'hydramata/works/linters/implement_work_type_presenter_interface_matcher'
 require 'hydramata/works/linters/implement_data_definition_interface_matcher'
 
 module Hydramata
@@ -22,6 +23,13 @@ module Hydramata
       it 'has #fieldsets that is an alias of #predicate_sets' do
         subject = described_class.new(identity: 'My Identity', predicate_sets: ['one predicate', 'two predicate'])
         expect(subject.fieldsets).to eq(subject.predicate_sets)
+      end
+
+      context '#to_presenter' do
+        subject { described_class.new }
+        it 'implements the work_type_presenter_interface' do
+          expect(subject.to_presenter).to implement_work_type_presenter_interface
+        end
       end
 
       context '#itemtype_schema_dot_org' do

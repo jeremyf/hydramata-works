@@ -24,7 +24,7 @@ module Hydramata
       # @return [Array(WorkType)]
       def available_work_types(context)
         WorkTypes::Storage.ordered.all.collect do |work_type|
-          work_type.to_work_type(shallow: true)
+          work_type.to_work_type(shallow: true).to_presenter
         end
       end
     end
