@@ -1,5 +1,6 @@
 require 'hydramata/works/conversions/presented_fieldsets'
 require 'hydramata/works/conversions/work_type'
+require 'hydramata/works/conversions/presenter'
 require 'hydramata/works/base_presenter'
 
 module Hydramata
