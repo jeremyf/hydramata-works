@@ -1,16 +1,18 @@
 #!/usr/bin/env ruby -w
 require 'time'
 require 'rake'
-require 'benchmark'
 
-File.open("run_each_spec_in_isolation.txt", 'w+') do |file|
-  file.puts "Using Benchmark.measure.real\n"
-  FileList['spec/**/*_spec.rb'].sort.select do |fn|
-    puts "rspec #{fn}"
-    measurement = Benchmark.measure { system "rspec #{fn}" }
-    file.puts format("%#.1f\t%s", (measurement.real), fn)
-    file.puts ''
-  end
-  measurement = Benchmark.measure { system('rspec') }
-  file.puts format("%#.1f\t%s", (measurement.real), "total-time-for-specs-run-together")
+failed_result = false
+FileList['spec/**/*_spec.rb'].sort.select do |fn|
+  puts "rspec #{fn}"
+  failed_result ||= !(system "rspec #{fn}")
+end
+failed_result ||= !(system('rspec'))
+
+if failed_result
+  STDERR.puts "Error encountered in isolation tests."
+  exit!(-1)
+else
+  STDOUT.puts "Success"
+  exit!(0)
 end
