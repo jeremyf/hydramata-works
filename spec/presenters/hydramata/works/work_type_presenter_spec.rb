@@ -30,6 +30,17 @@ module Hydramata
           expect(subject.name).to eq('An Article')
         end
       end
+
+      it 'has a friendly inspect message, because tracking it down could be a pain' do
+        expect(subject.inspect).to include("#{described_class}")
+        expect(subject.inspect).to include(work_type.inspect)
+      end
+
+      it 'is an instance of the presented object\'s class' do
+        expect(subject.instance_of?(work_type.class)).to be_truthy
+        expect(subject.instance_of?(described_class)).to be_truthy
+      end
+
     end
   end
 end

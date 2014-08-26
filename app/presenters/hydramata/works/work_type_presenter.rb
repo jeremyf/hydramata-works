@@ -19,6 +19,14 @@ module Hydramata
         translator.translate('name', options.reverse_merge(scopes: translation_scopes, default: __getobj__.name))
       end
 
+      def inspect
+        format('#<%s:%#0x presenting=%s>', self.class, __id__, __getobj__.inspect)
+      end
+
+      def instance_of?(klass)
+        super || __getobj__.instance_of?(klass)
+      end
+
       private
       attr_reader :translator, :translation_scopes
       private :translator, :translation_scopes
