@@ -24,7 +24,7 @@ module Hydramata
       end
 
       def work_type
-        @work_type ||= Presenter(super) #__getobj__.work_type)
+        @work_type ||= Presenter(super)
       end
 
       private
