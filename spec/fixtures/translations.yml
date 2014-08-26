@@ -1,7 +1,7 @@
 en:
   hydramata:
     core:
-      works:
+      work_types:
         work_type_with_translated_name:
           name: I Am Translating the Name for Application Usage!
         work_type_translated:

@@ -44,7 +44,7 @@ module Hydramata
         work_prefix = TranslationKeyFragment(work)
         predicate_prefix = TranslationKeyFragment(predicate)
         [
-          ['works', work_prefix, view_path_slug_for_object, predicate_prefix],
+          ['work_types', work_prefix, view_path_slug_for_object, predicate_prefix],
           [view_path_slug_for_object, predicate_prefix]
         ]
       end

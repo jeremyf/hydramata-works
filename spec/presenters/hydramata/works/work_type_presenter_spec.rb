@@ -15,7 +15,7 @@ module Hydramata
         it 'uses translation services' do
           expect(translator).
             to receive(:translate).
-            with('description', scopes: [['works', work_type.to_translation_key_fragment]]).
+            with('description', scopes: [['work_types', work_type.to_translation_key_fragment]]).
             and_return('An Article Description')
           expect(subject.description).to eq('An Article Description')
         end
@@ -25,7 +25,7 @@ module Hydramata
         it 'uses translation services' do
           expect(translator).
             to receive(:translate).
-            with('name', scopes: [['works', work_type.to_translation_key_fragment]], default: work_type.name).
+            with('name', scopes: [['work_types', work_type.to_translation_key_fragment]], default: work_type.name).
             and_return('An Article')
           expect(subject.name).to eq('An Article')
         end

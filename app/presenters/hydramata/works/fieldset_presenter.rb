@@ -45,7 +45,7 @@ module Hydramata
         work_prefix = TranslationKeyFragment(work)
         fieldset_prefix = TranslationKeyFragment(name)
         [
-          ['works', work_prefix, view_path_slug_for_object, fieldset_prefix],
+          ['work_types', work_prefix, view_path_slug_for_object, fieldset_prefix],
           [view_path_slug_for_object, fieldset_prefix]
         ]
       end

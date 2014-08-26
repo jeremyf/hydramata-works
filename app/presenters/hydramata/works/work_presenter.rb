@@ -56,7 +56,7 @@ module Hydramata
 
       def default_translation_scopes
         [
-          ['works', TranslationKeyFragment(self)]
+          ['work_types', TranslationKeyFragment(self)]
         ]
       end
 

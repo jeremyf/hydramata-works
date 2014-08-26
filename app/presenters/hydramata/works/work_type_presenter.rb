@@ -32,7 +32,7 @@ module Hydramata
       private :translator, :translation_scopes
       def default_translation_scopes
         [
-          ['works', TranslationKeyFragment(self)]
+          ['work_types', TranslationKeyFragment(self)]
         ]
       end
 
