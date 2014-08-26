@@ -1,4 +1,5 @@
 require 'hydramata/works/conversions/presented_fieldsets'
+require 'hydramata/works/conversions/work_type'
 require 'hydramata/works/base_presenter'
 
 module Hydramata
@@ -20,6 +21,10 @@ module Hydramata
 
       def fieldsets
         @fieldsets ||= presented_fieldset_builder.call(work: self, presentation_structure: presentation_structure)
+      end
+
+      def work_type
+        @work_type ||= Presenter(super) #__getobj__.work_type)
       end
 
       private

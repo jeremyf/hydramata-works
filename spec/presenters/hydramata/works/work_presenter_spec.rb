@@ -2,6 +2,7 @@ require 'spec_fast_helper'
 require 'hydramata/works/work_presenter'
 require 'hydramata/works/work'
 require 'hydramata/works/linters/implement_work_presenter_interface_matcher'
+require 'hydramata/works/linters/implement_work_type_presenter_interface_matcher'
 
 module Hydramata
   module Works
@@ -21,6 +22,10 @@ module Hydramata
       end
 
       it { should implement_work_presenter_interface }
+
+      it 'has a presented work type' do
+        expect(subject.work_type).to implement_work_type_presenter_interface
+      end
 
       it 'has #container_content_tag_attributes' do
         expect(subject.container_content_tag_attributes.keys).to eq([:class, :itemscope, :itemtype])
