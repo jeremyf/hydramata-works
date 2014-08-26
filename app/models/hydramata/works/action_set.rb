@@ -14,8 +14,8 @@ module Hydramata
       private :action_builder
 
       def <<(options)
-        action_name = options.fetch(:action_name)
-        @actions[action_name] = action_builder.call(options.merge(context: context))
+        name = options.fetch(:name)
+        @actions[name] = action_builder.call(options.merge(context: context))
       end
 
       def each

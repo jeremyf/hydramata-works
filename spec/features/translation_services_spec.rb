@@ -37,7 +37,7 @@ module Hydramata
 
       context 'for actions' do
         let(:work_presenter) { WorkPresenter.new(work: work, presentation_structure: nil) }
-        let(:presenter) { ActionPresenter.new(context: work_presenter, action_name: :create) }
+        let(:presenter) { ActionPresenter.new(context: work_presenter, name: :create) }
         context 'with existing work type translations' do
           let(:work_type) { 'Work Type Translated' }
           it 'translates its :name from the lookup table' do

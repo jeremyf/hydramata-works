@@ -5,9 +5,9 @@ module Hydramata
   module Works
     describe ActionPresenter do
       let(:context) { double('Context', translate: true) }
-      let(:action_name) { :create }
+      let(:name) { :create }
       let(:template) { double('Template', submit_tag: true) }
-      subject { described_class.new(context: context, action_name: action_name) }
+      subject { described_class.new(context: context, name: name) }
 
       context '#render' do
         it 'renders a submit tag' do

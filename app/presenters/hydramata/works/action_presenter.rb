@@ -5,10 +5,10 @@ module Hydramata
     class ActionPresenter
 
       include Conversions
-      attr_reader :action_name, :context
+      attr_reader :name, :context
 
       def initialize(collaborators = {})
-        @action_name = collaborators.fetch(:action_name)
+        @name = collaborators.fetch(:name)
         @context = collaborators.fetch(:context)
       end
 
@@ -19,7 +19,7 @@ module Hydramata
       end
 
       def value
-        context.translate("actions.#{action_name}.value", default: 'Save changes')
+        context.translate("actions.#{name}.value", default: 'Save changes')
       end
 
     end
