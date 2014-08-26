@@ -28,7 +28,7 @@ module Hydramata
       end
 
       initializer 'hydramata_works.services' do |app|
-        ActiveSupport.on_load(:hydramata_core_services) do
+        ActiveSupport.on_load(:hydramata_services) do
           include Hydramata::Works::ServiceMethods
         end
       end
