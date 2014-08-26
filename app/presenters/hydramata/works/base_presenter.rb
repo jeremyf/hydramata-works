@@ -13,8 +13,8 @@ module Hydramata
       def initialize(object, collaborators = {})
         __setobj__(object)
         @presentation_context = collaborators.fetch(:presentation_context) { default_presentation_context }
-        @translator = collaborators.fetch(:translator) { default_translator }
         @partial_prefixes = collaborators.fetch(:partial_prefixes) { default_partial_prefixes }
+        @translator = collaborators.fetch(:translator) { default_translator }
         @translation_scopes = collaborators.fetch(:translation_scopes) { default_translation_scopes }
         @template_missing_error = collaborators.fetch(:template_missing_exception) { default_template_missing_exception }
         @dom_attributes_builder = collaborators.fetch(:dom_attributes_builder) { default_dom_attributes_builder }
