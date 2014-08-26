@@ -19,6 +19,14 @@ module Hydramata
         presenter.actions << { name: :create }
         WorkForm.new(presenter, &block)
       end
+
+      # @param :context [#current_user]
+      # @return [Array(WorkType)]
+      def available_work_types(context)
+        WorkTypes::Storage.ordered.all.collect do |work_type|
+          work_type.to_work_type(shallow: true)
+        end
+      end
     end
   end
 end

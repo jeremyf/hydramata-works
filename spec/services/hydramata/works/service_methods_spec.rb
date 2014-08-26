@@ -4,10 +4,12 @@ require 'hydramata/works/property'
 require 'hydramata/works/linters/implement_work_interface_matcher'
 require 'hydramata/works/linters/implement_work_presenter_interface_matcher'
 require 'hydramata/works/linters/implement_work_form_interface_matcher'
+require 'hydramata/works/conversions/work_type'
 
 module Hydramata
   module Works
     describe ServiceMethods do
+      include Conversions
       let(:service) do
         Class.new do
           include ServiceMethods
@@ -29,6 +31,17 @@ module Hydramata
           expect(returned_object).to be_an_instance_of(Work)
           expect(returned_object.properties[:title]).to eq(Property.new(predicate: :title, values: 'my title'))
           expect(returned_object.actions.count).to eq(1)
+        end
+      end
+
+      context '#available_work_types' do
+        before do
+          WorkTypes::Storage.create(identity: 'book')
+          WorkTypes::Storage.create(identity: 'article')
+        end
+        it 'should return an enumerable of work types' do
+          returned_object = service.available_work_types(context)
+          expect(returned_object).to eq([WorkType('article'), WorkType('book')])
         end
       end
     end

@@ -31,12 +31,19 @@ module Hydramata
           { identity: identity }
         end
 
-        def to_work_type
-          WorkType.new(as_work_type)
+        scope :ordered, ->{ order(arel_table[:identity].asc) }
+
+        def to_work_type(options = {})
+          WorkType.new(as_work_type(options))
         end
 
-        def as_work_type
-          attributes.merge(predicate_sets: predicate_sets)
+        def as_work_type(options = {})
+          shallow = options.fetch(:shallow) { false }
+          if shallow
+            attributes
+          else
+            attributes.merge(predicate_sets: predicate_sets)
+          end
         end
       end
     end

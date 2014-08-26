@@ -25,6 +25,15 @@ module Hydramata
             expect(work_type).to implement_work_type_interface
             expect(work_type.predicate_sets.size).to eq(1)
           end
+
+          it 'returns a WorkType object without predicates if shallow request' do
+            work_type = described_class.new do |work_type|
+              work_type.predicate_sets.build(identity: 'hello')
+            end.to_work_type(shallow: true)
+
+            expect(work_type).to implement_work_type_interface
+            expect(work_type.predicate_sets.size).to eq(0)
+          end
         end
 
         context '.find_by_identity' do
@@ -42,6 +51,12 @@ module Hydramata
           it 'returns nil when identity is missing' do
             # @TODO - Should this be a NullPredicate?
             expect { described_class.find_by_identity!(identity) }.to raise_error
+          end
+        end
+
+        context '.ordered' do
+          it 'should evaluate to SQL' do
+            expect(described_class.ordered.to_sql).to be_a(String)
           end
         end
 
