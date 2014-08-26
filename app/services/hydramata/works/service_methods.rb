@@ -6,6 +6,7 @@ module Hydramata
     module ServiceMethods
       def new_work_for(context, work_type, attributes, &block)
         work = Hydramata::Works::Work.new(work_type: work_type)
+        ApplyUserInputToWork.call(work: work, attributes: attributes) if attributes.present?
         presenter = Hydramata::Works::WorkPresenter.new(work: work, presentation_context: :new)
         presenter.actions << { name: :create }
         Hydramata::Works::WorkForm.new(presenter, &block)

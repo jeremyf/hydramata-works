@@ -10,11 +10,10 @@ module Hydramata
       describe 'User input to in memory' do
       include Conversions
       context 'for :new object' do
-        let(:work) { Work.new }
+        let(:work) { Work.new(work_type: work_type_identity) }
         let(:user_input) do
           {
-            work: {
-              work_type: work_type_identity,
+            attributes: {
               title: ['Hello', 'World', 'Bang!'],
               abstract: ['Long Text', 'Longer Text'],
               keyword: ['Programming']
@@ -23,7 +22,7 @@ module Hydramata
         end
 
         it 'appends properties to the collaborating work object' do
-          ApplyUserInputToWork.call(work: work, input: user_input.fetch(:work))
+          ApplyUserInputToWork.call(work: work, attributes: user_input.fetch(:attributes))
 
           expect(work.work_type).to eq(WorkType(work_type_identity))
           expect(work.properties.fetch(:title)).to eq(Property(:title, 'Hello', 'World', 'Bang!'))
@@ -42,8 +41,7 @@ module Hydramata
         end
         let(:user_input) do
           {
-            work: {
-              work_type: work_type_identity,
+            attributes: {
               title: ['Hello', 'World', 'Bang!'],
               abstract: ['Long Text', 'Longer Text']
             }
@@ -51,7 +49,7 @@ module Hydramata
         end
 
         it 'appends explicit properties to the collaborating work object' do
-          ApplyUserInputToWork.call(work: work, input: user_input.fetch(:work))
+          ApplyUserInputToWork.call(work: work, attributes: user_input.fetch(:attributes))
 
           expect(work.work_type).to eq(WorkType(work_type_identity))
           expect(work.properties.fetch(:title)).to eq(Property(:title, 'Hello', 'World', 'Bang!'))
