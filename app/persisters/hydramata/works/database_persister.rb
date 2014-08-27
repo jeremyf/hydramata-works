@@ -31,9 +31,8 @@ module Hydramata
           pid: pid,
           work_type: work_type.to_s,
           properties: properties
-        )
-        work.identity = pid
-        self
+        ) &&
+        work.identity = pid && true
       end
 
       attr_reader :work, :storage_service, :pid_minting_service
