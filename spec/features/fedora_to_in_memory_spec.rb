@@ -1,13 +1,15 @@
 require 'spec_active_record_helper'
 require 'hydramata/works/fedora_wrangler'
 require 'hydramata/works/work'
-require 'hydramata/works/predicates/storage'
 require 'hydramata/works/property'
 
 module Hydramata
   module Works
 
     describe 'A Fedora object loaded into an in memory work' do
+      before(:each) do
+        load File.expand_path('../../support/feature_seeds.rb', __FILE__)
+      end
       let(:pid) { 'und:f4752f8687n' }
       let(:work_wrangler) { FedoraWrangler.new(work: work) }
       let(:work) { Work.new }
@@ -33,17 +35,6 @@ module Hydramata
 
       private
       def seed_predicates!(vcr_cassette = 'fedora-object')
-        Predicates::Storage.delete_all
-        Predicates::Storage.create!(identity: 'depositor')
-        Predicates::Storage.create!(identity: 'http://purl.org/dc/terms/created', value_parser_name: 'DateParser')
-        Predicates::Storage.create!(identity: 'http://purl.org/dc/terms/language', value_parser_name: 'InterrogationParser' )
-        Predicates::Storage.create!(identity: 'http://purl.org/dc/terms/publisher', value_parser_name: 'InterrogationParser')
-        Predicates::Storage.create!(identity: 'http://purl.org/dc/terms/title', value_parser_name: 'InterrogationParser')
-        Predicates::Storage.create!(identity: 'http://purl.org/dc/terms/dateSubmitted', value_parser_name: 'DateParser')
-        Predicates::Storage.create!(identity: 'http://purl.org/dc/terms/modified', value_parser_name: 'DateParser')
-        Predicates::Storage.create!(identity: 'http://purl.org/dc/terms/rights', value_parser_name: 'InterrogationParser')
-        Predicates::Storage.create!(identity: 'http://purl.org/dc/terms/creator', value_parser_name: 'InterrogationParser')
-        Predicates::Storage.create!(identity: 'http://purl.org/dc/terms/description', value_parser_name: 'InterrogationParser')
         VCR.use_cassette(vcr_cassette, record: :none) do
           yield
         end
