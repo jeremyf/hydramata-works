@@ -11,43 +11,44 @@ module Hydramata
   module Works
     describe ServiceMethods do
       include Conversions
-      let(:service) do
+
+      Given(:service) do
         Class.new do
           include ServiceMethods
         end.new
       end
-      let(:context) { double('Context') }
+      Given(:context) { double('Context') }
+
       context '#new_work_for' do
-        let(:work_type) { 'article' }
-        let(:attributes) { { title: 'my title' } }
-
-        it 'should return a WorkForm' do
-          returned_object = service.new_work_for(context, work_type, attributes)
-          expect(returned_object).to implement_work_interface
-          expect(returned_object).to implement_work_presenter_interface
-          expect(returned_object).to implement_work_form_interface
-
-          expect(returned_object).to be_an_instance_of(WorkForm)
-          expect(returned_object).to be_an_instance_of(WorkPresenter)
-          expect(returned_object).to be_an_instance_of(Work)
-          expect(returned_object.properties[:title]).to eq(Property.new(predicate: :title, values: 'my title'))
-          expect(returned_object.actions.count).to eq(1)
+        before do
+          load File.expand_path('../../../../support/feature_seeds.rb', __FILE__)
         end
+
+        Given(:work_type) { 'article' }
+        Given(:attributes) { { dc_title: 'my title' } }
+
+        When(:returned_object) { service.new_work_for(context, work_type, attributes) }
+        Then{ expect(returned_object).to implement_work_interface }
+        And { expect(returned_object).to implement_work_presenter_interface }
+        And { expect(returned_object).to implement_work_form_interface }
+        And { expect(returned_object).to be_an_instance_of(WorkForm) }
+        And { expect(returned_object).to be_an_instance_of(WorkPresenter) }
+        And { expect(returned_object).to be_an_instance_of(Work) }
+        And { expect(returned_object.properties[:dc_title]).to eq(Property.new(predicate: 'dc_title', values: 'my title')) }
+        And { expect(returned_object.actions.count).to eq(1) }
       end
 
       context '#available_work_types' do
         before do
-          WorkTypes::Storage.create(identity: 'book')
-          WorkTypes::Storage.create(identity: 'article')
+          load File.expand_path('../../../../support/feature_seeds.rb', __FILE__)
         end
-        it 'should return an enumerable of work types' do
-          returned_object = service.available_work_types(context)
-          expect(returned_object).to eq([WorkType('article'), WorkType('book')])
-          expect(returned_object[0]).to implement_work_type_presenter_interface
-          expect(returned_object[1]).to implement_work_type_presenter_interface
-        end
+
+        When(:returned_object) { service.available_work_types(context) }
+        Then { expect(returned_object).to eq([WorkType('article'), WorkType('book')]) }
+        And { expect(returned_object[0]).to implement_work_type_presenter_interface }
+        And { expect(returned_object[1]).to implement_work_type_presenter_interface }
       end
+
     end
   end
 end
-
