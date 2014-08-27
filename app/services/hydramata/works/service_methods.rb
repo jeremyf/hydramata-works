@@ -45,7 +45,7 @@ module Hydramata
       def find_work(identity, collaborators = {})
         # @TODO - Given that we are going to have data across multiple sources
         # should there be a chain of lookups? (eg { sequence: :database })
-        Works::DatabaseStorage.where(pid: identity).first.to_work
+        Works::DatabaseStorage.where(pid: identity).first.to_work.to_presenter
       end
     end
   end

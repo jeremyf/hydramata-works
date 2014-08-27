@@ -69,6 +69,7 @@ module Hydramata
         Then { found_object.identity == work.identity }
         And { found_object.object_id != work.object_id }
         And { found_object.properties == work.properties }
+        And { expect(found_object).to implement_work_presenter_interface }
         # And { found_object == work } # TODO: Does this make sense?
       end
 
