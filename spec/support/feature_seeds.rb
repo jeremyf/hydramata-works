@@ -1,4 +1,5 @@
 require 'hydramata/works/predicates/storage'
+require 'hydramata/works/work_types/storage'
 
 Hydramata::Works::Predicates::Storage.create!(identity: 'depositor')
 Hydramata::Works::Predicates::Storage.create!(identity: 'http://purl.org/dc/terms/created', name_for_application_usage: 'dc_created', value_parser_name: 'DateParser')
