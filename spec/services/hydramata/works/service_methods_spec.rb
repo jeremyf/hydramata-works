@@ -23,10 +23,8 @@ module Hydramata
         before do
           load File.expand_path('../../../../support/feature_seeds.rb', __FILE__)
         end
-
         Given(:work_type) { 'article' }
         Given(:attributes) { { dc_title: 'my title' } }
-
         When(:returned_object) { service.new_work_for(context, work_type, attributes) }
         Then{ expect(returned_object).to implement_work_interface }
         And { expect(returned_object).to implement_work_presenter_interface }
@@ -47,6 +45,18 @@ module Hydramata
         Then { expect(returned_object).to eq([WorkType('article'), WorkType('book')]) }
         And { expect(returned_object[0]).to implement_work_type_presenter_interface }
         And { expect(returned_object[1]).to implement_work_type_presenter_interface }
+      end
+
+      context '#save_work' do
+        before do
+          load File.expand_path('../../../../support/feature_seeds.rb', __FILE__)
+        end
+        Given(:work_type) { 'article' }
+        Given(:attributes) { { dc_title: 'my title' } }
+        Given(:work) { service.new_work_for(context, work_type, attributes) }
+        When(:response) { service.save_work(work) }
+        Then { response == true }
+        And { work.new_record? == false }
       end
 
     end

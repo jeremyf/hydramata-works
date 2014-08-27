@@ -27,6 +27,13 @@ module Hydramata
           work_type.to_work_type(shallow: true).to_presenter
         end
       end
+
+      # @param :work [#save]
+      # @return [Boolean]
+      def save_work(work, collaborators = {})
+        persister = collaborators.fetch(:persister) { DatabasePersister }
+        persister.call(work: work)
+      end
     end
   end
 end
