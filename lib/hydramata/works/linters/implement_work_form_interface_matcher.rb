@@ -5,11 +5,13 @@ RSpec::Matchers.define :implement_work_form_interface do
   Hydramata::Works::Linters::InterfaceMatcherBuilder.call(
     self,
     'WorkForm',
-    errors: [:each],
-    to_key: [],
-    to_param: [],
-    to_partial_path: [],
-    persisted?: [],
-    valid?: []
+    :errors => [:each],
+    :to_key => [],
+    :to_param => [],
+    :to_partial_path => [],
+    :form_options => [],
+    :form_options= => [],
+    :persisted? => [],
+    :valid? => []
   )
 end
