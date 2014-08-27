@@ -10,22 +10,12 @@ module Hydramata
       let(:fieldset) { fieldset_class.new('my_fieldset', work_type) }
       let(:work_type) { WorkType.new(identity: 'a work type') }
       let(:work) { Work.new(work_type: work_type) }
-      let(:template) { double('Template', render: true) }
-      subject { described_class.new(work: work, fieldset: fieldset, presentation_context: 'show', template_missing_exception: [RuntimeError]) }
+      let(:renderer) { double('Renderer', call: true) }
+      let(:template) { double('Template') }
+      subject { described_class.new(work: work, fieldset: fieldset, renderer: renderer) }
 
       it 'renders as per the template' do
-        expect(template).to receive(:render).
-          with(partial: 'hydramata/works/fieldsets/a_work_type/my_fieldset/show', object: subject).
-          ordered.
-          and_raise(RuntimeError)
-        expect(template).to receive(:render).
-          with(partial: 'hydramata/works/fieldsets/my_fieldset/show', object: subject).
-          ordered.
-          and_raise(RuntimeError)
-        expect(template).to receive(:render).
-          with(partial: 'hydramata/works/fieldsets/show', object: subject).
-          ordered.
-          and_return('YES')
+        expect(renderer).to receive(:call).with(template: template).and_return('YES')
         expect(subject.render(template: template)).to eq('YES')
       end
 

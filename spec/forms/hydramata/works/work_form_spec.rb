@@ -22,6 +22,19 @@ module Hydramata
       it { should be_an_instance_of Work }
       it { should implement_work_form_interface }
 
+      context '#form_options' do
+        it 'defaults to a hash' do
+          expect(subject.form_options).to eq({})
+        end
+
+        it 'overwrites via a setter' do
+          expect { subject.form_options = { url: 'url' } }.
+          to change { subject.form_options }.
+          from({}).
+          to({ url: 'url' })
+        end
+      end
+
       context 'when errors are not set' do
         let(:validation_service) { double(call: true) }
         it 'is not valid' do

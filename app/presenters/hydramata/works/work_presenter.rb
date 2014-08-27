@@ -28,6 +28,10 @@ module Hydramata
         @work_type ||= Presenter(super)
       end
 
+      def view_path_slug_for_object
+        'works'
+      end
+
       private
 
       def default_dom_attributes
@@ -40,10 +44,6 @@ module Hydramata
 
       def presenter_dom_class
         'work'
-      end
-
-      def view_path_slug_for_object
-        'works'
       end
 
       def base_dom_class

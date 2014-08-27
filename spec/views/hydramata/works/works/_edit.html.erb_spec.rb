@@ -4,7 +4,7 @@ require 'spec_view_helper'
 # This means, without the `type: :view` tag, the render method does not exist
 # in the example context
 describe 'hydramata/works/works/_edit.html.erb', type: :view do
-  let(:object) { double('Object', fieldsets: [fieldset1, fieldset2], dom_class: 'my-dom-class') }
+  let(:object) { double('Object', form_options: {}, fieldsets: [fieldset1, fieldset2], dom_class: 'my-dom-class') }
 
   # A short circuit as the render does not normally
   let(:fieldset1) { double('Fieldset', render: '<div class="set1">Fieldset 1</div>'.html_safe) }

@@ -77,54 +77,6 @@ module Hydramata
           expect(subject.dom_class(prefix: 'edit', suffix: '1')).to eq('edit-hello-world-1')
         end
       end
-
-      context '#render' do
-        let(:template) { double('Template', render: true)}
-
-        it 'delegates render to the template' do
-          subject.render(template: template)
-          expect(template).to have_received(:render).with(partial: 'hydramata/works/base/show', object: subject)
-        end
-
-        it 'handles a partial_prefixes rendering in less and less specificity' do
-          subject = described_class.new(object, translator: translator, partial_prefixes: ['article/required', 'article'], presentation_context: 'show', template_missing_exception: [RuntimeError, NoMethodError])
-          expect(template).to receive(:render).
-            with(partial: 'hydramata/works/base/article/required/show', object: subject).
-            ordered.
-            and_raise(NoMethodError)
-          expect(template).to receive(:render).
-            with(partial: 'hydramata/works/base/article/show', object: subject).
-            ordered.
-            and_raise(RuntimeError)
-          expect(template).to receive(:render).
-            with(partial: 'hydramata/works/base/show', object: subject).
-            ordered
-          subject.render(template: template)
-        end
-
-        it 'stops rendering chain once we sucessfully render a template' do
-          subject = described_class.new(object, translator: translator, partial_prefixes: ['article/required', 'article'], presentation_context: 'show', template_missing_exception: [RuntimeError, NoMethodError])
-          expect(template).to receive(:render).
-            with(partial: 'hydramata/works/base/article/required/show', object: subject).
-            ordered.
-            and_raise(NoMethodError)
-          expect(template).to receive(:render).
-            with(partial: 'hydramata/works/base/article/show', object: subject).
-            ordered
-          expect(template).to_not receive(:render).
-            with(partial: 'hydramata/works/base/show', object: subject)
-          subject.render(template: template)
-        end
-
-        it 'raises exception if we are rendering as general as possible' do
-          subject = described_class.new(object, translator: translator, presentation_context: 'show')
-          expect(template).to receive(:render).
-            with(partial: 'hydramata/works/base/show', object: subject).
-            and_raise(RuntimeError)
-          expect { subject.render(template: template) }.
-            to raise_error(RuntimeError)
-        end
-      end
     end
   end
 end

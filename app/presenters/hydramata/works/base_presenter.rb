@@ -9,22 +9,25 @@ module Hydramata
     # object to an output buffer.
     class BasePresenter < SimpleDelegator
       include Conversions
-      attr_reader :presentation_context, :translator, :partial_prefixes, :template_missing_error, :translation_scopes
+      attr_reader :presentation_context, :translator, :partial_prefixes, :translation_scopes, :renderer
       def initialize(object, collaborators = {})
         __setobj__(object)
         @presentation_context = collaborators.fetch(:presentation_context) { default_presentation_context }
         @partial_prefixes = collaborators.fetch(:partial_prefixes) { default_partial_prefixes }
         @translator = collaborators.fetch(:translator) { default_translator }
         @translation_scopes = collaborators.fetch(:translation_scopes) { default_translation_scopes }
-        @template_missing_error = collaborators.fetch(:template_missing_exception) { default_template_missing_exception }
         @dom_attributes_builder = collaborators.fetch(:dom_attributes_builder) { default_dom_attributes_builder }
+        @renderer = collaborators.fetch(:renderer) { default_renderer }
       end
 
       def render(options = {})
-        template = options.fetch(:template)
-        rendering_options = rendering_options_for(options)
-        render_with_diminishing_specificity(template, rendering_options)
+        renderer.call(options)
       end
+
+      def translate(key, options = {})
+        translator.t(key, options.reverse_merge(scopes: translation_scopes, default: default_translation_for(key)))
+      end
+      alias_method :t, :translate
 
       def inspect
         format('#<%s:%#0x presenting=%s>', self.class, __id__, __getobj__.inspect)
@@ -40,11 +43,6 @@ module Hydramata
         [prefix, base_dom_class, suffix].compact.join('-')
       end
 
-      def translate(key, options = {})
-        translator.t(key, options.reverse_merge(scopes: translation_scopes, default: default_translation_for(key)))
-      end
-      alias_method :t, :translate
-
       def name
         __getobj__.respond_to?(:name) ? __getobj__.name : __getobj__.name_for_application_usage
       end
@@ -59,6 +57,10 @@ module Hydramata
 
       def presenter_dom_class
         self.class.to_s.split('::').last.sub(/presenter\Z/i,'').downcase
+      end
+
+      def view_path_slug_for_object
+        'base'
       end
 
       private
@@ -77,29 +79,6 @@ module Hydramata
         name.to_s.downcase.gsub(/[\W_]+/, '-')
       end
 
-      def render_with_diminishing_specificity(template, rendering_options)
-        render_with_prefixes(template, rendering_options) || render_without_prefixes(template, rendering_options)
-      end
-
-      def render_with_prefixes(template, rendering_options)
-        rendered = nil
-        partial_prefixes.each do |partial_prefix|
-          begin
-            rendered = template.render(rendering_options.merge(partial: partial_name(partial_prefix)))
-            break
-            # By using the splat operator I am allowing multiple exceptions to
-            # be caught and pass to the next rendering context.
-          rescue *template_missing_error
-            next
-          end
-        end
-        rendered
-      end
-
-      def render_without_prefixes(template, rendering_options)
-        template.render(rendering_options.merge(partial: partial_name))
-      end
-
       def default_partial_prefixes
         []
       end
@@ -108,23 +87,8 @@ module Hydramata
         []
       end
 
-      def rendering_options_for(options = {})
-        returning_options = { object: self }
-        returning_options[:locals] = options[:locals] if options.key?(:locals)
-        returning_options
-      end
-
-      def partial_name(*current_partial_prefixes)
-        partial_prefix = Array.wrap(current_partial_prefixes).join("/")
-        File.join('hydramata/works', view_path_slug_for_object, partial_prefix , presentation_context.to_s)
-      end
-
       def default_presentation_context
         'show'
-      end
-
-      def view_path_slug_for_object
-        'base'
       end
 
       def default_translation_for(key)
@@ -136,11 +100,9 @@ module Hydramata
         Hydramata.configuration.translator
       end
 
-      # Because actually testing this is somewhat of a nightmare given the
-      # 5+ parameters that are required when instantiating this exception.
-      def default_template_missing_exception
-        require 'action_view/template/error'
-        ActionView::MissingTemplate
+      def default_renderer
+        require 'hydramata/works/work_template_renderer'
+        WorkTemplateRenderer.new(self)
       end
     end
   end
