@@ -42,6 +42,10 @@ module Hydramata
         identity.present?
       end
 
+      def new_record?
+        ! persisted?
+      end
+
       # Needed for Validator interaction
       def self.human_attribute_name(attr, options = {})
         attr

@@ -57,6 +57,10 @@ module Hydramata
           expect(subject.persisted?).to be_falsey
         end
 
+        it 'is a #new_record?' do
+          expect(subject.new_record?).to be_truthy
+        end
+
         it 'has a nil #to_param' do
           expect(subject.to_param).to be_nil
         end
@@ -70,6 +74,10 @@ module Hydramata
         let(:identity) { '1234' }
         it 'is #persisted?' do
           expect(subject.persisted?).to be_truthy
+        end
+
+        it 'is a #new_record?' do
+          expect(subject.new_record?).to be_falsey
         end
 
         it 'uses the work#identity to derive #to_param' do
