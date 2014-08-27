@@ -17,7 +17,6 @@ module Hydramata
           include ServiceMethods
         end.new
       end
-      Given(:context) { double('Context') }
 
       context '#new_work_for' do
         before do
@@ -25,7 +24,7 @@ module Hydramata
         end
         Given(:work_type) { 'article' }
         Given(:attributes) { { dc_title: 'my title' } }
-        When(:returned_object) { service.new_work_for(context, work_type, attributes) }
+        When(:returned_object) { service.new_work_for(work_type, attributes) }
         Then{ expect(returned_object).to implement_work_interface }
         And { expect(returned_object).to implement_work_presenter_interface }
         And { expect(returned_object).to implement_work_form_interface }
@@ -41,7 +40,7 @@ module Hydramata
           load File.expand_path('../../../../support/feature_seeds.rb', __FILE__)
         end
 
-        When(:returned_object) { service.available_work_types(context) }
+        When(:returned_object) { service.available_work_types }
         Then { expect(returned_object).to eq([WorkType('article'), WorkType('book')]) }
         And { expect(returned_object[0]).to implement_work_type_presenter_interface }
         And { expect(returned_object[1]).to implement_work_type_presenter_interface }
@@ -53,7 +52,7 @@ module Hydramata
         end
         Given(:work_type) { 'article' }
         Given(:attributes) { { dc_title: 'my title' } }
-        Given(:work) { service.new_work_for(context, work_type, attributes) }
+        Given(:work) { service.new_work_for(work_type, attributes) }
         When(:response) { service.save_work(work) }
         Then { response == true }
         And { work.new_record? == false }
@@ -65,7 +64,7 @@ module Hydramata
         end
         Given(:work_type) { 'article' }
         Given(:attributes) { { dc_title: 'my title' } }
-        Given(:work) { service.new_work_for(context, work_type, attributes).tap {|obj| service.save_work(obj) } }
+        Given(:work) { service.new_work_for(work_type, attributes).tap {|obj| service.save_work(obj) } }
         When(:found_object) { service.find_work(work.identity) }
         Then { found_object.identity == work.identity }
         And { found_object.object_id != work.object_id }

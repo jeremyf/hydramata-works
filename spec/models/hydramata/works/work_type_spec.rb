@@ -13,6 +13,10 @@ module Hydramata
       it { should implement_work_type_interface }
       it { should implement_data_definition_interface }
 
+      it 'has a #to_param equal to its identity' do
+        expect(subject.to_param).to eq('my-identity')
+      end
+
       context '#predicate_sets=' do
         it 'handles predicate set conversion' do
           subject = described_class.new(identity: 'My Identity', predicate_sets: ['one predicate', 'two predicate'])

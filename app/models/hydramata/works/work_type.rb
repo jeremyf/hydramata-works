@@ -51,6 +51,10 @@ module Hydramata
         WorkTypePresenter.new(self)
       end
 
+      def to_param
+        identity.downcase.gsub(/\W+/, '-').sub(/-\Z/, '')
+      end
+
       private
 
       def default_itemtype_schema_dot_org

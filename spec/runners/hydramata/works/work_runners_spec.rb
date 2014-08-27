@@ -20,7 +20,7 @@ module Hydramata
           When(:result) { runner.run(work_type, attributes) }
           Then { expect(result).to eq([returning_object]) }
           And { expect(callback.invoked).to eq([:success, returning_object]) }
-          And { expect(services).to have_received(:new_work_for).with(runner, work_type, attributes) }
+          And { expect(services).to have_received(:new_work_for).with(work_type, attributes) }
         end
 
         describe AvailableType do
@@ -30,7 +30,7 @@ module Hydramata
           When(:result) { runner.run }
           Then { expect(result).to eq([returning_object]) }
           And { expect(callback.invoked).to eq([:success, returning_object]) }
-          And { expect(services).to have_received(:available_work_types).with(runner) }
+          And { expect(services).to have_received(:available_work_types) }
         end
 
         describe New do
@@ -41,7 +41,7 @@ module Hydramata
           When(:result) { runner.run(work_type, attributes) }
           Then { expect(result).to eq([returning_object]) }
           And { expect(callback.invoked).to eq([:success, returning_object]) }
-          And { expect(services).to have_received(:new_work_for).with(runner, work_type, attributes) }
+          And { expect(services).to have_received(:new_work_for).with(work_type, attributes) }
         end
 
         describe Show do
@@ -51,7 +51,7 @@ module Hydramata
           When(:result) { runner.run(identifier) }
           Then { expect(result).to eq([returning_object]) }
           And { expect(callback.invoked).to eq([:success, returning_object]) }
-          And { expect(services).to have_received(:find_work).with(runner, identifier) }
+          And { expect(services).to have_received(:find_work).with(identifier) }
         end
 
       end
