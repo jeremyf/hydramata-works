@@ -18,6 +18,10 @@ module Hydramata
         __getobj__.work_type || work.work_type
       end
 
+      def view_path_slug_for_object
+        'fieldsets'
+      end
+
       private
 
       def default_dom_attributes
@@ -26,10 +30,6 @@ module Hydramata
 
       def default_presentation_context
         work.respond_to?(:presentation_context) ? work.presentation_context : 'show'
-      end
-
-      def view_path_slug_for_object
-        'fieldsets'
       end
 
       def default_partial_prefixes

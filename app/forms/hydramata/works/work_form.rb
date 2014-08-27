@@ -3,6 +3,7 @@ require 'active_support/core_ext/module/delegation'
 require 'active_support/core_ext/object/blank'
 require 'active_model/naming'
 require 'hydramata/works/conversions/translation_key_fragment'
+require 'hydramata/works/conversions/presenter'
 
 module Hydramata
   module Works
@@ -11,14 +12,20 @@ module Hydramata
     class WorkForm < SimpleDelegator
       include Conversions
       def initialize(work, collaborators = {})
-        __setobj__(work)
+        self.work = (work)
         @errors = collaborators.fetch(:error_container) { default_error_container }
         @validation_service = collaborators.fetch(:validation_service) { default_validation_service }
+        @renderer = collaborators.fetch(:renderer) { default_renderer }
         yield(self) if block_given?
       end
 
       attr_reader :errors
-      attr_reader :validation_service
+      attr_reader :validation_service, :renderer
+      private :validation_service, :renderer
+
+      def render(options = {})
+        renderer.call(options)
+      end
 
       def valid?
         validate
@@ -70,6 +77,20 @@ module Hydramata
         super || __getobj__.instance_of?(klass)
       end
 
+      def form_options
+        @form_options ||= {}
+      end
+
+      def form_options=(options)
+        @form_options = options
+      end
+
+      protected
+
+      def work=(object)
+        __setobj__(Presenter(object))
+      end
+
       private
 
       def respond_to_missing?(method_name, include_all = false)
@@ -97,6 +118,11 @@ module Hydramata
 
       def validate
         validation_service.call(self)
+      end
+
+      def default_renderer
+        require 'hydramata/works/work_template_renderer'
+        WorkTemplateRenderer.new(self)
       end
 
     end

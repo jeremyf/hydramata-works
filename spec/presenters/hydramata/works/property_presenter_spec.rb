@@ -7,29 +7,12 @@ module Hydramata
     describe PropertyPresenter do
       let(:work) { Work.new(work_type: 'a work type') }
       let(:property) { double('Property', predicate: 'my_property') }
-      let(:template) { double('Template', render: true) }
-      subject do
-        described_class.new(
-          property: property,
-          work: work,
-          presentation_context: 'show',
-          template_missing_exception: [RuntimeError]
-        )
-      end
+      let(:renderer) { double('Renderer', call: true) }
+      subject { described_class.new(property: property, work: work, renderer: renderer) }
 
-      it 'attempts to render with diminishing specificity' do
-        expect(template).to receive(:render).
-          with(partial: 'hydramata/works/properties/a_work_type/my_property/show', object: subject).
-          ordered.
-          and_raise(RuntimeError)
-        expect(template).to receive(:render).
-          with(partial: 'hydramata/works/properties/my_property/show', object: subject).
-          ordered.
-          and_raise(RuntimeError)
-        expect(template).to receive(:render).
-          with(partial: 'hydramata/works/properties/show', object: subject).
-          ordered.
-          and_return('YES')
+      it 'delegates render to the renderer' do
+        template = double
+        expect(renderer).to receive(:call).with(template: template).and_return('YES')
         expect(subject.render(template: template)).to eq('YES')
       end
 

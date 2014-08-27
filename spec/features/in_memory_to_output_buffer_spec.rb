@@ -51,6 +51,7 @@ module Hydramata
 
       context 'rendering an :edit action' do
         let(:presentation_context) { :edit }
+        let(:work_form) { WorkForm.new(work_presenter) }
         let(:work) do
           Work.new do |work|
             work.work_type = work_type
@@ -64,7 +65,7 @@ module Hydramata
         end
 
         it 'writes a well-structured HTML document' do
-          renderer = WorkRenderer.new(work: work_presenter, format: :html)
+          renderer = WorkRenderer.new(work: work_form, format: :html)
           rendered_output = renderer.render
 
           # @TODO - Make sure the action URL includes the PID; Otherwise I will be
@@ -96,9 +97,10 @@ module Hydramata
       context 'rendering an :new action' do
         let(:presentation_context) { :new }
         let(:work) { Work.new(work_type: work_type) }
+        let(:work_form) { WorkForm.new(work_presenter) }
 
         it 'writes a well-structured HTML document' do
-          renderer = WorkRenderer.new(work: work_presenter, format: :html)
+          renderer = WorkRenderer.new(work: work_form, format: :html)
           rendered_output = renderer.render
           expect(rendered_output).to have_tag('form.new-special-work-type.work#new_work', with: { method: 'post', action: '/' }) do
             with_tag('fieldset.required') do

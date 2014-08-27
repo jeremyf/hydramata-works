@@ -17,6 +17,10 @@ module Hydramata
         @values ||= __getobj__.values.collect {|value| value_presenter_builder.call(value: value, predicate: self, work: work) }
       end
 
+      def view_path_slug_for_object
+        'properties'
+      end
+
       private
 
       def default_dom_attributes
@@ -25,10 +29,6 @@ module Hydramata
 
       def default_presentation_context
         work.respond_to?(:presentation_context) ? work.presentation_context : 'show'
-      end
-
-      def view_path_slug_for_object
-        'properties'
       end
 
       def default_partial_prefixes

@@ -12,12 +12,13 @@ module Hydramata
       let(:work) { Work.new(work_type: 'My Work Type') }
       let(:presented_fieldset_builder) { double('Builder', call: true) }
       let(:template) { double('Template', render: true) }
+      let(:renderer) { double('Renderer', call: true) }
       subject do
         described_class.new(
           work: work,
           presentation_structure: presentation_structure,
           presented_fieldset_builder: presented_fieldset_builder,
-          template_missing_exception: [RuntimeError]
+          renderer: renderer
         )
       end
 
@@ -41,14 +42,7 @@ module Hydramata
       end
 
       it 'renders as per the template' do
-        expect(template).to receive(:render).
-          with(partial: 'hydramata/works/works/my_work_type/show', object: subject).
-          ordered.
-          and_raise(RuntimeError)
-        expect(template).to receive(:render).
-          with(partial: 'hydramata/works/works/show', object: subject).
-          ordered.
-          and_return('YES')
+        expect(renderer).to receive(:call).with(template: template).and_return('YES')
         expect(subject.render(template: template)).to eq('YES')
       end
 
