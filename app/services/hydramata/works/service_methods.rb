@@ -1,3 +1,11 @@
+require 'hydramata/works/work'
+require 'hydramata/works/apply_user_input_to_work'
+require 'hydramata/works/work_presenter'
+require 'hydramata/works/work_form'
+require 'hydramata/works/work_types/storage'
+require 'hydramata/works/works/database_storage'
+require 'hydramata/works/database_persister'
+
 module Hydramata
   module Works
     # Responsible for being a collection of service methods that are useful
@@ -30,9 +38,16 @@ module Hydramata
 
       # @param :work [#save]
       # @return [Boolean]
-      def save_work(work, collaborators = {})
-        persister = collaborators.fetch(:persister) { DatabasePersister }
-        persister.call(work: work)
+      def save_work(work)
+        DatabasePersister.call(work: work)
+      end
+
+      # @param :identity [#to_s]
+      # @return [WorkPresenter]
+      def find_work(identity, collaborators = {})
+        # @TODO - Given that we are going to have data across multiple sources
+        # should there be a chain of lookups? (eg { sequence: :database })
+        Works::DatabaseStorage.where(pid: identity).first.to_work
       end
     end
   end

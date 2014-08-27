@@ -1,4 +1,4 @@
-require 'spec_slow_helper'
+require 'spec_active_record_helper'
 require 'hydramata/works/service_methods'
 require 'hydramata/works/property'
 require 'hydramata/works/linters/implement_work_interface_matcher'
@@ -57,6 +57,20 @@ module Hydramata
         When(:response) { service.save_work(work) }
         Then { response == true }
         And { work.new_record? == false }
+      end
+
+      context '#find_work' do
+        before do
+          load File.expand_path('../../../../support/feature_seeds.rb', __FILE__)
+        end
+        Given(:work_type) { 'article' }
+        Given(:attributes) { { dc_title: 'my title' } }
+        Given(:work) { service.new_work_for(context, work_type, attributes).tap {|obj| service.save_work(obj) } }
+        When(:found_object) { service.find_work(work.identity) }
+        Then { found_object.identity == work.identity }
+        And { found_object.object_id != work.object_id }
+        And { found_object.properties == work.properties }
+        # And { found_object == work } # TODO: Does this make sense?
       end
 
     end
