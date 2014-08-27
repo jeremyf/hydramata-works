@@ -29,6 +29,13 @@ module Hydramata
         end
       end
 
+      class Show < Hydramata::Core::Runner
+        def run(identifier)
+          work = services.find_work(self, identifier)
+          callback(:success, work)
+        end
+      end
+
     end
   end
 end
