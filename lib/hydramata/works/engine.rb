@@ -34,6 +34,13 @@ module Hydramata
           include Hydramata::Works::ServiceMethods
         end
       end
+
+      initializer 'hydramata_works.configuration' do |app|
+        ActiveSupport.on_load(:hydramata_configuration) do
+          require 'hydramata/works/configuration_methods'
+          include Hydramata::Works::ConfigurationMethods
+        end
+      end
     end
   end
 end

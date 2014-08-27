@@ -61,8 +61,13 @@ module Hydramata
       def self.model_name
         # @TODO - allow overwrite of the ActiveModel::Name, which may require
         # overwriting #class to be something else.
-        @_model_name ||= ActiveModel::Name.new(self, Hydramata::Works)
+        @_model_name ||= ActiveModel::Name.new(self, Hydramata::Works, explicit_model_name)
       end
+
+      def self.explicit_model_name
+        Hydramata.configuration.work_model_name rescue nil
+      end
+      private_class_method :explicit_model_name
 
       # Needed for Validator interaction
       def read_attribute_for_validation(attribute_name)
