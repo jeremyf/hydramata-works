@@ -27,12 +27,16 @@ module Hydramata
         #
         # Yes I could define :quote_id and :id on data definitions, but I
         # have yet to take the time to consider this implication.
-        storage_service.call(
+        if storage_service.call(
           pid: pid,
           work_type: work_type.to_s,
           properties: properties
-        ) &&
-        work.identity = pid && true
+        )
+          work.identity = pid
+          true
+        else
+          false
+        end
       end
 
       attr_reader :work, :storage_service, :pid_minting_service
@@ -46,7 +50,7 @@ module Hydramata
 
       def default_storage_service
         require 'hydramata/works/works/database_storage'
-        Works::DatabaseStorage.method(:create!)
+        Works::DatabaseStorage.method(:create)
       end
 
       def default_pid_minting_service
