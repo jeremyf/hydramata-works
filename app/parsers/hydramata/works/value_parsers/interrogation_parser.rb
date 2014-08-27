@@ -1,3 +1,4 @@
+require 'rdf'
 module Hydramata
   module Works
     module ValueParsers
