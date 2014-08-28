@@ -33,15 +33,26 @@ module Hydramata
           And { expect(services).to have_received(:new_work_for).with(work_type, attributes) }
         end
 
-        describe New do
+        describe Create do
           Given(:work_type) { 'article' }
           Given(:attributes) { {} }
           Given(:runner) { described_class.new(context, &callback_config) }
-          Given(:services) { double('Services', new_work_for: returning_object)}
+          Given(:services) { double('Services', new_work_for: returning_object, save_work: work_was_saved?)}
           When(:result) { runner.run(work_type, attributes) }
-          Then { expect(result).to eq([returning_object]) }
-          And { expect(callback.invoked).to eq([:success, returning_object]) }
-          And { expect(services).to have_received(:new_work_for).with(work_type, attributes) }
+          context 'good data' do
+            Given(:work_was_saved?) { true }
+            Then { expect(result).to eq([returning_object]) }
+            And { expect(callback.invoked).to eq([:success, returning_object]) }
+            And { expect(services).to have_received(:new_work_for).with(work_type, attributes) }
+            And { expect(services).to have_received(:save_work).with(returning_object) }
+          end
+          context 'bad data' do
+            Given(:work_was_saved?) { false }
+            Then { expect(result).to eq([returning_object]) }
+            And { expect(callback.invoked).to eq([:failure, returning_object]) }
+            And { expect(services).to have_received(:new_work_for).with(work_type, attributes) }
+            And { expect(services).to have_received(:save_work).with(returning_object) }
+          end
         end
 
         describe Show do
