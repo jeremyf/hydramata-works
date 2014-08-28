@@ -12,6 +12,16 @@ module Hydramata
         Given(:context) { double('Context', services: services) }
         Given(:returning_object) { double('Returning Object') }
 
+        describe AvailableType do
+          Given(:runner) { described_class.new(context, &callback_config) }
+          Given(:returning_object) { double('Returning Object') }
+          Given(:services) { double('Services', available_work_types: returning_object)}
+          When(:result) { runner.run }
+          Then { expect(result).to eq([returning_object]) }
+          And { expect(callback.invoked).to eq([:success, returning_object]) }
+          And { expect(services).to have_received(:available_work_types) }
+        end
+
         describe New do
           Given(:work_type) { 'article' }
           Given(:attributes) { {} }
@@ -21,16 +31,6 @@ module Hydramata
           Then { expect(result).to eq([returning_object]) }
           And { expect(callback.invoked).to eq([:success, returning_object]) }
           And { expect(services).to have_received(:new_work_for).with(work_type, attributes) }
-        end
-
-        describe AvailableType do
-          Given(:runner) { described_class.new(context, &callback_config) }
-          Given(:returning_object) { double('Returning Object') }
-          Given(:services) { double('Services', available_work_types: returning_object)}
-          When(:result) { runner.run }
-          Then { expect(result).to eq([returning_object]) }
-          And { expect(callback.invoked).to eq([:success, returning_object]) }
-          And { expect(services).to have_received(:available_work_types) }
         end
 
         describe New do
