@@ -14,8 +14,6 @@ module Hydramata
           class_name: '::Hydramata::Works::WorkTypes::Storage',
           foreign_key: 'work_type_id'
         )
-        validates :identity, uniqueness: { scope: :work_type_id }
-        validates :presentation_sequence, uniqueness: { scope: :work_type_id }
 
         has_many(
           :predicate_presentation_sequences,
@@ -28,6 +26,9 @@ module Hydramata
           class_name: '::Hydramata::Works::Predicates::Storage',
           through: :predicate_presentation_sequences
         )
+
+        validates :identity, uniqueness: { scope: :work_type_id }
+        validates :presentation_sequence, uniqueness: { scope: :work_type_id }
 
         def to_predicate_set
           PredicateSet.new(predicate_set_attributes)

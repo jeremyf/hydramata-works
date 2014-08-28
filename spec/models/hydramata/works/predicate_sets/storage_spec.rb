@@ -23,6 +23,18 @@ module Hydramata
           )
         end
 
+        it 'belongs to a work type' do
+          expect(subject.work_type).to eq(work_type)
+        end
+
+        it 'has many predicates' do
+          expect(subject.predicates).to eq([])
+        end
+
+        it 'has many predicate_presentation_sequences' do
+          expect(subject.predicate_presentation_sequences).to eq([])
+        end
+
         it 'belongs to a work_type' do
           expect(subject.work_type).to eq(work_type)
         end

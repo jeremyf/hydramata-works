@@ -11,6 +11,5 @@ class CreateHydramataWorkPredicates < ActiveRecord::Migration
     end
     add_index :hydramata_works_predicates, :identity, unique: true
     add_index :hydramata_works_predicates, :name_for_application_usage, unique: true
-
   end
 end

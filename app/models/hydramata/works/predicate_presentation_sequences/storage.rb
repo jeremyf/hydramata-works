@@ -15,12 +15,12 @@ module Hydramata
 
         belongs_to(
           :predicate_set,
-          class_name: 'Hydramata::Works::PredicateSets::Storage',
+          class_name: '::Hydramata::Works::PredicateSets::Storage',
           foreign_key: 'predicate_set_id'
         )
         belongs_to(
           :predicate,
-          class_name: 'Hydramata::Works::Predicates::Storage',
+          class_name: '::Hydramata::Works::Predicates::Storage',
           foreign_key: 'predicate_id'
         )
       end

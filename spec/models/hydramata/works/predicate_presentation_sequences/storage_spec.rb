@@ -9,6 +9,15 @@ module Hydramata
 
       describe Storage do
         subject { described_class.new }
+
+        it 'belongs to a work type' do
+          expect(subject.predicate).to be_nil
+        end
+
+        it 'has many predicates' do
+          expect(subject.predicate_set).to be_nil
+        end
+
       end
     end
   end

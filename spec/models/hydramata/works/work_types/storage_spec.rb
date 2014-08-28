@@ -89,6 +89,15 @@ module Hydramata
             by(1)
         end
 
+        it 'has many predicates' do
+          expect(subject.predicates).to eq([])
+        end
+
+        it 'has many predicate_presentation_sequences' do
+          expect(subject.predicate_presentation_sequences).to eq([])
+        end
+
+
       end
     end
   end

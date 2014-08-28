@@ -76,6 +76,19 @@ module Hydramata
             expect(described_class).to receive(:find_by_identity!).and_raise(ActiveRecord::ConnectionNotEstablished)
             expect(described_class.existing_attributes_for(identity)).to eq(identity: identity)
           end
+
+          it 'has many work types' do
+            expect(subject.work_types).to eq([])
+          end
+
+          it 'has many predicate_sets' do
+            expect(subject.predicate_sets).to eq([])
+          end
+
+          it 'has many predicate_set_presentations' do
+            expect(subject.predicate_set_presentations).to eq([])
+          end
+
         end
 
       end

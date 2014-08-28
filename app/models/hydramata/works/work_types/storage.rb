@@ -9,7 +9,24 @@ module Hydramata
       # strategy for predicates.
       class Storage < ActiveRecord::Base
         self.table_name = :hydramata_works_types
-        has_many :predicate_sets, class_name: '::Hydramata::Works::PredicateSets::Storage', foreign_key: 'work_type_id'
+        has_many(
+          :predicate_sets,
+          class_name: '::Hydramata::Works::PredicateSets::Storage',
+          foreign_key: 'work_type_id'
+        )
+
+        has_many(
+          :predicate_presentation_sequences,
+          class_name: '::Hydramata::Works::PredicatePresentationSequences::Storage',
+          through: :predicate_sets
+        )
+
+        has_many(
+          :predicates,
+          class_name: '::Hydramata::Works::Predicates::Storage',
+          through: :predicate_sets
+        )
+
         validates :identity, uniqueness: true, presence: true
 
         def self.find_by_identity!(identity)
