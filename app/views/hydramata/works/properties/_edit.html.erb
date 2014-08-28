@@ -2,11 +2,23 @@
 Tidy this up. Not yet certain how to do this.
 %>
 <div class="<%= edit.dom_class %>">
-  <%= label_tag("work_#{edit.predicate}", edit.t(:predicate)) %>
+  <%= label_tag("work_#{edit.predicate}", edit.t(:predicate), id: "label_for_work_#{edit.predicate}") %>
   <div class="values">
   <% edit.each_with_index do |value, index| %>
-    <%= text_field_tag("work_#{edit.predicate}_#{index+1}", value, name: "work[#{edit.predicate}][]", class: 'existing-input') %>
+    <%= text_field_tag(
+      "work_#{edit.predicate}_#{index+1}",
+       value,
+       :name => "work[#{edit.predicate}][]",
+       :class => 'existing-input',
+       'aria-labelledby' => "label_for_work_#{edit.predicate}")
+    %>
   <% end %>
-    <%= text_field_tag("work_#{edit.predicate}_0", nil, name: "work[#{edit.predicate}][]", class: 'blank-input') %>
+    <%= text_field_tag(
+      "work_#{edit.predicate}_0",
+       nil,
+       :name => "work[#{edit.predicate}][]",
+       :class => 'blank-input',
+       'aria-labelledby' => "label_for_work_#{edit.predicate}")
+    %>
   </div>
 </div>
