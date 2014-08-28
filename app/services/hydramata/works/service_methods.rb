@@ -53,8 +53,9 @@ module Hydramata
       # @param identity [#to_s]
       # @param options [Hash]
       # @return [WorkForm]
-      def edit_work(identity, options = {}, &block)
-        work = find_work(identity, options.reverse_merge(presentation_context: :edit))
+      def edit_work(identity, attributes = {}, &block)
+        work = find_work(identity, presentation_context: :edit)
+        ApplyUserInputToWork.call(work: work, attributes: attributes) if attributes.present?
         WorkForm.new(work, &block)
       end
     end
