@@ -88,7 +88,7 @@ module Hydramata
       end
 
       def default_presentation_context
-        'show'
+        :show
       end
 
       def default_translation_for(key)

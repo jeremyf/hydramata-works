@@ -31,6 +31,7 @@ module Hydramata
         And { expect(returned_object).to be_an_instance_of(WorkForm) }
         And { expect(returned_object).to be_an_instance_of(WorkPresenter) }
         And { expect(returned_object).to be_an_instance_of(Work) }
+        And { expect(returned_object.presentation_context).to eq(:new) }
         And { expect(returned_object.properties[:dc_title]).to eq(Property.new(predicate: 'dc_title', values: 'my title')) }
         And { expect(returned_object.actions.count).to eq(1) }
       end
@@ -70,6 +71,24 @@ module Hydramata
         And { found_object.object_id != work.object_id }
         And { found_object.properties == work.properties }
         And { expect(found_object).to implement_work_presenter_interface }
+        And { expect(found_object.presentation_context).to eq(:show) }
+        # And { found_object == work } # TODO: Does this make sense?
+      end
+
+      context '#edit_work' do
+        before do
+          load File.expand_path('../../../../support/feature_seeds.rb', __FILE__)
+        end
+        Given(:work_type) { 'article' }
+        Given(:attributes) { { dc_title: 'my title' } }
+        Given(:work) { service.new_work_for(work_type, attributes).tap {|obj| service.save_work(obj) } }
+        When(:editable_work) { service.edit_work(work.identity) }
+        Then { editable_work.identity == work.identity }
+        And { editable_work.object_id != work.object_id }
+        And { editable_work.properties == work.properties }
+        And { expect(editable_work).to implement_work_presenter_interface }
+        And { expect(editable_work).to implement_work_form_interface }
+        And { expect(editable_work.presentation_context).to eq(:edit) }
         # And { found_object == work } # TODO: Does this make sense?
       end
 
