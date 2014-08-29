@@ -28,6 +28,18 @@ module Hydramata
             )
           ).to be_truthy
         end
+
+        it 'returns false on failure' do
+          expect(work).to_not receive(:identity=)
+          expect(storage_service).to receive(:call).and_return(false)
+          expect(
+            described_class.call(
+              work: work,
+              storage_service: storage_service,
+              pid_minting_service: pid_minting_service
+            )
+          ).to be_falsey
+        end
       end
     end
   end

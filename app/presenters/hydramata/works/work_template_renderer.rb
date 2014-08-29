@@ -5,9 +5,6 @@ require 'active_support/core_ext/array/wrap'
 module Hydramata
   module Works
     class WorkTemplateRenderer
-      def self.call(context, options = {})
-        new(context).call(options)
-      end
 
       attr_reader :context, :template_missing_exception
       def initialize(context, collaborators = {})

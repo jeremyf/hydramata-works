@@ -63,7 +63,7 @@ module Hydramata
       end
 
       def view_path_slug_for_object
-        'base'
+        raise NotImplementedError.new("You must implmenent #{self.class}#view_path_slug_for_object")
       end
 
       private

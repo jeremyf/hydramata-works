@@ -15,6 +15,8 @@ module Hydramata
       let(:translator) { double('Translator', t: true) }
       subject { described_class.new(object, translator: translator) }
 
+      it { expect{ subject.view_path_slug_for_object }.to raise_error(NotImplementedError) }
+
       it 'has #presenter_dom_class' do
         expect(subject.presenter_dom_class).to eq('base')
       end
