@@ -24,6 +24,8 @@ module Hydramata
         renderer.call(options)
       end
 
+      # @todo Don't provide a default. Instead create public facing methods that
+      #       leverage the translate function.
       def translate(key, options = {})
         translator.t(key, options.reverse_merge(scopes: translation_scopes, default: default_translation_for(key)))
       end
