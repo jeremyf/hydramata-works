@@ -13,6 +13,12 @@ module Hydramata
     # domain model.
     #
     # This module defines the public API for interacting with Hydramata::Works.
+    #
+    # As Hydramata::Works is in a pre-release state, this code is subject to
+    # change.
+    #
+    # @todo finalize external API with v1.0.0 release
+    # @see semver.org
     module ServiceMethods
       # @param :work_type [String]
       # @param :attributes [Hash]
