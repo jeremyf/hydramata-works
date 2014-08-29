@@ -71,8 +71,8 @@ module Hydramata
         And { found_object.object_id != work.object_id }
         And { found_object.properties == work.properties }
         And { expect(found_object).to implement_work_presenter_interface }
-        And { expect(found_object.presentation_context).to eq(:show) }
-        # And { found_object == work } # TODO: Does this make sense?
+        And { found_object.presentation_context == :show }
+        And { found_object.actions.all? {|action| action.instance_of?(ActionPresenter) } }
       end
 
       context '#edit_work' do
