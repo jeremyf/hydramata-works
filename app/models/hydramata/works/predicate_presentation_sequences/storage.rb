@@ -1,6 +1,7 @@
 require 'active_record'
 require 'hydramata/works/predicates/storage'
 require 'hydramata/works/predicate_sets/storage'
+require 'hydramata/works/predicates/storage'
 
 module Hydramata
   module Works

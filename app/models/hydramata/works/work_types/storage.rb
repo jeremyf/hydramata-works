@@ -1,5 +1,7 @@
 require 'active_record'
 require 'hydramata/works/predicate_sets/storage'
+require 'hydramata/works/predicates/storage'
+require 'hydramata/works/predicate_presentation_sequences/storage'
 require 'hydramata/works/work_type'
 
 module Hydramata
