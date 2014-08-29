@@ -13,13 +13,18 @@ module Hydramata
       let(:presented_fieldset_builder) { double('Builder', call: true) }
       let(:template) { double('Template', render: true) }
       let(:renderer) { double('Renderer', call: true) }
-      subject do
-        described_class.new(
+      let(:collaborators) do
+        {
           work: work,
           presentation_structure: presentation_structure,
           presented_fieldset_builder: presented_fieldset_builder,
           renderer: renderer
-        )
+        }
+      end
+      subject { described_class.new(collaborators) }
+
+      it 'yields the presenter if a block is given' do
+        expect{|b| described_class.new(collaborators, &b) }.to yield_with_args(described_class)
       end
 
       it { should implement_work_presenter_interface }

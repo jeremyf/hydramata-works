@@ -12,12 +12,13 @@ module Hydramata
 
       attr_reader :presentation_structure, :presented_fieldset_builder, :actions
 
-      def initialize(collaborators = {})
+      def initialize(collaborators = {}, &block)
         work = collaborators.fetch(:work)
         super(work, collaborators)
         @presentation_structure = collaborators.fetch(:presentation_structure) { default_presentation_structure }
         @presented_fieldset_builder = collaborators.fetch(:presented_fieldset_builder) { default_presented_fieldset_builder }
         @actions = collaborators.fetch(:actions_container) { default_actions_container }
+        yield(self) if block_given?
       end
 
       def fieldsets
