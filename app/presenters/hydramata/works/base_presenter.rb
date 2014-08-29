@@ -94,10 +94,6 @@ module Hydramata
         :show
       end
 
-      def default_translation_for(key)
-        proc { send(key).to_s }
-      end
-
       def default_translator
         require 'hydramata/core'
         Hydramata.configuration.translator
