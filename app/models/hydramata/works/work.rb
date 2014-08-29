@@ -32,6 +32,10 @@ module Hydramata
         @work_type ||= WorkType()
       end
 
+      def to_param
+        identity.to_s
+      end
+
       def identity=(value)
         @identity = value
       end

@@ -7,13 +7,18 @@ require 'hydramata/works/linters/implement_property_interface_matcher'
 module Hydramata
   module Works
     describe Work do
-      subject { described_class.new }
+      subject { described_class.new(identity: '123') }
       it { should implement_work_interface }
 
       let(:predicate) { :title }
       let(:value) { 'Hello' }
       let(:property) { Property.new(predicate: predicate, value: value) }
 
+      context '#to_param' do
+        it 'is the same as the identity' do
+          expect(subject.to_param).to eq(subject.identity.to_s)
+        end
+      end
 
       context '#to_presenter' do
         let(:presenter_builder) { double('Presenter Builder', call: :built) }
