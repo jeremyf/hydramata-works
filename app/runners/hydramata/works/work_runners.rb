@@ -37,8 +37,8 @@ module Hydramata
       end
 
       class Edit < Hydramata::Core::Runner
-        def run(identifier)
-          work = services.edit_work(identifier)
+        def run(identifier, attributes = {})
+          work = services.edit_work(identifier, attributes)
           callback(:success, work)
         end
       end

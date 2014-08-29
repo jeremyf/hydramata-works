@@ -69,10 +69,11 @@ module Hydramata
           Given(:identifier) { '123' }
           Given(:runner) { described_class.new(context, &callback_config) }
           Given(:services) { double('Services', edit_work: returning_object)}
-          When(:result) { runner.run(identifier) }
+          Given(:attributes) { { key: :value } }
+          When(:result) { runner.run(identifier, attributes) }
           Then { expect(result).to eq([returning_object]) }
           And { expect(callback.invoked).to eq([:success, returning_object]) }
-          And { expect(services).to have_received(:edit_work).with(identifier) }
+          And { expect(services).to have_received(:edit_work).with(identifier, attributes) }
         end
 
       end
