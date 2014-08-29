@@ -17,6 +17,7 @@
 #     user  0m2.720s
 #     sys   0m0.679s
 
+require 'spec_fast_helper'
 require 'active_support'
 require 'action_view'
 require 'action_controller'

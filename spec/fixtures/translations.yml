@@ -15,7 +15,10 @@ en:
           actions:
             create:
               type: submit
-              value: Create a Translated Work
+              label: Create a Translated Work
+            edit:
+              type: link
+              label: Edit Translated Work
       fieldsets:
         property_set_translated:
           name: I Am a Translated Property Set with a non-Translated Work Type!
@@ -25,4 +28,8 @@ en:
       actions:
         create:
           type: submit
-          value: Create a Work
+          label: Create a Work
+        edit:
+          type: link
+          label: Edit the Work
+          url: "/path/to/edit/%{to_param}"

@@ -1,17 +1,12 @@
-require 'spec_fast_helper'
+require 'spec_slow_helper'
 require 'hydramata/works/conversions/property_set'
 require 'hydramata/works/conversions/property'
-require 'hydramata/works/work'
-require 'hydramata/works/work_presenter'
-require 'hydramata/works/property_presenter'
-require 'hydramata/works/fieldset_presenter'
-require 'hydramata/works/action_presenter'
 
 module Hydramata
   module Works
     describe 'Translation services' do
       include Conversions
-      let(:work) { Work.new {|e| e.work_type = work_type } }
+      let(:work) { Work.new(work_type: work_type, identity: '123') }
 
       context 'for entities' do
         let(:presenter) { WorkPresenter.new(work: work, presentation_structure: nil) }
@@ -37,17 +32,44 @@ module Hydramata
 
       context 'for actions' do
         let(:work_presenter) { WorkPresenter.new(work: work, presentation_structure: nil) }
-        let(:presenter) { ActionPresenter.new(context: work_presenter, name: :create) }
-        context 'with existing work type translations' do
-          let(:work_type) { 'Work Type Translated' }
-          it 'translates its :name from the lookup table' do
-            expect(presenter.value).to eq("Create a Translated Work")
+        let(:presenter) { ActionPresenter.new(context: work_presenter, name: action_name) }
+        let(:template) do
+          view_container = ActionController::Base.new
+          view = ActionView::Base.new(view_container.view_paths, {}, view_container, [:html])
+        end
+        context 'submit actions' do
+          let(:action_name) { :create }
+          context 'with existing work type translations' do
+            let(:work_type) { 'Work Type Translated' }
+            it 'renders a submit tag with translation' do
+              expect(presenter.render(template: template)).
+                to eq('<input name="commit" type="submit" value="Create a Translated Work" />')
+            end
+          end
+          context 'without existing work type translations' do
+            let(:work_type) { 'Non-Translated Work Type' }
+            it 'renders a submit tag with a default' do
+              expect(presenter.render(template: template)).
+                to eq('<input name="commit" type="submit" value="Create a Work" />')
+            end
           end
         end
-        context 'without existing work type translations' do
-          let(:work_type) { 'Non-Translated Work Type' }
-          it 'translates its :name by using the key directly' do
-            expect(presenter.value).to eq('Create a Work')
+
+        context 'link actions' do
+          let(:action_name) { :edit }
+          context 'with existing work type translations' do
+            let(:work_type) { 'Work Type Translated' }
+            it 'renders an a-tag' do
+              expect(presenter.render(template: template)).
+                to eq(%(<a href="/path/to/edit/#{work.to_param}">Edit Translated Work</a>))
+            end
+          end
+          context 'without existing work type translations' do
+            let(:work_type) { 'Non-Translated Work Type' }
+            it 'translates its :name by using the key directly' do
+              expect(presenter.render(template: template)).
+                to eq(%(<a href="/path/to/edit/#{work.to_param}">Edit the Work</a>))
+            end
           end
         end
       end
