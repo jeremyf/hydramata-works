@@ -1,3 +1,6 @@
 <%= content_tag('article', show.container_content_tag_attributes) do %>
 <% show.fieldsets.each do |fieldset| %><%= fieldset.render(template: self) %><% end %>
+<div class="actions">
+  <% show.actions.each do |action| %><%= action.render(template: self) %><% end %>
+</div>
 <% end %>
