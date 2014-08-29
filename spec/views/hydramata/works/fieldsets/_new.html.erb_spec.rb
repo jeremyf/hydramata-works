@@ -14,7 +14,7 @@ describe 'hydramata/works/fieldsets/_new.html.erb', type: :view do
   let(:property2) { double('Property', render: '<div class="property2">Property 2</div>'.html_safe) }
 
   it 'renders the object and fieldsets' do
-    expect(object).to receive(:t).with(:name).and_return('Heading')
+    expect(object).to receive(:label).and_return('Heading')
     render partial: 'hydramata/works/fieldsets/new', object: object, locals: { form: form }
 
     expect(property1).to have_received(:render).with(template: view, locals: { form: form } )

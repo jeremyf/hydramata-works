@@ -3,15 +3,15 @@ en:
     core:
       work_types:
         work_type_with_translated_name:
-          name: I Am Translating the Name for Application Usage!
+          label: I Am Translating the Name for Application Usage!
         work_type_translated:
           fieldsets:
             property_set_translated:
-              name: I Am a Translated Property Set for a Translated Work Type!
+              label: I Am a Translated Property Set for a Translated Work Type!
           properties:
             property_translated:
-              name: I Am a Translated Property for a Translated Work Type!
-          name: I Am a Translated Work Type!
+              label: I Am a Translated Property for a Translated Work Type!
+          label: I Am a Translated Work Type!
           actions:
             create:
               type: submit
@@ -21,10 +21,10 @@ en:
               label: Edit Translated Work
       fieldsets:
         property_set_translated:
-          name: I Am a Translated Property Set with a non-Translated Work Type!
+          label: I Am a Translated Property Set with a non-Translated Work Type!
       properties:
         property_translated:
-          name: I Am a Translated Property with a non-Translated Work Type!
+          label: I Am a Translated Property with a non-Translated Work Type!
       actions:
         create:
           type: submit

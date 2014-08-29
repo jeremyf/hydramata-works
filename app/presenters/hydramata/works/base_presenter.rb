@@ -1,6 +1,5 @@
 require 'delegate'
 require 'active_support/core_ext/array/wrap'
-require 'active_support/core_ext/hash/reverse_merge'
 require 'hydramata/works/conversions/translation_key_fragment'
 
 module Hydramata
@@ -24,12 +23,14 @@ module Hydramata
         renderer.call(options)
       end
 
-      # @todo Don't provide a default. Instead create public facing methods that
-      #       leverage the translate function.
       def translate(key, options = {})
-        translator.t(key, options.reverse_merge(scopes: translation_scopes, default: default_translation_for(key)))
+        translator.t(key, { scopes: translation_scopes }.merge(options))
       end
       alias_method :t, :translate
+
+      def label(options = {})
+        translator.t(:label, { scopes: translation_scopes, default: name.to_s }.merge(options))
+      end
 
       def inspect
         format('#<%s:%#0x presenting=%s>', self.class, __id__, __getobj__.inspect)

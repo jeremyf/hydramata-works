@@ -46,12 +46,12 @@ module Hydramata
       context '#translate' do
         it 'translates attribute keys' do
           subject.translate(:name)
-          expect(translator).to have_received(:t).with(:name, scopes: [], default: instance_of(Proc))
+          expect(translator).to have_received(:t).with(:name, scopes: [])
         end
 
         it 'passes along options' do
           subject.translate(:name, raise: true)
-          expect(translator).to have_received(:t).with(:name, scopes: [], default: instance_of(Proc), raise: true)
+          expect(translator).to have_received(:t).with(:name, scopes: [], raise: true)
         end
 
         it 'allows defaults to be overridden' do

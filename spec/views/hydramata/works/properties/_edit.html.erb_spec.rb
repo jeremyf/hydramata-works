@@ -9,7 +9,7 @@ describe 'hydramata/works/properties/_edit.html.erb', type: :view do
 
   it 'renders the object and fieldsets' do
     expect(object).to receive(:each_with_index).and_yield('value1', 0).and_yield('value2', 1)
-    expect(object).to receive(:t).with(:predicate).and_return('Label')
+    expect(object).to receive(:label).and_return('Label')
     render partial: 'hydramata/works/properties/edit', object: object, locals: { form: form }
 
     expect(rendered).to have_tag('.my-dom-class') do

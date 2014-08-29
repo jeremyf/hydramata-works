@@ -17,7 +17,7 @@ describe 'hydramata/works/properties/_show.html.erb', type: :view do
       to receive(:container_content_tag_attributes).
       with(:class=>"value", "aria-labelledby"=>"label_for_work_title").
       and_return(:class => ['my-dom-class', 'value'], "aria-labelledby"=>"label_for_work_title").at_least(1).times
-    expect(object).to receive(:t).with(:name).and_return('Label')
+    expect(object).to receive(:label).and_return('Label')
     render partial: 'hydramata/works/properties/show', object: object
 
     expect(rendered).to have_tag('#label_for_work_title.my-dom-class.label', text: 'Label')

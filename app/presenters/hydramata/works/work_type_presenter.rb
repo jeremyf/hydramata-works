@@ -19,6 +19,8 @@ module Hydramata
         translator.translate('name', options.reverse_merge(scopes: translation_scopes, default: __getobj__.name))
       end
 
+      alias_method :to_s, :name
+
       def inspect
         format('#<%s:%#0x presenting=%s>', self.class, __id__, __getobj__.inspect)
       end

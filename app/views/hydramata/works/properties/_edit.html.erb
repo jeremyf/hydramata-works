@@ -2,7 +2,7 @@
 Tidy this up. Not yet certain how to do this.
 %>
 <div class="<%= edit.dom_class %>">
-  <%= label_tag("work_#{edit.predicate}", edit.t(:predicate), id: "label_for_work_#{edit.predicate}") %>
+  <%= label_tag("work_#{edit.predicate}", edit.label, id: "label_for_work_#{edit.predicate}") %>
   <div class="values">
   <% edit.each_with_index do |value, index| %>
     <%= text_field_tag(

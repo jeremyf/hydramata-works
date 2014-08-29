@@ -1,6 +1,6 @@
 <%= content_tag('section', show.container_content_tag_attributes) do %>
   <hgroup>
-    <%= content_tag('h1', show.t(:name), class: 'heading') %>
+    <%= content_tag('h1', show.label, class: 'heading') %>
   </hgroup>
   <dl class="metadata">
     <% show.properties.each do |property| %><%= property.render(template: self) %><% end %>

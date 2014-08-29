@@ -27,15 +27,15 @@ module Hydramata
           begin
             generate_template(
               'works',
-              "ENTITY <%= #{presentation_context}.t(:work_type)%>",
+              "ENTITY <%= #{presentation_context}.work_type %>",
               "<% #{presentation_context}.fieldsets.each do |f|%><%= f.render(template: self) %><% end %>"
             )
             generate_template(
               'fieldsets',
-              "FIELDSET <%= #{presentation_context}.t(:name)%>",
+              "FIELDSET <%= #{presentation_context}.label%>",
               "<% #{presentation_context}.each do |f|%><%= f.render(template: self) %><% end %>"
             )
-            generate_template('properties', "PROPERTY <%= #{presentation_context}.t(:name) %>")
+            generate_template('properties', "PROPERTY <%= #{presentation_context}.label %>")
             example.run
           ensure
             cleanup_template('works')
