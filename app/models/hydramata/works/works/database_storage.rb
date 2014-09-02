@@ -15,7 +15,6 @@ module Hydramata
             end
           end
         end
-
       end
     end
   end
