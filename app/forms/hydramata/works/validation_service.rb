@@ -70,7 +70,7 @@ module Hydramata
 
       def default_validator_namespaces
         require 'active_model/validations'
-        ActiveModel::Validations
+        [Hydramata::Works, ActiveModel::Validations]
       end
 
       def validator_namespaces=(names)
