@@ -21,8 +21,9 @@ module Hydramata
       class Create < Hydramata::Core::Runner
         def run(work_type, attributes)
           work = services.new_work_for(work_type, attributes)
-          if services.save_work(work)
-            callback(:success, work)
+          case services.save_work(work)
+          when 'valid' then callback(:success, work)
+          when 'invalid' then callback(:created_with_invalid_data, work)
           else
             callback(:failure, work)
           end

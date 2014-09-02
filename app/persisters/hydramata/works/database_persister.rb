@@ -13,6 +13,7 @@ module Hydramata
       attr_reader :pid, :properties
       def initialize(collaborators = {})
         @work = collaborators.fetch(:work)
+        @state = collaborators[:state]
         @storage_service = collaborators.fetch(:storage_service) { default_storage_service }
         @pid_minting_service = collaborators.fetch(:pid_minting_service) { default_pid_minting_service }
         assign_a_pid!
@@ -27,11 +28,7 @@ module Hydramata
         #
         # Yes I could define :quote_id and :id on data definitions, but I
         # have yet to take the time to consider this implication.
-        if storage_service.call(
-          pid: pid,
-          work_type: work_type.to_s,
-          properties: properties
-        )
+        if storage_service.call(attributes_to_persist)
           work.identity = pid
           true
         else
@@ -39,14 +36,24 @@ module Hydramata
         end
       end
 
-      attr_reader :work, :storage_service, :pid_minting_service
-      private :work, :storage_service, :pid_minting_service
+      attr_reader :work, :storage_service, :pid_minting_service, :state
+      private :work, :storage_service, :pid_minting_service, :state
 
       def work_type
         work.work_type
       end
 
       private
+
+      def attributes_to_persist
+        attrs = {
+          pid: pid,
+          work_type: work_type.to_s,
+          properties: properties
+        }
+        attrs[:state] = state if state
+        attrs
+      end
 
       def default_storage_service
         require 'hydramata/works/works/database_storage'
