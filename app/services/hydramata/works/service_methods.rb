@@ -43,7 +43,8 @@ module Hydramata
       # @param :work [#save]
       # @return [Boolean]
       def save_work(work)
-        DatabasePersister.call(work: work)
+        state = work.valid? ? 'valid' : 'invalid'
+        DatabasePersister.call(work: work, state: state) && state
       end
 
       # @param identity [#to_s]

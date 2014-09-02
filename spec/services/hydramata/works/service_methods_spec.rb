@@ -52,11 +52,23 @@ module Hydramata
           load File.expand_path('../../../../support/feature_seeds.rb', __FILE__)
         end
         Given(:work_type) { 'article' }
-        Given(:attributes) { { dc_title: 'my title' } }
         Given(:work) { service.new_work_for(work_type, attributes) }
-        When(:response) { service.save_work(work) }
-        Then { response == true }
-        And { work.new_record? == false }
+        context 'valid data' do
+          Given(:attributes) { { dc_title: 'my title' } }
+          When(:response) { service.save_work(work) }
+          Then { response == 'valid' }
+          And { work.new_record? == false }
+          And { work.errors.empty? }
+          And { service.find_work(work.identity).state == 'valid' }
+        end
+        context 'invalid data' do
+          Given(:attributes) { { dc_title: '' } }
+          When(:response) { service.save_work(work) }
+          Then { response == 'invalid' }
+          And { work.new_record? == false }
+          And { work.errors.present? }
+          And { service.find_work(work.identity).state == 'invalid' }
+        end
       end
 
       context '#find_work' do

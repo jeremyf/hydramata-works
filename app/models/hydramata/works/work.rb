@@ -18,6 +18,7 @@ module Hydramata
       def initialize(collaborators = {}, &block)
         self.work_type = collaborators[:work_type] if collaborators.key?(:work_type)
         self.identity = collaborators[:identity] if collaborators.key?(:identity)
+        @state = collaborators.fetch(:state) { default_state }
         @property_value_strategy = collaborators.fetch(:property_value_strategy) { default_property_value_strategy }
         @properties = collaborators.fetch(:properties_container) { default_properties_container }
         @presenter_builder = collaborators.fetch(:presenter_builder) { default_presenter_builder }
@@ -46,6 +47,7 @@ module Hydramata
 
       attr_reader :property_value_strategy
       attr_reader :properties, :identity
+      attr_reader :state
 
       delegate(
         :to_translation_key_fragment,
@@ -75,6 +77,10 @@ module Hydramata
       def default_presenter_builder
         require 'hydramata/works/work_presenter'
         ->(work) { WorkPresenter.new(work: work) }
+      end
+
+      def default_state
+        'valid'
       end
     end
   end

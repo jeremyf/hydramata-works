@@ -18,7 +18,7 @@ module Hydramata
         end
 
         it 'should implement #to_work' do
-          expect(subject.to_work).to implement_work_interface
+          expect(subject.to_work).to implement_work_interface.with(:state, 'unknown')
         end
       end
     end

@@ -6,7 +6,12 @@ predicate_depositor = Hydramata::Works::Predicates::Storage.create!(identity: 'd
 predicate_created = Hydramata::Works::Predicates::Storage.create!(identity: 'http://purl.org/dc/terms/created', name_for_application_usage: 'dc_created', value_parser_name: 'DateParser')
 predicate_language = Hydramata::Works::Predicates::Storage.create!(identity: 'http://purl.org/dc/terms/language', name_for_application_usage: 'dc_language', value_parser_name: 'InterrogationParser' )
 predicate_publicher = Hydramata::Works::Predicates::Storage.create!(identity: 'http://purl.org/dc/terms/publisher', name_for_application_usage: 'dc_publisher', value_parser_name: 'InterrogationParser')
-predicate_title = Hydramata::Works::Predicates::Storage.create!(identity: 'http://purl.org/dc/terms/title', name_for_application_usage: 'dc_title', value_parser_name: 'InterrogationParser')
+predicate_title = Hydramata::Works::Predicates::Storage.create!(
+  identity: 'http://purl.org/dc/terms/title',
+  name_for_application_usage: 'dc_title',
+  value_parser_name: 'InterrogationParser',
+  validations: '{ "presence_of_each": true }'
+)
 predicate_dateSubmitted = Hydramata::Works::Predicates::Storage.create!(identity: 'http://purl.org/dc/terms/dateSubmitted', name_for_application_usage: 'dc_dateSubmitted', value_parser_name: 'DateParser')
 predicate_modified = Hydramata::Works::Predicates::Storage.create!(identity: 'http://purl.org/dc/terms/modified', name_for_application_usage: 'dc_modified', value_parser_name: 'DateParser')
 predicate_rights = Hydramata::Works::Predicates::Storage.create!(identity: 'http://purl.org/dc/terms/rights', name_for_application_usage: 'dc_rights', value_parser_name: 'InterrogationParser')
