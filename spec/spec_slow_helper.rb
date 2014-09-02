@@ -12,10 +12,18 @@ if ENV['COV'] || ENV['COVERAGE']
   require 'simplecov'
   SimpleCov.start 'rails'
   SimpleCov.command_name 'spec'
+  SimpleCov.start do
+    add_filter 'lib/hydramata/works/linters'
+  end
 end
 
 if ENV['TRAVIS']
   require 'coveralls'
+  require 'simplecov'
+  SimpleCov.formatter = Coveralls::SimpleCov::Formatter
+  SimpleCov.start do
+    add_filter 'lib/hydramata/works/linters'
+  end
   Coveralls.wear!('rails')
 end
 

@@ -23,10 +23,6 @@ module Hydramata
 
       private
 
-      def name
-        "#{predicate.name}_value"
-      end
-
       def default_dom_attributes
         { class: [dom_class, presenter_dom_class] }
       end
