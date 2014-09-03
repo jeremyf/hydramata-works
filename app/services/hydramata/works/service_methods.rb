@@ -48,17 +48,12 @@ module Hydramata
       end
 
       # @param identity [#to_s]
-      # @param options [Hash]
       # @yield [presenter]
       # @yieldparam presenter [WorkPresenter]
       # @return [WorkPresenter]
-      def find_work(identity, options = {})
-        # @TODO - Given that we are going to have data across multiple sources
-        # should there be a chain of lookups? (eg { sequence: :database })
-        work = Works::DatabaseStorage.where(pid: identity).first.to_work
-        WorkPresenter.new(options.merge(work: work)) do |presenter|
-          presenter.actions << { name: :edit }
-          yield(presenter) if block_given?
+      def find_work(identity)
+        work_finder(identity, presentation_context: :show) do |work|
+          work.actions << { name: :edit }
         end
       end
 
@@ -66,9 +61,22 @@ module Hydramata
       # @param options [Hash]
       # @return [WorkForm]
       def edit_work(identity, attributes = {}, &block)
-        work = find_work(identity, presentation_context: :edit)
-        ApplyUserInputToWork.call(work: work, attributes: attributes) if attributes.present?
-        WorkForm.new(work, &block)
+        presented_work = work_finder(identity, presentation_context: :edit) do |work|
+          work.actions << { name: :update }
+        end
+        ApplyUserInputToWork.call(work: presented_work, attributes: attributes) if attributes.present?
+        WorkForm.new(presented_work, &block)
+      end
+
+      private
+
+      def work_finder(identity, options = {})
+        # @TODO - Given that we are going to have data across multiple sources
+        # should there be a chain of lookups? (eg { sequence: :database })
+        work = Works::DatabaseStorage.where(pid: identity).first.to_work
+        WorkPresenter.new(options.merge(work: work)) do |presenter|
+          yield(presenter) if block_given?
+        end
       end
     end
   end
