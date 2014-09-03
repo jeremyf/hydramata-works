@@ -5,4 +5,7 @@ towards a solution.
 %>
 <%= form_for edit, edit.form_options.reverse_merge(as: :work, url: '/', method: :patch, html: { class: [edit.dom_class(prefix: 'edit'), 'work'], id: 'edit_work' }) do |form| %>
   <% edit.fieldsets.each do |fieldset| %><%= fieldset.render(template: self, locals: { form: form } ) %><% end %>
+  <div class="actions">
+    <% edit.actions.each do |action| %><%= action.render(template: self, locals: { form: form } ) %><% end %>
+  </div>
 <% end %>
