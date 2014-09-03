@@ -7,6 +7,10 @@ module Hydramata
     #
     # @TODO - Consider storing the database record in the same format as the
     # show.json object
+    #
+    # @TODO - Consider creating two persisters. One of the PID exists. Another
+    # if the PID does not exist. There are if statements happening, and service
+    # logic mixing into the storage_service.
     class DatabasePersister
       def self.call(collaborators = {})
         new(collaborators).call
