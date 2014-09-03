@@ -1,3 +1,5 @@
+require 'active_support/core_ext/object/blank'
+
 module Hydramata
   module Works
     # Responsible for negotiating an in-memory work through to the database via
@@ -29,7 +31,7 @@ module Hydramata
         # Yes I could define :quote_id and :id on data definitions, but I
         # have yet to take the time to consider this implication.
         if storage_service.call(attributes_to_persist)
-          work.identity = pid
+          work.identity = pid unless work.identity.present?
           true
         else
           false
@@ -57,12 +59,20 @@ module Hydramata
 
       def default_storage_service
         require 'hydramata/works/works/database_storage'
-        Works::DatabaseStorage.method(:create)
+        if work.identity.present?
+          Works::DatabaseStorage.method(:find_or_create_by_pid)
+        else
+          Works::DatabaseStorage.method(:create)
+        end
       end
 
       def default_pid_minting_service
-        # @TODO - This is not the final form, but a placeholder
-        lambda { rand(100000).to_s }
+        if work.identity.present?
+          lambda { work.identity }
+        else
+          # @TODO - This is not the final form, but a placeholder
+          lambda { rand(100000).to_s }
+        end
       end
 
       def assign_a_pid!
