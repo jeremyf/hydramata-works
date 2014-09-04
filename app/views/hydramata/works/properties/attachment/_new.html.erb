@@ -1,0 +1,12 @@
+<div class="<%= new.dom_class %>">
+  <%= label_tag("work_#{new.predicate}", new.label, id: "label_for_work_#{new.predicate}") %>
+  <div class="values">
+    <%= file_field_tag(
+      "work_#{new.predicate}_0",
+       :name => "work[#{new.predicate}][]",
+       :class => 'blank-input',
+       :multiple => true,
+       'aria-labelledby' => "label_for_work_#{new.predicate}")
+    %>
+  </div>
+</div>

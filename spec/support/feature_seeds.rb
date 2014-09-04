@@ -12,6 +12,10 @@ predicate_title = Hydramata::Works::Predicates::Storage.create!(
   value_parser_name: 'InterrogationParser',
   validations: '{ "presence_of_each": true }'
 )
+predicate_attachment = Hydramata::Works::Predicates::Storage.create!(
+  identity: 'opaque:attachment',
+  name_for_application_usage: 'attachment'
+)
 predicate_dateSubmitted = Hydramata::Works::Predicates::Storage.create!(identity: 'http://purl.org/dc/terms/dateSubmitted', name_for_application_usage: 'dc_dateSubmitted', value_parser_name: 'DateParser')
 predicate_modified = Hydramata::Works::Predicates::Storage.create!(identity: 'http://purl.org/dc/terms/modified', name_for_application_usage: 'dc_modified', value_parser_name: 'DateParser')
 predicate_rights = Hydramata::Works::Predicates::Storage.create!(identity: 'http://purl.org/dc/terms/rights', name_for_application_usage: 'dc_rights', value_parser_name: 'InterrogationParser')
@@ -23,4 +27,7 @@ predicate_description = Hydramata::Works::Predicates::Storage.create!(identity: 
   predicate_set = Hydramata::Works::PredicateSets::Storage.create!(identity: 'required', work_type: work_type, presentation_sequence: 1, name_for_application_usage: 'required')
   predicate_set.predicate_presentation_sequences.create!(presentation_sequence: 1, predicate: predicate_title)
   predicate_set.predicate_presentation_sequences.create!(presentation_sequence: 2, predicate: predicate_description)
+
+  optional_predicate_set = Hydramata::Works::PredicateSets::Storage.create!(identity: 'optional', work_type: work_type, presentation_sequence: 2, name_for_application_usage: 'optional')
+  optional_predicate_set.predicate_presentation_sequences.create!(presentation_sequence: 1, predicate: predicate_attachment)
 end
