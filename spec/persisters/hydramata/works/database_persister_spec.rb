@@ -16,7 +16,15 @@ module Hydramata
           it 'passes along to the underlying storage' do
             expect(work).to receive(:identity=).with(pid)
             described_class.call(work: work, storage_service: storage_service, pid_minting_service: pid_minting_service)
-            expect(storage_service).to have_received(:call).with(pid: pid, work_type: 'Article', properties: {'Title' => ['Hello World'], 'Description' => ['A Brief Description']})
+            expect(storage_service).
+              to have_received(:call).
+            with(
+              pid: pid,
+              work_type: 'Article',
+              properties: {'Title' => ['Hello World'], 'Description' => ['A Brief Description']},
+              state: nil,
+              files: {}
+            )
           end
 
           it 'returns true on success' do
@@ -50,7 +58,13 @@ module Hydramata
             described_class.call(work: work, storage_service: storage_service)
             expect(storage_service).
               to have_received(:call).
-              with(pid: pid, work_type: 'Article', properties: {'Title' => ['Hello World'], 'Description' => ['A Brief Description']})
+            with(
+              pid: pid,
+              work_type: 'Article',
+              properties: {'Title' => ['Hello World'], 'Description' => ['A Brief Description']},
+              state: nil,
+              files: {}
+            )
           end
         end
       end
