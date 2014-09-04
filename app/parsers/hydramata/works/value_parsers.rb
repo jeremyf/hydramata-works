@@ -1,5 +1,7 @@
+# @TODO - How to register these without an explicit require
 require 'hydramata/works/value_parsers/simple_parser'
 require 'hydramata/works/value_parsers/date_parser'
+require 'hydramata/works/value_parsers/attachment_parser'
 require 'hydramata/works/value_parsers/interrogation_parser'
 
 module Hydramata

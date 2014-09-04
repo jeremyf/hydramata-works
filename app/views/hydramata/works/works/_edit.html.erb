@@ -3,7 +3,14 @@ Consider replacing form_for with form_tag. By using form_for, the given `edit`
 object must expose all of the property methods. This may work out as I steer
 towards a solution.
 %>
-<%= form_for edit, edit.form_options.reverse_merge(as: :work, url: '/', method: :patch, html: { class: [edit.dom_class(prefix: 'edit'), 'work'], id: 'edit_work' }) do |form| %>
+<% options = {
+    as: :work,
+    url: '/',
+    method: :patch,
+    html: { multipart: true, class: [edit.dom_class(prefix: 'edit'), 'work'], id: 'edit_work' }
+  }.deep_merge(edit.form_options)
+%>
+<%= form_for(edit, options) do |form| %>
   <% edit.fieldsets.each do |fieldset| %><%= fieldset.render(template: self, locals: { form: form } ) %><% end %>
   <div class="actions">
     <% edit.actions.each do |action| %><%= action.render(template: self, locals: { form: form } ) %><% end %>

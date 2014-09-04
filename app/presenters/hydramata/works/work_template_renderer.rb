@@ -20,6 +20,7 @@ module Hydramata
         begin
           render_with_diminishing_specificity(template, rendering_options)
         rescue *template_missing_exception => e
+          STDOUT.puts(e) if ENV['DEBUG']
           if block_given?
             yield
           else
@@ -56,7 +57,8 @@ module Hydramata
             break
             # By using the splat operator I am allowing multiple exceptions to
             # be caught and pass to the next rendering context.
-          rescue *template_missing_exception
+          rescue *template_missing_exception => e
+            STDOUT.puts(e) if ENV['DEBUG']
             next
           end
         end
