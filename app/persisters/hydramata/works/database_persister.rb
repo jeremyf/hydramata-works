@@ -17,7 +17,7 @@ module Hydramata
       end
 
 
-      attr_reader :properties, :files, :state, :work, :storage_service, :pid_minting_service, :pid
+      attr_reader :properties, :attachments, :state, :work, :storage_service, :pid_minting_service, :pid
       private :storage_service, :pid_minting_service
       def initialize(collaborators = {})
         @work = collaborators.fetch(:work)
@@ -50,17 +50,17 @@ module Hydramata
       end
 
       def attributes_to_persist
-        { pid: pid, work_type: work_type, properties: properties, state: state, files: files }
+        { pid: pid, work_type: work_type, properties: properties, state: state, attachments: attachments }
       end
 
       def assign_properties!
         @properties = {}
-        @files = {}
+        @attachments = {}
         work.properties.each do |property|
           property.values.each do |value|
             if value.respond_to?(:raw_object) && value.raw_object.respond_to?(:original_filename)
-              @files[property.name.to_s] ||= []
-              @files[property.name.to_s] << value.raw_object
+              @attachments[property.name.to_s] ||= []
+              @attachments[property.name.to_s] << value.raw_object
             else
               @properties[property.name.to_s] ||= []
               @properties[property.name.to_s] << value.to_s

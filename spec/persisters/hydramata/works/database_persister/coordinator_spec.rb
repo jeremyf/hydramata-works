@@ -8,26 +8,37 @@ module Hydramata
       subject { described_class }
       let(:attributes) { { pid: '123', work_type: 'Article' } }
       let(:storage) { Works::DatabaseStorage }
+      let(:attachment_storage) { double }
+      let(:my_attachments) { { predicate_name: [:first_file] } }
+      let(:work) { storage.find(attributes.fetch(:pid)) }
       it 'creates a new instance if one does not exist' do
-        expect { described_class.call(attributes, storage) }.
+        expect { described_class.call(attributes) }.
           to change { storage.count }.
           by(1)
-        expect { described_class.call(attributes, storage) }.
+        expect { described_class.call(attributes) }.
           to_not change { storage.count }
       end
 
       it 'overwrites the existing work type if one is given' do
-        initial_work = described_class.call(attributes)
+        described_class.call(attributes)
         expect { described_class.call(attributes.merge(work_type: 'Document')) }.
-          to change { storage.find(attributes.fetch(:pid)).work_type }.
+          to change { work.reload.work_type }.
           from('Article').
           to('Document')
       end
 
+      it 'attaches attachments when attachments are given' do
+        expect(attachment_storage).
+          to receive(:create!).
+          with(work_id: attributes.fetch(:pid), predicate: :predicate_name, attachment: :first_file ).
+          and_return(true)
+        described_class.call(attributes.merge(attachments: my_attachments), { attachment_storage: attachment_storage })
+      end
+
       it 'updates property keys for matches but ignores misses' do
-        initial_work = described_class.call(attributes.merge(properties: { title: 'Hello', subject: 'Trees', locations: 'Here' }))
+        described_class.call(attributes.merge(properties: { title: 'Hello', subject: 'Trees', locations: 'Here' }))
         expect { described_class.call(attributes.merge(properties: { title: 'World', locations: nil })) }.
-          to change { storage.find(attributes.fetch(:pid)).properties }.
+          to change { work.reload.properties }.
           from({ title: 'Hello', subject: 'Trees', locations: 'Here' }).
           to({ title: 'World', subject: 'Trees' })
       end

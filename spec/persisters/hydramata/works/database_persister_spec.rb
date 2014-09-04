@@ -23,7 +23,7 @@ module Hydramata
               work_type: 'Article',
               properties: {'Title' => ['Hello World'], 'Description' => ['A Brief Description']},
               state: nil,
-              files: {}
+              attachments: {}
             )
           end
 
@@ -63,7 +63,7 @@ module Hydramata
               work_type: 'Article',
               properties: {'Title' => ['Hello World'], 'Description' => ['A Brief Description']},
               state: nil,
-              files: {}
+              attachments: {}
             )
           end
         end
