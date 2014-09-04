@@ -4,6 +4,7 @@ class CreateHydramataWorksAttachments < ActiveRecord::Migration
       t.string :pid, null: false
       t.string :work_id
       t.string :predicate
+      t.string :attachment_uid
       t.timestamps
     end
     add_index :hydramata_works_attachments, :pid, unique: true
