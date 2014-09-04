@@ -13,6 +13,7 @@ module Hydramata
           pid = attributes.fetch(:pid)
           work = where(pid: pid).first || new(pid: pid)
           work.work_type = attributes[:work_type] if attributes.key?(:work_type)
+          work.state = attributes[:state] if attributes[:state]
           if attributes.key?(:properties)
             work.properties ||= {}
             attributes[:properties].each do |key ,value|
