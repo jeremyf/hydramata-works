@@ -14,11 +14,15 @@ module Hydramata
       end
 
       def render(options = {})
-        renderer.call(options) { __getobj__.to_s }
+        renderer.call(options) { label }
       end
 
       def view_path_slug_for_object
         'values'
+      end
+
+      def label
+        __getobj__.to_s
       end
 
       private
