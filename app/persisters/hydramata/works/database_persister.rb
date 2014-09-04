@@ -4,18 +4,10 @@ module Hydramata
   module Works
     # Responsible for negotiating an in-memory work through to the database via
     # the #storage_service method.
-    #
-    # @TODO - Consider storing the database record in the same format as the
-    # show.json object
-    #
-    # @TODO - Consider creating two persisters. One of the PID exists. Another
-    # if the PID does not exist. There are if statements happening, and service
-    # logic mixing into the storage_service.
     class DatabasePersister
       def self.call(collaborators = {})
         new(collaborators).call
       end
-
 
       attr_reader :properties, :attachments, :state, :work, :storage_service, :pid_minting_service, :pid
       private :storage_service, :pid_minting_service
@@ -25,13 +17,12 @@ module Hydramata
         @pid_minting_service = collaborators.fetch(:pid_minting_service) { default_pid_minting_service }
         @storage_service = collaborators.fetch(:storage_service) { default_storage_service }
         assign_pid!
-        # yield(self) if block_given?
         assign_properties!
         freeze
       end
 
       def call
-        if storage_service.call(attributes_to_persist)
+        if storage_service.call(attributes_to_persist, pid_minting_service: pid_minting_service)
           work.identity ||= pid
           true
         else

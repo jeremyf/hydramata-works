@@ -8,11 +8,13 @@ module Hydramata
           new(attributes, collaborators).call
         end
 
-        attr_reader :work, :attributes, :pid
+        attr_reader :work, :attributes, :collaborators
+        private :work, :attributes, :collaborators
         def initialize(attributes = {}, collaborators = {})
           @property_storage = collaborators.fetch(:property_storage) { default_property_storage }
           @attachment_storage = collaborators.fetch(:attachment_storage) { default_attachment_storage }
-          @pid = attributes.fetch(:pid)
+          @pid_minting_service = collaborators.fetch(:pid_minting_service) { pid_minting_service }
+          pid = attributes.fetch(:pid)
           @work = property_storage.find_or_initialize_by(pid: pid)
           @attributes = attributes
         end
@@ -42,8 +44,10 @@ module Hydramata
           return true unless attributes[:attachments]
           attributes[:attachments].all? do |predicate, attachments|
             Array.wrap(attachments).each do |attachment|
+              attachment_pid = pid_minting_service.call
               attachment_storage.create!(
-                work_id: pid,
+                pid: attachment_pid,
+                work_id: work.identity,
                 predicate: predicate,
                 attachment: attachment
               )
@@ -61,9 +65,14 @@ module Hydramata
         attr_reader :attachment_storage
         private :attachment_storage
         def default_attachment_storage
-          -> { }
-          # require 'hydramata/works/attachments/database_storage'
-          # Attachments::DatabaseStorage
+          require 'hydramata/works/attachments/database_storage'
+          Attachments::DatabaseStorage
+        end
+
+        attr_reader :pid_minting_service
+        private :pid_minting_service
+        def default_pid_minting_service
+          lambda { rand(100_000_000).to_s }
         end
 
       end

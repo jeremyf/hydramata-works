@@ -9,6 +9,8 @@ module Hydramata
         self.primary_key = :pid
         serialize :properties, Hash
 
+        alias_attribute :identity, :pid
+
         def to_work
           Work.new(identity: pid, work_type: work_type, state: state) do |work|
             properties.each do |predicate, values|
