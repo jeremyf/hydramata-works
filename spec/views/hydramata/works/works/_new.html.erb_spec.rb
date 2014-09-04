@@ -16,7 +16,7 @@ describe 'hydramata/works/works/_new.html.erb', type: :view do
 
     expect(fieldset1).to have_received(:render).with(template: view, locals: { form: kind_of(ActionView::Helpers::FormBuilder) })
     expect(fieldset2).to have_received(:render).with(template: view, locals: { form: kind_of(ActionView::Helpers::FormBuilder) })
-    expect(rendered).to have_tag('form.work.my-dom-class') do
+    expect(rendered).to have_tag('form.work.my-dom-class[enctype="multipart/form-data"]') do
       with_tag('.set1', text: 'Fieldset 1')
       with_tag('.set2', text: 'Fieldset 2')
       with_tag('.actions .action', text: 'An Action')

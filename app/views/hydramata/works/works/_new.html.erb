@@ -3,7 +3,14 @@ Consider replacing form_for with form_tag. By using form_for, the given `new`
 object must expose all of the property methods. This may work out as I steer
 towards a solution.
 %>
-<%= form_for new, new.form_options.reverse_merge(as: :work, url: '/', method: :post, html: { class: [new.dom_class(prefix: 'new'), 'work'] }) do |form| %>
+<% options = {
+    as: :work,
+    url: '/',
+    method: :patch,
+    html: { multipart: true, class: [new.dom_class(prefix: 'new'), 'work'], id: 'new_work' }
+  }.deep_merge(new.form_options)
+%>
+<%= form_for(new, options) do |form| %>
   <% new.fieldsets.each do |fieldset| %><%= fieldset.render(template: self, locals: { form: form } ) %><% end %>
   <div class="actions">
     <% new.actions.each do |action| %><%= action.render(template: self, locals: { form: form } ) %><% end %>
