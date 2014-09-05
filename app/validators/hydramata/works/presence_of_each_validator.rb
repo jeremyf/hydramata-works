@@ -7,8 +7,19 @@ module Hydramata
     class PresenceOfEachValidator < SimpleDelegator
       def initialize(options, collaborators = {})
         @base_validator_builder = collaborators.fetch(:base_validator_builder) { default_base_validator_builder }
-        __setobj__(@base_validator_builder.call(options))
+        __setobj__(base_validator_builder.call(options))
       end
+      attr_reader :base_validator_builder
+      private :base_validator_builder
+
+      def validate(record)
+        attributes.each do |attribute|
+          value = record.read_attribute_for_validation(attribute)
+          next if (value.nil? && options[:allow_nil]) || (value.blank? && options[:allow_blank])
+          validate_each(record, attribute, value)
+        end
+      end
+
       def validate_each(record, attribute, values)
         wrapped_values = Array.wrap(values)
         if wrapped_values.present?

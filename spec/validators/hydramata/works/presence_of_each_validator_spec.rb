@@ -7,39 +7,43 @@ module Hydramata
       class Validatable
         include ActiveModel::Validations
         attr_accessor :identity
+
+        def read_attribute_for_validation(attribute)
+          send(attribute)
+        end
       end
 
-      Given(:record) { Validatable.new }
+      Given(:record) { Validatable.new.tap {|v| v.identity = values } }
       Given(:attribute) { :identity }
-      Given(:validator) { described_class.new(attributes: { attribute => values }) }
+      Given(:validator) { described_class.new(attributes: [attribute]) }
 
       context 'with no values' do
         Given(:values) { [] }
-        When { validator.validate_each(record, attribute, values) }
+        When { validator.validate(record) }
         Then { record.errors[attribute].present? }
       end
 
       context 'with a nil value' do
         Given(:values) { [nil] }
-        When { validator.validate_each(record, attribute, values) }
+        When { validator.validate(record) }
         Then { record.errors[attribute].present? }
       end
 
       context 'with a value' do
         Given(:values) { ['valid'] }
-        When { validator.validate_each(record, attribute, values) }
+        When { validator.validate(record) }
         Then { record.errors[attribute].empty? }
       end
 
       context 'with a value and a blank' do
         Given(:values) { ['valid', ''] }
-        When { validator.validate_each(record, attribute, values) }
+        When { validator.validate(record) }
         Then { record.errors[attribute].present? }
       end
 
       context 'with two values' do
         Given(:values) { ['valid', 'valid'] }
-        When { validator.validate_each(record, attribute, values) }
+        When { validator.validate(record) }
         Then { record.errors[attribute].empty? }
       end
 
