@@ -1,6 +1,7 @@
 require 'hydramata/works/predicates/storage'
 require 'hydramata/works/predicate_sets/storage'
 require 'hydramata/works/work_types/storage'
+require 'hydramata/works/presence_of_each_validator'
 
 predicate_depositor = Hydramata::Works::Predicates::Storage.create!(identity: 'depositor')
 predicate_created = Hydramata::Works::Predicates::Storage.create!(identity: 'http://purl.org/dc/terms/created', name_for_application_usage: 'dc_created', value_parser_name: 'DateParser')
