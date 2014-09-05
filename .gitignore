@@ -13,3 +13,4 @@ documents/**/*.pdf
 .yardoc
 doc/
 .ruby-version
+dragonfly/*
