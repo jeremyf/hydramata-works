@@ -12,7 +12,6 @@ class TestAppGenerator < Rails::Generators::Base
     rake 'db:create'
     rake 'hydramata_works:install:migrations'
     rake 'db:migrate'
-    rake 'db:test:prepare'
   end
 
 end
