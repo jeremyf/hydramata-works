@@ -1,4 +1,4 @@
-require 'active_record/base'
+require 'active_record'
 require 'dragonfly/model'
 
 module Hydramata
