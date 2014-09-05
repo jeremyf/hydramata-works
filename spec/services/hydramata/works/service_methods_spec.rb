@@ -1,4 +1,5 @@
 require 'spec_active_record_helper'
+require 'spec_file_upload_helper'
 require 'hydramata/works/service_methods'
 require 'hydramata/works/property'
 require 'hydramata/works/linters/implement_work_interface_matcher'
@@ -60,6 +61,18 @@ module Hydramata
           And { work.new_record? == false }
           And { work.errors.empty? }
           And { service.find_work(work.identity).state == 'valid' }
+          And { service.find_work(work.identity).properties[:dc_title].values == ['my title'] }
+        end
+        context 'with attachment' do
+          Given(:attributes) do
+            {
+              attachment: [FileUpload.fixture_file_upload('attachments/hello-world.txt')]
+            }
+          end
+          Given(:uploaded_attachment) { service.find_work(work.identity).properties[:attachment].values.first }
+          When(:response) { service.save_work(work) }
+          Then { expect(uploaded_attachment.file.name).to eq('hello-world.txt') }
+          And { expect(uploaded_attachment.file.data).to eq(FileUpload.pathname_for('attachments/hello-world.txt').read) }
         end
         context 'invalid data' do
           Given(:attributes) { { dc_title: '' } }

@@ -21,6 +21,12 @@ In each layer, there is a concept of a Work and its data structure.
 - [x] UI Input for New -> Memory
 - [x] Validation in Memory Object
 
+## File Attachments
+
+- [ ] Attachment Presenter - maybe?
+- [X] End to End Attachment Test
+- [X] Tidy up Attachment Parser
+
 ## Low Level Tasks
 
 These should not be considered exhaustive.
