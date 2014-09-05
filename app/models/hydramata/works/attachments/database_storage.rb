@@ -8,7 +8,7 @@ module Hydramata
         extend Dragonfly::Model
         self.table_name = :hydramata_works_attachments
         self.primary_key = :pid
-        dragonfly_accessor :attachment
+        dragonfly_accessor :file
 
         belongs_to(
           :work,

@@ -43,13 +43,13 @@ module Hydramata
         def append_attachments
           return true unless attributes[:attachments]
           attributes[:attachments].all? do |predicate, attachments|
-            Array.wrap(attachments).each do |attachment|
+            Array.wrap(attachments).each do |file|
               attachment_pid = pid_minting_service.call
               attachment_storage.create!(
                 pid: attachment_pid,
                 work_id: work.identity,
                 predicate: predicate,
-                attachment: attachment
+                file: file
               )
             end
           end

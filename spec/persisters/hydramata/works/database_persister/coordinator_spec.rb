@@ -1,22 +1,32 @@
 require 'spec_active_record_helper'
 require 'hydramata/works/database_persister/coordinator'
 require 'hydramata/works/works/database_storage'
+require 'hydramata/works/attachments/database_storage'
 
 module Hydramata
   module Works
     describe DatabasePersister::Coordinator do
       subject { described_class }
       let(:attributes) { { pid: '123', work_type: 'Article' } }
-      let(:storage) { Works::DatabaseStorage }
-      let(:attachment_storage) { double }
-      let(:my_attachments) { { predicate_name: [:first_file, :second_file] } }
-      let(:work) { storage.find(attributes.fetch(:pid)) }
+      let(:work_storage) { Works::DatabaseStorage }
+      let(:attachment_storage) { Attachments::DatabaseStorage }
+      let(:my_attachments) do
+        {
+          predicate_name: [
+            File.new(__FILE__)
+          ],
+          another_predicate_name: [
+            File.new(__FILE__)
+          ]
+        }
+      end
+      let(:work) { work_storage.find(attributes.fetch(:pid)) }
       it 'creates a new instance if one does not exist' do
         expect { described_class.call(attributes) }.
-          to change { storage.count }.
+          to change { work_storage.count }.
           by(1)
         expect { described_class.call(attributes) }.
-          to_not change { storage.count }
+          to_not change { work_storage.count }
       end
 
       it 'overwrites the existing work type if one is given' do
@@ -27,18 +37,12 @@ module Hydramata
           to('Document')
       end
 
-      it 'attaches attachments when attachments are given' do
+      it 'attaches files when attachments are given' do
         pid_minting_service = double
         expect(pid_minting_service).to receive(:call).exactly(2).times.and_return('abc', 'efg')
-        expect(attachment_storage).
-          to receive(:create!).
-          with(pid: 'abc', work_id: attributes.fetch(:pid), predicate: :predicate_name, attachment: :first_file ).
-          and_return(true)
-        expect(attachment_storage).
-          to receive(:create!).
-          with(pid: 'efg', work_id: attributes.fetch(:pid), predicate: :predicate_name, attachment: :second_file ).
-          and_return(true)
-        described_class.call(attributes.merge(attachments: my_attachments), { pid_minting_service: pid_minting_service, attachment_storage: attachment_storage })
+        expect { described_class.call(attributes.merge(attachments: my_attachments), { pid_minting_service: pid_minting_service } ) }.
+          to change { attachment_storage.count }.
+          by(my_attachments.size)
       end
 
       it 'updates property keys for matches but ignores misses' do

@@ -7,9 +7,9 @@ module Hydramata
       describe DatabaseStorage do
         subject { described_class.new }
 
-        it 'has an attachment via the dragonfly gem' do
-          subject.attachment = File.new(__FILE__)
-          expect(subject.attachment.data).to eq(File.read(__FILE__))
+        it 'has an file via the dragonfly gem' do
+          subject.file = File.new(__FILE__)
+          expect(subject.file.data).to eq(File.read(__FILE__))
         end
       end
     end
