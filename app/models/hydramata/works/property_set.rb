@@ -20,11 +20,12 @@ module Hydramata
 
       delegate :name, to: :predicate_set
 
-      def <<(input)
+      def <<(input, options = {})
         property = Property(input)
+        strategy = options.fetch(:property_value_strategy) { property_value_strategy }
         existing_property = property_store[property.predicate.to_s]
         if existing_property
-          existing_property.send(property_value_strategy, property.values)
+          existing_property.send(strategy, property.values)
         else
           property_store[property.predicate.to_s] = property
         end

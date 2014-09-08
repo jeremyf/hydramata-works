@@ -21,6 +21,13 @@ module Hydramata
             expect { |b| described_class.call(object, &b) }.to yield_with_args(value: 'hello-world.txt', raw_object: object)
           end
         end
+
+        context 'already parsed object' do
+          let(:object) { double('Object', raw_object: :a_raw_object) }
+          it 'preserves the already parsed object' do
+            expect { |b| described_class.call(object, &b) }.to yield_with_args(value: object, raw_object: object.raw_object)
+          end
+        end
       end
     end
   end
