@@ -71,8 +71,8 @@ module Hydramata
           end
           Given(:uploaded_attachment) { service.find_work(work.identity).properties[:attachment].values.first }
           When(:response) { service.save_work(work) }
-          Then { expect(uploaded_attachment.file.name).to eq('hello-world.txt') }
-          And { expect(uploaded_attachment.file.data).to eq(FileUpload.pathname_for('attachments/hello-world.txt').read) }
+          Then { expect(uploaded_attachment.raw_object.file.name).to eq('hello-world.txt') }
+          And { expect(uploaded_attachment.raw_object.file.data).to eq(FileUpload.pathname_for('attachments/hello-world.txt').read) }
         end
         context 'invalid data' do
           Given(:attributes) { { dc_title: '' } }
@@ -139,9 +139,9 @@ module Hydramata
           work = service.new_work_for(work_type, new_attributes)
           service.save_work(work)
 
-          expect(updated_work.properties['attachment'].values.mape(&:to_s)).to eq(['hello-world.txt', 'good-bye-world.txt'])
-          expect(updated_work.properties['dc_title'].values.mape(&:to_s)).to eq([])
-          expect(updated_work.properties['dc_abstract'].values.mape(&:to_s)).to eq(['My Abstract'])
+          expect(work.properties['attachment'].values.map(&:to_s)).to eq(['hello-world.txt', 'good-bye-world.txt'])
+          expect(work.properties['dc_title'].values.map(&:to_s)).to eq([])
+          expect(work.properties['dc_abstract'].values.map(&:to_s)).to eq(['My Abstract'])
 
           edited_work = service.edit_work(work.identity, edit_attributes)
           service.save_work(edited_work)
@@ -150,9 +150,9 @@ module Hydramata
 
           updated_work = service.find_work(edited_work.identity)
 
-          expect(updated_work.properties['attachment'].values.mape(&:to_s)).to eq(['hello-world.txt', 'good-bye-world.txt'])
-          expect(updated_work.properties['dc_title'].values.mape(&:to_s)).to eq(['My Title'])
-          expect(updated_work.properties['dc_abstract'].values.mape(&:to_s)).to eq(['Ye Ol\' Abstract', 'Another Abstract'])
+          expect(updated_work.properties['attachment'].values.map(&:to_s)).to eq(['hello-world.txt', 'good-bye-world.txt'])
+          expect(updated_work.properties['dc_title'].values.map(&:to_s)).to eq(['My Title'])
+          expect(updated_work.properties['dc_abstract'].values.map(&:to_s)).to eq(['Ye Ol\' Abstract', 'Another Abstract'])
         end
       end
     end
