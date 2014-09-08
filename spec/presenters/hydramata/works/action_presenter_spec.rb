@@ -38,7 +38,7 @@ module Hydramata
               with("actions.#{name}.url", raise: true, to_param: context.to_param).
               and_return('my_href')
             expect(template).to receive(:content_tag).
-              with('a', 'Edit this Work', href: 'my_href').
+              with('a', 'Edit this Work', href: 'my_href', class: 'action-edit').
               and_return('My Link Tag')
             expect(subject.render(template: template)).to eq('My Link Tag')
           end

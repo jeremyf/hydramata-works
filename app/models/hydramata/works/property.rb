@@ -34,9 +34,17 @@ module Hydramata
       attr_reader :value_parser
       private :value_parser
 
-      delegate :name, to: :predicate
-      delegate :to_translation_key_fragment, to: :predicate
-      delegate :each, to: :values
+      def name
+        predicate.name
+      end
+
+      def to_translation_key_fragment
+        predicate.to_translation_key_fragment
+      end
+
+      def each
+        values.each {|value| yield(value) }
+      end
 
       def replace_values(values)
         @values = []

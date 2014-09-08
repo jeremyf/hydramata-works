@@ -43,6 +43,7 @@ module Hydramata
         template = options.fetch(:template)
         action_options = options.fetch(:action_options, {})
         action_options[:href] ||= url
+        action_options[:class] ||= "action-#{name}"
         template.content_tag('a', label, action_options)
       end
 
