@@ -45,8 +45,8 @@ module Hydramata
       end
 
       class Update < Hydramata::Core::Runner
-        def run(work_type, attributes)
-          work = services.edit_work(work_type, attributes)
+        def run(identifier, attributes)
+          work = services.edit_work(identifier, attributes)
           case services.save_work(work)
           when 'valid' then callback(:success, work)
           when 'invalid' then callback(:updated_with_invalid_data, work)
