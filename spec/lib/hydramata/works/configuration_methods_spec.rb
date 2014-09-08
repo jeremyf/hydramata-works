@@ -36,6 +36,24 @@ module Hydramata
         Then { configuration.work_storage_service == service }
 
       end
+
+      context 'default #pid_minting_service' do
+        When(:service) { configuration.pid_minting_service }
+        Then { service.respond_to?(:call) }
+      end
+
+      context 'override #pid_minting_service' do
+        it 'raises an exception when the object is invalid' do
+          expect {
+            configuration.pid_minting_service = :storage_service
+          }.to raise_error(RuntimeError)
+        end
+
+        Given(:service) { double(call: true) }
+        When { configuration.pid_minting_service = service }
+        Then { configuration.pid_minting_service == service }
+
+      end
     end
   end
 end
