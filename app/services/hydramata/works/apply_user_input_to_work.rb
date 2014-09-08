@@ -6,15 +6,17 @@ module Hydramata
       def self.call(collaborators = {})
         new(collaborators).call
       end
-      attr_reader :attributes, :work
+      attr_reader :attributes, :work, :property_value_strategy
       def initialize(collaborators = {})
         @attributes = collaborators.fetch(:attributes)
         @work = collaborators.fetch(:work)
+        @property_value_strategy = collaborators.fetch(:property_value_strategy) { :append_values }
       end
 
       def call
         attributes.each do |predicate, values|
-          work.properties << { predicate: predicate, values: values }
+          # Yuck! @TODO refactor this.
+          work.properties.<<({ predicate: predicate, values: values }, { property_value_strategy: property_value_strategy })
         end
         work
       end

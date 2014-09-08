@@ -49,7 +49,7 @@ module Hydramata
         end
 
         it 'appends explicit properties to the collaborating work object' do
-          ApplyUserInputToWork.call(work: work, attributes: user_input.fetch(:attributes))
+          ApplyUserInputToWork.call(work: work, attributes: user_input.fetch(:attributes), property_value_strategy: :replace_values)
 
           expect(work.work_type).to eq(WorkType(work_type_identity))
           expect(work.properties.fetch(:title)).to eq(Property(:title, 'Hello', 'World', 'Bang!'))

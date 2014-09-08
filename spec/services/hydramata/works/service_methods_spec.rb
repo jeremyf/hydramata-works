@@ -117,6 +117,44 @@ module Hydramata
         # And { found_object == work } # TODO: Does this make sense?
       end
 
+      context 'sequence of services to create and update a work' do
+        before do
+          load File.expand_path('../../../../support/feature_seeds.rb', __FILE__)
+        end
+
+        Given(:work_type) { 'article' }
+        Given(:new_attributes) do
+          {
+            dc_title: [],
+            dc_abstract: ['My Abstract'],
+            attachment: [
+              FileUpload.fixture_file_upload('attachments/hello-world.txt'),
+              FileUpload.fixture_file_upload('attachments/good-bye-world.txt')
+            ]
+          }
+        end
+        Given(:edit_attributes) { { dc_title: ['My Title'], dc_abstract: ['Ye Ol\' Abstract', 'Another Abstract'], attachment: [] } }
+
+        it 'captures the correct metadata' do
+          work = service.new_work_for(work_type, new_attributes)
+          service.save_work(work)
+
+          expect(updated_work.properties['attachment'].values.mape(&:to_s)).to eq(['hello-world.txt', 'good-bye-world.txt'])
+          expect(updated_work.properties['dc_title'].values.mape(&:to_s)).to eq([])
+          expect(updated_work.properties['dc_abstract'].values.mape(&:to_s)).to eq(['My Abstract'])
+
+          edited_work = service.edit_work(work.identity, edit_attributes)
+          service.save_work(edited_work)
+
+          expect(edited_work.identity).to eq(work.identity)
+
+          updated_work = service.find_work(edited_work.identity)
+
+          expect(updated_work.properties['attachment'].values.mape(&:to_s)).to eq(['hello-world.txt', 'good-bye-world.txt'])
+          expect(updated_work.properties['dc_title'].values.mape(&:to_s)).to eq(['My Title'])
+          expect(updated_work.properties['dc_abstract'].values.mape(&:to_s)).to eq(['Ye Ol\' Abstract', 'Another Abstract'])
+        end
+      end
     end
   end
 end

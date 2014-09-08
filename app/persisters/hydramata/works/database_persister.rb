@@ -49,9 +49,22 @@ module Hydramata
         @attachments = {}
         work.properties.each do |property|
           property.values.each do |value|
-            if value.respond_to?(:raw_object) && value.raw_object.respond_to?(:original_filename)
-              @attachments[property.name.to_s] ||= []
-              @attachments[property.name.to_s] << value.raw_object
+            # Casess to parse:
+            #
+            # * existing attachment
+            # * new attachment
+            # * simple value
+            if value.respond_to?(:raw_object)
+              if value.raw_object.respond_to?(:file_name)
+                @attachments[property.name.to_s] ||= []
+                @attachments[property.name.to_s] << value.raw_object
+              elsif value.raw_object.respond_to?(:original_filename)
+                @attachments[property.name.to_s] ||= []
+                @attachments[property.name.to_s] << value.raw_object
+              else
+                @properties[property.name.to_s] ||= []
+                @properties[property.name.to_s] << value.to_s
+              end
             else
               @properties[property.name.to_s] ||= []
               @properties[property.name.to_s] << value.to_s
