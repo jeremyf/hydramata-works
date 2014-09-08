@@ -74,7 +74,7 @@ module Hydramata
       end
 
       def default_pid_minting_service
-        lambda { rand(100_000_000).to_s }
+        Hydramata.configuration.pid_minting_service
       end
 
       def default_storage_service
