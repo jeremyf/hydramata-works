@@ -78,8 +78,7 @@ module Hydramata
       end
 
       def default_storage_service
-        require 'hydramata/works/persister/database_coordinator'
-        DatabaseCoordinator
+        Hydramata.configuration.work_storage_service
       end
     end
   end
