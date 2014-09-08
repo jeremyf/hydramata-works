@@ -4,7 +4,7 @@ module Hydramata
   module Works
     # Responsible for negotiating an in-memory work through to the database via
     # the #storage_service method.
-    class DatabasePersister
+    class Persister
       def self.call(collaborators = {})
         new(collaborators).call
       end
@@ -78,7 +78,7 @@ module Hydramata
       end
 
       def default_storage_service
-        require 'hydramata/works/database_persister/coordinator'
+        require 'hydramata/works/persister/coordinator'
         Coordinator
       end
     end

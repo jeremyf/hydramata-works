@@ -2,7 +2,7 @@ require 'active_support/core_ext/array/wrap'
 
 module Hydramata
   module Works
-    class DatabasePersister
+    class Persister
       class Coordinator
         def self.call(attributes = {}, collaborators = {})
           new(attributes, collaborators).call

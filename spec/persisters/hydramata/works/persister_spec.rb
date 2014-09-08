@@ -1,9 +1,9 @@
 require 'spec_fast_helper'
-require 'hydramata/works/database_persister'
+require 'hydramata/works/persister'
 
 module Hydramata
   module Works
-    describe DatabasePersister do
+    describe Persister do
       let(:pid) { 'abc-123' }
       let(:storage_service) { double('Storage Service', call: true) }
       let(:pid_minting_service) { double('PID Minting Service', call: pid)}
