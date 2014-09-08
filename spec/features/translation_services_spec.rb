@@ -61,14 +61,14 @@ module Hydramata
             let(:work_type) { 'Work Type Translated' }
             it 'renders an a-tag' do
               expect(presenter.render(template: template)).
-                to eq(%(<a href="/path/to/edit/#{work.to_param}">Edit Translated Work</a>))
+                to eq(%(<a class="action-edit" href="/path/to/edit/#{work.to_param}">Edit Translated Work</a>))
             end
           end
           context 'without existing work type translations' do
             let(:work_type) { 'Non-Translated Work Type' }
             it 'translates its :name by using the key directly' do
               expect(presenter.render(template: template)).
-                to eq(%(<a href="/path/to/edit/#{work.to_param}">Edit the Work</a>))
+                to eq(%(<a class="action-edit" href="/path/to/edit/#{work.to_param}">Edit the Work</a>))
             end
           end
         end
