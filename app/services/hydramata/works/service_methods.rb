@@ -64,7 +64,7 @@ module Hydramata
         presented_work = work_finder(identity, presentation_context: :edit) do |work|
           work.actions << { name: :update }
         end
-        ApplyUserInputToWork.call(work: presented_work, attributes: attributes) if attributes.present?
+        ApplyUserInputToWork.call(work: presented_work, attributes: attributes, property_value_strategy: :replace_values) if attributes.present?
         WorkForm.new(presented_work, &block)
       end
 
