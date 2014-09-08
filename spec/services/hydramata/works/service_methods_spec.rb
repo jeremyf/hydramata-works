@@ -133,15 +133,15 @@ module Hydramata
             ]
           }
         end
-        Given(:edit_attributes) { { dc_title: ['My Title'], dc_abstract: ['My Abstract', 'Another Abstract'], attachment: [] } }
+        Given(:edit_attributes) { { dc_title: ['My Title'], dc_abstract: ['Ye Ol\' Abstract', 'Another Abstract'], attachment: [] } }
 
         it 'captures the correct metadata' do
           work = service.new_work_for(work_type, new_attributes)
           service.save_work(work)
 
-          expect(work.properties['attachment'].values.size).to eq(2)
-          expect(work.properties['dc_title'].values.size).to eq(0)
-          expect(work.properties['dc_abstract'].values.size).to eq(1)
+          expect(updated_work.properties['attachment'].values.mape(&:to_s)).to eq(['hello-world.txt', 'good-bye-world.txt'])
+          expect(updated_work.properties['dc_title'].values.mape(&:to_s)).to eq([])
+          expect(updated_work.properties['dc_abstract'].values.mape(&:to_s)).to eq(['My Abstract'])
 
           edited_work = service.edit_work(work.identity, edit_attributes)
           service.save_work(edited_work)
@@ -150,9 +150,9 @@ module Hydramata
 
           updated_work = service.find_work(edited_work.identity)
 
-          expect(updated_work.properties['attachment'].values.collect(&:to_s)).to eq(['hello-world.txt', 'good-bye-world.txt'])
-          expect(updated_work.properties['dc_title'].values.collect(&:to_s)).to eq(['My Title'])
-          expect(updated_work.properties['dc_abstract'].values.collect(&:to_s)).to eq(['My Abstract', 'Another Abstract'])
+          expect(updated_work.properties['attachment'].values.mape(&:to_s)).to eq(['hello-world.txt', 'good-bye-world.txt'])
+          expect(updated_work.properties['dc_title'].values.mape(&:to_s)).to eq(['My Title'])
+          expect(updated_work.properties['dc_abstract'].values.mape(&:to_s)).to eq(['Ye Ol\' Abstract', 'Another Abstract'])
         end
       end
     end
