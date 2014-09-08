@@ -10,18 +10,21 @@ module Hydramata
       let(:attributes) { { pid: '123', work_type: 'Article' } }
       let(:work_storage) { Works::DatabaseStorage }
       let(:attachment_storage) { Attachments::DatabaseStorage }
+      let(:persisted_attachment) { attachment_storage.new(pid: '1234') }
       let(:my_attachments) do
         {
           predicate_name: [
             File.new(__FILE__)
           ],
           another_predicate_name: [
-            File.new(__FILE__)
+            File.new(__FILE__),
+            persisted_attachment
           ]
         }
       end
       let(:work) { work_storage.find(attributes.fetch(:pid)) }
-      it 'creates a new instance if one does not exist' do
+
+      it 'creates a new work instance if one does not exist' do
         expect { described_class.call(attributes) }.
           to change { work_storage.count }.
           by(1)
@@ -39,6 +42,7 @@ module Hydramata
 
       it 'attaches files when attachments are given' do
         pid_minting_service = double
+        allow(persisted_attachment).to receive(:persisted?).and_return(true)
         expect(pid_minting_service).to receive(:call).exactly(2).times.and_return('abc', 'efg')
         expect { described_class.call(attributes.merge(attachments: my_attachments), { pid_minting_service: pid_minting_service } ) }.
           to change { attachment_storage.count }.

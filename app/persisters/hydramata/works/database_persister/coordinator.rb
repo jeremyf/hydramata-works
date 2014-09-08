@@ -44,6 +44,7 @@ module Hydramata
           return true unless attributes[:attachments]
           attributes[:attachments].all? do |predicate, attachments|
             Array.wrap(attachments).each do |file|
+              next if file.is_a?(attachment_storage) && file.persisted?
               attachment_pid = pid_minting_service.call
               attachment_storage.create!(
                 pid: attachment_pid,
