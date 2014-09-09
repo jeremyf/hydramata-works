@@ -5,7 +5,7 @@ module Hydramata
   module Works
     describe Persister do
       let(:pid) { 'abc-123' }
-      let(:storage_service) { double('Storage Service', call: true) }
+      let(:persistence_coordinator) { double('Storage Service', call: true) }
       let(:pid_minting_service) { double('PID Minting Service', call: pid)}
       let(:property_1) { double(predicate: 'Title', values: ['Hello World']) }
       let(:property_2) { double(predicate: 'Description', values: ['A Brief Description']) }
@@ -15,8 +15,8 @@ module Hydramata
           let(:work) { double('Work', work_type: 'Article', properties: [property_1, property_2], identity: nil)}
           it 'passes along to the underlying storage' do
             expect(work).to receive(:identity=).with(pid)
-            described_class.call(work: work, storage_service: storage_service, pid_minting_service: pid_minting_service)
-            expect(storage_service).
+            described_class.call(work: work, persistence_coordinator: persistence_coordinator, pid_minting_service: pid_minting_service)
+            expect(persistence_coordinator).
               to have_received(:call).
             with(
               {
@@ -34,7 +34,7 @@ module Hydramata
             expect(
               described_class.call(
                 work: work,
-                storage_service: storage_service,
+                persistence_coordinator: persistence_coordinator,
                 pid_minting_service: pid_minting_service
               )
             ).to be_truthy
@@ -42,11 +42,11 @@ module Hydramata
 
           it 'returns false on failure' do
             expect(work).to_not receive(:identity=)
-            expect(storage_service).to receive(:call).and_return(false)
+            expect(persistence_coordinator).to receive(:call).and_return(false)
             expect(
               described_class.call(
                 work: work,
-                storage_service: storage_service,
+                persistence_coordinator: persistence_coordinator,
                 pid_minting_service: pid_minting_service
               )
             ).to be_falsey
@@ -57,8 +57,8 @@ module Hydramata
           let(:work) { double('Work', work_type: 'Article', properties: [property_1, property_2], identity: pid)}
           it 'returns true on success' do
             expect(work).to_not receive(:identity=)
-            described_class.call(work: work, storage_service: storage_service, pid_minting_service: pid_minting_service)
-            expect(storage_service).
+            described_class.call(work: work, persistence_coordinator: persistence_coordinator, pid_minting_service: pid_minting_service)
+            expect(persistence_coordinator).
               to have_received(:call).
             with(
               {

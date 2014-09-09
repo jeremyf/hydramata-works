@@ -9,16 +9,16 @@ module Hydramata
         @work_model_name = string
       end
 
-      def work_storage_service
-        @work_storage_service ||= begin
+      def work_to_persistence_coordinator
+        @work_to_persistence_coordinator ||= begin
           require 'hydramata/works/persister/database_coordinator'
           Persister::DatabaseCoordinator
         end
       end
 
-      def work_storage_service=(callable)
+      def work_to_persistence_coordinator=(callable)
         if callable.respond_to?(:call)
-          @work_storage_service = callable
+          @work_to_persistence_coordinator = callable
         else
           raise RuntimeError, "Expected #{callable.inspect} to respond_to :call"
         end

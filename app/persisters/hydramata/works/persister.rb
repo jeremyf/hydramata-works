@@ -3,26 +3,26 @@ require 'active_support/core_ext/object/blank'
 module Hydramata
   module Works
     # Responsible for negotiating an in-memory work through to the database via
-    # the #storage_service method.
+    # the #persistence_coordinator method.
     class Persister
       def self.call(collaborators = {})
         new(collaborators).call
       end
 
-      attr_reader :properties, :attachments, :state, :work, :storage_service, :pid_minting_service, :pid
-      private :storage_service, :pid_minting_service
+      attr_reader :properties, :attachments, :state, :work, :persistence_coordinator, :pid_minting_service, :pid
+      private :persistence_coordinator, :pid_minting_service
       def initialize(collaborators = {})
         @work = collaborators.fetch(:work)
         @state = collaborators[:state]
         @pid_minting_service = collaborators.fetch(:pid_minting_service) { default_pid_minting_service }
-        @storage_service = collaborators.fetch(:storage_service) { default_storage_service }
+        @persistence_coordinator = collaborators.fetch(:persistence_coordinator) { default_persistence_coordinator }
         assign_pid!
         assign_properties!
         freeze
       end
 
       def call
-        if storage_service.call(attributes_to_persist, pid_minting_service: pid_minting_service)
+        if persistence_coordinator.call(attributes_to_persist, pid_minting_service: pid_minting_service)
           work.identity ||= pid
           true
         else
@@ -77,8 +77,8 @@ module Hydramata
         Hydramata.configuration.pid_minting_service
       end
 
-      def default_storage_service
-        Hydramata.configuration.work_storage_service
+      def default_persistence_coordinator
+        Hydramata.configuration.work_to_persistence_coordinator
       end
     end
   end
