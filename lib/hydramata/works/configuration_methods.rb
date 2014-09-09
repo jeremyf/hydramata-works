@@ -37,6 +37,23 @@ module Hydramata
           raise RuntimeError, "Expected #{callable.inspect} to respond_to :call"
         end
       end
+
+      def repository_connection
+        @repository_connection ||= begin
+        require 'rubydora'
+        # Please note: these parameters were used in building the VCR cassettes, so change at your own risk.
+        # TODO: This should be a configuration option analogous to ActiveFedora.
+        Rubydora.connect(url: 'http://127.0.0.1:8983/fedora', user: 'fedoraAdmin', password: 'fedoraAdmin')
+        end
+      end
+
+      def repository_connection=(connection)
+        if connection.respond_to?(:find_or_initialize)
+          @repository_connection = connection
+        else
+          raise RuntimeError, "Expected #{connection.inspect} to respond_to :find_or_initialize"
+        end
+      end
     end
   end
 end

@@ -19,10 +19,7 @@ module Hydramata
       end
 
       def default_repository_connection
-        require 'rubydora'
-        # Please note: these parameters were used in building the VCR cassettes, so change at your own risk.
-        # TODO: This should be a configuration option analogous to ActiveFedora.
-        Rubydora.connect(url: 'http://127.0.0.1:8983/fedora', user: 'fedoraAdmin', password: 'fedoraAdmin')
+        Hydramata.configuration.repository_connection
       end
 
       public
