@@ -36,9 +36,9 @@ module Hydramata
       # http://api.rubyonrails.org/classes/ActiveModel/Validations/ClassMethods.html#method-i-validates
       attr_reader :validations
 
-      attr_reader :namespace_context_prefix
-      attr_reader :namespace_context_url
-      attr_reader :namespace_context_name
+      attr_accessor :namespace_context_prefix
+      attr_accessor :namespace_context_url
+      attr_accessor :namespace_context_name
 
       # @TODO - Instead of evaluating the validations, consider parsing the
       # validations when needed.
