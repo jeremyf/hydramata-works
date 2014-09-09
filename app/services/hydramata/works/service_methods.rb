@@ -3,8 +3,8 @@ require 'hydramata/works/apply_user_input_to_work'
 require 'hydramata/works/work_presenter'
 require 'hydramata/works/work_form'
 require 'hydramata/works/work_types/storage'
-require 'hydramata/works/works/database_storage'
 require 'hydramata/works/to_persistence'
+require 'hydramata/works/from_persistence'
 
 module Hydramata
   module Works
@@ -79,7 +79,7 @@ module Hydramata
       def work_finder(identity, options = {})
         # @TODO - Given that we are going to have data across multiple sources
         # should there be a chain of lookups? (eg { sequence: :database })
-        work = Works::DatabaseStorage.where(pid: identity).first.to_work
+        work = FromPersistence.call(pid: identity)
         WorkPresenter.new(options.merge(work: work)) do |presenter|
           yield(presenter) if block_given?
         end
