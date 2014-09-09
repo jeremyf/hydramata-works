@@ -1,5 +1,5 @@
 require 'spec_active_record_helper'
-require 'hydramata/works/fedora_wrangler'
+require 'hydramata/works/from_persistence/fedora_wrangler'
 require 'hydramata/works/work'
 require 'hydramata/works/property'
 
@@ -11,7 +11,7 @@ module Hydramata
         load File.expand_path('../../support/feature_seeds.rb', __FILE__)
       end
       let(:pid) { 'und:f4752f8687n' }
-      let(:work_wrangler) { FedoraWrangler.new(work: work) }
+      let(:work_wrangler) { FromPersistence::FedoraWrangler.new(work: work) }
       let(:work) { Work.new }
 
       it 'parses the Fedora object, assigning predicates and values to the work' do
