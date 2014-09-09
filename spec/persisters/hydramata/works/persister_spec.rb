@@ -7,8 +7,8 @@ module Hydramata
       let(:pid) { 'abc-123' }
       let(:storage_service) { double('Storage Service', call: true) }
       let(:pid_minting_service) { double('PID Minting Service', call: pid)}
-      let(:property_1) { double(name: 'Title', values: ['Hello World']) }
-      let(:property_2) { double(name: 'Description', values: ['A Brief Description']) }
+      let(:property_1) { double(predicate: 'Title', values: ['Hello World']) }
+      let(:property_2) { double(predicate: 'Description', values: ['A Brief Description']) }
 
       context '#call' do
         context 'creating a new object' do

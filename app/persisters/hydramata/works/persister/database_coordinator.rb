@@ -1,9 +1,11 @@
 require 'active_support/core_ext/array/wrap'
+require 'hydramata/works/conversions/predicate'
 
 module Hydramata
   module Works
     class Persister
       class DatabaseCoordinator
+        include Conversions
         def self.call(attributes = {}, collaborators = {})
           new(attributes, collaborators).call
         end
@@ -31,25 +33,27 @@ module Hydramata
         def append_properties
           return true unless attributes[:properties]
           work.properties ||= {}
-          attributes[:properties].each do |predicate ,values|
+          attributes[:properties].each do |key ,values|
+            predicate = Predicate(key)
             if values
-              work.properties[predicate] = values
+              work.properties[predicate.name] = values
             else
-              work.properties.delete(predicate)
+              work.properties.delete(predicate.name)
             end
           end
         end
 
         def append_attachments
           return true unless attributes[:attachments]
-          attributes[:attachments].all? do |predicate, attachments|
+          attributes[:attachments].all? do |key, attachments|
+            predicate = Predicate(key)
             Array.wrap(attachments).each do |file|
               next if file.is_a?(attachment_storage) && file.persisted?
               attachment_pid = pid_minting_service.call
               attachment_storage.create!(
                 pid: attachment_pid,
                 work_id: work.identity,
-                predicate: predicate,
+                predicate: predicate.name,
                 file: file
               )
             end

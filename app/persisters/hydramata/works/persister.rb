@@ -56,18 +56,18 @@ module Hydramata
             # * simple value
             if value.respond_to?(:raw_object)
               if value.raw_object.respond_to?(:file_name)
-                @attachments[property.name.to_s] ||= []
-                @attachments[property.name.to_s] << value.raw_object
+                @attachments[property.predicate] ||= []
+                @attachments[property.predicate] << value.raw_object
               elsif value.raw_object.respond_to?(:original_filename)
-                @attachments[property.name.to_s] ||= []
-                @attachments[property.name.to_s] << value.raw_object
+                @attachments[property.predicate] ||= []
+                @attachments[property.predicate] << value.raw_object
               else
-                @properties[property.name.to_s] ||= []
-                @properties[property.name.to_s] << value.to_s
+                @properties[property.predicate] ||= []
+                @properties[property.predicate] << value.to_s
               end
             else
-              @properties[property.name.to_s] ||= []
-              @properties[property.name.to_s] << value.to_s
+              @properties[property.predicate] ||= []
+              @properties[property.predicate] << value.to_s
             end
           end
         end

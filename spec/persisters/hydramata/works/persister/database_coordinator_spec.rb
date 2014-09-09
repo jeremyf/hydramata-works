@@ -53,8 +53,8 @@ module Hydramata
         described_class.call(attributes.merge(properties: { title: 'Hello', subject: 'Trees', locations: 'Here' }))
         expect { described_class.call(attributes.merge(properties: { title: 'World', locations: nil })) }.
           to change { work.reload.properties }.
-          from({ title: 'Hello', subject: 'Trees', locations: 'Here' }).
-          to({ title: 'World', subject: 'Trees' })
+          from({ 'title' => 'Hello', 'subject' => 'Trees', 'locations' => 'Here' }).
+          to({ 'title' => 'World', 'subject' => 'Trees' })
       end
     end
   end
