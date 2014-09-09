@@ -4,7 +4,7 @@ module Hydramata
   module Works
     # Responsible for negotiating an in-memory work through to the database via
     # the #persistence_coordinator method.
-    class Persister
+    class ToPersistence
       def self.call(collaborators = {})
         new(collaborators).call
       end

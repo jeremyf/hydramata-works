@@ -11,8 +11,8 @@ module Hydramata
 
       def work_to_persistence_coordinator
         @work_to_persistence_coordinator ||= begin
-          require 'hydramata/works/persister/database_coordinator'
-          Persister::DatabaseCoordinator
+          require 'hydramata/works/to_persistence/database_coordinator'
+          ToPersistence::DatabaseCoordinator
         end
       end
 
@@ -54,6 +54,24 @@ module Hydramata
           raise RuntimeError, "Expected #{connection.inspect} to respond_to :find_or_initialize"
         end
       end
+
+      def work_from_persistence_coordinator
+        @work_from_persistence_coordinator ||= begin
+          ->(options) do
+            pid = options.fetch(:pid)
+            Works::DatabaseStorage.where(pid: pid).first.to_work
+          end
+        end
+      end
+
+      def work_from_persistence_coordinator=(callable)
+        if callable.respond_to?(:call)
+          @work_from_persistence_coordinator = callable
+        else
+          raise RuntimeError, "Expected #{callable.inspect} to respond_to :call"
+        end
+      end
+
     end
   end
 end

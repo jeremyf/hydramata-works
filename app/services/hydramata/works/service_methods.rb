@@ -4,7 +4,7 @@ require 'hydramata/works/work_presenter'
 require 'hydramata/works/work_form'
 require 'hydramata/works/work_types/storage'
 require 'hydramata/works/works/database_storage'
-require 'hydramata/works/persister'
+require 'hydramata/works/to_persistence'
 
 module Hydramata
   module Works
@@ -44,7 +44,7 @@ module Hydramata
       # @return [Boolean]
       def save_work(work)
         state = work.valid? ? 'valid' : 'invalid'
-        Persister.call(work: work, state: state) && state
+        ToPersistence.call(work: work, state: state) && state
       end
 
       # @param identity [#to_s]

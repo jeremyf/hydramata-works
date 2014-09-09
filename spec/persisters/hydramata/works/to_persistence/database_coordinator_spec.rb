@@ -1,11 +1,11 @@
 require 'spec_active_record_helper'
-require 'hydramata/works/persister/database_coordinator'
+require 'hydramata/works/to_persistence/database_coordinator'
 require 'hydramata/works/works/database_storage'
 require 'hydramata/works/attachments/database_storage'
 
 module Hydramata
   module Works
-    describe Persister::DatabaseCoordinator do
+    describe ToPersistence::DatabaseCoordinator do
       subject { described_class }
       let(:attributes) { { pid: '123', work_type: 'Article' } }
       let(:work_storage) { Works::DatabaseStorage }

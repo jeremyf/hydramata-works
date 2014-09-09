@@ -3,7 +3,7 @@ require 'hydramata/works/conversions/predicate'
 
 module Hydramata
   module Works
-    class Persister
+    class ToPersistence
       class DatabaseCoordinator
         include Conversions
         def self.call(attributes = {}, collaborators = {})
