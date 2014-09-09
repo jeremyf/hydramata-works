@@ -8,6 +8,7 @@ module Hydramata
       private
       def Predicate(input)
         return input.to_predicate if input.respond_to?(:to_predicate)
+        return Predicate(input.predicate) if input.respond_to?(:predicate)
 
         case input
         when Predicate then input

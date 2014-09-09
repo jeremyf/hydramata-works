@@ -1,5 +1,6 @@
 require 'spec_fast_helper'
 require 'hydramata/works/conversions/predicate'
+require 'hydramata/works/property'
 require 'hydramata/works/linters/implement_predicate_interface_matcher'
 
 module Hydramata
@@ -10,6 +11,11 @@ module Hydramata
       context '#Predicate' do
         it 'converts a String to a Predicate object' do
           expect(Predicate('hello')).to implement_predicate_interface
+        end
+
+        it 'converts a Property to a Predicate object' do
+          property = Property.new(predicate: 'a_predicate', values: 'some_values')
+          expect(Predicate(property)).to eq(property.predicate)
         end
 
         it 'converts a Symbol to a Predicate object' do
