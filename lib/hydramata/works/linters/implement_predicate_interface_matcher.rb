@@ -12,6 +12,9 @@ RSpec::Matchers.define :implement_predicate_interface do
     value_parser_name: [],
     validations: [],
     indexing_strategy: [],
-    itemprop_schema_dot_org: []
+    itemprop_schema_dot_org: [],
+    namespace_context_prefix: [],
+    namespace_context_url: [],
+    namespace_context_name: [],
   )
 end
