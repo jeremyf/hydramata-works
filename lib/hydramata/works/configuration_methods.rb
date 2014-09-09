@@ -26,7 +26,7 @@ module Hydramata
 
       def pid_minting_service
         @pid_minting_service ||= begin
-          -> { rand(100_000_000).to_s }
+          -> { "opaque:#{rand(100_000_000)}" }
         end
       end
 
