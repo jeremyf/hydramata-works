@@ -50,12 +50,8 @@ module Hydramata
       end
 
       def default_value_presenter_builder
-        require 'hydramata/works/value_presenter'
-        if predicate.respond_to?(:value_presenter_class_name) && predicate.value_presenter_class_name
-          "Hydramata::Works::#{predicate.value_presenter_class_name}".constantize.method(:new)
-        else
-          ValuePresenter.method(:new)
-        end
+        require 'hydramata/works/value_presenter_finder'
+        ->(options) { ValuePresenterFinder.call(predicate, options) }
       end
     end
   end
