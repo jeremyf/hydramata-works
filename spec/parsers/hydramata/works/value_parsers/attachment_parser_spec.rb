@@ -28,6 +28,13 @@ module Hydramata
             expect { |b| described_class.call(object, &b) }.to yield_with_args(value: object, raw_object: object.raw_object)
           end
         end
+
+        context 'an unexpected object' do
+          let(:object) { double('Object') }
+          it 'preserves the already parsed object' do
+            expect { |b| described_class.call(object, &b) }.to yield_with_args(value: object, raw_object: object)
+          end
+        end
       end
     end
   end

@@ -1,27 +1,42 @@
 require 'hydramata/works/base_presenter'
+
 module Hydramata
   module Works
-    # Responsible for coordinating the rendering of an in-memory Property-like
-    # object to an output buffer.
-    class PropertyPresenter < BasePresenter
-      attr_reader :work, :value_presenter_builder
-      private :value_presenter_builder
+    # Responsible for coordinating the rendering of an in-memory Attachment
+    # Value-like object to an output buffer.
+    class AttachmentPresenter < BasePresenter
+      attr_reader :work, :predicate, :remote_url_builder
+      private :remote_url_builder
       def initialize(collaborators = {})
-        property = collaborators.fetch(:property)
+        value = collaborators.fetch(:value)
+        @predicate = collaborators.fetch(:predicate)
         @work = collaborators.fetch(:work)
-        super(property, collaborators)
-        @value_presenter_builder = collaborators.fetch(:value_presenter_builder) { default_value_presenter_builder }
+        @remote_url_builder = collaborators.fetch(:remote_url_builder) { default_remote_url_builder }
+        super(value, collaborators)
       end
 
-      def values
-        @values ||= __getobj__.values.collect {|value| value_presenter_builder.call(value: value, predicate: self, work: work) }
+      def render(options = {})
+        renderer.call(options) { label }
       end
 
       def view_path_slug_for_object
-        'properties'
+        'values'
+      end
+
+      def label
+        __getobj__.to_s
+      end
+
+      def url
+        remote_url_builder.call(raw_object.file_uid)
       end
 
       private
+
+      def default_remote_url_builder
+        require 'dragonfly'
+        Dragonfly.app.method(:remote_url_for)
+      end
 
       def default_dom_attributes
         { class: [dom_class, presenter_dom_class] }
@@ -47,11 +62,6 @@ module Hydramata
           ['work_types', work_prefix, view_path_slug_for_object, predicate_prefix],
           [view_path_slug_for_object, predicate_prefix]
         ]
-      end
-
-      def default_value_presenter_builder
-        require 'hydramata/works/value_presenter_finder'
-        ->(options) { ValuePresenterFinder.call(predicate).new(options) }
       end
     end
   end
