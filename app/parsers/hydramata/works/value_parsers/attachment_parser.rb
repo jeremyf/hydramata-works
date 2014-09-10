@@ -11,7 +11,7 @@ module Hydramata
           elsif object.respond_to?(:file_name)
             block.call(value: object.file_name, raw_object: object)
           else
-            block.call(value: object.to_s, raw_object: object)
+            block.call(value: object, raw_object: object)
           end
         end
       end
