@@ -51,7 +51,7 @@ module Hydramata
 
       def default_value_presenter_builder
         require 'hydramata/works/value_presenter_finder'
-        ->(options) { ValuePresenterFinder.call(predicate, options) }
+        ->(options) { ValuePresenterFinder.call(predicate).new(options) }
       end
     end
   end
