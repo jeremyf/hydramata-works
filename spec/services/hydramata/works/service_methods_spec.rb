@@ -1,7 +1,6 @@
-require 'spec_active_record_helper'
+require 'spec_slow_helper'
 require 'spec_file_upload_helper'
 require 'hydramata/works/service_methods'
-require 'hydramata/works/property'
 require 'hydramata/works/linters/implement_work_interface_matcher'
 require 'hydramata/works/linters/implement_work_presenter_interface_matcher'
 require 'hydramata/works/linters/implement_work_type_presenter_interface_matcher'

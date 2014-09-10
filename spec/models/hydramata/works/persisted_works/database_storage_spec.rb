@@ -2,6 +2,7 @@
 # for active record objects.
 require 'spec_active_record_helper'
 require 'hydramata/works/persisted_works/database_storage'
+require 'hydramata/works/attachments/database_storage'
 require 'hydramata/works/linters/implement_work_interface_matcher'
 
 module Hydramata
