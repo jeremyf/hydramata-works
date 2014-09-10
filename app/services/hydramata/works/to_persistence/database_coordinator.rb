@@ -64,7 +64,7 @@ module Hydramata
         private :property_storage
         def default_property_storage
           require 'hydramata/works/works/database_storage'
-          Works::DatabaseStorage
+          Hydramata::Works::Works::DatabaseStorage
         end
 
         attr_reader :attachment_storage
