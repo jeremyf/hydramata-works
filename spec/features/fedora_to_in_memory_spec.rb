@@ -1,7 +1,4 @@
-require 'spec_active_record_helper'
-require 'hydramata/works/from_persistence/fedora_wrangler'
-require 'hydramata/works/work'
-require 'hydramata/works/property'
+require 'spec_slow_helper'
 
 module Hydramata
   module Works
