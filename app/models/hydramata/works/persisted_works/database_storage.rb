@@ -1,9 +1,9 @@
-require 'active_record/base'
+require 'active_record'
 require 'hydramata/works/work'
 
 module Hydramata
   module Works
-    module Works
+    module PersistedWorks
       class DatabaseStorage < ActiveRecord::Base
         self.table_name = :hydramata_works_works
         self.primary_key = :pid

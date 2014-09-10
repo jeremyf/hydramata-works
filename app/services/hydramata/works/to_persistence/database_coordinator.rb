@@ -63,8 +63,8 @@ module Hydramata
         attr_reader :property_storage
         private :property_storage
         def default_property_storage
-          require 'hydramata/works/works/database_storage'
-          Hydramata::Works::Works::DatabaseStorage
+          require 'hydramata/works/persisted_works/database_storage'
+          PersistedWorks::DatabaseStorage
         end
 
         attr_reader :attachment_storage

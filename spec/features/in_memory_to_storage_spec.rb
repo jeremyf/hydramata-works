@@ -1,6 +1,6 @@
 require 'spec_slow_helper'
 require 'hydramata/works/to_persistence'
-require 'hydramata/works/works/database_storage'
+require 'hydramata/works/persisted_works/database_storage'
 
 module Hydramata
   module Works
@@ -10,7 +10,7 @@ module Hydramata
       context 'to a database' do
         it 'increments the database record for a given work' do
           expect { ToPersistence.call(work: work) }.
-            to change { Works::DatabaseStorage.count }.
+            to change { PersistedWorks::DatabaseStorage.count }.
             by(1)
         end
       end
@@ -21,7 +21,7 @@ module Hydramata
           persister.call
         end
         let(:persister) { ToPersistence.new(work: work) }
-        let(:stored_work) { Works::DatabaseStorage.where(pid: persister.pid).first }
+        let(:stored_work) { PersistedWorks::DatabaseStorage.where(pid: persister.pid).first }
 
         it 'is equal to the original work' do
           reified_work = stored_work.to_work

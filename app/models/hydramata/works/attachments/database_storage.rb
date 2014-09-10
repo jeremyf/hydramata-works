@@ -12,7 +12,7 @@ module Hydramata
 
         belongs_to(
           :work,
-          class_name: '::Hydramata::Works::Works::DatabaseStorage',
+          class_name: '::Hydramata::Works::PersistedWorks::DatabaseStorage',
           foreign_key: 'work_id'
         )
 

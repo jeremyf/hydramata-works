@@ -1,6 +1,6 @@
 require 'spec_active_record_helper'
 require 'hydramata/works/to_persistence/database_coordinator'
-require 'hydramata/works/works/database_storage'
+require 'hydramata/works/persisted_works/database_storage'
 require 'hydramata/works/attachments/database_storage'
 
 module Hydramata
@@ -8,7 +8,7 @@ module Hydramata
     describe ToPersistence::DatabaseCoordinator do
       subject { described_class }
       let(:attributes) { { pid: '123', work_type: 'Article' } }
-      let(:work_storage) { Works::DatabaseStorage }
+      let(:work_storage) { PersistedWorks::DatabaseStorage }
       let(:attachment_storage) { Attachments::DatabaseStorage }
       let(:persisted_attachment) { attachment_storage.new(pid: '1234') }
       let(:my_attachments) do

@@ -59,7 +59,7 @@ module Hydramata
         @work_from_persistence_coordinator ||= begin
           ->(options) do
             pid = options.fetch(:pid)
-            ::Hydramata::Works::Works::DatabaseStorage.where(pid: pid).first.to_work
+            PersistedWorks::DatabaseStorage.where(pid: pid).first.to_work
           end
         end
       end
