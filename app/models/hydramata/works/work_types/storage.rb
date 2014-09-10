@@ -11,6 +11,7 @@ module Hydramata
       # strategy for predicates.
       class Storage < ActiveRecord::Base
         self.table_name = :hydramata_works_types
+        default_scope { order(arel_table[:name_for_application_usage].asc) }
         has_many(
           :predicate_sets,
           class_name: '::Hydramata::Works::PredicateSets::Storage',

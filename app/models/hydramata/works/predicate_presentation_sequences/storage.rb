@@ -10,6 +10,8 @@ module Hydramata
       class Storage < ActiveRecord::Base
         self.table_name = :hydramata_works_predicate_presentation_sequences
 
+        default_scope { order(arel_table[:predicate_set_id].asc).order(arel_table[:presentation_sequence].asc) }
+
         validates :predicate_set_id, { presence: true }
         validates :predicate_id, { presence: true, uniqueness: { scope: :predicate_set_id } }
         validates :presentation_sequence, { presence: true, uniqueness: { scope: :predicate_set_id } }

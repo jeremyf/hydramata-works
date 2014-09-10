@@ -8,6 +8,7 @@ module Hydramata
   module Works
     module PredicateSets
       class Storage < ActiveRecord::Base
+        default_scope { order(arel_table[:work_type_id].asc).order(arel_table[:presentation_sequence].asc) }
         self.table_name = :hydramata_works_predicate_sets
         belongs_to(
           :work_type,
