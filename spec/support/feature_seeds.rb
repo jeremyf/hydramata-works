@@ -16,7 +16,8 @@ predicate_title = Hydramata::Works::Predicates::Storage.create!(
 predicate_attachment = Hydramata::Works::Predicates::Storage.create!(
   identity: 'opaque:attachment',
   name_for_application_usage: 'attachment',
-  value_parser_name: 'AttachmentParser'
+  value_parser_name: 'AttachmentParser',
+  value_presenter_class_name: 'AttachmentPresenter'
 )
 predicate_dateSubmitted = Hydramata::Works::Predicates::Storage.create!(identity: 'http://purl.org/dc/terms/dateSubmitted', name_for_application_usage: 'dc_dateSubmitted', value_parser_name: 'DateParser')
 predicate_modified = Hydramata::Works::Predicates::Storage.create!(identity: 'http://purl.org/dc/terms/modified', name_for_application_usage: 'dc_modified', value_parser_name: 'DateParser')

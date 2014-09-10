@@ -40,6 +40,8 @@ module Hydramata
       attr_accessor :namespace_context_url
       attr_accessor :namespace_context_name
 
+      attr_accessor :value_presenter_class_name
+
       # @TODO - Instead of evaluating the validations, consider parsing the
       # validations when needed.
       def validations=(value)

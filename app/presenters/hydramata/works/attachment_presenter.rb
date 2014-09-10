@@ -35,7 +35,7 @@ module Hydramata
 
       def default_remote_url_builder
         require 'dragonfly'
-        Dragonfly.app.method(:remote_url_builder)
+        Dragonfly.app.method(:remote_url_for)
       end
 
       def default_dom_attributes

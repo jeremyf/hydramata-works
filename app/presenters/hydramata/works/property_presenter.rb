@@ -9,8 +9,8 @@ module Hydramata
       def initialize(collaborators = {})
         property = collaborators.fetch(:property)
         @work = collaborators.fetch(:work)
-        @value_presenter_builder = collaborators.fetch(:value_presenter_builder) { default_value_presenter_builder }
         super(property, collaborators)
+        @value_presenter_builder = collaborators.fetch(:value_presenter_builder) { default_value_presenter_builder }
       end
 
       def values
@@ -51,7 +51,11 @@ module Hydramata
 
       def default_value_presenter_builder
         require 'hydramata/works/value_presenter'
-        ValuePresenter.method(:new)
+        if predicate.respond_to?(:value_presenter_class_name) && predicate.value_presenter_class_name
+          "Hydramata::Works::#{predicate.value_presenter_class_name}".constantize.method(:new)
+        else
+          ValuePresenter.method(:new)
+        end
       end
     end
   end
