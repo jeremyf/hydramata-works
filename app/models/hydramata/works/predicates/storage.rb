@@ -31,6 +31,10 @@ module Hydramata
           through: :predicate_sets
         )
 
+        def to_s
+          "#{name_for_application_usage || identity}"
+        end
+
         def self.find_by_identity!(identity)
           where(identity: identity).first!
         rescue ActiveRecord::RecordNotFound

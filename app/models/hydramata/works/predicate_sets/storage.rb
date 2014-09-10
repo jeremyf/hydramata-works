@@ -31,6 +31,10 @@ module Hydramata
         validates :identity, uniqueness: { scope: :work_type_id }
         validates :presentation_sequence, uniqueness: { scope: :work_type_id }
 
+        def to_s
+          "#{work_type} > #{presentation_sequence}-#{identity}"
+        end
+
         def to_predicate_set
           PredicateSet.new(predicate_set_attributes)
         end

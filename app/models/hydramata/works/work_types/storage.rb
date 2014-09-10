@@ -32,6 +32,10 @@ module Hydramata
 
         validates :identity, uniqueness: true, presence: true
 
+        def to_s
+          "#{identity}"
+        end
+
         def self.find_by_identity!(identity)
           where(identity: identity).first!
         rescue ActiveRecord::RecordNotFound

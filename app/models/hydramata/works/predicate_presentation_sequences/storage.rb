@@ -26,6 +26,10 @@ module Hydramata
           class_name: 'Hydramata::Works::Predicates::Storage',
           foreign_key: 'predicate_id'
         )
+
+        def to_s
+          "#{predicate_set} > #{presentation_sequence}-#{predicate}"
+        end
       end
     end
   end
