@@ -4,12 +4,12 @@ require 'spec_view_helper'
 # This means, without the `type: :view` tag, the render method does not exist
 # in the example context
 describe 'hydramata/works/values/attachment/_show.html.erb', type: :view do
-  let(:object) { double('Object', label: 'readme.txt') }
+  let(:object) { double('Object', label: 'readme.txt', url: '/path/to/awesome') }
 
   it 'renders the object and fieldsets' do
     render partial: 'hydramata/works/values/attachment/show', object: object
 
-    expect(rendered).to have_tag('a', text: object.label)
+    expect(rendered).to have_tag('a', text: object.label, href: object.url)
 
   end
 end
