@@ -15,19 +15,19 @@ module Hydramata
 
         has_many(
           :predicate_set_presentations,
-          class_name: '::Hydramata::Works::PredicatePresentationSequences::Storage',
+          class_name: 'Hydramata::Works::PredicatePresentationSequences::Storage',
           foreign_key: 'predicate_id'
         )
 
         has_many(
           :predicate_sets,
-          class_name: '::Hydramata::Works::PredicateSets::Storage',
+          class_name: 'Hydramata::Works::PredicateSets::Storage',
           through: :predicate_set_presentations
         )
 
         has_many(
           :work_types,
-          class_name: '::Hydramata::Works::WorkTypes::Storage',
+          class_name: 'Hydramata::Works::WorkTypes::Storage',
           through: :predicate_sets
         )
 

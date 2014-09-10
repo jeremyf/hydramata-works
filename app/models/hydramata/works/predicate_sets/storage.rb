@@ -12,19 +12,19 @@ module Hydramata
         self.table_name = :hydramata_works_predicate_sets
         belongs_to(
           :work_type,
-          class_name: '::Hydramata::Works::WorkTypes::Storage',
+          class_name: 'Hydramata::Works::WorkTypes::Storage',
           foreign_key: 'work_type_id'
         )
 
         has_many(
           :predicate_presentation_sequences,
-          class_name: '::Hydramata::Works::PredicatePresentationSequences::Storage',
+          class_name: 'Hydramata::Works::PredicatePresentationSequences::Storage',
           foreign_key: 'predicate_set_id'
         )
 
         has_many(
           :predicates,
-          class_name: '::Hydramata::Works::Predicates::Storage',
+          class_name: 'Hydramata::Works::Predicates::Storage',
           through: :predicate_presentation_sequences
         )
 

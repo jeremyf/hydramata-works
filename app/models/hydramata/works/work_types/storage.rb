@@ -14,19 +14,19 @@ module Hydramata
         default_scope { order(arel_table[:name_for_application_usage].asc) }
         has_many(
           :predicate_sets,
-          class_name: '::Hydramata::Works::PredicateSets::Storage',
+          class_name: 'Hydramata::Works::PredicateSets::Storage',
           foreign_key: 'work_type_id'
         )
 
         has_many(
           :predicate_presentation_sequences,
-          class_name: '::Hydramata::Works::PredicatePresentationSequences::Storage',
+          class_name: 'Hydramata::Works::PredicatePresentationSequences::Storage',
           through: :predicate_sets
         )
 
         has_many(
           :predicates,
-          class_name: '::Hydramata::Works::Predicates::Storage',
+          class_name: 'Hydramata::Works::Predicates::Storage',
           through: :predicate_sets
         )
 

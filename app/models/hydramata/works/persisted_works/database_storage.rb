@@ -13,7 +13,7 @@ module Hydramata
 
         has_many(
           :attachments,
-          class_name: '::Hydramata::Works::Attachments::DatabaseStorage',
+          class_name: 'Hydramata::Works::Attachments::DatabaseStorage',
           foreign_key: 'work_id'
         )
 
