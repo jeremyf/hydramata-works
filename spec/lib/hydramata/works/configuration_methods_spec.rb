@@ -86,6 +86,27 @@ module Hydramata
         end
 
       end
+
+      context '#work_from_persistence_coordinator' do
+
+        context 'default' do
+          When(:service) { configuration.work_from_persistence_coordinator }
+          Then { service.respond_to?(:call) }
+        end
+
+        context 'override #work_from_persistence_coordinator' do
+          it 'raises an exception when the object is invalid' do
+            expect {
+              configuration.work_from_persistence_coordinator = :storage_service
+            }.to raise_error(RuntimeError)
+          end
+
+          Given(:service) { double(call: true) }
+          When { configuration.work_from_persistence_coordinator = service }
+          Then { configuration.work_from_persistence_coordinator == service }
+
+        end
+      end
     end
   end
 end
