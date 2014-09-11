@@ -13,7 +13,10 @@ describe 'hydramata/works/properties/attachment/_new.html.erb', type: :view do
 
     expect(rendered).to have_tag('.my-dom-class') do
       with_tag('label', text: 'Label')
-      with_tag('.values input#work_attachment_0.blank-input', with: { type: 'file', multiple: 'multiple', name: 'work[attachment][]' })
+      with_tag(
+        '.values input#work_attachment_0.blank-input',
+        with: { type: 'file', multiple: 'multiple', name: 'work[attachment][add][]' }
+      )
     end
   end
 end
