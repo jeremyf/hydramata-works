@@ -126,20 +126,22 @@ module Hydramata
           {
             dc_title: [],
             dc_abstract: ['My Abstract'],
-            attachment: [
-              FileUpload.fixture_file_upload('attachments/hello-world.txt'),
-              FileUpload.fixture_file_upload('attachments/good-bye-world.txt')
-            ]
+            attachment: {
+              add: [
+                FileUpload.fixture_file_upload('attachments/hello-world.txt'),
+                FileUpload.fixture_file_upload('attachments/good-bye-world.txt')
+              ]
+            }
           }
         end
         Given(:edit_attributes) do
           {
             dc_title: ['My Title'],
             dc_abstract: ['Ye Ol\' Abstract', 'Another Abstract'],
-            attachment: [
-              FileUpload.fixture_file_upload('attachments/another-attachment.txt'),
+            attachment: {
+              add: [FileUpload.fixture_file_upload('attachments/another-attachment.txt')],
               delete: []
-            ]
+            }
           }
         end
 

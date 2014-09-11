@@ -73,9 +73,15 @@ module Hydramata
                 @attachments[property.predicate] << value.raw_object
               elsif value.raw_object.respond_to?(:fetch)
                 @attachments[property.predicate] ||= []
-                @attachments[property.predicate] << value.raw_object.fetch(:add) { nil }
+                to_add = value.raw_object.fetch(:add) { [] }
+                Array.wrap(to_add).each do |attachment|
+                  @attachments[property.predicate] << attachment
+                end
                 @dettachments[property.predicate] ||= []
-                @dettachments[property.predicate] << value.raw_object.fetch(:delete) { nil }
+                to_delete = value.raw_object.fetch(:delete) { [] }.flatten
+                Array.wrap(to_delete).each do |attachment|
+                  @dettachments[property.predicate] << attachment
+                end
               else
                 @properties[property.predicate] ||= []
                 @properties[property.predicate] << value.to_s
