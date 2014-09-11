@@ -136,10 +136,10 @@ module Hydramata
           {
             dc_title: ['My Title'],
             dc_abstract: ['Ye Ol\' Abstract', 'Another Abstract'],
-            attachment: [
-              FileUpload.fixture_file_upload('attachments/another-attachment.txt'),
+            attachment: {
+              add: [FileUpload.fixture_file_upload('attachments/another-attachment.txt')],
               delete: []
-            ]
+            }
           }
         end
 
@@ -154,7 +154,7 @@ module Hydramata
           # Get the handle for the attachment that I want to dettach
           found_work = service.find_work(work.identity)
           first_uploaded_attachment = found_work.properties['attachment'].values.first.to_param
-          edit_attributes[:attachment][-1][:delete] << first_uploaded_attachment
+          edit_attributes[:attachment][:delete] << first_uploaded_attachment
 
           edited_work = service.edit_work(work.identity, edit_attributes)
           service.save_work(edited_work)
