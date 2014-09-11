@@ -1,5 +1,5 @@
 require 'spec_fast_helper'
-require 'hydramata/works/work_form'
+require 'hydramata/works/work_form_presenter'
 require 'hydramata/works/linters'
 require 'hydramata/works/work'
 require 'hydramata/works/linters/implement_work_form_interface_matcher'

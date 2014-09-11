@@ -1,6 +1,6 @@
 require 'spec_fast_helper'
 require 'hydramata/works/validation_service'
-require 'hydramata/works/work_form'
+require 'hydramata/works/work_form_presenter'
 require 'hydramata/works/predicate'
 require 'hydramata/works/work'
 require 'active_model/validations/presence'

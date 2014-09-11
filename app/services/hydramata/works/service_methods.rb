@@ -1,7 +1,7 @@
 require 'hydramata/works/work'
 require 'hydramata/works/apply_user_input_to_work'
 require 'hydramata/works/work_presenter'
-require 'hydramata/works/work_form'
+require 'hydramata/works/work_form_presenter'
 require 'hydramata/works/work_types/storage'
 require 'hydramata/works/to_persistence'
 require 'hydramata/works/from_persistence'

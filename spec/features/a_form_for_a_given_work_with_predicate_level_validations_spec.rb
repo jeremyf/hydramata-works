@@ -1,7 +1,7 @@
 require 'spec_fast_helper'
 require 'hydramata/works/predicate'
 require 'hydramata/works/work'
-require 'hydramata/works/work_form'
+require 'hydramata/works/work_form_presenter'
 
 module Hydramata
   module Works
