@@ -72,13 +72,8 @@ module Hydramata
                 @attachments[property.predicate] ||= []
                 @attachments[property.predicate] << value.raw_object
               elsif value.raw_object.respond_to?(:fetch)
-                @attachments[property.predicate] ||= []
-                to_add = value.raw_object.fetch(:add) { [] }
-                Array.wrap(to_add).each do |attachment|
-                  @attachments[property.predicate] << attachment
-                end
                 @dettachments[property.predicate] ||= []
-                to_delete = value.raw_object.fetch(:delete) { [] }.flatten
+                to_delete = value.raw_object.fetch(:delete, []).flatten
                 Array.wrap(to_delete).each do |attachment|
                   @dettachments[property.predicate] << attachment
                 end
