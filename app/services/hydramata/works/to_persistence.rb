@@ -9,7 +9,8 @@ module Hydramata
         new(collaborators).call
       end
 
-      attr_reader :properties, :attachments, :state, :work, :persistence_coordinator, :pid_minting_service, :pid
+      attr_reader :properties, :attachments, :state, :work, :pid, :dettachments
+      attr_reader :persistence_coordinator, :pid_minting_service
       private :persistence_coordinator, :pid_minting_service
       def initialize(collaborators = {})
         @work = collaborators.fetch(:work)
@@ -41,19 +42,28 @@ module Hydramata
       end
 
       def attributes_to_persist
-        { pid: pid, work_type: work_type, properties: properties, state: state, attachments: attachments }
+        {
+          pid: pid, work_type: work_type, state: state,
+          properties: properties, attachments: attachments, dettachments: dettachments
+        }
       end
 
       def assign_properties!
         @properties = {}
         @attachments = {}
+        @dettachments = {}
         work.properties.each do |property|
           property.values.each do |value|
             # Casess to parse:
             #
             # * existing attachment
             # * new attachment
+            # * removing an attachment
             # * simple value
+            #
+            # @TODO - Yuck! Noodle on this solution. Its ugly.
+            # I believe the value parser should yield for the appropriate
+            # callback types.
             if value.respond_to?(:raw_object)
               if value.raw_object.respond_to?(:file_name)
                 @attachments[property.predicate] ||= []
@@ -61,6 +71,11 @@ module Hydramata
               elsif value.raw_object.respond_to?(:original_filename)
                 @attachments[property.predicate] ||= []
                 @attachments[property.predicate] << value.raw_object
+              elsif value.raw_object.respond_to?(:fetch)
+                @attachments[property.predicate] ||= []
+                @attachments[property.predicate] << value.raw_object.fetch(:add) { nil }
+                @dettachments[property.predicate] ||= []
+                @dettachments[property.predicate] << value.raw_object.fetch(:delete) { nil }
               else
                 @properties[property.predicate] ||= []
                 @properties[property.predicate] << value.to_s

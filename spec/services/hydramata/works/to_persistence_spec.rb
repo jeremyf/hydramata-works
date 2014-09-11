@@ -22,9 +22,10 @@ module Hydramata
               {
                 pid: pid,
                 work_type: 'Article',
-                properties: {'Title' => ['Hello World'], 'Description' => ['A Brief Description']},
                 state: nil,
-                attachments: {}
+                properties: { 'Title' => ['Hello World'], 'Description' => ['A Brief Description'] },
+                attachments: {},
+                dettachments: {}
               }, { pid_minting_service: pid_minting_service }
             )
           end
@@ -64,9 +65,10 @@ module Hydramata
               {
                 pid: pid,
                 work_type: 'Article',
-                properties: {'Title' => ['Hello World'], 'Description' => ['A Brief Description']},
                 state: nil,
-                attachments: {}
+                properties: { 'Title' => ['Hello World'], 'Description' => ['A Brief Description'] },
+                attachments: {},
+                dettachments: {}
               }, { pid_minting_service: pid_minting_service }
             )
           end

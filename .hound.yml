@@ -186,7 +186,7 @@ DefWithParentheses:
 
 Delegate:
   Description: 'Prefer delegate method for delegations.'
-  Enabled: true
+  Enabled: false
 
 DeprecatedHashMethods:
   Description: 'Checks for use of deprecated Hash methods.'

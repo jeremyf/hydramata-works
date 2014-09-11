@@ -6,7 +6,7 @@ require 'hydramata/works/linters/implement_value_interface_matcher'
 module Hydramata
   module Works
     describe Value do
-      let(:raw_object) { double('Raw Object') }
+      let(:raw_object) { double('Raw Object', to_param: '123', to_key: ['123']) }
       let(:value) { 123456789 }
       subject { described_class.new(value: value, raw_object: raw_object) }
 
@@ -24,6 +24,14 @@ module Hydramata
 
       it 'is an instance of the presented object\'s class' do
         expect(subject.instance_of?(value.class)).to be_truthy
+      end
+
+      it 'delegates #to_param to the raw object' do
+        expect(subject.to_param).to eq(raw_object.to_param)
+      end
+
+      it 'delegates #to_key to the raw object' do
+        expect(subject.to_key).to eq(raw_object.to_key)
       end
 
       context '#==' do

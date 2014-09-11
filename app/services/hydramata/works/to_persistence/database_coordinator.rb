@@ -25,7 +25,7 @@ module Hydramata
           work.work_type = attributes[:work_type] if attributes.key?(:work_type)
           work.state = attributes[:state] if attributes[:state]
           append_properties
-          work.save! && append_attachments
+          work.save! && append_attachments && remove_dettachments
         end
 
         private
@@ -43,20 +43,31 @@ module Hydramata
           end
         end
 
-        def append_attachments
-          return true unless attributes[:attachments]
-          attributes[:attachments].all? do |key, attachments|
+        def each_value_for_attribute_key(key_name)
+          return true unless attributes[key_name]
+          attributes[key_name].all? do |key, values|
             predicate = Predicate(key)
-            Array.wrap(attachments).each do |file|
-              next if file.is_a?(attachment_storage) && file.persisted?
-              attachment_pid = pid_minting_service.call
-              attachment_storage.create!(
-                pid: attachment_pid,
-                work_id: work.identity,
-                predicate: predicate.name,
-                file: file
-              )
+            Array.wrap(values).each do |value|
+              next if value.blank?
+              yield(predicate, value)
             end
+          end
+        end
+
+        def append_attachments
+          each_value_for_attribute_key(:attachments) do |predicate, file|
+            next if file.is_a?(attachment_storage) && file.persisted?
+            attachment_pid = pid_minting_service.call
+            attachment_storage.
+              create!(pid: attachment_pid, work_id: work.identity, predicate: predicate.name, file: file)
+          end
+        end
+
+        def remove_dettachments
+          each_value_for_attribute_key(:dettachments) do |predicate, identity|
+            attachment_storage.
+              where(work_id: work.identity, predicate: predicate.name, pid: identity).
+              destroy_all
           end
         end
 

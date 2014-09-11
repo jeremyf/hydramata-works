@@ -18,6 +18,14 @@ module Hydramata
         format('#<%s:%#0x value=%s raw_object=%s>', self.class, __id__, __getobj__.inspect, raw_object.inspect)
       end
 
+      def to_param
+        raw_object.to_param
+      end
+
+      def to_key
+        raw_object.to_key
+      end
+
       def instance_of?(klass)
         super || __getobj__.instance_of?(klass)
       end

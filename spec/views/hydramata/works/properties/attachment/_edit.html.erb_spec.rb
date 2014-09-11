@@ -6,8 +6,8 @@ require 'spec_view_helper'
 describe 'hydramata/works/properties/attachment/_edit.html.erb', type: :view do
   let(:object) { double('Object', predicate: 'attachment', dom_class: 'my-dom-class') }
   let(:form) { double('Form') }
-  let(:attachment_1) { double('Attachment', to_s: 'file_1.txt') }
-  let(:attachment_2) { double('Attachment', to_s: 'file_2.txt') }
+  let(:attachment_1) { double('Attachment', to_s: 'file_1.txt', to_param: '123') }
+  let(:attachment_2) { double('Attachment', to_s: 'file_2.txt', to_param: '456') }
 
   it 'renders the object and fieldsets' do
     expect(object).to receive(:each_with_index).and_yield(attachment_1, 0).and_yield(attachment_2, 1)
@@ -16,9 +16,22 @@ describe 'hydramata/works/properties/attachment/_edit.html.erb', type: :view do
 
     expect(rendered).to have_tag('.my-dom-class') do
       with_tag('label', text: 'Label')
-      with_tag('.values #work_attachment_1.existing-input', text: 'file_1.txt' )
-      with_tag('.values #work_attachment_2.existing-input', text: 'file_2.txt' )
-      with_tag('.values input#work_attachment_0.blank-input', with: { type: 'file', multiple: 'multiple', name: 'work[attachment][]' })
+      with_tag('.values .value #work_attachment_1.existing-input', text: 'file_1.txt')
+      with_tag(
+        '.values .value .existing-input-delete',
+        with: { type: :checkbox, name: 'work[attachment][delete][]', value: attachment_1.to_param },
+        without: { checked: 'checked' }
+      )
+      with_tag('.values .value #work_attachment_2.existing-input', text: 'file_2.txt')
+      with_tag(
+        '.values .value .existing-input-delete',
+        with: { type: :checkbox, name: 'work[attachment][delete][]', value: attachment_2.to_param },
+        without: { checked: 'checked' }
+      )
+      with_tag(
+        '.values .value input#work_attachment_0.blank-input',
+        with: { type: 'file', multiple: 'multiple', name: 'work[attachment][add][]' }
+      )
     end
   end
 end
