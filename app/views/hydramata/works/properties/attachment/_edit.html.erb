@@ -21,6 +21,7 @@
               "remove_work_#{edit.predicate}_#{index+1}",
               value.to_param,
               false,
+              :id => "delete_work_#{edit.predicate}_#{index+1}",
               :name => "work[#{edit.predicate}][delete][]",
               :class => 'existing-input-delete-input',
               'aria-labelledby' => "label_for_delete_work_#{edit.predicate}_#{index+1}"

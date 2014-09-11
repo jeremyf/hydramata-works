@@ -25,10 +25,11 @@ describe 'hydramata/works/properties/attachment/_edit.html.erb', type: :view do
           with_tag('.existing-input-delete') do
             with_tag(
               "label.existing-input-delete-label#label_for_delete_work_attachment_#{index}",
-              text: "Delete #{attachment}"
+              text: "Delete #{attachment}",
+              with: { for: "delete_work_#{object.predicate}_#{index}"}
             )
             with_tag(
-              '.existing-input-delete-input',
+              ".existing-input-delete-input#delete_work_#{object.predicate}_#{index}",
               with: {
                 :type => :checkbox, :name => 'work[attachment][delete][]', :value => attachment.to_param,
                 'aria-labelledby' => "label_for_delete_work_attachment_#{index}"
