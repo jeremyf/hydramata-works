@@ -22,7 +22,7 @@ module Hydramata
             Property.new(predicate: predicate)
           end
           values = args[1..-1]
-          property << values
+          property << values if values.size > 0
           property
         end
       end
