@@ -128,7 +128,7 @@ module Hydramata
             dc_abstract: ['My Abstract'],
             attachment: [
               FileUpload.fixture_file_upload('attachments/hello-world.txt'),
-              FileUpload.fixture_file_upload('attachments/good-bye-world.txt')
+              add: FileUpload.fixture_file_upload('attachments/good-bye-world.txt')
             ]
           }
         end
@@ -155,7 +155,6 @@ module Hydramata
           found_work = service.find_work(work.identity)
           first_uploaded_attachment = found_work.properties['attachment'].values.first.to_param
           edit_attributes[:attachment][:delete] << first_uploaded_attachment
-
           edited_work = service.edit_work(work.identity, edit_attributes)
           service.save_work(edited_work)
 
