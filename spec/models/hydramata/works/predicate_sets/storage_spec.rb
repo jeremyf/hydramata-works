@@ -43,6 +43,19 @@ module Hydramata
           expect(described_class.new.to_predicate_set).to implement_predicate_set_interface
         end
 
+        context 'with feature seed data' do
+          before do
+            load File.expand_path('../../../../../support/feature_seeds.rb', __FILE__)
+          end
+
+          let(:work_type) { WorkTypes::Storage.where(identity: 'article').first! }
+          let(:predicate_set) { described_class.where(work_type: work_type, identity: 'required').first! }
+
+          it 'has properly sorted predicates' do
+            expect(predicate_set.predicates.map(&:to_s)).to eq(['dc_title', 'dc_description'])
+          end
+        end
+
       end
     end
   end

@@ -24,6 +24,10 @@ module Hydramata
 
         has_many(
           :predicates,
+          lambda {
+            unscope(:order).
+            order(Hydramata::Works::PredicatePresentationSequences::Storage.arel_table[:presentation_sequence].asc)
+          },
           class_name: 'Hydramata::Works::Predicates::Storage',
           through: :predicate_presentation_sequences
         )
