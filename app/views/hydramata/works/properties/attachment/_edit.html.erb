@@ -2,33 +2,40 @@
   <%= label_tag("work_#{edit.predicate}", edit.label, id: "label_for_work_#{edit.predicate}") %>
   <div class="values">
     <% edit.each_with_index do |value, index| %>
-      <div class="value">
+      <div class="value" id="work_<%= edit.predicate %>_<%= index+1 %>">
         <%= content_tag(
-          'a',
-          value,
-          :href => '#',
-          :class => 'existing-input',
-          :id => "work_#{edit.predicate}_#{index+1}",
-          'aria-labelledby' => "label_for_work_#{edit.predicate}")
-        %>
-        <%= check_box_tag(
-          "remove_work_#{edit.predicate}_#{index+1}",
-          value.to_param,
-          false,
-          :name => "work[#{edit.predicate}][delete][]",
-          :class => 'existing-input-delete',
-          'aria-labelledby' => "work_#{edit.predicate}_#{index+1}")
-        %>
+            'a',
+            value,
+            :href => '#',
+            :class => 'existing-input',
+            'aria-labelledby' => "label_for_work_#{edit.predicate}"
+          ) %>
+        <div class="existing-input-delete">
+          <%= label_tag(
+              "delete_work_#{edit.predicate}_#{index+1}",
+              "Delete #{value}",
+              id: "label_for_delete_work_#{edit.predicate}_#{index+1}",
+              class: 'existing-input-delete-label'
+            ) %>
+          <%= check_box_tag(
+              "remove_work_#{edit.predicate}_#{index+1}",
+              value.to_param,
+              false,
+              :name => "work[#{edit.predicate}][delete][]",
+              :class => 'existing-input-delete-input',
+              'aria-labelledby' => "label_for_delete_work_#{edit.predicate}_#{index+1}"
+            ) %>
+        </div>
       </div>
     <% end %>
     <div class="value">
       <%= file_field_tag(
-        "work_#{edit.predicate}_0",
-         :name => "work[#{edit.predicate}][add][]",
-         :class => 'blank-input',
-         :multiple => true,
-         'aria-labelledby' => "label_for_work_#{edit.predicate}")
-      %>
+          "work_#{edit.predicate}_0",
+          :name => "work[#{edit.predicate}][add][]",
+          :class => 'blank-input',
+          :multiple => true,
+          'aria-labelledby' => "label_for_work_#{edit.predicate}"
+        ) %>
     </div>
   </div>
 </div>
