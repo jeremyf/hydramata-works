@@ -42,6 +42,10 @@ module Hydramata
         predicate.to_translation_key_fragment
       end
 
+      def to_view_path_fragment
+        predicate.to_view_path_fragment
+      end
+
       def each
         values.each {|value| yield(value) }
       end

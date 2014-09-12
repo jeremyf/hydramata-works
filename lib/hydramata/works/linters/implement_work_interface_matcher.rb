@@ -11,6 +11,7 @@ RSpec::Matchers.define :implement_work_interface do
     work_type: [],
     identity: [],
     to_translation_key_fragment: [],
+    to_view_path_fragment: [],
     itemtype_schema_dot_org: []
   )
 end

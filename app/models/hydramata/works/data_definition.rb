@@ -22,8 +22,14 @@ module Hydramata
         @name_for_application_usage || identity
       end
 
+      attr_accessor :translation_key_fragment
       def to_translation_key_fragment
-        name_for_application_usage
+        @translation_key_fragment || name_for_application_usage
+      end
+
+      attr_accessor :view_path_fragment
+      def to_view_path_fragment
+        @view_path_fragment || name_for_application_usage
       end
 
       def name

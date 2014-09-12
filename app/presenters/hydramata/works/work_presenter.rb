@@ -57,7 +57,7 @@ module Hydramata
 
       def default_partial_prefixes
         [
-          [TranslationKeyFragment(self)]
+          [ViewPathFragment(self)]
         ]
       end
 

@@ -51,6 +51,7 @@ module Hydramata
 
       delegate(
         :to_translation_key_fragment,
+        :to_view_path_fragment,
         :name_for_application_usage,
         :itemtype_schema_dot_org,
         to: :work_type

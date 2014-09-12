@@ -13,6 +13,32 @@ module Hydramata
         expect(subject.identity).to eq('My Identity')
       end
 
+      context 'translation_key_fragment' do
+        Given(:data_definition) { described_class.new(attributes) }
+        context 'defaults to name_for_application_usage' do
+          Given(:attributes) { { name_for_application_usage: 'One Two Three' } }
+          Then { data_definition.to_translation_key_fragment == 'One Two Three' }
+        end
+
+        context 'with override custom override' do
+          Given(:attributes) { { name_for_application_usage: 'One Two Three', translation_key_fragment: 'Hello World' } }
+          Then { data_definition.to_translation_key_fragment == 'Hello World' }
+        end
+      end
+
+      context 'view_path_fragment' do
+        Given(:data_definition) { described_class.new(attributes) }
+        context 'defaults to name_for_application_usage' do
+          Given(:attributes) { { name_for_application_usage: 'One Two Three' } }
+          Then { data_definition.to_view_path_fragment == 'One Two Three' }
+        end
+
+        context 'with override custom override' do
+          Given(:attributes) { { name_for_application_usage: 'One Two Three', view_path_fragment: 'Hello World' } }
+          Then { data_definition.to_view_path_fragment == 'Hello World' }
+        end
+      end
+
       context 'with #name_for_application_usage assigned' do
         subject { described_class.new(identity: 'My Identity', name_for_application_usage: 'My Name') }
 

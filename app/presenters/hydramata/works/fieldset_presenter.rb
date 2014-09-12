@@ -33,8 +33,8 @@ module Hydramata
       end
 
       def default_partial_prefixes
-        work_prefix = TranslationKeyFragment(work)
-        fieldset_prefix = TranslationKeyFragment(name)
+        work_prefix = ViewPathFragment(work)
+        fieldset_prefix = ViewPathFragment(name)
         [
           [work_prefix, fieldset_prefix],
           [fieldset_prefix]

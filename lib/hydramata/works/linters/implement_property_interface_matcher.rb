@@ -11,6 +11,8 @@ RSpec::Matchers.define :implement_property_interface do
     :replace_values => [],
     :append_values => [],
     :values => [:each],
-    :predicate => []
+    :predicate => [],
+    :to_translation_key_fragment => [],
+    :to_view_path_fragment => []
   )
 end
