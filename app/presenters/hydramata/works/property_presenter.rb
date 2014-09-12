@@ -32,8 +32,8 @@ module Hydramata
       end
 
       def default_partial_prefixes
-        work_prefix = TranslationKeyFragment(work)
-        predicate_prefix = TranslationKeyFragment(predicate)
+        work_prefix = ViewPathFragment(work)
+        predicate_prefix = ViewPathFragment(predicate)
         [
           [work_prefix, predicate_prefix],
           [predicate_prefix]

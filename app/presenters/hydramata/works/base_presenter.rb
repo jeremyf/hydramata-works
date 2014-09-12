@@ -1,6 +1,7 @@
 require 'delegate'
 require 'active_support/core_ext/array/wrap'
 require 'hydramata/works/conversions/translation_key_fragment'
+require 'hydramata/works/conversions/view_path_fragment'
 
 module Hydramata
   module Works
