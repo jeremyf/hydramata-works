@@ -1,12 +1,15 @@
 require 'spec_fast_helper'
 require 'hydramata/works/property_presenter'
 require 'hydramata/works/work'
+require 'hydramata/works/conversions/property'
 
 module Hydramata
   module Works
     describe PropertyPresenter do
+      include Conversions
       let(:work) { Work.new(work_type: 'a work type') }
-      let(:property) { double('Property', predicate: 'my_property') }
+      let(:predicate) { 'my_predicate' }
+      let(:property) { Property(predicate: 'my_predicate') }
       let(:renderer) { double('Renderer', call: true) }
       subject { described_class.new(property: property, work: work, renderer: renderer) }
 
@@ -17,9 +20,36 @@ module Hydramata
       end
 
       it 'has a default partial prefixes' do
-        expect(subject.partial_prefixes).to eq([['a_work_type','my_property'], ['my_property']])
+        expect(subject.partial_prefixes).to eq([['a_work_type','my_predicate'], ['my_predicate']])
       end
 
+      context 'dom helpers' do
+        Then { subject.dom_id_for_field(index: 1) == "work_#{predicate}_1" }
+        And { subject.dom_id_for_label == "label_for_work_#{predicate}" }
+        And { subject.dom_name_for_field == "work[#{predicate}][]" }
+      end
+
+      context '#dom_label_attributes' do
+        Given(:options) { { :class => ['123'] } }
+        When(:returned_value) { subject.dom_label_attributes(options) }
+        Then do
+          returned_value == {
+            :id=>"label_for_work_my_predicate",
+            :class=>["123", "label", "property", 'my-predicate']
+          }
+        end
+      end
+
+      context '#dom_value_attributes' do
+        Given(:options) { { :class => ['123'] } }
+        When(:returned_value) { subject.dom_value_attributes(options) }
+        Then do
+          returned_value == {
+            'aria-labelledby'=>"label_for_work_my_predicate",
+            :class=>["123", "value", "property", 'my-predicate']
+          }
+        end
+      end
     end
   end
 end

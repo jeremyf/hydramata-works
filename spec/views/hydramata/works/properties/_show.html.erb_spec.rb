@@ -6,17 +6,23 @@ require 'spec_view_helper'
 describe 'hydramata/works/properties/_show.html.erb', type: :view do
   let(:value1) { double('Value 1', render: '<dd class="my-dom-class value">value1</dd>'.html_safe ) }
   let(:value2) { double('Value 2', render: '<dd class="my-dom-class value">value2</dd>'.html_safe ) }
-  let(:object) { double('Object', predicate: 'title', t: true, dom_class: 'my-dom-class', values: [value1, value2]) }
+  let(:object) do
+    double(
+      'Object',
+      predicate: 'title',
+      dom_label_attributes: {
+        'id' => "label_for_work_title",
+        'class' => ['my-dom-class', 'label']
+      },
+      dom_value_attributes: {
+        "aria-labelledby"=>"label_for_work_title",
+        'class' => ['my-dom-class', 'value']
+      },
+      values: [value1, value2]
+    )
+  end
 
   it 'renders the object and fieldsets' do
-    expect(object).
-      to receive(:container_content_tag_attributes).
-      with(id: "label_for_work_title", class: 'label').
-      and_return(id: "label_for_work_title", class: ['my-dom-class', 'label'])
-    expect(object).
-      to receive(:container_content_tag_attributes).
-      with(:class=>"value", "aria-labelledby"=>"label_for_work_title").
-      and_return(:class => ['my-dom-class', 'value'], "aria-labelledby"=>"label_for_work_title").at_least(1).times
     expect(object).to receive(:label).and_return('Label')
     render partial: 'hydramata/works/properties/show', object: object
 

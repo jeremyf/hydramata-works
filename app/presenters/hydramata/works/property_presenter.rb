@@ -21,6 +21,32 @@ module Hydramata
         'properties'
       end
 
+      def dom_label_attributes(options = {})
+        returning = { id: dom_id_for_label }.deep_merge(options)
+        returning[:class] = Array.wrap(returning[:class])
+        returning[:class] << 'label' << presenter_dom_class << dom_class
+        returning
+      end
+
+      def dom_value_attributes(options = {})
+        returning = { 'aria-labelledby' => dom_id_for_label }.deep_merge(options)
+        returning[:class] = Array.wrap(returning[:class])
+        returning[:class] << 'value' << presenter_dom_class << dom_class
+        returning
+      end
+
+      def dom_id_for_field(index: 0)
+        "work_#{predicate}_#{index}"
+      end
+
+      def dom_id_for_label
+        "label_for_work_#{predicate}"
+      end
+
+      def dom_name_for_field
+        "work[#{predicate}][]"
+      end
+
       private
 
       def default_dom_attributes
