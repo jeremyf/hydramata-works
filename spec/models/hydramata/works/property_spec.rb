@@ -23,6 +23,11 @@ module Hydramata
           to([value])
       end
 
+      it 'skips appending values that are not present' do
+        expect { subject << '' }.
+          to_not change { subject.values }
+      end
+
       it 'can replace values' do
         subject << value
         expect { subject.replace_values('New') }.

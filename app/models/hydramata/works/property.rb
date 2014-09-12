@@ -54,7 +54,9 @@ module Hydramata
       def <<(values)
         Array.wrap(values).each do |value|
           value_parser.call(predicate: predicate, value: value) do |response|
-            @values << Value(response)
+            if response[:raw_object].present?
+              @values << Value(response)
+            end
           end
         end
         self
