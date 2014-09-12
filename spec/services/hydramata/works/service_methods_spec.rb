@@ -124,7 +124,7 @@ module Hydramata
         Given(:work_type) { 'article' }
         Given(:new_attributes) do
           {
-            dc_title: [],
+            dc_title: [''],
             dc_abstract: ['My Abstract'],
             attachment: [
               FileUpload.fixture_file_upload('attachments/hello-world.txt'),
