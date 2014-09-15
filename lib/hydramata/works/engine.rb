@@ -1,3 +1,5 @@
+require 'hydramata/works/conversions'
+
 module Hydramata
   module Works
     # Hydramata::Works is a [Rails::Engine](http://guides.rubyonrails.org/engines.html)
@@ -29,14 +31,15 @@ module Hydramata
 
       initializer 'hydramata_works.services' do |app|
         ActiveSupport.on_load(:hydramata_services) do
-          include Hydramata::Works::ServiceMethods
+          require 'hydramata/works/service_methods'
+          include ServiceMethods
         end
       end
 
       initializer 'hydramata_works.configuration' do |app|
         ActiveSupport.on_load(:hydramata_configuration) do
           require 'hydramata/works/configuration_methods'
-          include Hydramata::Works::ConfigurationMethods
+          include ConfigurationMethods
         end
       end
     end
