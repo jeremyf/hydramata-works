@@ -1,42 +1,33 @@
-<div class="<%= edit.dom_class %>">
+<div class="<%= edit.dom_class %> form-group">
   <%= label_tag(edit.dom_id_for_field, edit.label, edit.dom_label_attributes) %>
   <div class="values">
     <% edit.each_with_index do |value, index| %>
-      <div class="value" id="work_<%= edit.predicate %>_<%= index+1 %>">
+      <div class="value">
         <%= content_tag(
             'a',
             value,
-            :href => '#',
-            :class => 'existing-input',
-            'aria-labelledby' => edit.dom_id_for_label
+            edit.dom_value_attributes(class: 'existing-input', href: '#')
           ) %>
         <div class="existing-input-delete">
           <%= label_tag(
-              "delete_work_#{edit.predicate}_#{index+1}",
-              "Delete #{value}",
-              id: "label_for_delete_work_#{edit.predicate}_#{index+1}",
-              class: 'existing-input-delete-label'
+            edit.dom_id_for_field(index: index+1, suffix: 'delete'),
+            "Delete #{value}",
+            edit.dom_label_attributes(index: index+1, suffix: 'delete', class: 'existing-input-delete-label')
             ) %>
           <%= check_box_tag(
-              "remove_work_#{edit.predicate}_#{index+1}",
-              value.to_param,
-              false,
-              :id => "delete_work_#{edit.predicate}_#{index+1}",
-              :name => "work[#{edit.predicate}][delete][]",
-              :class => 'existing-input-delete-input',
-              'aria-labelledby' => "label_for_delete_work_#{edit.predicate}_#{index+1}"
+            edit.dom_id_for_field(index: index+1, suffix: 'delete'),
+            value.to_param,
+            false,
+            edit.dom_input_attributes(index: index+1, suffix: 'delete', class: 'existing-input-delete-input')
             ) %>
         </div>
       </div>
     <% end %>
     <div class="value">
       <%= file_field_tag(
-          edit.dom_id_for_field,
-          :name => "work[#{edit.predicate}][add][]",
-          :class => 'blank-input',
-          :multiple => true,
-          'aria-labelledby' => edit.dom_id_for_label
-        ) %>
+        edit.dom_id_for_field,
+        edit.dom_input_attributes(class: 'blank-input', multiple: 'multiple', name: "work[#{edit.predicate}][add][]")
+      ) %>
     </div>
   </div>
   <% edit.with_text_for(:help) do |help| %>
