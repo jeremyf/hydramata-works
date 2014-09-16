@@ -1,4 +1,4 @@
 <fieldset class="<%= edit.dom_class %> fieldset">
-  <legend><%= edit.label %></legend>
+  <legend class="legend"><%= edit.label %></legend>
   <% edit.properties.each do |property| %><%= property.render(template: self, locals: { form: form }) %><% end %>
 </fieldset>

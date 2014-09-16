@@ -20,7 +20,7 @@ describe 'hydramata/works/fieldsets/_new.html.erb', type: :view do
     expect(property1).to have_received(:render).with(template: view, locals: { form: form } )
     expect(property2).to have_received(:render).with(template: view, locals: { form: form } )
     expect(rendered).to have_tag('fieldset.my-dom-class.fieldset') do
-      with_tag('caption', text: 'Heading')
+      with_tag('legend.legend', text: 'Heading')
       with_tag('.property1', text: 'Property 1')
       with_tag('.property2', text: 'Property 2')
     end

@@ -73,7 +73,7 @@ module Hydramata
           expect(rendered_output).to have_tag('form.edit-special-work-type.work#edit_work', with: { method: 'post', action: '/' }) do
             with_tag('input', with: { name: '_method', value: 'patch' } )
             with_tag('fieldset.required') do
-              with_tag('caption', text: 'required')
+              with_tag('.legend', text: 'required')
               with_tag('.title label', text: 'title')
               with_tag('.title .values input.existing-input', with: { name: 'work[title][]', value: 'Hello' })
               with_tag('.title .values input.existing-input', with: { name: 'work[title][]', value: 'World' })
@@ -81,7 +81,7 @@ module Hydramata
               with_tag('.title .values input.blank-input', with: { name: 'work[title][]' }, without: { value: /.*/ })
             end
             with_tag('fieldset.optional') do
-              with_tag('caption', text: 'optional')
+              with_tag('.legend', text: 'optional')
               with_tag('.abstract label', text: 'abstract')
               with_tag('.abstract .values input.existing-input', with: { name: 'work[abstract][]', value: 'Long Text' })
               with_tag('.abstract .values input.existing-input', with: { name: 'work[abstract][]', value: 'Longer Text' })
@@ -104,13 +104,13 @@ module Hydramata
           rendered_output = renderer.render
           expect(rendered_output).to have_tag('form.new-special-work-type.work#new_work', with: { method: 'post', action: '/' }) do
             with_tag('fieldset.required') do
-              with_tag('caption', text: 'required')
+              with_tag('.legend', text: 'required')
               with_tag('.title label', text: 'title')
               with_tag('.title .values input.blank-input', with: { name: 'work[title][]'}, without: { value: /.*/ })
             end
 
             with_tag('fieldset.optional') do
-              with_tag('caption', text: 'optional')
+              with_tag('.legend', text: 'optional')
               with_tag('.abstract label', text: 'abstract')
               with_tag('.abstract .values input.blank-input', with: { name: 'work[abstract][]'}, without: { value: /.*/ })
               with_tag('.keyword label', text: 'keyword')
