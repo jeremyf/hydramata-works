@@ -7,7 +7,7 @@ describe 'hydramata/works/properties/attachment/_edit.html.erb', type: :view do
   let(:object) do
     double(
       'Object', predicate: 'attachment', dom_class: 'my-dom-class', label: 'Label',
-      dom_id_for_label: 'label_for_work_attachment'
+      dom_id_for_label: 'label_for_work_attachment', dom_id_for_field: 'work_attachment_0'
     )
   end
   let(:form) { double('Form') }

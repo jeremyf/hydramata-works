@@ -1,5 +1,5 @@
 <div class="<%= edit.dom_class %>">
-  <%= label_tag(edit.dom_id_for_label, edit.label, edit.dom_label_attributes) %>
+  <%= label_tag(edit.dom_id_for_field, edit.label, edit.dom_label_attributes) %>
   <div class="values">
     <% edit.each_with_index do |value, index| %>
       <div class="value" id="work_<%= edit.predicate %>_<%= index+1 %>">
@@ -31,7 +31,7 @@
     <% end %>
     <div class="value">
       <%= file_field_tag(
-          "work_#{edit.predicate}_0",
+          edit.dom_id_for_field,
           :name => "work[#{edit.predicate}][add][]",
           :class => 'blank-input',
           :multiple => true,
