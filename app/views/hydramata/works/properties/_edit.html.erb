@@ -1,5 +1,5 @@
 <div class="<%= edit.dom_class %> form-group">
-  <%= label_tag(edit.dom_id_for_field, edit.label, id: edit.dom_id_for_label) %>
+  <%= label_tag(edit.dom_id_for_field, edit.label, edit.dom_label_attributes) %>
   <div class="values">
   <% edit.each_with_index do |value, index| %>
     <%= text_field_tag(

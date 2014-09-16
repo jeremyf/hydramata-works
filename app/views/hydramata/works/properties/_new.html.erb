@@ -1,5 +1,5 @@
 <div class="<%= new.dom_class %>">
-  <%= label_tag(new.dom_id_for_field, new.label, id: new.dom_id_for_label) %>
+  <%= label_tag(new.dom_id_for_field, new.label, new.dom_label_attributes) %>
   <div class="values">
   <% new.each_with_index do |value, index| %>
     <%= text_field_tag(

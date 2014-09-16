@@ -12,11 +12,12 @@ describe 'hydramata/works/properties/attachment/_edit.html.erb', type: :view do
   it 'renders the object and fieldsets' do
     expect(object).to receive(:each_with_index).and_yield(attachment_1, 0).and_yield(attachment_2, 1)
     expect(object).to receive(:with_text_for).with(:help).and_yield('This is a hint')
+    expect(object).to receive(:dom_label_attributes).and_return({ id: 'label_id' })
 
     render partial: 'hydramata/works/properties/attachment/edit', object: object, locals: { form: form }
 
     expect(rendered).to have_tag('.my-dom-class') do
-      with_tag('label', text: 'Label')
+      with_tag('#label_id', text: 'Label')
       [attachment_1, attachment_2].each_with_index do |attachment, i|
         index = i+1
         with_tag(".values .value#work_attachment_#{index}") do

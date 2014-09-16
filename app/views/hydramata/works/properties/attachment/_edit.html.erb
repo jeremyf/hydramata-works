@@ -1,5 +1,5 @@
 <div class="<%= edit.dom_class %>">
-  <%= label_tag("work_#{edit.predicate}", edit.label, id: "label_for_work_#{edit.predicate}") %>
+  <%= label_tag("work_#{edit.predicate}", edit.label, edit.dom_label_attributes) %>
   <div class="values">
     <% edit.each_with_index do |value, index| %>
       <div class="value" id="work_<%= edit.predicate %>_<%= index+1 %>">
