@@ -1,5 +1,7 @@
 require 'hydramata/works/base_presenter'
 require 'active_support/core_ext/array/wrap'
+require 'active_support/core_ext/module/delegation'
+require 'hydramata/works/property_presenter_dom_helper'
 
 module Hydramata
   module Works
@@ -23,62 +25,14 @@ module Hydramata
         'properties'
       end
 
-      def dom_label_attributes(options = {})
-        options = options.clone
-        suffix = options.delete(:suffix)
-        index = options.delete(:index)
-        returning = { id: dom_id_for_label(suffix: suffix, index: index) }.deep_merge(options)
-        returning[:class] = Array.wrap(returning[:class])
-        returning[:class] << 'label' << presenter_dom_class << dom_class
-        returning[:class] << 'required' if predicate.required?
-        returning
-      end
-
-      def dom_value_attributes(options = {})
-        returning = { 'aria-labelledby' => dom_id_for_label }.deep_merge(options)
-        returning[:class] = Array.wrap(returning[:class])
-        returning[:class] << 'value' << presenter_dom_class << dom_class
-        returning
-      end
-
-      def dom_input_attributes(options = {})
-        options = options.clone
-        suffix = options.delete(:suffix)
-        index = options.delete(:index)
-        returning = { 'aria-labelledby' => dom_id_for_label(suffix: suffix, index: index) }.deep_merge(options)
-        returning[:class] = Array.wrap(returning[:class])
-        returning[:class] << 'value' << presenter_dom_class << dom_class
-        returning['required'] = 'required' if predicate.required?
-        returning[:name] ||= dom_name_for_field(suffix: suffix)
-        returning
-      end
-
-      def dom_id_for_field(index: 0, suffix: nil, prefix: nil)
-        parts = []
-        parts << prefix if prefix
-        parts << "work_#{predicate}"
-        parts << suffix if suffix
-        parts << "#{index}" if index
-        parts.join("_")
-      end
-
-      def dom_id_for_label(prefix: nil, index: nil, suffix: nil)
-        parts = ["label_for"]
-        parts << prefix if prefix
-        parts << "work_#{predicate}"
-        parts << suffix if suffix
-        parts << "#{index}" if index
-        parts.join("_")
-      end
-
-      def dom_name_for_field(suffix: nil)
-        returning_value = "work[#{predicate}]"
-        returning_value << "[#{suffix}]" if suffix
-        returning_value << "[]"
-        returning_value
-      end
+      delegate :label_attributes, :value_attributes, :input_attributes,
+        :id_for_field, :id_for_label, :name_for_field, to: :dom, prefix: :dom
 
       private
+
+      def dom
+        @dom ||= PropertyPresenterDomHelper.new(self)
+      end
 
       def default_dom_attributes
         { class: [dom_class, presenter_dom_class] }
