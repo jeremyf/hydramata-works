@@ -2,14 +2,15 @@ require 'spec_fast_helper'
 require 'hydramata/works/property_presenter'
 require 'hydramata/works/work'
 require 'hydramata/works/conversions/property'
+require 'hydramata/works/predicate'
 
 module Hydramata
   module Works
     describe PropertyPresenter do
       include Conversions
       let(:work) { Work.new(work_type: 'a work type') }
-      let(:predicate) { 'my_predicate' }
-      let(:property) { Property(predicate: 'my_predicate') }
+      let(:predicate) { Predicate.new(identity: 'my_predicate', validations: { required: true } ) }
+      let(:property) { Property(predicate: predicate) }
       let(:renderer) { double('Renderer', call: true) }
       subject { described_class.new(property: property, work: work, renderer: renderer) }
 
@@ -35,7 +36,7 @@ module Hydramata
         Then do
           returned_value == {
             :id=>"label_for_work_my_predicate",
-            :class=>["123", "label", "property", 'my-predicate']
+            :class=>["123", "label", "property", 'my-predicate', 'required']
           }
         end
       end
@@ -46,7 +47,8 @@ module Hydramata
         Then do
           returned_value == {
             'aria-labelledby'=>"label_for_work_my_predicate",
-            :class=>["123", "value", "property", 'my-predicate']
+            :class=>["123", "value", "property", 'my-predicate'],
+            :required=>'required'
           }
         end
       end

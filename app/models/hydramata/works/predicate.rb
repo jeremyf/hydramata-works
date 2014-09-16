@@ -48,6 +48,10 @@ module Hydramata
         @validations = ValidationsParser.call(value)
       end
 
+      def required?
+        validations.present?
+      end
+
       attr_reader :itemprop_schema_dot_org
       def itemprop_schema_dot_org=(value)
         string = value.to_s.strip

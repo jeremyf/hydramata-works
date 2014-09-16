@@ -1,4 +1,6 @@
 require 'hydramata/works/base_presenter'
+require 'active_support/core_ext/array/wrap'
+
 module Hydramata
   module Works
     # Responsible for coordinating the rendering of an in-memory Property-like
@@ -25,6 +27,7 @@ module Hydramata
         returning = { id: dom_id_for_label }.deep_merge(options)
         returning[:class] = Array.wrap(returning[:class])
         returning[:class] << 'label' << presenter_dom_class << dom_class
+        returning[:class] << 'required' if predicate.required?
         returning
       end
 
@@ -32,6 +35,7 @@ module Hydramata
         returning = { 'aria-labelledby' => dom_id_for_label }.deep_merge(options)
         returning[:class] = Array.wrap(returning[:class])
         returning[:class] << 'value' << presenter_dom_class << dom_class
+        returning[:required] = 'required' if predicate.required?
         returning
       end
 

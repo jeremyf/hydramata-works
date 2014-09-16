@@ -31,6 +31,10 @@ module Hydramata
           through: :predicate_sets
         )
 
+        def required?
+          validations.present?
+        end
+
         def to_s
           "#{name_for_application_usage || identity}"
         end
