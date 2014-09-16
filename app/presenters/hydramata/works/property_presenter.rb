@@ -24,7 +24,10 @@ module Hydramata
       end
 
       def dom_label_attributes(options = {})
-        returning = { id: dom_id_for_label }.deep_merge(options)
+        options = options.clone
+        suffix = options.delete(:suffix)
+        index = options.delete(:index)
+        returning = { id: dom_id_for_label(suffix: suffix, index: index) }.deep_merge(options)
         returning[:class] = Array.wrap(returning[:class])
         returning[:class] << 'label' << presenter_dom_class << dom_class
         returning[:class] << 'required' if predicate.required?
@@ -35,24 +38,44 @@ module Hydramata
         returning = { 'aria-labelledby' => dom_id_for_label }.deep_merge(options)
         returning[:class] = Array.wrap(returning[:class])
         returning[:class] << 'value' << presenter_dom_class << dom_class
-        returning[:required] = 'required' if predicate.required?
         returning
       end
 
-      def dom_id_for_field(index: 0)
-        "work_#{predicate}_#{index}"
+      def dom_input_attributes(options = {})
+        options = options.clone
+        suffix = options.delete(:suffix)
+        index = options.delete(:index)
+        returning = { 'aria-labelledby' => dom_id_for_label(suffix: suffix, index: index) }.deep_merge(options)
+        returning[:class] = Array.wrap(returning[:class])
+        returning[:class] << 'value' << presenter_dom_class << dom_class
+        returning['required'] = 'required' if predicate.required?
+        returning[:name] ||= dom_name_for_field(suffix: suffix)
+        returning
       end
 
-      def dom_id_for_label(prefix: nil, index: nil)
-        parts = ["label_for"]
+      def dom_id_for_field(index: 0, suffix: nil, prefix: nil)
+        parts = []
         parts << prefix if prefix
         parts << "work_#{predicate}"
+        parts << suffix if suffix
         parts << "#{index}" if index
         parts.join("_")
       end
 
-      def dom_name_for_field
-        "work[#{predicate}][]"
+      def dom_id_for_label(prefix: nil, index: nil, suffix: nil)
+        parts = ["label_for"]
+        parts << prefix if prefix
+        parts << "work_#{predicate}"
+        parts << suffix if suffix
+        parts << "#{index}" if index
+        parts.join("_")
+      end
+
+      def dom_name_for_field(suffix: nil)
+        returning_value = "work[#{predicate}]"
+        returning_value << "[#{suffix}]" if suffix
+        returning_value << "[]"
+        returning_value
       end
 
       private

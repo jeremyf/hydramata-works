@@ -47,8 +47,7 @@ module Hydramata
         Then do
           returned_value == {
             'aria-labelledby'=>"label_for_work_my_predicate",
-            :class=>["123", "value", "property", 'my-predicate'],
-            :required=>'required'
+            :class=>["123", "value", "property", 'my-predicate']
           }
         end
       end
