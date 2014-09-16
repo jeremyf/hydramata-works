@@ -43,8 +43,12 @@ module Hydramata
         "work_#{predicate}_#{index}"
       end
 
-      def dom_id_for_label
-        "label_for_work_#{predicate}"
+      def dom_id_for_label(prefix: nil, index: nil)
+        parts = ["label_for"]
+        parts << prefix if prefix
+        parts << "work_#{predicate}"
+        parts << "#{index}" if index
+        parts.join("_")
       end
 
       def dom_name_for_field

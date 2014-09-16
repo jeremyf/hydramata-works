@@ -1,5 +1,5 @@
 <div class="<%= edit.dom_class %>">
-  <%= label_tag("work_#{edit.predicate}", edit.label, edit.dom_label_attributes) %>
+  <%= label_tag(edit.dom_id_for_label, edit.label, edit.dom_label_attributes) %>
   <div class="values">
     <% edit.each_with_index do |value, index| %>
       <div class="value" id="work_<%= edit.predicate %>_<%= index+1 %>">
@@ -8,7 +8,7 @@
             value,
             :href => '#',
             :class => 'existing-input',
-            'aria-labelledby' => "label_for_work_#{edit.predicate}"
+            'aria-labelledby' => edit.dom_id_for_label
           ) %>
         <div class="existing-input-delete">
           <%= label_tag(
@@ -35,7 +35,7 @@
           :name => "work[#{edit.predicate}][add][]",
           :class => 'blank-input',
           :multiple => true,
-          'aria-labelledby' => "label_for_work_#{edit.predicate}"
+          'aria-labelledby' => edit.dom_id_for_label
         ) %>
     </div>
   </div>
