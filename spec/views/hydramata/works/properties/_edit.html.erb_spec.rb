@@ -9,6 +9,7 @@ describe 'hydramata/works/properties/_edit.html.erb', type: :view do
 
   it 'renders the object and fieldsets' do
     expect(object).to receive(:each_with_index).and_yield('value1', 0).and_yield('value2', 1)
+    expect(object).to receive(:with_text_for).with(:help).and_yield('This is a hint')
     expect(object).to receive(:label).and_return('Label')
     render partial: 'hydramata/works/properties/edit', object: object, locals: { form: form }
 
@@ -17,6 +18,8 @@ describe 'hydramata/works/properties/_edit.html.erb', type: :view do
       with_tag('.values input#work_my_predicate_0.blank-input', with: { name: 'work[my_predicate][]' })
       with_tag('.values input#work_my_predicate_1.existing-input', with: { name: 'work[my_predicate][]', value: 'value1' })
       with_tag('.values input#work_my_predicate_2.existing-input', with: { name: 'work[my_predicate][]', value: 'value2' })
+      with_tag('.values input#work_my_predicate_2.existing-input', with: { name: 'work[my_predicate][]', value: 'value2' })
+      with_tag('.help-block', text: 'This is a hint')
     end
   end
 end

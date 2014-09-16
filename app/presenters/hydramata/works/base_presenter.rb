@@ -29,6 +29,14 @@ module Hydramata
       end
       alias_method :t, :translate
 
+      def with_text_for(key, options = {})
+        translation = translate(key, { raise: true }.merge(options))
+        yield(translation) if block_given?
+        translation
+      rescue StandardError
+        :no_translation
+      end
+
       def label(options = {})
         translator.t(:label, { scopes: translation_scopes, default: name.to_s }.merge(options))
       end

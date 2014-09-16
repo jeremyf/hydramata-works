@@ -45,6 +45,25 @@ module Hydramata
         expect(subject.instance_of?(described_class)).to be_truthy
       end
 
+      context '#with_text_for' do
+        it 'yields if a translation for that key is found' do
+          man_o_war_text = 'Hello World'
+          expect(translator).to receive(:t).
+            with(:man_o_war, kind_of(Hash)).
+            and_return(man_o_war_text)
+          expect { |b| subject.with_text_for(:man_o_war, &b) }.
+            to yield_with_args(man_o_war_text)
+        end
+
+        it 'does not yield if translation key is not found' do
+          expect(translator).to receive(:t).
+            with(:man_o_war, hash_including(raise: true)).
+            and_raise(RuntimeError)
+          expect { |b| subject.with_text_for(:man_o_war, &b) }.
+            to_not yield_control
+        end
+      end
+
       context '#translate' do
         it 'translates attribute keys' do
           subject.translate(:name)
