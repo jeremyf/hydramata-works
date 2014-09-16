@@ -9,4 +9,7 @@
        'aria-labelledby' => "label_for_work_#{new.predicate}")
     %>
   </div>
+  <% new.with_text_for(:help) do |help| %>
+    <p class="help-block"><%= help %></p>
+  <% end %>
 </div>

@@ -11,6 +11,8 @@ describe 'hydramata/works/properties/attachment/_edit.html.erb', type: :view do
 
   it 'renders the object and fieldsets' do
     expect(object).to receive(:each_with_index).and_yield(attachment_1, 0).and_yield(attachment_2, 1)
+    expect(object).to receive(:with_text_for).with(:help).and_yield('This is a hint')
+
     render partial: 'hydramata/works/properties/attachment/edit', object: object, locals: { form: form }
 
     expect(rendered).to have_tag('.my-dom-class') do
@@ -46,6 +48,8 @@ describe 'hydramata/works/properties/attachment/_edit.html.erb', type: :view do
             'aria-labelledby' => 'label_for_work_attachment'
           }
         )
+        with_tag('.help-block', text: 'This is a hint')
+
       end
     end
   end

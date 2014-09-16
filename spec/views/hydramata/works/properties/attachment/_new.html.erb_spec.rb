@@ -9,6 +9,7 @@ describe 'hydramata/works/properties/attachment/_new.html.erb', type: :view do
 
   it 'renders the object and fieldsets' do
     expect(object).to receive(:label).and_return('Label')
+    expect(object).to receive(:with_text_for).with(:help).and_yield('This is a hint')
     render partial: 'hydramata/works/properties/attachment/new', object: object, locals: { form: form }
 
     expect(rendered).to have_tag('.my-dom-class') do
@@ -17,6 +18,7 @@ describe 'hydramata/works/properties/attachment/_new.html.erb', type: :view do
         '.values input#work_attachment_0.blank-input',
         with: { type: 'file', multiple: 'multiple', name: 'work[attachment][add][]' }
       )
+      with_tag('.help-block', text: 'This is a hint')
     end
   end
 end
