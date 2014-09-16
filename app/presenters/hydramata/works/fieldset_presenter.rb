@@ -22,6 +22,8 @@ module Hydramata
         'fieldsets'
       end
 
+      alias_method :legend, :label
+
       private
 
       def default_dom_attributes

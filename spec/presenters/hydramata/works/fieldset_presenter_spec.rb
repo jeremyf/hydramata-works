@@ -27,6 +27,10 @@ module Hydramata
         expect(subject.work_type).to eq(work.work_type)
       end
 
+      it 'has a #legend' do
+        expect(subject.legend).to eq(subject.label)
+      end
+
       it 'is an instance of the presented object\'s class' do
         expect(subject.instance_of?(fieldset.class)).to be_truthy
       end
