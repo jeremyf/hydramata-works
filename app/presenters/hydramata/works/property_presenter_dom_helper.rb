@@ -7,7 +7,11 @@ module Hydramata
         __setobj__(property)
       end
 
-      def label_attributes(options ={})
+      def container_attributes(options = {})
+        # @TODO
+      end
+
+      def label_attributes(options = {})
         options = options.clone
         suffix = options.delete(:suffix)
         index = options.delete(:index)
@@ -35,27 +39,17 @@ module Hydramata
         returning = { 'aria-labelledby' => id_for_label(suffix: suffix, index: index) }.deep_merge(options)
         returning[:class] = Array.wrap(returning[:class])
         returning[:class] << 'value' << presenter_dom_class << dom_class
-        returning['required'] = 'required' if predicate.required?
+        returning[:required] = 'required' if predicate.required?
         returning[:name] ||= name_for_field(suffix: suffix)
         returning
       end
 
       def id_for_field(index: 0, suffix: nil, prefix: nil)
-        parts = []
-        parts << prefix if prefix
-        parts << "work_#{predicate}"
-        parts << suffix if suffix
-        parts << "#{index}" if index
-        parts.join("_")
+        assemble_id(nil, index: index, suffix: suffix, prefix: prefix)
       end
 
       def id_for_label(prefix: nil, index: nil, suffix: nil)
-        parts = ["label_for"]
-        parts << prefix if prefix
-        parts << "work_#{predicate}"
-        parts << suffix if suffix
-        parts << "#{index}" if index
-        parts.join("_")
+        assemble_id('label_for', index: index, suffix: suffix, prefix: prefix)
       end
 
       def name_for_field(suffix: nil)
@@ -63,6 +57,16 @@ module Hydramata
         returning_value << "[#{suffix}]" if suffix
         returning_value << "[]"
         returning_value
+      end
+
+      private
+      def assemble_id(leader, prefix: nil, index: nil, suffix: nil)
+        parts = Array.wrap(leader)
+        parts << prefix if prefix
+        parts << "work_#{predicate}"
+        parts << suffix if suffix
+        parts << "#{index}" if index
+        parts.join("_")
       end
     end
   end
