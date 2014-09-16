@@ -1,5 +1,5 @@
 <div class="<%= new.dom_class %>">
-  <%= label_tag("work_#{new.predicate}", new.label, id: "label_for_work_#{new.predicate}") %>
+  <%= label_tag("work_#{new.predicate}", new.label, new.dom_label_attributes) %>
   <div class="values">
     <%= file_field_tag(
       "work_#{new.predicate}_0",

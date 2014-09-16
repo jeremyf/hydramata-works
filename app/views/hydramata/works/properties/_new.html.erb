@@ -1,21 +1,21 @@
 <div class="<%= new.dom_class %>">
-  <%= label_tag("work_#{new.predicate}", new.label, id: "label_for_work_#{new.predicate}") %>
+  <%= label_tag(new.dom_id_for_field, new.label, new.dom_label_attributes) %>
   <div class="values">
   <% new.each_with_index do |value, index| %>
     <%= text_field_tag(
-      "work_#{new.predicate}_#{index+1}",
-       value,
-       :name => "work[#{new.predicate}][]",
-       :class => 'existing-input',
-       'aria-labelledby' => "label_for_work_#{new.predicate}")
+      new.dom_id_for_field(index: index+1),
+      value,
+      :name => new.dom_name_for_field,
+      :class => 'existing-input',
+      'aria-labelledby' => new.dom_id_for_label)
     %>
   <% end %>
     <%= text_field_tag(
-      "work_#{new.predicate}_0",
-       nil,
-       :name => "work[#{new.predicate}][]",
-       :class => 'blank-input',
-       'aria-labelledby' => "label_for_work_#{new.predicate}")
+      new.dom_id_for_field,
+      nil,
+      :name => new.dom_name_for_field,
+      :class => 'blank-input',
+      'aria-labelledby' => new.dom_id_for_label)
     %>
   </div>
   <% new.with_text_for(:help) do |help| %>

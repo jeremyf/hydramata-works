@@ -4,7 +4,12 @@ require 'spec_view_helper'
 # This means, without the `type: :view` tag, the render method does not exist
 # in the example context
 describe 'hydramata/works/properties/attachment/_edit.html.erb', type: :view do
-  let(:object) { double('Object', predicate: 'attachment', dom_class: 'my-dom-class', label: 'Label') }
+  let(:object) do
+    double(
+      'Object', predicate: 'attachment', dom_class: 'my-dom-class', label: 'Label',
+      dom_id_for_label: 'label_for_work_attachment'
+    )
+  end
   let(:form) { double('Form') }
   let(:attachment_1) { double('Attachment', to_s: 'file_1.txt', to_param: '123') }
   let(:attachment_2) { double('Attachment', to_s: 'file_2.txt', to_param: '456') }
@@ -12,11 +17,12 @@ describe 'hydramata/works/properties/attachment/_edit.html.erb', type: :view do
   it 'renders the object and fieldsets' do
     expect(object).to receive(:each_with_index).and_yield(attachment_1, 0).and_yield(attachment_2, 1)
     expect(object).to receive(:with_text_for).with(:help).and_yield('This is a hint')
+    expect(object).to receive(:dom_label_attributes).and_return({ id: object.dom_id_for_label })
 
     render partial: 'hydramata/works/properties/attachment/edit', object: object, locals: { form: form }
 
     expect(rendered).to have_tag('.my-dom-class') do
-      with_tag('label', text: 'Label')
+      with_tag('#label_for_work_attachment', text: 'Label')
       [attachment_1, attachment_2].each_with_index do |attachment, i|
         index = i+1
         with_tag(".values .value#work_attachment_#{index}") do
