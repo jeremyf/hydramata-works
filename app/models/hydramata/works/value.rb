@@ -34,6 +34,10 @@ module Hydramata
         super || other == __getobj__
       end
 
+      def name_for_application_usage
+        "value"
+      end
+
       private
 
       def default_raw_object

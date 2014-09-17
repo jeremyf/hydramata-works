@@ -73,11 +73,16 @@ module Hydramata
               elsif value.raw_object.respond_to?(:original_filename)
                 @attachments[property.predicate] ||= []
                 @attachments[property.predicate] << value.raw_object
-              elsif value.raw_object.respond_to?(:fetch)
-                @dettachments[property.predicate] ||= []
-                to_delete = value.raw_object.fetch(:delete, []).flatten
-                Array.wrap(to_delete).each do |attachment|
-                  @dettachments[property.predicate] << attachment
+              elsif value.raw_object.is_a?(Hash)
+                if value.raw_object.key?(:delete)
+                  @dettachments[property.predicate] ||= []
+                  to_delete = value.raw_object.fetch(:delete, []).flatten
+                  Array.wrap(to_delete).each do |attachment|
+                    @dettachments[property.predicate] << attachment
+                  end
+                else
+                  @properties[property.predicate] ||= []
+                  @properties[property.predicate] << value.raw_object
                 end
               else
                 @properties[property.predicate] ||= []

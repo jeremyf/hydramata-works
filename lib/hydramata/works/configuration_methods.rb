@@ -40,10 +40,10 @@ module Hydramata
 
       def repository_connection
         @repository_connection ||= begin
-        require 'rubydora'
-        # Please note: these parameters were used in building the VCR cassettes, so change at your own risk.
-        # TODO: This should be a configuration option analogous to ActiveFedora.
-        Rubydora.connect(url: 'http://127.0.0.1:8983/fedora', user: 'fedoraAdmin', password: 'fedoraAdmin')
+          require 'rubydora'
+          # Please note: these parameters were used in building the VCR cassettes, so change at your own risk.
+          # TODO: This should be a configuration option analogous to ActiveFedora.
+          Rubydora.connect(url: 'http://127.0.0.1:8983/fedora', user: 'fedoraAdmin', password: 'fedoraAdmin')
         end
       end
 
@@ -59,7 +59,9 @@ module Hydramata
         @work_from_persistence_coordinator ||= begin
           ->(options) do
             pid = options.fetch(:pid)
-            PersistedWorks::DatabaseStorage.where(pid: pid).first.to_work
+            PersistedWorks::DatabaseStorage.where(pid: pid).
+              first!.
+              to_work
           end
         end
       end

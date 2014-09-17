@@ -25,7 +25,14 @@ module Hydramata
         __getobj__.to_s
       end
 
+      delegate :label_attributes, :value_attributes, :input_attributes,
+        :id_for_field, :id_for_label, :name_for_field, to: :dom, prefix: :dom
+
       private
+
+      def dom
+        @dom ||= PropertyPresenterDomHelper.new(self)
+      end
 
       def default_dom_attributes
         { class: [dom_class, presenter_dom_class] }
