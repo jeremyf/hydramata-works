@@ -18,10 +18,13 @@ module Hydramata
             expect(context).to receive(:translate).
               with("actions.#{name}.type", default: 'link').
               and_return('submit')
+            expect(context).to receive(:translate).
+              with("actions.#{name}.dom_class", default: 'named-action action-create').
+              and_return('named-action action-create')
             expect(template).to receive(:submit_tag).
-              with('Translated', { data: true }).
+              with('Translated', { data: true, class: ['twonky', 'named-action action-create'] }).
               and_return('My Submit Tag')
-            expect(subject.render(template: template, action_options: { data: true })).to eq('My Submit Tag')
+            expect(subject.render(template, data: true, class: 'twonky')).to eq('My Submit Tag')
           end
         end
 
@@ -35,12 +38,15 @@ module Hydramata
               with("actions.#{name}.type", default: 'link').
               and_return('link')
             expect(context).to receive(:translate).
+              with("actions.#{name}.dom_class", default: 'named-action action-edit').
+              and_return('named-action action-edit')
+            expect(context).to receive(:translate).
               with("actions.#{name}.url", raise: true, to_param: context.to_param).
               and_return('my_href')
             expect(template).to receive(:content_tag).
-              with('a', 'Edit this Work', href: 'my_href', class: 'action-edit').
+              with('a', 'Edit this Work', href: 'my_href', class: ['otter', 'named-action action-edit']).
               and_return('My Link Tag')
-            expect(subject.render(template: template)).to eq('My Link Tag')
+            expect(subject.render(template, class: 'otter')).to eq('My Link Tag')
           end
         end
       end

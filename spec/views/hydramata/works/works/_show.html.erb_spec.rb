@@ -15,14 +15,16 @@ describe 'hydramata/works/works/_show.html.erb', type: :view do
   it 'renders the object and fieldsets' do
     render partial: 'hydramata/works/works/show', object: object
 
-    expect(fieldset1).to have_received(:render).with(template: view)
-    expect(fieldset2).to have_received(:render).with(template: view)
-    expect(action).to have_received(:render).with(template: view)
+    expect(fieldset1).to have_received(:render).with(view)
+    expect(fieldset2).to have_received(:render).with(view)
+    expect(action).to have_received(:render).with(view)
 
     expect(rendered).to have_tag('article.work.my-dom-class') do
       with_tag('.set1', text: 'Fieldset 1')
       with_tag('.set2', text: 'Fieldset 2')
-      with_tag('.actions #action_1', text: 'Action 1')
+    end
+    expect(rendered).to have_tag('article+ .actions') do
+      with_tag('#action_1')
     end
   end
 

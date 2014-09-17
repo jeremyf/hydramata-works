@@ -23,15 +23,15 @@ module Hydramata
           rendered_output = renderer.render
 
           expect(rendered_output).to have_tag('.work') do
-            with_tag('.required .title.label', text: 'title')
-            with_tag('.required .title.value', text: 'Hello')
-            with_tag('.required .title.value', text: 'World')
-            with_tag('.required .title.value', text: 'Bang!')
-            with_tag('.optional .abstract.label', text: 'abstract')
-            with_tag('.optional .abstract.value', text: 'Long Text')
-            with_tag('.optional .abstract.value', text: 'Longer Text')
-            with_tag('.optional .keyword.label', text: 'keyword')
-            with_tag('.optional .keyword.value', text: 'Programming')
+            with_tag('.required .title.property-label', text: 'title')
+            with_tag('.required .title.property-value', text: 'Hello')
+            with_tag('.required .title.property-value', text: 'World')
+            with_tag('.required .title.property-value', text: 'Bang!')
+            with_tag('.optional .abstract.property-label', text: 'abstract')
+            with_tag('.optional .abstract.property-value', text: 'Long Text')
+            with_tag('.optional .abstract.property-value', text: 'Longer Text')
+            with_tag('.optional .keyword.property-label', text: 'keyword')
+            with_tag('.optional .keyword.property-value', text: 'Programming')
           end
         end
 

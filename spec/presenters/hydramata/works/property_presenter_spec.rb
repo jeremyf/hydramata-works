@@ -16,8 +16,8 @@ module Hydramata
 
       it 'delegates render to the renderer' do
         template = double
-        expect(renderer).to receive(:call).with(template: template).and_return('YES')
-        expect(subject.render(template: template)).to eq('YES')
+        expect(renderer).to receive(:call).with(template, kind_of(Hash)).and_return('YES')
+        expect(subject.render(template)).to eq('YES')
       end
 
       it 'has a default partial prefixes' do

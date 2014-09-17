@@ -4,5 +4,5 @@ show.each do |property|
   # will call :target! and dump the attributes to JSON form.
   # This means nested calls will result in multiple dump commands on the
   # rendered value.
-  property.render(template: self, locals: {json: json})
+  property.render(self, locals: {json: json})
 end

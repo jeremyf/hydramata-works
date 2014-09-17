@@ -11,8 +11,8 @@ towards a solution.
   }.deep_merge(new.form_options)
 %>
 <%= form_for(new, options) do |form| %>
-  <% new.fieldsets.each do |fieldset| %><%= fieldset.render(template: self, locals: { form: form } ) %><% end %>
+  <% new.fieldsets.each do |fieldset| %><%= fieldset.render(self, locals: { form: form } ) %><% end %>
   <div class="actions">
-    <% new.actions.each do |action| %><%= action.render(template: self, locals: { form: form } ) %><% end %>
+    <% new.actions.each do |action| %><%= action.render(self) %><% end %>
   </div>
 <% end %>

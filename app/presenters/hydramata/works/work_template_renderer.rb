@@ -14,8 +14,7 @@ module Hydramata
 
       private :template_missing_exception
 
-      def call(options = {}, &block)
-        template = options.fetch(:template)
+      def call(template, options = {}, &block)
         rendering_options = rendering_options_for(options)
         begin
           render_with_diminishing_specificity(template, rendering_options)

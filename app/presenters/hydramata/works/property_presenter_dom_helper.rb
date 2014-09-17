@@ -1,4 +1,5 @@
 require 'delegate'
+require 'active_support/core_ext/array/wrap'
 
 module Hydramata
   module Works
@@ -17,7 +18,7 @@ module Hydramata
         index = options.delete(:index)
         returning = { id: id_for_label(suffix: suffix, index: index) }.deep_merge(options)
         returning[:class] = Array.wrap(returning[:class])
-        returning[:class] << 'label' << presenter_dom_class << dom_class
+        returning[:class] << presenter_dom_class(suffix: 'label') << dom_class
         returning[:class] << 'required' if predicate.required?
         returning
       end
@@ -28,7 +29,7 @@ module Hydramata
         index = options.delete(:index)
         returning = { 'aria-labelledby' => id_for_label(suffix: suffix, index: index) }.deep_merge(options)
         returning[:class] = Array.wrap(returning[:class])
-        returning[:class] << 'value' << presenter_dom_class << dom_class
+        returning[:class] << presenter_dom_class(suffix: 'value') << dom_class
         returning
       end
 
@@ -38,8 +39,10 @@ module Hydramata
         index = options.delete(:index)
         returning = { 'aria-labelledby' => id_for_label(suffix: suffix, index: index) }.deep_merge(options)
         returning[:class] = Array.wrap(returning[:class])
-        returning[:class] << 'value' << presenter_dom_class << dom_class
-        returning[:required] = 'required' if predicate.required?
+        returning[:class] << presenter_dom_class(suffix: 'input') << dom_class
+        with_required_attribute(suffix: suffix) do
+          returning[:required] = 'required'
+        end
         returning[:name] ||= name_for_field(suffix: suffix)
         returning
       end
@@ -60,6 +63,15 @@ module Hydramata
       end
 
       private
+
+      def with_required_attribute(suffix: nil)
+        @rendered ||= false
+        return if @rendered
+        yield if predicate.required?
+      ensure
+        @rendered = true
+      end
+
       def assemble_id(leader, prefix: nil, index: nil, suffix: nil)
         parts = Array.wrap(leader)
         parts << prefix if prefix
@@ -68,6 +80,11 @@ module Hydramata
         parts << "#{index}" if index
         parts.join("_")
       end
+
+      def presenter_dom_class(prefix: nil, suffix: nil)
+        [prefix, 'property', suffix].compact.join('-')
+      end
+
     end
   end
 end

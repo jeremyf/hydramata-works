@@ -20,8 +20,8 @@ module Hydramata
         @renderer = collaborators.fetch(:renderer) { default_renderer }
       end
 
-      def render(options = {})
-        renderer.call(options)
+      def render(template, options = {})
+        renderer.call(template, options)
       end
 
       def translate(key, options = {})
@@ -49,9 +49,7 @@ module Hydramata
         super || __getobj__.instance_of?(klass)
       end
 
-      def dom_class(options = {})
-        prefix = options.fetch(:prefix, nil)
-        suffix = options.fetch(:suffix, nil)
+      def dom_class(prefix: nil, suffix: nil)
         [prefix, base_dom_class, suffix].compact.join('-')
       end
 
@@ -67,7 +65,11 @@ module Hydramata
         dom_attributes_builder.call(self, options, default_dom_attributes)
       end
 
-      def presenter_dom_class
+      def presenter_dom_class(prefix: nil, suffix: nil)
+        [prefix, base_presenter_dom_class, suffix].compact.join('-')
+      end
+
+      def base_presenter_dom_class
         self.class.to_s.split('::').last.sub(/presenter\Z/i,'').downcase
       end
 

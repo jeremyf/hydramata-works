@@ -12,7 +12,7 @@ module Hydramata
       end
 
       def render
-        work.render(template: template)
+        work.render(template)
       end
 
       private

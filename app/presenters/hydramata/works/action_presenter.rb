@@ -1,4 +1,5 @@
 require 'hydramata/works/conversions/translation_key_fragment'
+require 'active_support/core_ext/array/wrap'
 
 module Hydramata
   module Works
@@ -15,14 +16,18 @@ module Hydramata
         @context = collaborators.fetch(:context)
       end
 
-      def render(options = {})
-        send("render_#{type}", options)
+      def render(template, options = {})
+        send("render_#{type}", template, options)
       end
 
       private
 
       def label
         context.translate("actions.#{name}.label", default: 'Save changes')
+      end
+
+      def dom_class
+        context.translate("actions.#{name}.dom_class", default: "named-action action-#{name}")
       end
 
       def type
@@ -33,18 +38,17 @@ module Hydramata
         context.translate("actions.#{name}.url", raise: true, to_param: context.to_param)
       end
 
-      def render_submit(options)
-        template = options.fetch(:template)
-        action_options = options.fetch(:action_options, {})
-        template.submit_tag(label, action_options)
+      def render_submit(template, options)
+        options[:class] = Array.wrap(options[:class])
+        options[:class] << dom_class
+        template.submit_tag(label, options)
       end
 
-      def render_link(options)
-        template = options.fetch(:template)
-        action_options = options.fetch(:action_options, {})
-        action_options[:href] ||= url
-        action_options[:class] ||= "action-#{name}"
-        template.content_tag('a', label, action_options)
+      def render_link(template, options)
+        options[:href] ||= url
+        options[:class] = Array.wrap(options[:class])
+        options[:class] << dom_class
+        template.content_tag('a', label, options)
       end
 
     end

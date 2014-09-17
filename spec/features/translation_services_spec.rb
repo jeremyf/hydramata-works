@@ -42,15 +42,15 @@ module Hydramata
           context 'with existing work type translations' do
             let(:work_type) { 'Work Type Translated' }
             it 'renders a submit tag with translation' do
-              expect(presenter.render(template: template)).
-                to eq('<input name="commit" type="submit" value="Create a Translated Work" />')
+              expect(presenter.render(template)).
+                to eq('<input class="named-action action-create" name="commit" type="submit" value="Create a Translated Work" />')
             end
           end
           context 'without existing work type translations' do
             let(:work_type) { 'Non-Translated Work Type' }
             it 'renders a submit tag with a default' do
-              expect(presenter.render(template: template)).
-                to eq('<input name="commit" type="submit" value="Create a Work" />')
+              expect(presenter.render(template)).
+                to eq('<input class="named-action action-create" name="commit" type="submit" value="Create a Work" />')
             end
           end
         end
@@ -60,15 +60,15 @@ module Hydramata
           context 'with existing work type translations' do
             let(:work_type) { 'Work Type Translated' }
             it 'renders an a-tag' do
-              expect(presenter.render(template: template)).
-                to eq(%(<a class="action-edit" href="/path/to/edit/#{work.to_param}">Edit Translated Work</a>))
+              expect(presenter.render(template)).
+                to eq(%(<a class="named-action action-edit" href="/path/to/edit/#{work.to_param}">Edit Translated Work</a>))
             end
           end
           context 'without existing work type translations' do
             let(:work_type) { 'Non-Translated Work Type' }
             it 'translates its :name by using the key directly' do
-              expect(presenter.render(template: template)).
-                to eq(%(<a class="action-edit" href="/path/to/edit/#{work.to_param}">Edit the Work</a>))
+              expect(presenter.render(template)).
+                to eq(%(<a class="named-action action-edit" href="/path/to/edit/#{work.to_param}">Edit the Work</a>))
             end
           end
         end
