@@ -29,6 +29,10 @@ module Hydramata
         super || __getobj__.instance_of?(klass)
       end
 
+      def to_work_type
+        __getobj__
+      end
+
       private
       attr_reader :translator, :translation_scopes
       private :translator, :translation_scopes

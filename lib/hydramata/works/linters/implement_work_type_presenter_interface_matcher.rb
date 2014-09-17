@@ -6,6 +6,7 @@ RSpec::Matchers.define :implement_work_type_presenter_interface do
     self,
     'WorkType',
     name: [],
-    description: []
+    description: [],
+    to_work_type: []
   )
 end
