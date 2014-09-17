@@ -22,7 +22,7 @@ module Hydramata
               with("actions.#{name}.dom_class", default: 'named-action action-create').
               and_return('named-action action-create')
             expect(template).to receive(:submit_tag).
-              with('Translated', { data: true, class: ['twonky', 'named-action action-create'] }).
+              with('Translated', data: true, class: ['twonky', 'named-action action-create']).
               and_return('My Submit Tag')
             expect(subject.render(template, data: true, class: 'twonky')).to eq('My Submit Tag')
           end

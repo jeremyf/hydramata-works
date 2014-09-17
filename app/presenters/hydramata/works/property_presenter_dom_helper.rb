@@ -84,7 +84,6 @@ module Hydramata
       def presenter_dom_class(prefix: nil, suffix: nil)
         [prefix, 'property', suffix].compact.join('-')
       end
-
     end
   end
 end

@@ -17,8 +17,8 @@ describe 'hydramata/works/fieldsets/_edit.html.erb', type: :view do
     expect(object).to receive(:label).and_return('Heading')
     render partial: 'hydramata/works/fieldsets/edit', object: object, locals: { form: form }
 
-    expect(property1).to have_received(:render).with(view, locals: { form: form } )
-    expect(property2).to have_received(:render).with(view, locals: { form: form } )
+    expect(property1).to have_received(:render).with(view, locals: { form: form })
+    expect(property2).to have_received(:render).with(view, locals: { form: form })
     expect(rendered).to have_tag('fieldset.my-dom-class.fieldset') do
       with_tag('legend.legend', text: 'Heading')
       with_tag('.property1', text: 'Property 1')

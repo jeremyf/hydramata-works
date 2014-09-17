@@ -15,66 +15,66 @@ module Hydramata
       context '#label_attributes' do
         it 'handles a :suffix' do
           expect(subject.label_attributes(suffix: 'hello')).
-            to eq({:id=>"label_for_work_my_predicate_hello", :class=>["property-label", "my-predicate", "required"]})
+            to eq({ :id=>"label_for_work_my_predicate_hello", :class=>["property-label", "my-predicate", "required"] })
         end
 
         it 'handles an :index' do
           expect(subject.label_attributes(index: 1, suffix: 'hello')).
-            to eq({:id=>"label_for_work_my_predicate_hello_1", :class=>["property-label", "my-predicate", "required"]})
+            to eq({ :id=>"label_for_work_my_predicate_hello_1", :class=>["property-label", "my-predicate", "required"] })
         end
 
         it 'has a default' do
           expect(subject.label_attributes).
-            to eq({:id=>"label_for_work_my_predicate", :class=>["property-label", "my-predicate", "required"]})
+            to eq({ :id=>"label_for_work_my_predicate", :class=>["property-label", "my-predicate", "required"] })
         end
 
         it 'merges attributes' do
           expect(subject.label_attributes(:id => 'override_id', :class => 'another_class', 'data-attribute' => 'a data attribute')).
-            to eq({:id=>"override_id", :class=>["another_class", "property-label", "my-predicate", "required"], 'data-attribute' => 'a data attribute'})
+            to eq({ :id=>"override_id", :class=>["another_class", "property-label", "my-predicate", "required"], 'data-attribute' => 'a data attribute' })
         end
       end
 
       context '#value_attributes' do
         it 'handles a :suffix' do
           expect(subject.value_attributes(suffix: 'hello')).
-            to eq({'aria-labelledby'=>"label_for_work_my_predicate_hello", :class=>["property-value", "my-predicate"]})
+            to eq({ 'aria-labelledby'=>"label_for_work_my_predicate_hello", :class=>["property-value", "my-predicate"] })
         end
 
         it 'handles an :index' do
           expect(subject.value_attributes(index: 1, suffix: 'hello')).
-            to eq({'aria-labelledby'=>"label_for_work_my_predicate_hello_1", :class=>["property-value", "my-predicate"]})
+            to eq({ 'aria-labelledby'=>"label_for_work_my_predicate_hello_1", :class=>["property-value", "my-predicate"] })
         end
 
         it 'has a default' do
           expect(subject.value_attributes).
-            to eq({'aria-labelledby'=>"label_for_work_my_predicate", :class=>["property-value", "my-predicate"]})
+            to eq({ 'aria-labelledby'=>"label_for_work_my_predicate", :class=>["property-value", "my-predicate"] })
         end
 
         it 'merges attributes' do
           expect(subject.value_attributes('aria-labelledby' => 'override_id', :class => 'another_class', 'data-attribute' => 'a data attribute')).
-            to eq({'aria-labelledby'=>"override_id", :class=>["another_class", "property-value", "my-predicate"], 'data-attribute' => 'a data attribute'})
+            to eq({ 'aria-labelledby'=>"override_id", :class=>["another_class", "property-value", "my-predicate"], 'data-attribute' => 'a data attribute' })
         end
       end
 
       context '#input_attributes' do
         it 'handles a :suffix' do
           expect(subject.input_attributes(suffix: 'hello')).
-            to eq({'aria-labelledby'=>"label_for_work_my_predicate_hello", :class=>["property-input", "my-predicate"], :name => "work[my_predicate][hello][]", :required => 'required'})
+            to eq({ 'aria-labelledby'=>"label_for_work_my_predicate_hello", :class=>["property-input", "my-predicate"], :name => "work[my_predicate][hello][]", :required => 'required' })
         end
 
         it 'handles an :index' do
           expect(subject.input_attributes(index: 1, suffix: 'hello')).
-            to eq({'aria-labelledby'=>"label_for_work_my_predicate_hello_1", :class=>["property-input", "my-predicate"], :name => "work[my_predicate][hello][]", :required => 'required'})
+            to eq({ 'aria-labelledby'=>"label_for_work_my_predicate_hello_1", :class=>["property-input", "my-predicate"], :name => "work[my_predicate][hello][]", :required => 'required' })
         end
 
         it 'has a default' do
           expect(subject.input_attributes).
-            to eq({'aria-labelledby'=>"label_for_work_my_predicate", :class=>["property-input", "my-predicate"], :name => "work[my_predicate][]", :required => 'required'})
+            to eq({ 'aria-labelledby'=>"label_for_work_my_predicate", :class=>["property-input", "my-predicate"], :name => "work[my_predicate][]", :required => 'required' })
         end
 
         it 'merges attributes' do
           expect(subject.input_attributes('aria-labelledby' => 'override_id', :class => 'another_class', 'data-attribute' => 'a data attribute')).
-            to eq({'aria-labelledby'=>"override_id", :class=>["another_class", "property-input", "my-predicate"], :name => "work[my_predicate][]", 'data-attribute' => 'a data attribute', :required => 'required'})
+            to eq({ 'aria-labelledby'=>"override_id", :class=>["another_class", "property-input", "my-predicate"], :name => "work[my_predicate][]", 'data-attribute' => 'a data attribute', :required => 'required' })
         end
 
         it 'only renders required attribute on first rendering' do
