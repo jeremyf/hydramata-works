@@ -14,18 +14,13 @@ module Hydramata
 
       private :template_missing_exception
 
-      def call(options = {}, &block)
-        template = options.fetch(:template)
+      def call(template, options = {})
         rendering_options = rendering_options_for(options)
         begin
           render_with_diminishing_specificity(template, rendering_options)
         rescue *template_missing_exception => e
           STDOUT.puts(e) if ENV['DEBUG']
-          if block_given?
-            yield
-          else
-            raise e
-          end
+          block_given? ? yield : raise(e)
         end
       end
 

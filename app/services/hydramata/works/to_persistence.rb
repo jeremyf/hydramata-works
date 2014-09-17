@@ -1,10 +1,12 @@
 require 'active_support/core_ext/object/blank'
+require 'hydramata/works/conversions/work_type'
 
 module Hydramata
   module Works
     # Responsible for negotiating an in-memory work through to the database via
     # the #persistence_coordinator method.
     class ToPersistence
+      include Conversions
       def self.call(collaborators = {})
         new(collaborators).call
       end
@@ -38,7 +40,7 @@ module Hydramata
       end
 
       def work_type
-        work.work_type.to_s
+        WorkType(work.work_type).identity
       end
 
       def attributes_to_persist

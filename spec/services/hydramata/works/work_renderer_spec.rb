@@ -13,7 +13,7 @@ module Hydramata
 
       it 'renders the template based on all the inputs' do
         subject.render
-        expect(work).to have_received(:render).with(template: template)
+        expect(work).to have_received(:render).with(template)
       end
 
       it 'defaults to :html format' do

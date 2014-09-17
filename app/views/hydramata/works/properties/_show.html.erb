@@ -1,3 +1,3 @@
 <%= content_tag('dt', show.label, show.dom_label_attributes) %>
-  <%- show.values.each_with_index do |value, index| -%><%= content_tag('dd', show.dom_value_attributes) do %><%= value.render(template: self) %><%- end -%>
+  <%- show.values.each_with_index do |value, index| -%><%= content_tag('dd', show.dom_value_attributes) do %><%= value.render(self) %><%- end -%>
 <%- end -%>

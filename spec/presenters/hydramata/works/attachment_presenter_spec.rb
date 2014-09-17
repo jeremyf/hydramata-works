@@ -21,13 +21,13 @@ module Hydramata
       end
 
       it 'renders via the template' do
-        expect(renderer).to receive(:call).with(template: template).and_return('YES')
-        expect(subject.render(template: template)).to eq('YES')
+        expect(renderer).to receive(:call).with(template).and_return('YES')
+        expect(subject.render(template)).to eq('YES')
       end
 
       it 'renders the value as a string' do
-        expect(renderer).to receive(:call).with(template: template).and_yield
-        expect(subject.render(template: template)).to eq(value.to_s)
+        expect(renderer).to receive(:call).with(template).and_yield
+        expect(subject.render(template)).to eq(value.to_s)
       end
 
       it 'has a default partial prefixes' do

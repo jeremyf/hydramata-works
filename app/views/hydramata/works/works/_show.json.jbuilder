@@ -7,7 +7,7 @@ json.set! :work do
       # will call :target! and dump the attributes to JSON form.
       # This means nested calls will result in multiple dump commands on the
       # rendered value.
-      fieldset.render(template: self, locals: {json: json})
+      fieldset.render(self, locals: {json: json})
     end
   end
 end

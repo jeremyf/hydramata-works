@@ -14,8 +14,8 @@ describe 'hydramata/works/fieldsets/_show.html.erb', type: :view do
     expect(object).to receive(:label).and_return('Heading')
     render partial: 'hydramata/works/fieldsets/show', object: object
 
-    expect(property1).to have_received(:render).with(template: view)
-    expect(property2).to have_received(:render).with(template: view)
+    expect(property1).to have_received(:render).with(view)
+    expect(property2).to have_received(:render).with(view)
     expect(rendered).to have_tag('section.my-dom-class') do
       with_tag('.heading', text: 'Heading')
       with_tag('.metadata .property1', text: 'Property 1')

@@ -22,7 +22,7 @@ module Hydramata
           expect(template).to receive(:render).
             with(object: object, partial: 'hydramata/works/base/show').
             ordered
-          subject.call(template: template)
+          subject.call(template)
         end
 
         it 'stops calling chain once we sucessfully call a template' do
@@ -35,7 +35,7 @@ module Hydramata
             ordered
           expect(template).to_not receive(:call).
             with(object: object, partial: 'hydramata/works/base/show')
-          subject.call(template: template)
+          subject.call(template)
         end
 
         it 'raises exception if we are calling as general as possible' do
@@ -51,7 +51,7 @@ module Hydramata
             with(object: object, partial: 'hydramata/works/base/show').
             ordered.
             and_raise(RuntimeError)
-          expect { subject.call(template: template) }.
+          expect { subject.call(template) }.
             to raise_error(RuntimeError)
         end
       end
