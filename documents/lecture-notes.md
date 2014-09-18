@@ -43,6 +43,9 @@ How do you feel about diving in and helping others?
 Again, are we doing a good job of sharing?
 
 I have been hesitant to bring more dependencies from Hydra into our development.
+There are so many moving parts.
+Parts that I've created.
+Parts that pile upon the overworked Rails callback system.
 
 What has been your experience of upgrades?
 
