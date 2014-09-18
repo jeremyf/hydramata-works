@@ -2,15 +2,16 @@
 
 ## Background of Hydramata::Works
 
-Rearview mirror:
-* "Well How Did I Get Here?" Talking Heads
 * "Cracked Rear View" Hootie and the Blowfish
 
 ### Rails
 
 Rails espouses Convention over Configuration;
-But it is a very configurable framework.
-Why? Because it is used by lots of people.
+Yet it is a very configurable framework.
+Why? Because lots of people use it.
+
+Sometimes convention doesn't work.
+Configuration is necessary.
 
 > So they can, if they please, choose to follow a carefully curated set of opinions on how best to develop web applications with Rails and trust that it'll be good.
 > Just like Rails itself is a carefully curated collection of APIs and DSLs.
@@ -18,12 +19,14 @@ Why? Because it is used by lots of people.
 > Just like Rails itself is a carefully curated collection of APIs and DSLs.
 > -- [David Heinemeier-Hansson](http://david.heinemeierhansson.com/2012/the-parley-letter.html)
 
-That convention changes overtime;
-It is the manifestion of an ever shifting understanding of the problem space that Rails addresses.
+But, lets assume convention is our *modus operandi*.
+Conventions change overtime; Convention is the manifestion of an ever shifting understanding of the problem space that Rails addresses.
 
 > Rails once valued convention over configuration, a very long time ago, but today values
 > *curation over configuration*
 > -- [Giles Bowkett](http://gilesbowkett.blogspot.com/2013/02/the-lie-of-convention-over-configuration.html)
+
+@TODO - What does this mean?
 
 ### Hydra Philosophies
 
@@ -42,6 +45,12 @@ Again, are we doing a good job of sharing?
 I have been hesitant to bring more dependencies from Hydra into our development.
 
 What has been your experience of upgrades?
+
+As a community are we investing in the curation of tools for digital repositories?
+Are the tools that we are curating understood? Maintainable? Robust? Flexible? Durable?
+
+This is a long game that we are playing in digital repositories.
+Are we up for that wear and tear? Are our tools?
 
 ### Notes
 
@@ -77,6 +86,8 @@ What has been your experience of upgrades?
   * Are we to a point where we can share larger concepts? Applications?
 
 ## Personal Observations over the past 2 Years
+
+* "Well How Did I Get Here?" Talking Heads
 
 > It is “free” as in “free kittens,” not “free beer” – you still have to maintain it, and that’s where the overhead with software comes in.
 > -- [K.G. Schneider](http://freerangelibrarian.com/2006/10/16/south-africa-slis-follow-up-1-michael-stephens-web-20-and-libraries/)
@@ -304,6 +315,15 @@ Code coverage is a happy by product of this.
 * Jim Weirich
   * [Wyriki](https://github.com/jimweirich/wyriki)
   * [Dudley](https://github.com/jimweirich/dudley)
+* Robert Martin
+  * [SOLID Object Oriented Design](http://en.wikipedia.org/wiki/SOLID_(object-oriented_design))
+    * Single Responsibility
+    * Open/Closed
+    * Liskov Substitution - Objects replaceable with instances of their subtypes
+    * Interface Segregation
+    * Dependency Inversion - Depend upon Abstractions. Do not depend upon concretions.
+  * [Clean Coder](http://www.amazon.com/The-Clean-Coder-Professional-Programmers/dp/0137081073)
+  * [Clean Code](http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882)
 * Avdi Grimm
   * [Confident Ruby](http://www.confidentruby.com/)
   * [Naught](https://github.com/avdi/naught)
@@ -318,15 +338,6 @@ Code coverage is a happy by product of this.
   * [ActiveRecord Spec Helper](https://gist.github.com/coreyhaines/2068977)
 * Code Climate
   * [7 Patterns to Refactor Fat ActiveRecord Models](http://blog.codeclimate.com/blog/2012/10/17/7-ways-to-decompose-fat-activerecord-models/)
-* Robert Martin
-  * [SOLID Object Oriented Design](http://en.wikipedia.org/wiki/SOLID_(object-oriented_design))
-    * Single Responsibility
-    * Open/Closed
-    * Liskov Substitution - Objects replaceable with instances of their subtypes
-    * Interface Segregation
-    * Dependency Inversion - Depend upon Abstractions. Do not depend upon concretions.
-  * [Clean Coder](http://www.amazon.com/The-Clean-Coder-Professional-Programmers/dp/0137081073)
-  * [Clean Code](http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882)
 * Elisabeth Freeman & Eric Freeman
   * [Head First Design Patterns](http://www.headfirstlabs.com/books/hfdp/)
 * Bertrand Meyer
