@@ -45,7 +45,7 @@ Again, are we doing a good job of sharing?
 I have been hesitant to bring more dependencies from Hydra into our development.
 There are so many moving parts.
 Parts that I've created.
-Parts that pile upon the overworked Rails callback system.
+Parts that pile upon classes that are already overworked.
 
 What has been your experience of upgrades?
 
