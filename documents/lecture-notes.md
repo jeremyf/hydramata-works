@@ -35,8 +35,12 @@ It is the manifestion of an ever shifting understanding of the problem space tha
 > -- [Hydra Design Principles](http://projecthydra.org/design-principles-2/)
 
 As a Hydra adopter, how do you feel about adopting further development from partners?
-Are we doing a good job of sharing?
+How do you feel about diving in and helping others?
+
+Again, are we doing a good job of sharing?
+
 I have been hesitant to bring more dependencies from Hydra into our development.
+
 What has been your experience of upgrades?
 
 ### Notes
@@ -74,12 +78,13 @@ What has been your experience of upgrades?
 
 ## Personal Observations over the past 2 Years
 
-Free as in Kittens @MUST
+> It is “free” as in “free kittens,” not “free beer” – you still have to maintain it, and that’s where the overhead with software comes in.
+> -- [K.G. Schneider](http://freerangelibrarian.com/2006/10/16/south-africa-slis-follow-up-1-michael-stephens-web-20-and-libraries/)
 
 * Are we doing a good job sharing?
   * I asked this question at LDCX 2014.
     It was [a fruitful conversation](https://github.com/ldcx/ldcx-2014/blob/master/sessions/improving-sharing.md).
-  * My short answer is not yet.
+  * My short answer is not yet, though there are signs.
 * A tacit understanding that if you step off the hydra train, you are left behind and must work hard to catch up
   * [Notre Dame's Pain Points of Upgrading](http://ndlib.github.io/hydramata-works/demos/addressing-our-pain-points/)
 * Controller methods suck to test (this is an observation from the past 7 years of Rails development)
@@ -95,10 +100,47 @@ Free as in Kittens @MUST
   * Design by Committee? or Dictatorship? or Tribal Warlords?
 * Testing Hydra is slow going; I don't trust mocking my Fedora interactions because I perceive ActiveFedora as volitale
   * Its trying to keep up with Rails ActiveRecord features
-* Is the ActiveRecord pattern correct for Long Term Preservation concerns
-  * ActiveRecord pattern requires/assumes keeping data and schema in-sync
-  * ActiveRecord Rails pattern pushes towards Fat Models
-  * These two are in extreme tension
+
+### Is the ActiveRecord pattern the correct Pattern for Long Term preservation concerns
+
+> Active Records are special forms of DTOs [Data Transfer Objects]. They are data structures with public variables; but they typically have navigational methods like *save* and *find*. Typically these Active Records are direct translations from database tables, or other data sources.
+>
+> Unfortunately we often find that developers try to treat these data structures as though they were objects by putting business rule methods in them.
+> This is awkward because it creates a hybrid data structure and an object.
+>
+> The solution, of course, is to treat the Active Record as a data structure and to create separate objects that contain the business rules and that hide their internal data (which are probably just instance of the Active Record).
+>
+> -- Martin, Robert C. "Clean Code: A Handbook of Agile Software Craftsmanship (Robert C. Martin Series)" pp
+
+ActiveRecord pattern requires/assumes keeping model and schema in-sync.
+Rails mitigates this synchonization issue by introspection on the database's table.
+ActiveFedora does not provide such a luxury.
+
+Traditionally, Rails pushed ActiveRecord objects towards Fat Models.
+I blame [Fat Models, Skinny Controllers](http://weblog.jamisbuck.org/2006/10/18/skinny-controller-fat-model).
+But I am not without blame.
+I jumped on the Fat Models train.
+
+I remember early in Rails development having MVC related arguements about where things should go.
+My coworker said "In the controller" and I said "In the model."
+
+It turns out we were both wrong.
+But we didn't have a noun to attach the behavior to.
+We were talking about a Query object; Something that finds the objects that we need.
+In other cases we needed a Command object; Something that transforms an object.
+
+Consider the more general statement from Robert Martin.
+
+> Procedural code (code using data structures) makes it easy to add new functions without changing the existing data structures.
+> OO code, on the other hand, makes it easy to add new classes without changing existing functions.
+>
+> The complement is also true:
+>
+> Procedural code makes it hard to add new data structures because all the functions must change.
+> OO code makes it hard to add new functions because all the classes must change.
+>
+> -- Martin, Robert C. "Clean Code: A Handbook of Agile Software Craftsmanship (Robert C. Martin Series)" pp 97
+
 * What would Hydra look like without Fedora? Blacklight? Solr?
 * Is direct deposit into Fedora the best way to do these things?
 * Asynchronous is powerful
