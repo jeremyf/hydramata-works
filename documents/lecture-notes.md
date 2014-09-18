@@ -88,7 +88,14 @@ Are we up for that wear and tear? Are our tools?
 
 ## Personal Observations over the past 2 Years
 
-* "Well How Did I Get Here?" Talking Heads
+> And you may ask yourself
+> Well...How did I get here?
+>
+> And you may say to yourself yourself
+> My God!...What have I done?!
+>
+> -- Talking Heads "Once in a Lifetime"
+
 
 > It is “free” as in “free kittens,” not “free beer” – you still have to maintain it, and that’s where the overhead with software comes in.
 > -- [K.G. Schneider](http://freerangelibrarian.com/2006/10/16/south-africa-slis-follow-up-1-michael-stephens-web-20-and-libraries/)
