@@ -21,13 +21,23 @@ module Hydramata
         end
       end
 
-      context '#name' do
+      context '#label' do
         it 'uses translation services' do
           expect(translator).
             to receive(:translate).
-            with('name', scopes: [['work_types', work_type.to_translation_key_fragment]], default: work_type.name).
+            with('label', scopes: [['work_types', work_type.to_translation_key_fragment]], default: work_type.name).
             and_return('An Article')
-          expect(subject.name).to eq('An Article')
+          expect(subject.label).to eq('An Article')
+        end
+      end
+
+      context '#to_s' do
+        it 'uses translation services' do
+          expect(translator).
+            to receive(:translate).
+            with('label', scopes: [['work_types', work_type.to_translation_key_fragment]], default: work_type.name).
+            and_return('An Article')
+          expect(subject.to_s).to eq('An Article')
         end
       end
 

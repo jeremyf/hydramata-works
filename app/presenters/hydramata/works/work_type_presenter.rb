@@ -15,11 +15,11 @@ module Hydramata
         translator.translate('description', options.reverse_merge(scopes: translation_scopes))
       end
 
-      def name(options = {})
-        translator.translate('name', options.reverse_merge(scopes: translation_scopes, default: __getobj__.name))
+      def label(options = {})
+        translator.translate('label', options.reverse_merge(scopes: translation_scopes, default: __getobj__.name))
       end
 
-      alias_method :to_s, :name
+      alias_method :to_s, :label
 
       def inspect
         format('#<%s:%#0x presenting=%s>', self.class, __id__, __getobj__.inspect)
