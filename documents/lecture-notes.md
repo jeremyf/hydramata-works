@@ -22,12 +22,6 @@ Configuration is necessary.
 But, lets assume convention is our *modus operandi*.
 Conventions change overtime; Convention is the manifestion of an ever shifting understanding of the problem space that Rails addresses.
 
-> Rails once valued convention over configuration, a very long time ago, but today values
-> *curation over configuration*
-> -- [Giles Bowkett](http://gilesbowkett.blogspot.com/2013/02/the-lie-of-convention-over-configuration.html)
-
-@TODO - What does this mean?
-
 ### Hydra Philosophies
 
 > So why care about compliance?
@@ -47,7 +41,11 @@ There are so many moving parts.
 Parts that I've created.
 Parts that pile upon classes that are already overworked.
 
-What has been your experience of upgrades?
+> Rails once valued convention over configuration, a very long time ago, but today values
+> *curation over configuration*
+> -- [Giles Bowkett](http://gilesbowkett.blogspot.com/2013/02/the-lie-of-convention-over-configuration.html)
+
+What has been your experience of upgrades? Why have you chosen to upgrade?
 
 As a community are we investing in the curation of tools for digital repositories?
 Are the tools that we are curating understood? Maintainable? Robust? Flexible? Durable?
