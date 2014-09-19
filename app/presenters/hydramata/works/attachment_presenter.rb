@@ -15,8 +15,8 @@ module Hydramata
         super(value, collaborators)
       end
 
-      def render(options = {})
-        renderer.call(options) { label }
+      def render(template, options = {})
+        renderer.call(template, options) { label }
       end
 
       def view_path_slug_for_object
