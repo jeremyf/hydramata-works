@@ -16,6 +16,13 @@ module Hydramata
         expect(subject.raw_object).to eq(raw_object)
       end
 
+      it 'has a #name_for_application_usage' do
+        # @TODO - This is to improve test coverage; but does not reflect the
+        #         final state. That will fall out from work on the complex
+        #         predicate.
+        expect(subject.name_for_application_usage).to be_a(String)
+      end
+
       it 'has a friendly inspect message, because tracking it down could be a pain' do
         expect(subject.inspect).to include("#{described_class}")
         expect(subject.inspect).to include(raw_object.inspect)
