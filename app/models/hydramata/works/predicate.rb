@@ -14,14 +14,23 @@ module Hydramata
         super(*args, &block)
       end
 
-      # In what datastream are we going to store this predicate.
-      # It is possible that we will find the predicate in another datastream.
-      attr_accessor :datastream_name
+      attr_writer :datastream_name
+
+      # In what datastream will we store this predicate.
+      # It is possible that we will find the predicate in another datastream,
+      # but when the object is saved, it would be to this datastream.
+      def datastream_name
+        @datastream_name || 'descMetadata'
+      end
+
+      attr_writer :value_parser_name
 
       # When we are loading the Predicate from persistence, what is the
       # class name of the Parser we should use to get the value into a suitable
       # format for interacting with the system.
-      attr_accessor :value_parser_name
+      def value_parser_name
+        @value_parser_name || 'SimpleParser'
+      end
 
       # When we go to index this predicate, what is the strategy to apply?
       # @TODO - This will require further fleshing out.
@@ -36,7 +45,10 @@ module Hydramata
       attr_accessor :namespace_context_url
       attr_accessor :namespace_context_name
 
-      attr_accessor :value_presenter_class_name
+      attr_writer :value_presenter_class_name
+      def value_presenter_class_name
+        @value_presenter_class_name || 'ValuePresenter'
+      end
 
       # @TODO - Instead of evaluating the validations, consider parsing the
       # validations when needed.
