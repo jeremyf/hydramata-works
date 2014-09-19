@@ -18,10 +18,6 @@ module Hydramata
       # It is possible that we will find the predicate in another datastream.
       attr_accessor :datastream_name
 
-      # @TODO - The Coercer and Parser need to be cleaned up;
-      # The purpose of the coercer appears to be lost for now. @TODO Remove.
-      attr_accessor :value_coercer_name
-
       # When we are loading the Predicate from persistence, what is the
       # class name of the Parser we should use to get the value into a suitable
       # format for interacting with the system.

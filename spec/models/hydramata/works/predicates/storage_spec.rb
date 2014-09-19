@@ -18,7 +18,6 @@ module Hydramata
             identity: identity,
             name_for_application_usage: name_for_application_usage,
             datastream_name: 'descMetadata',
-            value_coercer_name: 'SimpleParser',
             value_parser_name: 'SimpleParser',
             indexing_strategy: 'dsti',
             validations: '{ "presence": { "on": "create" } }'
@@ -59,7 +58,6 @@ module Hydramata
               :identity,
               :name_for_application_usage,
               :datastream_name,
-              :value_coercer_name,
               :value_parser_name,
               :indexing_strategy
             ]

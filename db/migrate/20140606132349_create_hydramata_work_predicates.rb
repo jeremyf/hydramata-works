@@ -4,7 +4,6 @@ class CreateHydramataWorkPredicates < ActiveRecord::Migration
       t.string :identity, null: false
       t.string :name_for_application_usage
       t.string :datastream_name
-      t.string :value_coercer_name
       t.string :value_parser_name
       t.string :indexing_strategy
       t.timestamps
