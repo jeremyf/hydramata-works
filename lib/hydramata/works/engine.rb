@@ -9,7 +9,6 @@ module Hydramata
     class Engine < ::Rails::Engine
       engine_name 'hydramata_works'
 
-
       generators do
         require 'generators/hydramata-works/complex_predicate/complex_predicate_generator'
       end
