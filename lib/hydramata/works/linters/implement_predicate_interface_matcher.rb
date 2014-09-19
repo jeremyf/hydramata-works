@@ -15,7 +15,6 @@ RSpec::Matchers.define :implement_predicate_interface do
     namespace_context_prefix: [],
     namespace_context_url: [],
     namespace_context_name: [],
-    value_presenter_class_name: [],
-    required?: []
+    value_presenter_class_name: []
   )
 end

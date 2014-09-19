@@ -14,12 +14,12 @@ module Hydramata
       subject { described_class.new(value: value, work: work, predicate: predicate, renderer: renderer) }
 
       it 'renders via the template' do
-        expect(renderer).to receive(:call).with(template).and_return('YES')
+        expect(renderer).to receive(:call).with(template, kind_of(Hash)).and_return('YES')
         expect(subject.render(template)).to eq('YES')
       end
 
       it 'renders the value as a string' do
-        expect(renderer).to receive(:call).with(template).and_yield
+        expect(renderer).to receive(:call).with(template, kind_of(Hash)).and_yield
         expect(subject.render(template)).to eq(value.to_s)
       end
 

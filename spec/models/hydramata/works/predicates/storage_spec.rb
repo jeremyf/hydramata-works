@@ -28,7 +28,7 @@ module Hydramata
 
         context '#to_predicate' do
           it 'coerces itself to a predicate' do
-            expect(described_class.new.to_predicate).to implement_predicate_interface
+            expect(subject.to_predicate).to implement_predicate_interface
           end
         end
 

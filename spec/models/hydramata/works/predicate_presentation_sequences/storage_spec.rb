@@ -18,6 +18,10 @@ module Hydramata
           expect(subject.predicate_set).to be_nil
         end
 
+        it 'has a meaningful #to_s method' do
+          # Alright not entirely meaningful
+          expect(subject.to_s).to match(/>.*-/)
+        end
       end
     end
   end
