@@ -114,6 +114,12 @@ module Hydramata
         require 'hydramata/works/work_template_renderer'
         WorkTemplateRenderer.new(self)
       end
+
+      def require(*args)
+        # Because the value object may decide to implement #require (I'm glaring
+        # at you ActionController::Parameters, and your #require method).
+        ::Kernel.require(*args)
+      end
     end
   end
 end
