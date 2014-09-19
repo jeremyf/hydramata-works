@@ -1,10 +1,11 @@
 require 'spec_fast_helper'
 require 'hydramata/works/property'
+require 'hydramata/works/predicate'
 
 module Hydramata
   module Works
     describe Property do
-      let(:predicate) { 'Predicate' }
+      let(:predicate) { Predicate.new(identity: 'Predicate') }
       let(:value) { double('Value') }
       subject { described_class.new(predicate: predicate) }
 
@@ -14,6 +15,10 @@ module Hydramata
       it 'delegates #each to #values' do
         subject << value
         expect { |b| subject.each(&b) }.to yield_with_args(value)
+      end
+
+      it 'delegates #required? to :predicate' do
+        expect(subject.required?).to eq(predicate.required?)
       end
 
       it 'can append to values' do

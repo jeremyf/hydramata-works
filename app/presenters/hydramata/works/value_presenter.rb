@@ -1,4 +1,5 @@
 require 'hydramata/works/base_presenter'
+require 'active_support/core_ext/module/delegation'
 
 module Hydramata
   module Works
@@ -13,8 +14,8 @@ module Hydramata
         super(value, collaborators)
       end
 
-      def render(options = {})
-        renderer.call(options) { label }
+      def render(template, options = {})
+        renderer.call(template, options) { label }
       end
 
       def view_path_slug_for_object

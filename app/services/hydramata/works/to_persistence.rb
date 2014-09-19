@@ -67,10 +67,7 @@ module Hydramata
             # I believe the value parser should yield for the appropriate
             # callback types.
             if value.respond_to?(:raw_object)
-              if value.raw_object.respond_to?(:file_name)
-                @attachments[property.predicate] ||= []
-                @attachments[property.predicate] << value.raw_object
-              elsif value.raw_object.respond_to?(:original_filename)
+              if value.raw_object.respond_to?(:original_filename)
                 @attachments[property.predicate] ||= []
                 @attachments[property.predicate] << value.raw_object
               elsif value.raw_object.is_a?(Hash)

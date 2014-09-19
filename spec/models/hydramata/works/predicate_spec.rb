@@ -23,6 +23,12 @@ module Hydramata
           expect(predicate.itemprop_schema_dot_org).to eq(nil)
         end
       end
+      context 'defaults' do
+        Given(:predicate) { described_class.new }
+        Then { predicate.datastream_name.is_a?(String) }
+        And { predicate.value_parser_name.is_a?(String) }
+        And { predicate.value_presenter_class_name.is_a?(String) }
+      end
     end
   end
 end
