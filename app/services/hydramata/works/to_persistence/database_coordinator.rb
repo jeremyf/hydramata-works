@@ -13,10 +13,10 @@ module Hydramata
         attr_reader :work, :attributes, :collaborators
         private :work, :attributes, :collaborators
         def initialize(attributes = {}, collaborators = {})
+          pid = attributes.fetch(:pid)
           @property_storage = collaborators.fetch(:property_storage) { default_property_storage }
           @attachment_storage = collaborators.fetch(:attachment_storage) { default_attachment_storage }
           @pid_minting_service = collaborators.fetch(:pid_minting_service) { pid_minting_service }
-          pid = attributes.fetch(:pid)
           @work = property_storage.find_or_initialize_by(pid: pid)
           @attributes = attributes
         end
