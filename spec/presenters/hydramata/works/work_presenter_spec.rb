@@ -27,6 +27,10 @@ module Hydramata
         expect{|b| described_class.new(collaborators, &b) }.to yield_with_args(described_class)
       end
 
+      it 'has #view_path_slug_for_object' do
+        expect(subject.view_path_slug_for_object).to eq('works')
+      end
+
       it { should implement_work_presenter_interface }
 
       it 'has a presented work type' do
