@@ -9,7 +9,7 @@ describe 'hydramata/works/properties/_new.html.erb', type: :view do
   let(:work) { Hydramata::Works::Work.new(identity: 'article') }
   let(:predicate) { Hydramata::Works::Predicate.new(identity: 'dc_title') }
   let(:property) { Hydramata::Works::Property.new(predicate: predicate, values: ['value1', 'value2']) }
-  let(:presenter) { Hydramata::Works::PropertyPresenter.new(property: property, work: work) }
+  let(:presenter) { Hydramata::Works::PropertyPresenter.new(property: property, work: work, presentation_context: :new) }
   let(:form) { double('Form') }
 
   it 'renders the object and fieldsets' do

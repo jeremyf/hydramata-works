@@ -18,7 +18,9 @@ module Hydramata
       end
 
       def values
-        @values ||= __getobj__.values.collect {|value| value_presenter_builder.call(value: value, predicate: self, work: work) }
+        @values ||= __getobj__.values.map do |value|
+          value_presenter_builder.call(value: value, predicate: self, work: work, presentation_context: presentation_context)
+        end
       end
 
       def view_path_slug_for_object

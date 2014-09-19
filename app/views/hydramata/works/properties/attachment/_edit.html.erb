@@ -1,7 +1,7 @@
 <div class="<%= edit.dom_class %> form-group">
   <%= label_tag(edit.dom_id_for_field, edit.label, edit.dom_label_attributes) %>
   <div class="values">
-    <% edit.each_with_index do |value, index| %>
+    <% edit.value.each_with_index do |value, index| %>
       <div class="value">
         <%= content_tag(
             'a',
