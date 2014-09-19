@@ -38,6 +38,10 @@ module Hydramata
         predicate.name
       end
 
+      def required?
+        predicate.required?
+      end
+
       def to_translation_key_fragment
         predicate.to_translation_key_fragment
       end

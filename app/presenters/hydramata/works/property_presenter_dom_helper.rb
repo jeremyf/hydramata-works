@@ -1,10 +1,14 @@
 require 'delegate'
 require 'active_support/core_ext/array/wrap'
+require 'hydramata/works/conversions/predicate'
 
 module Hydramata
   module Works
     class PropertyPresenterDomHelper < SimpleDelegator
+      include Conversions
+      attr_reader :predicate
       def initialize(property)
+        @predicate = Predicate(property)
         __setobj__(property)
       end
 

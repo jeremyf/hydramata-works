@@ -89,14 +89,14 @@ module Hydramata
         end
         Given(:work_type) { 'article' }
         Given(:attributes) { { dc_title: 'my title' } }
-        Given(:work) { service.new_work_for(work_type, attributes).tap {|obj| service.save_work(obj) } }
+        Given(:work) { service.new_work_for(work_type, attributes).tap { |obj| service.save_work(obj) } }
         When(:found_object) { service.find_work(work.identity) }
         Then { found_object.identity == work.identity }
         And { found_object.object_id != work.object_id }
         And { found_object.properties == work.properties }
         And { expect(found_object).to implement_work_presenter_interface }
         And { found_object.presentation_context == :show }
-        And { found_object.actions.all? {|action| action.instance_of?(ActionPresenter) } }
+        And { found_object.actions.all? { |action| action.instance_of?(ActionPresenter) } }
       end
 
       context '#edit_work' do
@@ -105,7 +105,7 @@ module Hydramata
         end
         Given(:work_type) { 'article' }
         Given(:attributes) { { dc_title: 'my title' } }
-        Given(:work) { service.new_work_for(work_type, attributes).tap {|obj| service.save_work(obj) } }
+        Given(:work) { service.new_work_for(work_type, attributes).tap { |obj| service.save_work(obj) } }
         When(:editable_work) { service.edit_work(work.identity) }
         Then { editable_work.identity == work.identity }
         And { editable_work.object_id != work.object_id }
@@ -126,6 +126,9 @@ module Hydramata
           {
             dc_title: [''],
             dc_abstract: ['My Abstract'],
+            dc_contributor: [
+              { name: ['Jeremy Friesen'], role: ['Author'] }
+            ],
             attachment: [
               FileUpload.fixture_file_upload('attachments/hello-world.txt'),
               add: FileUpload.fixture_file_upload('attachments/good-bye-world.txt')
@@ -136,6 +139,10 @@ module Hydramata
           {
             dc_title: ['My Title'],
             dc_abstract: ['Ye Ol\' Abstract', 'Another Abstract'],
+            dc_contributor: [
+              { name: ['Jeremy Friesen'], role: ['Author'] },
+              { name: ['Dan Brubaker-Horst'], role: ['Contributor'] }
+            ],
             attachment: {
               add: [FileUpload.fixture_file_upload('attachments/another-attachment.txt')],
               delete: []
@@ -147,14 +154,27 @@ module Hydramata
           work = service.new_work_for(work_type, new_attributes)
           service.save_work(work)
 
-          expect(work.properties['attachment'].values.map(&:to_s)).to eq(['hello-world.txt', 'good-bye-world.txt'])
-          expect(work.properties['dc_title'].values.map(&:to_s)).to eq([])
-          expect(work.properties['dc_abstract'].values.map(&:to_s)).to eq(['My Abstract'])
+          expect(work.properties['attachment'].values.map(&:to_s)).
+            to eq(['hello-world.txt', 'good-bye-world.txt'])
+          expect(work.properties['dc_title'].values.map(&:to_s)).
+            to eq([])
+          expect(work.properties['dc_abstract'].values.map(&:to_s)).
+            to eq(['My Abstract'])
+          expect(work.properties['dc_contributor'].values.map { |dc| dc[:name] }).
+            to eq([['Jeremy Friesen']])
+          expect(work.properties['dc_contributor'].values.map { |dc| dc[:role] }).
+            to eq([['Author']])
+
+          found_work = service.find_work(work.identity)
+          expect(found_work.properties['dc_contributor'].values.map { |dc| dc[:name] }).
+            to eq([['Jeremy Friesen']])
+          expect(found_work.properties['dc_contributor'].values.map { |dc| dc[:role] }).
+            to eq([['Author']])
 
           # Get the handle for the attachment that I want to dettach
-          found_work = service.find_work(work.identity)
           first_uploaded_attachment = found_work.properties['attachment'].values.first.to_param
           edit_attributes[:attachment][:delete] << first_uploaded_attachment
+
           edited_work = service.edit_work(work.identity, edit_attributes)
           service.save_work(edited_work)
 
@@ -162,9 +182,16 @@ module Hydramata
 
           updated_work = service.find_work(edited_work.identity)
 
-          expect(updated_work.properties['dc_title'].values.map(&:to_s)).to eq(['My Title'])
-          expect(updated_work.properties['dc_abstract'].values.map(&:to_s)).to eq(['Ye Ol\' Abstract', 'Another Abstract'])
-          expect(updated_work.properties['attachment'].values.map(&:to_s)).to eq(['good-bye-world.txt', 'another-attachment.txt'])
+          expect(updated_work.properties['dc_title'].values.map(&:to_s)).
+            to eq(['My Title'])
+          expect(updated_work.properties['dc_abstract'].values.map(&:to_s)).
+            to eq(['Ye Ol\' Abstract', 'Another Abstract'])
+          expect(updated_work.properties['dc_contributor'].values.map { |dc| dc[:name] }).
+            to eq([['Jeremy Friesen'], ['Dan Brubaker-Horst']])
+          expect(updated_work.properties['dc_contributor'].values.map { |dc| dc[:role] }).
+            to eq([['Author'], ['Contributor']])
+          expect(updated_work.properties['attachment'].values.map(&:to_s)).
+            to eq(['good-bye-world.txt', 'another-attachment.txt'])
         end
       end
     end

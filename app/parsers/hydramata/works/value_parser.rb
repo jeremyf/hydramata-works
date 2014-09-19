@@ -3,9 +3,13 @@ module Hydramata
     module ValueParser
       module_function
       def call(options = {}, &block)
-        parser = parser_for(options)
         value = options.fetch(:value)
-        parser.call(value, &block)
+        if value.respond_to?(:raw_object)
+          block.call(value: value, raw_object: value.raw_object)
+        else
+          parser = parser_for(options)
+          parser.call(value, &block)
+        end
       end
 
       def parser_for(options = {})
