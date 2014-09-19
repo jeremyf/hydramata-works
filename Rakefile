@@ -20,6 +20,13 @@ EngineCart.rails_options = '--skip-spring'
 require 'rspec/core/rake_task'
 
 namespace :spec do
+  desc 'Run the spec:all under benchmark'
+  task :benchmark do
+    require 'benchmark'
+    ENV['SPEC_OPTS'] = "--seed #{rand(10_000)}"
+    Benchmark.bmbm { |x| x.report { Rake::Task['spec:all'].execute } }
+  end
+
   RSpec::Core::RakeTask.new(:all) do
     ENV['COVERAGE'] = 'true'
   end
