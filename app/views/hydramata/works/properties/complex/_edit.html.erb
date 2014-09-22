@@ -1,14 +1,12 @@
 <div class="<%= edit.dom_class %> form-group">
   <%= label_tag(edit.dom_id_for_field, edit.label, edit.dom_label_attributes) %>
   <div class="values">
-  <% edit.values.each_with_index do |value, index| %>
-    <%= value.render(self, locals: { index: index, property: edit }) %>
-  <% end %>
-    <%= text_field_tag(
-      edit.dom_id_for_field,
-      nil,
-      edit.dom_input_attributes(class: 'blank-input')
-    ) %>
+    <% edit.each_with_index do |value, index| %>
+      <%= value.render(self, index: index, property: property) %>
+    <% end %>
+    <% edit.with_empty_value do |value| %>
+      <%= value.render(self) %>
+    <% end %>
   </div>
   <% edit.with_text_for(:help) do |help| %>
     <p class="help-block"><%= help %></p>

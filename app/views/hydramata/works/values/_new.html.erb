@@ -1,0 +1,5 @@
+<%= text_field_tag(
+  property.dom_id_for_field(index: index+1),
+  new,
+  property.dom_input_attributes(class: (new ? 'existing-input' : 'blank-input'))
+) %>

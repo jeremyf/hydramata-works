@@ -1,12 +1,8 @@
 <div class="<%= new.dom_class %> form-group">
   <%= label_tag(new.dom_id_for_field, new.label, new.dom_label_attributes) %>
   <div class="values">
-  <% new.each_with_index do |value, index| %>
-    <%= text_field_tag(
-      new.dom_id_for_field(index: index+1),
-      value,
-      new.dom_input_attributes(class: 'existing-input')
-    ) %>
+  <% new.values.each_with_index do |value, index| %>
+    <%= value.render(self, locals: { index: index, property: new }) %>
   <% end %>
     <%= text_field_tag(
       new.dom_id_for_field,
