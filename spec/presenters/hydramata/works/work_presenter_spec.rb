@@ -23,6 +23,10 @@ module Hydramata
       end
       subject { described_class.new(collaborators) }
 
+      it 'has a meaningful #to_s method' do
+        expect(subject.to_s).to be_a(String)
+      end
+
       it 'yields the presenter if a block is given' do
         expect{|b| described_class.new(collaborators, &b) }.to yield_with_args(described_class)
       end

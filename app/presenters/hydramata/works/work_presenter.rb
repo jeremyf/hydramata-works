@@ -21,6 +21,10 @@ module Hydramata
         yield(self) if block_given?
       end
 
+      def to_s
+        "#{work_type} (ID=#{to_param})"
+      end
+
       def fieldsets
         @fieldsets ||= presented_fieldset_builder.call(work: self, presentation_structure: presentation_structure)
       end
