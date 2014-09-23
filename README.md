@@ -19,9 +19,15 @@ Are you looking for Demos and High Level Documentation? Take a look at the [Proj
 
 Are you looking for the Code and how to Get Started? Then **this is the right place**.
 
+## Getting Your Bearings
+
+Take a look at the [ServiceMethods module](./app/services/hydramata/works/service_methods.rb).
+The ServiceMethods defines the public API of this gem.
+It illustrates what is possible and how it is done.
+
 ## Getting Started
 
-Presently Hydramata::Works is a work in progress, and very much not ready for production usage.
+Hydramata::Works is a work in progress, and very much not ready for production usage.
 
 But I would encourage you to:
 
@@ -33,12 +39,6 @@ But I would encourage you to:
 The rake task will build the internal rails application and run all of the tests.
 
 Once you have the `spec/internal` directory built, you can run `rspec` or `rake spec:all`.
-
-## Getting Your Bearings
-
-Take a look at the [ServiceMethods module](./app/services/hydramata/works/service_methods.rb).
-The ServiceMethods defines the public API of this gem.
-It illustrates what is possible and how it is done.
 
 ## Data Structure and Definition
 
