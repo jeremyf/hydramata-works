@@ -15,7 +15,7 @@ module Hydramata
     # This module defines the public API for interacting with Hydramata::Works.
     #
     # As Hydramata::Works is in a pre-release state, this code is subject to
-    # change.
+    # change. However, method signature, input, and output are somewhat stable.
     #
     # @todo finalize external API with v1.0.0 release
     # @see semver.org
@@ -40,7 +40,7 @@ module Hydramata
         end
       end
 
-      # @param :work [#save]
+      # @param :work [#valid?]
       # @return [Boolean]
       def save_work(work)
         state = work.valid? ? 'valid' : 'invalid'
@@ -58,7 +58,7 @@ module Hydramata
       end
 
       # @param identity [#to_s]
-      # @param options [Hash]
+      # @param attributes [Hash]
       # @return [WorkForm]
       def edit_work(identity, attributes = {}, &block)
         presented_work = work_finder(identity, presentation_context: :edit) do |work|
