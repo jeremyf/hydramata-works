@@ -38,11 +38,10 @@ But are instead a parking lot that may be cleared or added to.
 - [ ] Review view rendering path options; Presently the top level work type is created.
 - [ ] dom_class should derive from system symbol for identifier
 - [ ] dom_class should accept prefix and suffix
-- [ ] itemprop: for the Property presenter (for Microdata)
 - [ ] When persisting Validations make sure to validate that the serialized document is valid
 - [X] Setting a predicate by identity or name_for_application_usage should be the same! These are surrogates for each other.
 - [ ] Explore the meaning of the variants attribute for Rendering http://api.rubyonrails.org/classes/ActionDispatch/Http/MimeNegotiation.html#method-i-variant-3D
-- [ ] Look to leveraging Autoload at the Engine level. In doing this all files will be loaded and any dependencies won't invalidate the cache (https://charlie.bz/blog/things-that-clear-rubys-method-cache)
+- [X] Look to leveraging Autoload at the Engine level. In doing this all files will be loaded and any dependencies won't invalidate the cache (https://charlie.bz/blog/things-that-clear-rubys-method-cache)
 - [ ] Can we have closures for Datastreams. Instead of requesting each datastream and its contents, maybe request the list and hold the references in memory?
 - [X] Default work rendering to include work_type as one of the partial
       prefixes.
