@@ -52,3 +52,8 @@ Rake::Task['spec'].clear
 
 task spec: 'spec:all'
 task default: 'spec:travis'
+
+if !ENV['TRAVIS']
+  require 'rspec/yenta'
+  RSpec::Yenta.load_tasks
+end

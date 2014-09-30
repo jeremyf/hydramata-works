@@ -29,6 +29,7 @@ if ! ENV['TRAVIS']
   gem 'pry', '~> 0.9.7'
   gem 'pry-nav'
   gem 'byebug'
+  gem 'rspec-yenta'
 end
 
 file = File.expand_path("Gemfile", ENV['ENGINE_CART_DESTINATION'] || ENV['RAILS_ROOT'] || File.expand_path("../spec/internal", __FILE__))
