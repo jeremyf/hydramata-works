@@ -8,8 +8,6 @@ module Hydramata
             block.call(value: object, raw_object: object.raw_object)
           elsif object.respond_to?(:original_filename)
             block.call(value: object.original_filename, raw_object: object)
-          elsif object.respond_to?(:file_name)
-            block.call(value: object.file_name, raw_object: object)
           elsif object.respond_to?(:fetch)
             Array.wrap(object.fetch(:add, [])).each do |add_object|
               call(add_object, &block)
