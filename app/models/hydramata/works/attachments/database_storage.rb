@@ -16,6 +16,7 @@ module Hydramata
           foreign_key: 'work_id'
         )
 
+        alias_attribute :original_filename, :file_name
       end
     end
   end

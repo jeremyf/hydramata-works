@@ -16,6 +16,8 @@ module Hydramata
           subject.file = File.new(__FILE__)
           expect(subject.file_name).to eq(File.basename(__FILE__))
         end
+
+        it { is_expected.to respond_to(:original_filename) }
       end
     end
   end
