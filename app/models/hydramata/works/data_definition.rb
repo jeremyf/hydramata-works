@@ -1,3 +1,5 @@
+require 'active_support/core_ext/object/blank'
+
 module Hydramata
   module Works
 
@@ -17,20 +19,31 @@ module Hydramata
         self.freeze
       end
 
-      attr_writer :name_for_application_usage
+      def name_for_application_usage=(value)
+        @name_for_application_usage = value.present? ? value : nil
+      end
+
       def name_for_application_usage
         @name_for_application_usage || identity
       end
 
-      attr_accessor :translation_key_fragment
+      def translation_key_fragment=(value)
+        @translation_key_fragment = value.present? ? value : nil
+      end
+
       def to_translation_key_fragment
         @translation_key_fragment || name_for_application_usage
       end
+      alias_method :translation_key_fragment, :to_translation_key_fragment
 
-      attr_accessor :view_path_fragment
+      def view_path_fragment=(value)
+        @view_path_fragment = value.present? ? value : nil
+      end
+
       def to_view_path_fragment
         @view_path_fragment || name_for_application_usage
       end
+      alias_method :view_path_fragment, :to_view_path_fragment
 
       def name
         name_for_application_usage

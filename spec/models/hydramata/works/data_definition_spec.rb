@@ -24,6 +24,11 @@ module Hydramata
           Given(:attributes) { { name_for_application_usage: 'One Two Three', translation_key_fragment: 'Hello World' } }
           Then { data_definition.to_translation_key_fragment == 'Hello World' }
         end
+
+        context 'with non-present override' do
+          Given(:attributes) { { name_for_application_usage: 'One Two Three', view_path_fragment: '' } }
+          Then { data_definition.to_view_path_fragment == 'One Two Three' }
+        end
       end
 
       context 'view_path_fragment' do
@@ -36,6 +41,11 @@ module Hydramata
         context 'with override custom override' do
           Given(:attributes) { { name_for_application_usage: 'One Two Three', view_path_fragment: 'Hello World' } }
           Then { data_definition.to_view_path_fragment == 'Hello World' }
+        end
+
+        context 'with non-present override' do
+          Given(:attributes) { { name_for_application_usage: 'One Two Three', view_path_fragment: '' } }
+          Then { data_definition.to_view_path_fragment == 'One Two Three' }
         end
       end
 
