@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
   s.test_files    = s.files.grep(%r{^(test|spec|features)/})
   s.require_paths = ['lib']
 
-  s.add_dependency "rails", "~> 4.1"
+  s.add_dependency "railties", "~> 4.1"
   s.add_dependency 'rdf', '~> 1.1'
   s.add_dependency 'psych', '~> 2.0.5'
   s.add_dependency 'dragonfly', '~> 1.0'
