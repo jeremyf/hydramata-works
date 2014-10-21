@@ -1,4 +1,5 @@
 require 'hydramata/works/conversions'
+require 'rails/engine'
 
 module Hydramata
   module Works
